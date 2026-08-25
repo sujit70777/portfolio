@@ -82,11 +82,12 @@ class GeneralTablet extends ConsumerWidget {
   }
 
   EdgeInsetsGeometry _buildResponsivePadding({required BuildContext context}) {
-    if (Responsive.isTablet(context)) {
-      return const EdgeInsets.fromLTRB(48, 60, 48, 88);
-    } else if (Responsive.isMobile(context)) {
+    // GeneralTablet is used for every width below
+    // Responsive.isSplitScreenDesktop's cutoff, i.e. beyond the plain
+    // isTablet/isMobile range too — so this can't just delegate to those.
+    if (Responsive.isMobile(context)) {
       return const EdgeInsets.fromLTRB(20, 32, 20, 88);
     }
-    return EdgeInsets.zero;
+    return const EdgeInsets.fromLTRB(48, 60, 48, 88);
   }
 }

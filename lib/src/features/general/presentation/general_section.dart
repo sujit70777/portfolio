@@ -12,19 +12,17 @@ class GeneralSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isSplitScreen = Responsive.isSplitScreenDesktop(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       endDrawer: const MySafeArea(
         child: EndDrawer(),
       ),
-      body: const MySafeArea(
+      body: MySafeArea(
         child: Stack(
           children: [
-            Responsive(
-              desktop: GeneralDesktop(),
-              tablet: GeneralTablet(),
-            ),
-            Align(
+            isSplitScreen ? const GeneralDesktop() : const GeneralTablet(),
+            const Align(
               alignment: Alignment.bottomCenter,
               child: BottomBanner(),
             )

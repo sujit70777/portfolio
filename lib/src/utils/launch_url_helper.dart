@@ -5,9 +5,12 @@ import 'package:url_launcher/url_launcher.dart';
 class LaunchUrlHelper {
   LaunchUrlHelper._();
 
-  static Future<void> launchURL(String url) async {
+  static Future<void> launchURL(String url, {bool openInNewTab = false}) async {
     try {
-      await launchUrl(Uri.parse(url));
+      await launchUrl(
+        Uri.parse(url),
+        webOnlyWindowName: openInNewTab ? '_blank' : null,
+      );
     } catch (e) {
       throw '${tr(LocaleKeys.openUrlError)} $url';
     }

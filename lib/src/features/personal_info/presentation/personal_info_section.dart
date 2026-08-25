@@ -10,10 +10,18 @@ class PersonalInfoSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Responsive(
-      mobile: PersonalInfoMobile(),
-      tablet: PersonalInfoTablet(),
-      desktop: PersonalInfoDesktop(),
-    );
+    // PersonalInfoDesktop relies on a Spacer(), which needs the bounded
+    // height that only GeneralDesktop's split-screen column provides.
+    // GeneralTablet renders everything (including this) inside a scrollable
+    // sliver, which is unbounded height — so this must key off the same
+    // isSplitScreenDesktop cutoff GeneralSection uses to choose between
+    // those two, not the generic isDesktop breakpoint.
+    if (Responsive.isSplitScreenDesktop(context)) {
+      return const PersonalInfoDesktop();
+    }
+    if (Responsive.isMobile(context)) {
+      return const PersonalInfoMobile();
+    }
+    return const PersonalInfoTablet();
   }
 }

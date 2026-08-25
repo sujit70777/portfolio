@@ -98,7 +98,13 @@ class CodegenLoader extends AssetLoader{
       }
     }
   ],
-  "resumes": [],
+  "resumes": [
+    {
+      "languageCode": "en",
+      "language": "English",
+      "url": "assets/assets/documents/resume.pdf"
+    }
+  ],
   "aboutDescription": "Senior Mobile Developer with 9+ years building Flutter and Android applications, having shipped 50+ apps used by over 1 million people worldwide.\nI've led cross-functional teams across multiple time zones, delivered features 40% faster while sustaining 4.7+ app store ratings, and maintain an active open-source portfolio of published Flutter packages with real developer adoption.\nMy toolbox spans Flutter, native Android (Kotlin/Java) and iOS/SwiftUI, with Bloc, Riverpod, Provider and GetX for state management, and Firebase, REST APIs, GraphQL, SQLite, PostgreSQL and AWS on the backend and infrastructure side, backed by CI/CD, Fastlane and Docker.\nI use modern AI-assisted development tooling (Claude Code) to move faster without cutting corners on code review, testing, or architecture quality.",
   "experiences": [
     {
@@ -738,7 +744,7 @@ class CodegenLoader extends AssetLoader{
   "experienceSectionTitle": "Experience",
   "projectsSectionTitle": "Projects",
   "resume": "Resume",
-  "downloadResume": "Download resume",
+  "downloadResume": "Download Resume",
   "openUrlError": "Could not open the url",
   "unknownLanguageError": "Language unknown"
 };

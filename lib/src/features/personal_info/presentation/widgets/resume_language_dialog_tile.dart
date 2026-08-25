@@ -71,7 +71,7 @@ Widget _buildResumeLanguageTileContent(
 
 void _onPressed(BuildContext context, {required String resumeUrl}) async {
   try {
-    await LaunchUrlHelper.launchURL(resumeUrl);
+    await LaunchUrlHelper.launchURL(resumeUrl, openInNewTab: true);
   } catch (e) {
     if (context.mounted) {
       ScaffoldMessengerHelper.showLaunchUrlError(context, url: resumeUrl);
