@@ -20,7 +20,7 @@ jobs:
         run: flutter pub get
 
       - name: Build web app
-        run: flutter build web --release
+        run: flutter build web --release --no-tree-shake-icons
 
       - name: Deploy to Namecheap via rsync
         uses: burnett01/rsync-deployments@7.0.1
