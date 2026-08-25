@@ -73,32 +73,41 @@ class GeneralDesktop extends ConsumerWidget {
                           ),
                           child: Align(
                             alignment: Alignment.topLeft,
-                            child: SizedBox(
-                              width: 520,
-                              child: AnimatedFadeSlide(
-                                offset: const Offset(128, 0),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 12,
-                                      ),
-                                      child: AboutSection(
-                                        key: ref.watch(aboutSectionKeyProvider),
-                                      ),
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                final contentWidth = constraints.maxWidth < 880
+                                    ? constraints.maxWidth
+                                    : 880.0;
+                                return SizedBox(
+                                  width: contentWidth,
+                                  child: AnimatedFadeSlide(
+                                    offset: const Offset(128, 0),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                          ),
+                                          child: AboutSection(
+                                            key: ref
+                                                .watch(aboutSectionKeyProvider),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 120),
+                                        ExperienceSection(
+                                          key: ref.watch(
+                                              experienceSectionKeyProvider),
+                                        ),
+                                        const SizedBox(height: 120),
+                                        ProjectSection(
+                                          key: ref
+                                              .watch(projectSectionKeyProvider),
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(height: 120),
-                                    ExperienceSection(
-                                      key: ref
-                                          .watch(experienceSectionKeyProvider),
-                                    ),
-                                    const SizedBox(height: 120),
-                                    ProjectSection(
-                                      key: ref.watch(projectSectionKeyProvider),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),

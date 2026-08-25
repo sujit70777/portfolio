@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/widgets/profile_avatar.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/personal_info/data/personal_info_repository.dart';
 import 'package:portfolio/src/features/personal_info/domain/resume.dart';
@@ -19,6 +20,8 @@ class PersonalInfoMobile extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const ProfileAvatar(size: 96),
+        gapH16,
         Text(
           tr(LocaleKeys.name),
           style: Theme.of(context).textTheme.displayMedium,

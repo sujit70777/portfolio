@@ -23,6 +23,14 @@ class MyApp extends ConsumerWidget {
             data: (darkMode) => darkMode ? ThemeMode.dark : ThemeMode.light,
             orElse: () => ThemeMode.system,
           ),
+      builder: (context, child) {
+        return AnimatedTheme(
+          data: Theme.of(context),
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutCubic,
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
       home: const GeneralSection(),
     );
   }

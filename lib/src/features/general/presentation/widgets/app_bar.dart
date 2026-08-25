@@ -22,9 +22,7 @@ class MyAppBar extends ConsumerWidget {
         scrolledUnderElevation: 0,
         backgroundColor: Theme.of(context).colorScheme.secondary,
         centerTitle: false,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+        titleTextStyle: Theme.of(context).textTheme.titleMedium,
         title: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
@@ -44,7 +42,13 @@ class MyAppBar extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      Text(tr(LocaleKeys.portfolio)),
+                      Flexible(
+                        child: Text(
+                          tr(LocaleKeys.portfolio),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
                     ],
                   ),
                 ),

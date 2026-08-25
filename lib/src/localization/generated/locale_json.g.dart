@@ -666,6 +666,54 @@ class CodegenLoader extends AssetLoader{
           }
         }
       ]
+    },
+    {
+      "name": "Jatri — Bangladesh Transit App (in progress)",
+      "description": "GitHub project. Transit app prototype for Bangladesh covering the core journey: onboarding, a four-tab home/tickets/routes shell, journey search, route results, itinerary detail, and ticket purchase, using real MRT Line 6 and BRTA bus route data. Routing and payments are UI-complete but not yet wired to live services.",
+      "url": "https://github.com/sujit70777/Jatri---Bangladesh-Transit-App",
+      "icon": {
+        "codePoint": "0xefb7",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "OMR Scanner",
+      "description": "GitHub project. Offline exam/OMR management app: create exams, set a multi-answer-capable answer key, calibrate the bubble grid once per sheet layout, then scan answer sheets with a live camera guide and auto-capture for instant per-roll-number scoring — no OCR, using registration-mark alignment and homography.",
+      "url": "https://github.com/sujit70777/omr_scanner_flutter",
+      "icon": {
+        "codePoint": "0xefb7",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
     }
   ],
   "languages": [

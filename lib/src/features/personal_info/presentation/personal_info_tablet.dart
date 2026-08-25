@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/widgets/profile_avatar.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/personal_info/data/personal_info_repository.dart';
 import 'package:portfolio/src/features/personal_info/domain/resume.dart';
@@ -19,16 +20,31 @@ class PersonalInfoTablet extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          tr(LocaleKeys.name),
-          style: Theme.of(context).textTheme.displayLarge,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const ProfileAvatar(size: 130),
+            gapW20,
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    tr(LocaleKeys.name),
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
+                  gapH4,
+                  Text(
+                    tr(LocaleKeys.description),
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        gapH4,
-        Text(
-          tr(LocaleKeys.description),
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        gapH8,
+        gapH16,
         Text(
           tr(LocaleKeys.subDescription),
           style: Theme.of(context).textTheme.bodyLarge,

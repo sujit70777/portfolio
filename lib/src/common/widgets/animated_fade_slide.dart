@@ -6,7 +6,7 @@ class AnimatedFadeSlide extends HookConsumerWidget {
   const AnimatedFadeSlide({
     super.key,
     this.delay = const Duration(milliseconds: 0),
-    this.duration = const Duration(milliseconds: 500),
+    this.duration = const Duration(milliseconds: 280),
     this.offset = const Offset(0, -64),
     required this.child,
   });
@@ -18,20 +18,25 @@ class AnimatedFadeSlide extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = useAnimationController(duration: duration);
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    final controller = useAnimationController(
+      duration: reduceMotion ? Duration.zero : duration,
+    );
     final curveAnimation = CurvedAnimation(
       parent: controller,
-      curve: Curves.decelerate,
+      curve: Curves.easeOutCubic,
     );
     final dxAnimation = useAnimation(
-      Tween(begin: offset.dx, end: 0.0).animate(curveAnimation),
+      Tween(begin: reduceMotion ? 0.0 : offset.dx, end: 0.0)
+          .animate(curveAnimation),
     );
     final dyAnimation = useAnimation(
-      Tween(begin: offset.dy, end: 0.0).animate(curveAnimation),
+      Tween(begin: reduceMotion ? 0.0 : offset.dy, end: 0.0)
+          .animate(curveAnimation),
     );
 
     useEffect(() {
-      Future.delayed(delay, () {
+      Future.delayed(reduceMotion ? Duration.zero : delay, () {
         if (context.mounted) {
           controller.forward();
         }

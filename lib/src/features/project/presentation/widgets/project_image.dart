@@ -21,11 +21,10 @@ class ProjectImage extends ConsumerWidget {
     return Stack(
       children: [
         Container(
+          width: double.infinity,
           constraints: const BoxConstraints(
-            minHeight: 200,
-            minWidth: 520,
-            maxHeight: 400,
-            maxWidth: 600,
+            minHeight: 160,
+            maxHeight: 190,
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),

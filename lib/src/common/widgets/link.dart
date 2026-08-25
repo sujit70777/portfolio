@@ -12,14 +12,14 @@ class MyLink extends StatefulHookConsumerWidget {
     this.displayLink,
     this.displayLeadingIcon = false,
     this.underlined = false,
-    this.hoverColor = Colors.blue,
+    this.hoverColor,
   });
 
   final String url;
   final String? displayLink;
   final bool displayLeadingIcon;
   final bool underlined;
-  final Color hoverColor;
+  final Color? hoverColor;
 
   @override
   ConsumerState<MyLink> createState() => _LinkState();
@@ -32,7 +32,7 @@ class _LinkState extends ConsumerState<MyLink> {
   void didChangeDependencies() {
     _colorTween = ColorTween(
       begin: Theme.of(context).colorScheme.inverseSurface,
-      end: widget.hoverColor,
+      end: widget.hoverColor ?? Theme.of(context).colorScheme.tertiary,
     );
     super.didChangeDependencies();
   }
