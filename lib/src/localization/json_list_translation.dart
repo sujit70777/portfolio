@@ -4,6 +4,6 @@ import 'package:portfolio/src/localization/generated/locale_json.g.dart';
 
 List<Map<String, dynamic>> trList(Locale locale, String key) {
   final mapLocales = CodegenLoader.mapLocales[locale.languageCode];
-  final mapValue = mapLocales?[key];
-  return mapValue;
+  final mapValue = mapLocales?[key] as List?;
+  return mapValue?.cast<Map<String, dynamic>>() ?? [];
 }

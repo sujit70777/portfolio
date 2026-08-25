@@ -18,12 +18,20 @@ void main() async {
         onLoaded: (context) {
           return Consumer(
             builder: (context, ref, child) {
-              ref.watch(localeControllerProvider);
-              return EasyLocalization(
-                supportedLocales: supportedLocales,
-                path: AppLocalizations.translationsPath,
-                fallbackLocale: supportedLocales.first,
-                child: const MyApp(),
+              final localeControllerState =
+                  ref.watch(localeControllerProvider);
+              return localeControllerState.when(
+                data: (_) => EasyLocalization(
+                  supportedLocales: supportedLocales,
+                  path: AppLocalizations.translationsPath,
+                  fallbackLocale: supportedLocales.first,
+                  child: const MyApp(),
+                ),
+                loading: () => const AppStartupLoadingWidget(),
+                error: (error, stackTrace) => AppStartupErrorWidget(
+                  message: error.toString(),
+                  onRetry: () => ref.invalidate(localeControllerProvider),
+                ),
               );
             },
           );

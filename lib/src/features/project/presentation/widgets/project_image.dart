@@ -57,9 +57,9 @@ class ProjectImage extends ConsumerWidget {
                   curve: Curves.decelerate,
                   transform: isHovered
                       ? (Matrix4.identity()
-                        ..translate(0.5 * width, 0.5 * width)
-                        ..scale(1.2)
-                        ..translate(0.5 * -width, 0.5 * -width))
+                        ..translateByDouble(0.5 * width, 0.5 * width, 0, 1)
+                        ..scaleByDouble(1.2, 1.2, 1.2, 1)
+                        ..translateByDouble(0.5 * -width, 0.5 * -width, 0, 1))
                       : Matrix4.identity(),
                   child: _buildScreenshotImage(context),
                 );

@@ -34,7 +34,9 @@ class MyIcon extends ConsumerWidget {
       final iconCodePointHexa = int.tryParse(iconCodePoint);
       if (iconCodePointHexa != null) {
         final iconData = IconData(
+          // ignore: non_const_argument_for_const_parameter
           iconCodePointHexa,
+          // ignore: non_const_argument_for_const_parameter
           fontFamily: iconFontFamily,
         );
         return Padding(

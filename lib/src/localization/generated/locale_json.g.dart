@@ -1,0 +1,698 @@
+// DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
+
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, constant_identifier_names
+
+import 'dart:ui';
+
+import 'package:easy_localization/easy_localization.dart' show AssetLoader;
+
+class CodegenLoader extends AssetLoader{
+  const CodegenLoader();
+
+  @override
+  Future<Map<String, dynamic>?> load(String path, Locale locale) {
+    return Future.value(mapLocales[locale.toString()]);
+  }
+
+  static const Map<String,dynamic> _en = {
+  "name": "Ehsanur Rahman",
+  "description": "Senior Flutter/Mobile Developer",
+  "subDescription": "9+ yrs · 50+ Apps · 1M+ Users · Open to Remote Work",
+  "contacts": [
+    {
+      "tooltip": "Github",
+      "url": "https://github.com/sujit70777",
+      "icon": {
+        "codePoint": "0xefb7",
+        "fontFamily": "FontAwesome"
+      }
+    },
+    {
+      "tooltip": "LinkedIn",
+      "url": "https://www.linkedin.com/in/sujit70777",
+      "icon": {
+        "codePoint": "0xeffb",
+        "fontFamily": "FontAwesome"
+      }
+    },
+    {
+      "tooltip": "ehsanur.com",
+      "url": "https://ehsanur.com",
+      "icon": {
+        "codePoint": "0xeb3e",
+        "fontFamily": "FontAwesome"
+      }
+    },
+    {
+      "tooltip": "mail@ehsanur.com",
+      "url": "mailto:mail@ehsanur.com",
+      "icon": {
+        "codePoint": "0xeaad",
+        "fontFamily": "FontAwesome"
+      }
+    },
+    {
+      "tooltip": "WhatsApp: +880 1747-931646",
+      "url": "https://wa.me/8801747931646",
+      "icon": {
+        "codePoint": "0xf0d9",
+        "fontFamily": "FontAwesome"
+      }
+    },
+    {
+      "tooltip": "App Store",
+      "url": "https://apps.apple.com/us/developer/shekh-ehsanur-rahman/id1892682672",
+      "icon": {
+        "codePoint": "0xef23",
+        "fontFamily": "FontAwesome"
+      }
+    },
+    {
+      "tooltip": "Google Play — Devxhub",
+      "url": "https://play.google.com/store/apps/dev?id=4646660586516176141",
+      "icon": {
+        "codePoint": "0xefc5",
+        "fontFamily": "FontAwesome"
+      }
+    },
+    {
+      "tooltip": "Google Play — Prabartan",
+      "url": "https://play.google.com/store/apps/dev?id=6504002943007145339",
+      "icon": {
+        "codePoint": "0xefc5",
+        "fontFamily": "FontAwesome"
+      }
+    },
+    {
+      "tooltip": "pub.dev — ehsanur.com",
+      "url": "https://pub.dev/publishers/ehsanur.com/packages",
+      "icon": {
+        "assetName": "assets/icons/other/dart.svg"
+      }
+    },
+    {
+      "tooltip": "pub.dev — devxhub.com",
+      "url": "https://pub.dev/publishers/devxhub.com/packages",
+      "icon": {
+        "assetName": "assets/icons/other/dart.svg"
+      }
+    }
+  ],
+  "resumes": [],
+  "aboutDescription": "Senior Mobile Developer with 9+ years building Flutter and Android applications, having shipped 50+ apps used by over 1 million people worldwide.\nI've led cross-functional teams across multiple time zones, delivered features 40% faster while sustaining 4.7+ app store ratings, and maintain an active open-source portfolio of published Flutter packages with real developer adoption.\nMy toolbox spans Flutter, native Android (Kotlin/Java) and iOS/SwiftUI, with Bloc, Riverpod, Provider and GetX for state management, and Firebase, REST APIs, GraphQL, SQLite, PostgreSQL and AWS on the backend and infrastructure side, backed by CI/CD, Fastlane and Docker.\nI use modern AI-assisted development tooling (Claude Code) to move faster without cutting corners on code review, testing, or architecture quality.",
+  "experiences": [
+    {
+      "role": "Senior Flutter Developer — Level III",
+      "company": "Developer eXperience Hub (Devxhub)",
+      "description": "Architected FinTech and expense-management apps serving 50,000+ users, increasing engagement 35% and improving conversion 30%. Lead a 4-developer team across time zones and cut deployment time 40% via CI/CD. Published Flutter packages adopted by 2,000+ developers, while reducing crash rates 15%, app bundle size 35%, and launch time 45%.",
+      "url": "https://devxhub.com",
+      "isPresent": true,
+      "startYear": 2023,
+      "startMonth": 9,
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "Firebase",
+          "icon": {
+            "assetName": "assets/icons/other/firebase.svg"
+          }
+        },
+        {
+          "name": "Docker",
+          "icon": {
+            "assetName": "assets/icons/software-development/docker.svg"
+          }
+        },
+        {
+          "name": "Riverpod"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://devxhub.com",
+          "display": "Devxhub"
+        }
+      ]
+    },
+    {
+      "role": "Senior Mobile Application Developer",
+      "company": "Prabartan Information Technology",
+      "description": "Led an EdTech platform for 100,000+ students across 5 countries, offline-first and multi-language, reaching a 4.7-star rating and 100,000+ daily active users. Managed a team of 6.",
+      "isPresent": false,
+      "startYear": 2019,
+      "startMonth": 6,
+      "endYear": 2023,
+      "endMonth": 8,
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "Firebase",
+          "icon": {
+            "assetName": "assets/icons/other/firebase.svg"
+          }
+        },
+        {
+          "name": "Android",
+          "icon": {
+            "codePoint": "0xef1c",
+            "fontFamily": "FontAwesome"
+          }
+        }
+      ]
+    },
+    {
+      "role": "Mobile App Development Trainer",
+      "company": "NACTAR",
+      "description": "Trained 200+ developers in mobile app development, with a 95% course completion rate and 80% job placement rate among graduates.",
+      "isPresent": true,
+      "startYear": 2016,
+      "startMonth": 5,
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "Android",
+          "icon": {
+            "codePoint": "0xef1c",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "Java",
+          "icon": {
+            "codePoint": "0xefe7",
+            "fontFamily": "FontAwesome"
+          }
+        }
+      ]
+    },
+    {
+      "role": "Android Application Developer",
+      "company": "Blue Hills Information Technology",
+      "description": "Built consumer Android apps with 500,000+ combined downloads, reaching the top-10 of the Education category on Google Play.",
+      "isPresent": false,
+      "startYear": 2015,
+      "startMonth": 7,
+      "endYear": 2019,
+      "endMonth": 5,
+      "technologies": [
+        {
+          "name": "Android",
+          "icon": {
+            "codePoint": "0xef1c",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "Java",
+          "icon": {
+            "codePoint": "0xefe7",
+            "fontFamily": "FontAwesome"
+          }
+        }
+      ]
+    }
+  ],
+  "present": "Present",
+  "projects": [
+    {
+      "name": "Peace of Mind (POM)",
+      "description": "iOS legacy and estate-planning app: digital will management, a biometric-secured vault, a life timeline, and Apple StoreKit subscriptions/IAP with individual and family plans.",
+      "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
+      "icon": {
+        "codePoint": "0xef23",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Swift",
+          "icon": {
+            "codePoint": "0xf0aa",
+            "fontFamily": "FontAwesome"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Forward SMS",
+      "description": "SMS forwarder to email, Slack, Telegram, and Discord, with offline queuing and custom filtering rules.",
+      "url": "https://apps.apple.com/us/app/forward-sms-sms-forwarder/id6759511643",
+      "icon": {
+        "codePoint": "0xef23",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      }
+    },
+    {
+      "name": "Muslim Times Pro",
+      "description": "Prayer times with azan alerts, full Quran with recitation and translation, a mosque locator, Qibla compass, and Hijri calendar.",
+      "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
+      "icon": {
+        "codePoint": "0xef23",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tanto",
+      "description": "Enterprise expense-management app with real-time approval workflows and multi-currency support.",
+      "icon": {
+        "assetName": "assets/icons/software-development/flutter.svg",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "Firebase",
+          "icon": {
+            "assetName": "assets/icons/other/firebase.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Prabartan Educational Platform",
+      "description": "Learning apps suite for Prabartan Information Technology, including Learn Python — 165+ tutorials with 100,000+ installs.",
+      "url": "https://play.google.com/store/apps/dev?id=6504002943007145339",
+      "icon": {
+        "codePoint": "0xefc5",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Android",
+          "icon": {
+            "codePoint": "0xef1c",
+            "fontFamily": "FontAwesome"
+          }
+        }
+      ]
+    },
+    {
+      "name": "SK Mobile School",
+      "description": "Secure educational platform for streaming enrolled course videos with screenshot/recording protection, progress tracking, and course search.",
+      "url": "https://apps.apple.com/us/app/sk-mobile-school/id6475169754",
+      "icon": {
+        "codePoint": "0xef23",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      }
+    },
+    {
+      "name": "Notivio",
+      "description": "Notes, reminders, task planner, and calendar app with custom checklists, notifications, and cross-device cloud sync.",
+      "url": "https://apps.apple.com/us/app/notivio-notes-task-planner/id6748751923",
+      "icon": {
+        "codePoint": "0xef23",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ProofSell",
+      "description": "Bangladesh e-commerce marketplace for electronics, fashion, home goods, and daily essentials, with verified sellers, cashback rewards, and a social-impact model funding orphanages and sustainability initiatives.",
+      "url": "https://apps.apple.com/us/app/proofsell/id6755882846",
+      "icon": {
+        "codePoint": "0xef23",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eSIM247",
+      "description": "eSIM marketplace app for purchasing and managing mobile data plans.",
+      "url": "https://play.google.com/store/apps/details?id=com.esim247.app",
+      "icon": {
+        "codePoint": "0xefc5",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      }
+    },
+    {
+      "name": "flutter_scanner_devxhub",
+      "description": "Pub.dev package. Barcode/QR code scanning plugin for Flutter apps on Android/iOS, supporting a range of code types.",
+      "url": "https://pub.dev/packages/flutter_scanner_devxhub",
+      "icon": {
+        "codePoint": "0xea6f",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flutter_prayer_time_calculator",
+      "description": "Pub.dev package. Calculates Islamic prayer times with customizable calculation methods and location/timezone support.",
+      "url": "https://pub.dev/packages/flutter_prayer_time_calculator",
+      "icon": {
+        "codePoint": "0xea6f",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flutter_scroll_date_picker",
+      "description": "Pub.dev package. A customizable, easy-to-use scroll date picker for Flutter, compatible with Android, iOS, and Web.",
+      "url": "https://pub.dev/packages/flutter_scroll_date_picker",
+      "icon": {
+        "codePoint": "0xea6f",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flutter_fabric",
+      "description": "Pub.dev package. A Flutter canvas library inspired by Fabric.js — selectable, draggable, scalable, and rotatable objects with free drawing, JSON serialization, and SVG path support.",
+      "url": "https://pub.dev/packages/flutter_fabric",
+      "icon": {
+        "codePoint": "0xea6f",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flutter_a11y_lens",
+      "description": "Pub.dev package. Live accessibility auditing for Flutter: inspects the running widget tree and flags WCAG violations in real time, with an on-screen debug overlay.",
+      "url": "https://pub.dev/packages/flutter_a11y_lens",
+      "icon": {
+        "codePoint": "0xea6f",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flutter_liquid_glass_widgets",
+      "description": "Pub.dev package. UI kit inspired by Apple's iOS 26 Liquid Glass design language: shader-powered blur, physics-based jelly animations, and dynamic lighting, across Android, iOS, web, and desktop.",
+      "url": "https://pub.dev/packages/flutter_liquid_glass_widgets",
+      "icon": {
+        "codePoint": "0xea6f",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "local_voice",
+      "description": "Pub.dev package. Privacy-first, on-device voice commands for Flutter — no cloud, no API keys, works in airplane mode.",
+      "url": "https://pub.dev/packages/local_voice",
+      "icon": {
+        "codePoint": "0xea6f",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "flutter_crdt_sync_kit",
+      "description": "Pub.dev package. Offline-first, CRDT-based local data layer for Flutter: write while offline, merge automatically and conflict-free when back online, with pluggable Supabase and REST backend adapters.",
+      "url": "https://pub.dev/packages/flutter_crdt_sync_kit",
+      "icon": {
+        "codePoint": "0xea6f",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ar_measure (in progress)",
+      "description": "GitHub project. Cross-platform AR \"quick measure\" for Flutter — point the camera, tap to place anchors, and read live real-world distances and areas, wrapping ARKit and ARCore.",
+      "url": "https://github.com/sujit70777/ar_measure",
+      "icon": {
+        "codePoint": "0xefb7",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Awesome Mobile App Development",
+      "description": "GitHub project. Curated collection of mobile development resources spanning Kotlin/Android, Flutter, and Swift/iOS — articles, libraries, tools, templates, and open-source app examples.",
+      "url": "https://github.com/sujit70777/Awsome-Mobile-App-Development",
+      "icon": {
+        "codePoint": "0xefb7",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      }
+    },
+    {
+      "name": "Fitness Tracker (SENSEit)",
+      "description": "GitHub project. Android sensor-tracking app using a foreground service to continuously log device sensor data, with battery-optimization handling for reliable background tracking.",
+      "url": "https://github.com/sujit70777/Fitness-Tracker",
+      "icon": {
+        "codePoint": "0xefb7",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "technologies": [
+        {
+          "name": "Android",
+          "icon": {
+            "codePoint": "0xef1c",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "Java",
+          "icon": {
+            "codePoint": "0xefe7",
+            "fontFamily": "FontAwesome"
+          }
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "code": "en",
+      "name": "English",
+      "nativeName": "English",
+      "icon": {
+        "assetName": "assets/icons/flags/united-states-of-america.svg"
+      }
+    }
+  ],
+  "bottomBanner": {
+    "message": "Open source portfolio -",
+    "displayLink": "Fork it",
+    "linkUrl": "https://github.com/sujit70777/portfolio#readme"
+  },
+  "portfolio": "Ehsanur Rahman",
+  "homeSectionTitle": "Home",
+  "aboutSectionTitle": "About",
+  "aboutSectionTitleAlt": "About Me",
+  "experienceSectionTitle": "Experience",
+  "projectsSectionTitle": "Projects",
+  "resume": "Resume",
+  "downloadResume": "Download resume",
+  "openUrlError": "Could not open the url",
+  "unknownLanguageError": "Language unknown"
+};
+static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en};
+}

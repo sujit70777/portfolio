@@ -1,30 +1,54 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:portfolio/src/app.dart';
+import 'package:portfolio/src/app_startup.dart';
+import 'package:portfolio/src/localization/app_localizations.dart';
+import 'package:portfolio/src/localization/locale_controller.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+    await EasyLocalization.ensureInitialized();
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('MyApp renders without throwing', (WidgetTester tester) async {
+    final supportedLocales = await AppLocalizations.supportedLocales();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pumpWidget(
+      ProviderScope(
+        child: AppStartupWidget(
+          onLoaded: (context) {
+            return Consumer(
+              builder: (context, ref, child) {
+                final localeControllerState =
+                    ref.watch(localeControllerProvider);
+                return localeControllerState.when(
+                  data: (_) => EasyLocalization(
+                    supportedLocales: supportedLocales,
+                    path: AppLocalizations.translationsPath,
+                    fallbackLocale: supportedLocales.first,
+                    child: const MyApp(),
+                  ),
+                  loading: () => const AppStartupLoadingWidget(),
+                  error: (error, stackTrace) => AppStartupErrorWidget(
+                    message: error.toString(),
+                    onRetry: () => ref.invalidate(localeControllerProvider),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    expect(find.byType(MaterialApp), findsOneWidget);
   });
 }

@@ -20,10 +20,13 @@ class ProjectDescription extends ConsumerWidget {
       children: [
         Row(
           children: [
-            Text(
-              projectName != null ? "$projectName " : "",
-              style: theme.textTheme.titleMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+            Flexible(
+              child: Text(
+                projectName != null ? "$projectName " : "",
+                style: theme.textTheme.titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             const Icon(Icons.open_in_new),
           ],

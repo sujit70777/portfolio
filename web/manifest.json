@@ -1,11 +1,11 @@
 {
-    "name": "portfolio",
-    "short_name": "portfolio",
+    "name": "Ehsanur Rahman — Portfolio",
+    "short_name": "Ehsanur Rahman",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Ehsanur Rahman — Senior Flutter/Mobile Developer with 9+ years of experience, 50+ shipped apps, and 1M+ users.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
