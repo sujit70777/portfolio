@@ -1,0 +1,36 @@
+# Cache headers for the Flutter web build. main.dart.js and the entrypoint
+# files are NOT content-hashed by filename, so they must stay revalidatable
+# (no-cache lets the browser send a conditional request and get a fast 304
+# instead of a full re-download when nothing changed) rather than cached
+# long-term, or updates would never be picked up by returning visitors.
+# Fonts and images rarely change and are safe to cache aggressively; if one
+# is ever updated, rename the file to bust the cache.
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|json)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  <FilesMatch "\.(js|mjs|wasm)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  <FilesMatch "\.(ttf|otf|woff|woff2|png|jpg|jpeg|webp|gif|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType application/javascript "access plus 0 seconds"
+  ExpiresByType application/wasm "access plus 0 seconds"
+  ExpiresByType font/ttf "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE application/javascript application/wasm text/html text/css application/json image/svg+xml
+</IfModule>

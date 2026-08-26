@@ -21,9 +21,7 @@ dependencies:
   url_launcher: 6.2.6
   intl: ^0.20.2
   easy_localization: 3.0.7+1
-  easy_logger: 0.0.2
   freezed_annotation: 2.4.4
-  json_annotation: 4.9.0
   shared_preferences: 2.5.2
   flutter_svg: 2.0.17
   animated_toggle_switch: 0.8.4
@@ -55,66 +53,46 @@ flutter:
     - assets/images/
     - assets/images/profile.jpg
     - assets/documents/
+    - assets/projectimage/peace-of-mind-pom/
+    - assets/projectimage/forward-sms/
+    - assets/projectimage/muslim-times-pro/
+    - assets/projectimage/tanto/
+    - assets/projectimage/prabartan-educational-platform/
+    - assets/projectimage/sk-mobile-school/
+    - assets/projectimage/notivio/
+    - assets/projectimage/proofsell/
+    - assets/projectimage/esim247/
+    - assets/projectimage/flutter-scanner-devxhub/
+    - assets/projectimage/flutter-prayer-time-calculator/
+    - assets/projectimage/flutter-scroll-date-picker/
+    - assets/projectimage/flutter-fabric/
+    - assets/projectimage/flutter-a11y-lens/
+    - assets/projectimage/flutter-liquid-glass-widgets/
+    - assets/projectimage/local-voice/
+    - assets/projectimage/flutter-crdt-sync-kit/
+    - assets/projectimage/ar-measure-in-progress/
+    - assets/projectimage/awesome-mobile-app-development/
+    - assets/projectimage/fitness-tracker-senseit/
+    - assets/projectimage/jatri-bangladesh-transit-app-in-progress/
+    - assets/projectimage/omr-scanner/
     - assets/translations/
 
   fonts:
-    - family: BoxIcons
-      fonts:
-        - asset: assets/fonts/BoxIcons.ttf
     - family: FontAwesome
       fonts:
         - asset: assets/fonts/FontAwesome.ttf
-    - family: OctIcons
-      fonts:
-        - asset: assets/fonts/OctIcons.ttf
-    - family: Nunito
-      fonts:
-        - asset: assets/fonts/Nunito/static/Nunito-Black.ttf
-          weight: 900
-        - asset: assets/fonts/Nunito/static/Nunito-BlackItalic.ttf
-          weight: 900
-          style: italic
-        - asset: assets/fonts/Nunito/static/Nunito-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Nunito/static/Nunito-BoldItalic.ttf
-          weight: 700
-          style: italic
-        - asset: assets/fonts/Nunito/static/Nunito-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/Nunito/static/Nunito-ExtraBoldItalic.ttf
-          weight: 800
-          style: italic
-        - asset: assets/fonts/Nunito/static/Nunito-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Nunito/static/Nunito-ExtraLightItalic.ttf
-          weight: 200
-          style: italic
-        - asset: assets/fonts/Nunito/static/Nunito-Italic.ttf
-          style: italic
-        - asset: assets/fonts/Nunito/static/Nunito-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Nunito/static/Nunito-LightItalic.ttf
-          weight: 300
-          style: italic
-        - asset: assets/fonts/Nunito/static/Nunito-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Nunito/static/Nunito-MediumItalic.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/Nunito/static/Nunito-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Nunito/static/Nunito-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Nunito/static/Nunito-SemiBoldItalic.ttf
-          weight: 600
-          style: italic
 
 
 flutter_native_splash:
-  color: "#60a3d9"
-  image: "assets/images/spinner-light.apng"
-  color_dark: "#122035"
-  image_dark: "assets/images/spinner-dark.apng"
+  color: "#f7f8fa"
+  image: "native_splash_source/spinner-light.apng"
+  color_dark: "#0b0f14"
+  image_dark: "native_splash_source/spinner-dark.apng"
+  # The web loading screen is a lightweight CSS spinner hand-written in
+  # web/index.html instead — generating these splash images at web/splash/
+  # produced multi-megabyte PNGs (up to 6.5MB) that were downloaded before
+  # Flutter even started loading.
+  web: false
   
 flutter_launcher_icons:
   android: "ic_launcher"

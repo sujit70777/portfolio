@@ -105,7 +105,62 @@ class CodegenLoader extends AssetLoader{
       "url": "assets/assets/documents/resume.pdf"
     }
   ],
-  "aboutDescription": "Senior Mobile Developer with 9+ years building Flutter and Android applications, having shipped 50+ apps used by over 1 million people worldwide.\nI've led cross-functional teams across multiple time zones, delivered features 40% faster while sustaining 4.7+ app store ratings, and maintain an active open-source portfolio of published Flutter packages with real developer adoption.\nMy toolbox spans Flutter, native Android (Kotlin/Java) and iOS/SwiftUI, with Bloc, Riverpod, Provider and GetX for state management, and Firebase, REST APIs, GraphQL, SQLite, PostgreSQL and AWS on the backend and infrastructure side, backed by CI/CD, Fastlane and Docker.\nI use modern AI-assisted development tooling (Claude Code) to move faster without cutting corners on code review, testing, or architecture quality.",
+  "aboutDescription": "Seasoned Mobile Technology Leader with 9+ years architecting high-performance Flutter and Android applications serving 1M+ global users across 50+ published apps.\nProven track record of leading cross-functional development teams and delivering enterprise solutions faster while maintaining 4.7+ app store ratings.\nExperienced collaborating with distributed teams across multiple time zones, turning complex requirements into scalable, offline-first mobile platforms.\nActively contributes to the open-source Flutter ecosystem and mentors developers entering the field, while using modern AI-assisted development tooling (Claude Code) to move faster without cutting corners on code review, testing, or architecture quality.",
+  "skillCategories": [
+    {
+      "category": "Mobile Architecture & Development",
+      "skills": [
+        "Flutter (Expert)",
+        "Native Android",
+        "iOS/SwiftUI",
+        "Cross-Platform Development",
+        "Performance Optimization"
+      ]
+    },
+    {
+      "category": "Programming & Frameworks",
+      "skills": [
+        "Dart",
+        "Kotlin",
+        "Java",
+        "Swift",
+        "JavaScript/TypeScript",
+        "Python",
+        "Jetpack Compose"
+      ]
+    },
+    {
+      "category": "Backend & Cloud",
+      "skills": [
+        "Firebase (Firestore, Auth, Functions, Analytics)",
+        "REST APIs",
+        "GraphQL",
+        "SQLite",
+        "PostgreSQL",
+        "AWS"
+      ]
+    },
+    {
+      "category": "DevOps & Quality",
+      "skills": [
+        "CI/CD Pipelines",
+        "Docker",
+        "Git",
+        "Fastlane",
+        "Unit/Widget/Integration Testing",
+        "Code Review"
+      ]
+    },
+    {
+      "category": "Leadership & Collaboration",
+      "skills": [
+        "Agile/Scrum",
+        "Technical Mentoring",
+        "Cross-functional Team Leadership",
+        "Distributed Team Collaboration"
+      ]
+    }
+  ],
   "experiences": [
     {
       "role": "Senior Flutter Developer — Level III",
@@ -741,6 +796,7 @@ class CodegenLoader extends AssetLoader{
   "homeSectionTitle": "Home",
   "aboutSectionTitle": "About",
   "aboutSectionTitleAlt": "About Me",
+  "skillsSectionTitle": "Skills",
   "experienceSectionTitle": "Experience",
   "projectsSectionTitle": "Projects",
   "resume": "Resume",

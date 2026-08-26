@@ -9,6 +9,7 @@ abstract class  LocaleKeys {
   static const contacts = 'contacts';
   static const resumes = 'resumes';
   static const aboutDescription = 'aboutDescription';
+  static const skillCategories = 'skillCategories';
   static const experiences = 'experiences';
   static const present = 'present';
   static const projects = 'projects';
@@ -21,6 +22,7 @@ abstract class  LocaleKeys {
   static const homeSectionTitle = 'homeSectionTitle';
   static const aboutSectionTitle = 'aboutSectionTitle';
   static const aboutSectionTitleAlt = 'aboutSectionTitleAlt';
+  static const skillsSectionTitle = 'skillsSectionTitle';
   static const experienceSectionTitle = 'experienceSectionTitle';
   static const projectsSectionTitle = 'projectsSectionTitle';
   static const resume = 'resume';
