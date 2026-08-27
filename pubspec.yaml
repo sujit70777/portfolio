@@ -75,6 +75,8 @@ flutter:
     - assets/projectimage/fitness-tracker-senseit/
     - assets/projectimage/jatri-bangladesh-transit-app-in-progress/
     - assets/projectimage/omr-scanner/
+    - assets/projectimage/farenow/
+    - assets/projectimage/flutter-zoom-image/
     - assets/translations/
 
   fonts:
