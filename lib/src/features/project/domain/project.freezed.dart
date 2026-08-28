@@ -27,6 +27,7 @@ mixin _$Project {
   String? get screenshotPath => throw _privateConstructorUsedError;
   List<Technology>? get technologies => throw _privateConstructorUsedError;
   List<Link>? get links => throw _privateConstructorUsedError;
+  bool? get featured => throw _privateConstructorUsedError;
 
   /// Serializes this Project to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $ProjectCopyWith<$Res> {
       IconModel? icon,
       String? screenshotPath,
       List<Technology>? technologies,
-      List<Link>? links});
+      List<Link>? links,
+      bool? featured});
 
   $IconModelCopyWith<$Res>? get icon;
 }
@@ -76,6 +78,7 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
     Object? screenshotPath = freezed,
     Object? technologies = freezed,
     Object? links = freezed,
+    Object? featured = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
@@ -106,6 +109,10 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
               as List<Link>?,
+      featured: freezed == featured
+          ? _value.featured
+          : featured // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -138,7 +145,8 @@ abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       IconModel? icon,
       String? screenshotPath,
       List<Technology>? technologies,
-      List<Link>? links});
+      List<Link>? links,
+      bool? featured});
 
   @override
   $IconModelCopyWith<$Res>? get icon;
@@ -164,6 +172,7 @@ class __$$ProjectImplCopyWithImpl<$Res>
     Object? screenshotPath = freezed,
     Object? technologies = freezed,
     Object? links = freezed,
+    Object? featured = freezed,
   }) {
     return _then(_$ProjectImpl(
       name: freezed == name
@@ -194,6 +203,10 @@ class __$$ProjectImplCopyWithImpl<$Res>
           ? _value._links
           : links // ignore: cast_nullable_to_non_nullable
               as List<Link>?,
+      featured: freezed == featured
+          ? _value.featured
+          : featured // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -208,7 +221,8 @@ class _$ProjectImpl implements _Project {
       this.icon,
       this.screenshotPath,
       final List<Technology>? technologies,
-      final List<Link>? links})
+      final List<Link>? links,
+      this.featured})
       : _technologies = technologies,
         _links = links;
 
@@ -246,8 +260,11 @@ class _$ProjectImpl implements _Project {
   }
 
   @override
+  final bool? featured;
+
+  @override
   String toString() {
-    return 'Project(name: $name, description: $description, url: $url, icon: $icon, screenshotPath: $screenshotPath, technologies: $technologies, links: $links)';
+    return 'Project(name: $name, description: $description, url: $url, icon: $icon, screenshotPath: $screenshotPath, technologies: $technologies, links: $links, featured: $featured)';
   }
 
   @override
@@ -264,7 +281,9 @@ class _$ProjectImpl implements _Project {
                 other.screenshotPath == screenshotPath) &&
             const DeepCollectionEquality()
                 .equals(other._technologies, _technologies) &&
-            const DeepCollectionEquality().equals(other._links, _links));
+            const DeepCollectionEquality().equals(other._links, _links) &&
+            (identical(other.featured, featured) ||
+                other.featured == featured));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -277,7 +296,8 @@ class _$ProjectImpl implements _Project {
       icon,
       screenshotPath,
       const DeepCollectionEquality().hash(_technologies),
-      const DeepCollectionEquality().hash(_links));
+      const DeepCollectionEquality().hash(_links),
+      featured);
 
   /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.

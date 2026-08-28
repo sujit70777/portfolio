@@ -11,6 +11,8 @@ class ContactBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Wrap(
+      spacing: 10,
+      runSpacing: 10,
       children: contacts.map((contact) {
         return ContactIconButton(contact: contact);
       }).toList(),

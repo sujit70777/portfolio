@@ -16,6 +16,7 @@ class Project with _$Project {
     String? screenshotPath,
     List<Technology>? technologies,
     List<Link>? links,
+    bool? featured,
   }) = _Project;
 
   factory Project.fromJson(Map<String, dynamic> json) =>
