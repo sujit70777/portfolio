@@ -1,7 +1,20 @@
 {
     "name": "Shekh Ehsanur Rahman",
-    "description": "Senior Mobile Developer | Flutter, Android & iOS Specialist",
-    "subDescription": "9+ yrs · 50+ Apps · 1M+ Users · Open to Remote Work",
+    "description": "Senior Flutter Engineer — Offline-First & Data-Sync Architecture",
+    "subDescription": "Based in Bangladesh · hours shifted to overlap EU/US",
+    "heroPrimaryCta": "Email me",
+    "heroSecondaryCta": "WhatsApp",
+    "availabilityBadge": "Available for new work",
+    "stats": {
+        "years": "11",
+        "yearsLabel": "Years",
+        "apps": "50+",
+        "appsLabel": "Apps",
+        "users": "1M+",
+        "usersLabel": "Users",
+        "rating": "4.7",
+        "ratingLabel": "Rating"
+    },
     "contacts": [
         {
             "tooltip": "Github",
@@ -86,64 +99,72 @@
         {
             "languageCode": "en",
             "language": "English",
-            "url": "assets/assets/documents/resume.pdf"
+            "url": "assets/documents/resume.pdf"
         }
     ],
-    "aboutDescription": "Seasoned Mobile Technology Leader with 9+ years architecting high-performance Flutter, native Android, and native iOS applications serving 1M+ global users across 50+ published apps.\nProven track record of leading cross-functional development teams and delivering enterprise solutions faster while maintaining 4.7+ app store ratings.\nExperienced collaborating with distributed teams across multiple time zones, turning complex requirements into scalable, offline-first mobile platforms.\nActively contributes to the open-source Flutter ecosystem — publishing production packages on pub.dev — and mentors developers entering the field, while using modern AI-assisted development tooling (Claude Code) to move faster without cutting corners on code review, testing, or architecture quality.",
+    "aboutDescription": "I build Flutter apps that keep working when the network doesn't.\n11 years in mobile — 50+ shipped apps, 1M+ users, 4.7+ average store rating. My specialty is offline-first architecture and conflict-free data synchronisation: the part that quietly breaks most mobile apps in the field. I've built and open-sourced a CRDT-based sync library for Flutter, and shipped production apps holding a 4.7 rating at 100,000+ daily active users.\nRecent work includes an enterprise reimbursement platform for a Brazilian client — AI invoice capture, SEFAZ tax-agency integration, instant Pix payout — and a multi-service super app for a US client in Houston.\nI currently work shifted hours to overlap with a Brazil-based team, so adapting to US or UK business hours is routine rather than a promise. Available as an independent contractor.",
     "skillCategories": [
+        {
+            "category": "Offline-First & Data Sync",
+            "skills": [
+                "Offline-First Architecture",
+                "CRDT & Conflict Resolution",
+                "Local-First Data Layers",
+                "Firebase / SQLite Sync",
+                "Background Sync & Retry Queues"
+            ]
+        },
         {
             "category": "Mobile Architecture & Development",
             "skills": [
                 "Flutter (Expert)",
                 "Native Android",
-                "Native iOS/SwiftUI",
-                "React Native",
-                "Kotlin Multiplatform (KMP)",
+                "Native iOS / SwiftUI",
                 "Cross-Platform Development",
-                "Performance Optimization"
+                "Performance Optimization",
+                "Platform Channels"
             ]
         },
         {
-            "category": "Programming & Frameworks",
+            "category": "Languages & State Management",
             "skills": [
                 "Dart",
                 "Kotlin",
-                "Java",
                 "Swift",
-                "JavaScript/TypeScript",
-                "Python",
+                "Java",
+                "TypeScript",
+                "Bloc",
+                "Riverpod",
                 "Jetpack Compose"
             ]
         },
         {
-            "category": "Backend & Cloud",
+            "category": "Backend & Data",
             "skills": [
-                "Firebase (Firestore, Auth, Functions, Analytics)",
+                "Firebase (Firestore, Auth, Functions, Crashlytics)",
                 "REST APIs",
-                "GraphQL",
-                "SQLite",
-                "PostgreSQL",
-                "AWS"
+                "Supabase",
+                "SQLite / Drift",
+                "PostgreSQL"
             ]
         },
         {
-            "category": "DevOps & Quality",
+            "category": "Quality & Delivery",
             "skills": [
+                "Unit / Widget / Integration Testing",
                 "CI/CD Pipelines",
-                "Docker",
-                "Git",
                 "Fastlane",
-                "Unit/Widget/Integration Testing",
-                "Code Review"
+                "Git & Code Review",
+                "App Store & Play Release Management"
             ]
         },
         {
             "category": "Leadership & Collaboration",
             "skills": [
-                "Agile/Scrum",
+                "Agile / Scrum",
                 "Technical Mentoring",
                 "Cross-functional Team Leadership",
-                "Distributed Team Collaboration"
+                "Async, Distributed Team Collaboration"
             ]
         }
     ],
@@ -151,7 +172,7 @@
         {
             "role": "Senior Flutter Developer — Level III",
             "company": "Developer eXperience Hub (Devxhub)",
-            "description": "Architected FinTech and expense-management apps serving 50,000+ users, increasing engagement 35% and improving conversion 30%. Lead a 4-developer team across time zones and cut deployment time 40% via CI/CD. Published 9 reusable Flutter packages to pub.dev spanning accessibility, offline sync, UI, and utility tooling, cutting cross-project development time 25%, while reducing crash rates 15%, app bundle size 35%, and launch time 45%.",
+            "description": "Architect the Flutter application layer for enterprise FinTech and expense-management products serving 50,000+ users, owning data flow, state management and release process end to end. Built an offline-first local/Firebase sync architecture that keeps core functionality available through network interruptions, with deterministic conflict resolution on reconnect. Designed the team CI/CD pipeline for a 4-developer team spanning multiple time zones. Published 9 reusable Flutter packages to pub.dev covering accessibility auditing, CRDT sync, UI and utility tooling. Led delivery of Tanto (Brazil) and Farenow (US).",
             "url": "https://devxhub.com",
             "isPresent": true,
             "startYear": 2023,
@@ -176,13 +197,10 @@
                     }
                 },
                 {
-                    "name": "Docker",
-                    "icon": {
-                        "assetName": "assets/icons/software-development/docker.svg"
-                    }
+                    "name": "Riverpod"
                 },
                 {
-                    "name": "Riverpod"
+                    "name": "Bloc"
                 }
             ],
             "links": [
@@ -195,7 +213,7 @@
         {
             "role": "Senior Mobile Application Developer",
             "company": "Prabartan Information Technology",
-            "description": "Led an EdTech platform for 100,000+ students across 5 countries, offline-first and multi-language, reaching a 4.7-star rating and 100,000+ daily active users. Managed a team of 6.",
+            "description": "Led development of an offline-first, multi-language EdTech platform reaching 100,000+ students across 5 countries, engineered so lessons and progress remain available without connectivity. Sustained a 4.7-star store rating at 100,000+ daily active users by building the Firebase/SQLite synchronisation layer and resolving sync-conflict edge cases at scale. Managed a 6-developer team and modernised the stack with Flutter 3.0, Jetpack Compose and SwiftUI.",
             "isPresent": false,
             "startYear": 2019,
             "startMonth": 6,
@@ -230,9 +248,35 @@
             ]
         },
         {
+            "role": "Android Application Developer",
+            "company": "Blue Hills Information Technology",
+            "description": "Part-time through 04/2017 while completing my Computer Science degree, full-time thereafter. Co-developed consumer Android applications reaching 500,000+ combined downloads and a top-10 ranking in the Education category on Google Play. Improved launch performance and reduced production defects through systematic profiling and code review practices.",
+            "isPresent": false,
+            "startYear": 2015,
+            "startMonth": 7,
+            "endYear": 2019,
+            "endMonth": 5,
+            "technologies": [
+                {
+                    "name": "Android",
+                    "icon": {
+                        "codePoint": "0xef1c",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "Java",
+                    "icon": {
+                        "codePoint": "0xefe7",
+                        "fontFamily": "FontAwesome"
+                    }
+                }
+            ]
+        },
+        {
             "role": "Guest Trainer, Mobile App Development (Contract)",
             "company": "NACTAR",
-            "description": "Contract/guest trainer, 2–3 sessions per year. Trained 200+ developers in mobile app development, with a 95% course completion rate and 80% job placement rate among graduates.",
+            "description": "Contract guest trainer, 2–3 sessions per year. Designed and delivered mobile development curriculum to 200+ developers, with hands-on project mentorship aligned to Android and Flutter certification standards.",
             "isPresent": false,
             "startYear": 2016,
             "startMonth": 5,
@@ -265,182 +309,16 @@
                     }
                 }
             ]
-        },
-        {
-            "role": "Android Application Developer",
-            "company": "Blue Hills Information Technology",
-            "description": "Part-time through 04/2017 while completing my Computer Science degree, full-time thereafter. Built consumer Android apps with 500,000+ combined downloads, reaching the top-10 of the Education category on Google Play.",
-            "isPresent": false,
-            "startYear": 2015,
-            "startMonth": 7,
-            "endYear": 2019,
-            "endMonth": 5,
-            "technologies": [
-                {
-                    "name": "Android",
-                    "icon": {
-                        "codePoint": "0xef1c",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "Java",
-                    "icon": {
-                        "codePoint": "0xefe7",
-                        "fontFamily": "FontAwesome"
-                    }
-                }
-            ]
         }
     ],
     "present": "Present",
     "projects": [
         {
             "name": "Farenow",
-            "description": "All-in-one super app for a US-based client (Houston, TX), built while at Devxhub: ride-hailing, on-demand service bookings, food/grocery delivery, virtual consultations, and a real estate/marketplace listings module in a single app.",
+            "description": "All-in-one super app for a US-based client (Houston, TX), built while at Devxhub: ride-hailing, on-demand service bookings, food and grocery delivery, virtual consultations, and a real estate/marketplace listings module in a single app.",
             "url": "https://play.google.com/store/apps/details?id=com.app.farenow",
             "icon": {
                 "codePoint": "0xefc5",
-                "fontFamily": "FontAwesome",
-                "color": "0xffffffff"
-            },
-            "technologies": [
-                {
-                    "name": "Flutter",
-                    "icon": {
-                        "assetName": "assets/icons/software-development/flutter.svg"
-                    }
-                },
-                {
-                    "name": "Android",
-                    "icon": {
-                        "codePoint": "0xef1c",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "Kotlin"
-                },
-                {
-                    "name": "Swift",
-                    "icon": {
-                        "codePoint": "0xf0aa",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "iOS"
-                },
-                {
-                    "name": "XML"
-                },
-                {
-                    "name": "Firebase",
-                    "icon": {
-                        "assetName": "assets/icons/other/firebase.svg"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Tanto",
-            "description": "Brazilian corporate expense-reimbursement platform integrated with state tax agencies (SEFAZ): used AI to capture the unique token on each invoice, validate it against company policy, and reimburse employees instantly via Pix. Built while at Devxhub (2023–2025); the company closed in Sept 2025 and its app/website listings were taken down — Facebook page linked below as proof of the project's existence.",
-            "url": "https://www.facebook.com/profile.php?id=61560593442787",
-            "icon": {
-                "assetName": "assets/icons/software-development/flutter.svg",
-                "color": "0xffffffff"
-            },
-            "technologies": [
-                {
-                    "name": "Flutter",
-                    "icon": {
-                        "assetName": "assets/icons/software-development/flutter.svg"
-                    }
-                },
-                {
-                    "name": "Android",
-                    "icon": {
-                        "codePoint": "0xef1c",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "Kotlin"
-                },
-                {
-                    "name": "Swift",
-                    "icon": {
-                        "codePoint": "0xf0aa",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "iOS"
-                },
-                {
-                    "name": "XML"
-                },
-                {
-                    "name": "SQLite"
-                },
-                {
-                    "name": "Firebase",
-                    "icon": {
-                        "assetName": "assets/icons/other/firebase.svg"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Peace of Mind (POM)",
-            "description": "iOS legacy and estate-planning app: digital will management, a biometric-secured vault, a life timeline, and Apple StoreKit subscriptions/IAP with individual and family plans.",
-            "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
-            "icon": {
-                "codePoint": "0xef23",
-                "fontFamily": "FontAwesome",
-                "color": "0xffffffff"
-            },
-            "technologies": [
-                {
-                    "name": "Swift",
-                    "icon": {
-                        "codePoint": "0xf0aa",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "iOS"
-                },
-                {
-                    "name": "StoreKit"
-                },
-                {
-                    "name": "Flutter",
-                    "icon": {
-                        "assetName": "assets/icons/software-development/flutter.svg"
-                    }
-                },
-                {
-                    "name": "Android",
-                    "icon": {
-                        "codePoint": "0xef1c",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "Kotlin"
-                },
-                {
-                    "name": "Apple Pay"
-                }
-            ]
-        },
-        {
-            "name": "flutter_liquid_glass_widgets",
-            "description": "Pub.dev package. UI kit inspired by Apple's iOS 26 Liquid Glass design language: shader-powered blur, physics-based jelly animations, and dynamic lighting, across Android, iOS, web, and desktop.",
-            "url": "https://pub.dev/packages/flutter_liquid_glass_widgets",
-            "icon": {
-                "codePoint": "0xea6f",
                 "fontFamily": "FontAwesome",
                 "color": "0xffffffff"
             },
@@ -458,9 +336,103 @@
                     }
                 },
                 {
-                    "name": "Open Source"
+                    "name": "Android",
+                    "icon": {
+                        "codePoint": "0xef1c",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "Kotlin",
+                    "icon": {
+                        "assetName": "assets/icons/other/kotlin.svg"
+                    }
+                },
+                {
+                    "name": "Swift",
+                    "icon": {
+                        "codePoint": "0xf0aa",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "iOS",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "Firebase",
+                    "icon": {
+                        "assetName": "assets/icons/other/firebase.svg"
+                    }
                 }
-            ]
+            ],
+            "featured": true
+        },
+        {
+            "name": "Tanto",
+            "description": "Brazilian corporate expense-reimbursement platform integrated with state tax agencies (SEFAZ): AI capture of the unique token on each invoice, validation against company policy, and instant employee reimbursement via Pix. Built while at Devxhub (2023–2025); the company closed in September 2025 and its listings were taken down.",
+            "url": "https://www.facebook.com/profile.php?id=61560593442787",
+            "icon": {
+                "assetName": "assets/icons/software-development/flutter.svg",
+                "color": "0xffffffff"
+            },
+            "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
+                },
+                {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
+                    "name": "Android",
+                    "icon": {
+                        "codePoint": "0xef1c",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "Kotlin",
+                    "icon": {
+                        "assetName": "assets/icons/other/kotlin.svg"
+                    }
+                },
+                {
+                    "name": "Swift",
+                    "icon": {
+                        "codePoint": "0xf0aa",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "iOS",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "SQLite",
+                    "icon": {
+                        "assetName": "assets/icons/other/sqlite.svg"
+                    }
+                },
+                {
+                    "name": "Firebase",
+                    "icon": {
+                        "assetName": "assets/icons/other/firebase.svg"
+                    }
+                }
+            ],
+            "featured": true
         },
         {
             "name": "flutter_crdt_sync_kit",
@@ -483,6 +455,155 @@
                     "icon": {
                         "assetName": "assets/icons/other/dart.svg"
                     }
+                },
+                {
+                    "name": "Offline-First Architecture"
+                },
+                {
+                    "name": "Data Synchronization"
+                },
+                {
+                    "name": "Open Source"
+                }
+            ],
+            "featured": true
+        },
+        {
+            "name": "Peace of Mind (POM)",
+            "description": "iOS legacy and estate-planning app: digital will management, a biometric-secured vault, a life timeline, and Apple StoreKit 2 subscriptions with individual and family plans. Resolved StoreKit subscription race conditions and led App Store submission and compliance.",
+            "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
+            "icon": {
+                "codePoint": "0xef23",
+                "fontFamily": "FontAwesome",
+                "color": "0xffffffff"
+            },
+            "technologies": [
+                {
+                    "name": "Swift",
+                    "icon": {
+                        "codePoint": "0xf0aa",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "iOS",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "SwiftUI",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "StoreKit",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "Apple Pay",
+                    "icon": {
+                        "codePoint": "0xef22",
+                        "fontFamily": "FontAwesome"
+                    }
+                }
+            ],
+            "featured": true
+        },
+        {
+            "name": "OMR Scanner",
+            "description": "GitHub project. Fully offline exam and answer-sheet scanner: create exams, define a multi-answer-capable answer key, calibrate the bubble grid once per sheet layout, then scan with a live camera guide and auto-capture for instant per-roll scoring — no OCR, using registration-mark alignment and homography.",
+            "url": "https://github.com/sujit70777/omr_scanner_flutter",
+            "icon": {
+                "codePoint": "0xefb7",
+                "fontFamily": "FontAwesome",
+                "color": "0xffffffff"
+            },
+            "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
+                },
+                {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
+                    "name": "Computer Vision"
+                },
+                {
+                    "name": "Image Processing"
+                },
+                {
+                    "name": "Open Source"
+                }
+            ],
+            "featured": true
+        },
+        {
+            "name": "flutter_a11y_lens",
+            "description": "Pub.dev package. Live accessibility auditing for Flutter: inspects the running widget tree and flags WCAG violations in real time, with an on-screen debug overlay.",
+            "url": "https://pub.dev/packages/flutter_a11y_lens",
+            "icon": {
+                "codePoint": "0xea6f",
+                "fontFamily": "FontAwesome",
+                "color": "0xffffffff"
+            },
+            "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
+                },
+                {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
+                    "name": "Accessibility"
+                },
+                {
+                    "name": "Open Source"
+                }
+            ]
+        },
+        {
+            "name": "flutter_liquid_glass_widgets",
+            "description": "Pub.dev package. UI kit implementing Apple's Liquid Glass design language: shader-powered blur, physics-based jelly animations, and dynamic lighting, across Android, iOS, web, and desktop.",
+            "url": "https://pub.dev/packages/flutter_liquid_glass_widgets",
+            "icon": {
+                "codePoint": "0xea6f",
+                "fontFamily": "FontAwesome",
+                "color": "0xffffffff"
+            },
+            "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
+                },
+                {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
+                    "name": "UI Design"
                 },
                 {
                     "name": "Open Source"
@@ -512,16 +633,19 @@
                     }
                 },
                 {
+                    "name": "On-Device ML"
+                },
+                {
                     "name": "Open Source"
                 }
             ]
         },
         {
-            "name": "flutter_a11y_lens",
-            "description": "Pub.dev package. Live accessibility auditing for Flutter: inspects the running widget tree and flags WCAG violations in real time, with an on-screen debug overlay.",
-            "url": "https://pub.dev/packages/flutter_a11y_lens",
+            "name": "Jatri — Bangladesh Transit App",
+            "description": "GitHub project. Transit journey planner and ticketing app for Bangladesh built on real MRT Line 6 and BRTA bus route data: onboarding, home/tickets/routes shell, journey search, route results, itinerary detail, and ticket purchase flow. Routing and payments are UI-complete, not yet wired to live services.",
+            "url": "https://github.com/sujit70777/Jatri---Bangladesh-Transit-App",
             "icon": {
-                "codePoint": "0xea6f",
+                "codePoint": "0xefb7",
                 "fontFamily": "FontAwesome",
                 "color": "0xffffffff"
             },
@@ -539,16 +663,55 @@
                     }
                 },
                 {
+                    "name": "Mapping"
+                },
+                {
                     "name": "Open Source"
                 }
             ]
         },
         {
-            "name": "flutter_scanner_devxhub",
-            "description": "Pub.dev package. Barcode/QR code scanning plugin for Flutter apps on Android/iOS, supporting a range of code types.",
-            "url": "https://pub.dev/packages/flutter_scanner_devxhub",
+            "name": "Forward SMS",
+            "description": "SMS forwarder to email, Slack, Telegram, and Discord, with offline queuing and custom filtering rules.",
+            "url": "https://apps.apple.com/us/app/forward-sms-sms-forwarder/id6759511643",
             "icon": {
-                "codePoint": "0xea6f",
+                "codePoint": "0xef23",
+                "fontFamily": "FontAwesome",
+                "color": "0xffffffff"
+            },
+            "technologies": [
+                {
+                    "name": "Swift",
+                    "icon": {
+                        "codePoint": "0xf0aa",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "iOS",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "StoreKit",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "Automation"
+                }
+            ]
+        },
+        {
+            "name": "ar_measure",
+            "description": "GitHub project. Cross-platform AR quick-measure plugin for Flutter — point the camera, tap to place anchors, and read live real-world distances and areas, wrapping ARKit and ARCore.",
+            "url": "https://github.com/sujit70777/ar_measure",
+            "icon": {
+                "codePoint": "0xefb7",
                 "fontFamily": "FontAwesome",
                 "color": "0xffffffff"
             },
@@ -566,7 +729,69 @@
                     }
                 },
                 {
-                    "name": "Open Source"
+                    "name": "ARKit",
+                    "icon": {
+                        "codePoint": "0xee48",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "ARCore",
+                    "icon": {
+                        "codePoint": "0xee48",
+                        "fontFamily": "FontAwesome"
+                    }
+                }
+            ],
+            "featured": true
+        },
+        {
+            "name": "Muslim Times Pro",
+            "description": "Prayer times with azan alerts, full Quran with recitation and translation, a mosque locator, Qibla compass, and Hijri calendar.",
+            "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
+            "icon": {
+                "codePoint": "0xef23",
+                "fontFamily": "FontAwesome",
+                "color": "0xffffffff"
+            },
+            "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
+                },
+                {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
+                    "name": "Android",
+                    "icon": {
+                        "codePoint": "0xef1c",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "iOS",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "SQLite",
+                    "icon": {
+                        "assetName": "assets/icons/other/sqlite.svg"
+                    }
+                },
+                {
+                    "name": "Firebase",
+                    "icon": {
+                        "assetName": "assets/icons/other/firebase.svg"
+                    }
                 }
             ]
         },
@@ -587,6 +812,12 @@
                     }
                 },
                 {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
                     "name": "Android",
                     "icon": {
                         "codePoint": "0xef1c",
@@ -594,20 +825,55 @@
                     }
                 },
                 {
-                    "name": "Kotlin"
-                },
-                {
-                    "name": "Swift",
+                    "name": "iOS",
                     "icon": {
-                        "codePoint": "0xf0aa",
+                        "codePoint": "0xef21",
                         "fontFamily": "FontAwesome"
                     }
                 },
                 {
-                    "name": "iOS"
+                    "name": "Firebase",
+                    "icon": {
+                        "assetName": "assets/icons/other/firebase.svg"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "SK Mobile School",
+            "description": "Secure educational platform for streaming enrolled course videos with screenshot and recording protection, progress tracking, and course search.",
+            "url": "https://apps.apple.com/us/app/sk-mobile-school/id6475169754",
+            "icon": {
+                "codePoint": "0xef23",
+                "fontFamily": "FontAwesome",
+                "color": "0xffffffff"
+            },
+            "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
                 },
                 {
-                    "name": "XML"
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
+                    "name": "Android",
+                    "icon": {
+                        "codePoint": "0xef1c",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "iOS",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
                 },
                 {
                     "name": "Firebase",
@@ -634,44 +900,9 @@
                     }
                 },
                 {
-                    "name": "Android",
+                    "name": "Dart",
                     "icon": {
-                        "codePoint": "0xef1c",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "Kotlin"
-                },
-                {
-                    "name": "Swift",
-                    "icon": {
-                        "codePoint": "0xf0aa",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "iOS"
-                },
-                {
-                    "name": "XML"
-                }
-            ]
-        },
-        {
-            "name": "SK Mobile School",
-            "description": "Secure educational platform for streaming enrolled course videos with screenshot/recording protection, progress tracking, and course search.",
-            "url": "https://apps.apple.com/us/app/sk-mobile-school/id6475169754",
-            "icon": {
-                "codePoint": "0xef23",
-                "fontFamily": "FontAwesome",
-                "color": "0xffffffff"
-            },
-            "technologies": [
-                {
-                    "name": "Flutter",
-                    "icon": {
-                        "assetName": "assets/icons/software-development/flutter.svg"
+                        "assetName": "assets/icons/other/dart.svg"
                     }
                 },
                 {
@@ -682,104 +913,11 @@
                     }
                 },
                 {
-                    "name": "Kotlin"
-                },
-                {
-                    "name": "Swift",
+                    "name": "iOS",
                     "icon": {
-                        "codePoint": "0xf0aa",
+                        "codePoint": "0xef21",
                         "fontFamily": "FontAwesome"
                     }
-                },
-                {
-                    "name": "iOS"
-                },
-                {
-                    "name": "XML"
-                },
-                {
-                    "name": "Firebase",
-                    "icon": {
-                        "assetName": "assets/icons/other/firebase.svg"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Muslim Times Pro",
-            "description": "Prayer times with azan alerts, full Quran with recitation and translation, a mosque locator, Qibla compass, and Hijri calendar.",
-            "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
-            "icon": {
-                "codePoint": "0xef23",
-                "fontFamily": "FontAwesome",
-                "color": "0xffffffff"
-            },
-            "technologies": [
-                {
-                    "name": "Flutter",
-                    "icon": {
-                        "assetName": "assets/icons/software-development/flutter.svg"
-                    }
-                },
-                {
-                    "name": "Android",
-                    "icon": {
-                        "codePoint": "0xef1c",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "Kotlin"
-                },
-                {
-                    "name": "Swift",
-                    "icon": {
-                        "codePoint": "0xf0aa",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "iOS"
-                },
-                {
-                    "name": "XML"
-                },
-                {
-                    "name": "SQLite"
-                },
-                {
-                    "name": "Firebase",
-                    "icon": {
-                        "assetName": "assets/icons/other/firebase.svg"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Forward SMS",
-            "description": "SMS forwarder to email, Slack, Telegram, and Discord, with offline queuing and custom filtering rules.",
-            "url": "https://apps.apple.com/us/app/forward-sms-sms-forwarder/id6759511643",
-            "icon": {
-                "codePoint": "0xef23",
-                "fontFamily": "FontAwesome",
-                "color": "0xffffffff"
-            },
-            "technologies": [
-                {
-                    "name": "Swift",
-                    "icon": {
-                        "codePoint": "0xf0aa",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "iOS"
-                },
-                {
-                    "name": "StoreKit"
-                },
-                {
-                    "name": "Shortcuts App Automation"
                 }
             ]
         },
@@ -800,6 +938,12 @@
                     }
                 },
                 {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
                     "name": "Android",
                     "icon": {
                         "codePoint": "0xef1c",
@@ -807,20 +951,11 @@
                     }
                 },
                 {
-                    "name": "Kotlin"
-                },
-                {
-                    "name": "Swift",
+                    "name": "iOS",
                     "icon": {
-                        "codePoint": "0xf0aa",
+                        "codePoint": "0xef21",
                         "fontFamily": "FontAwesome"
                     }
-                },
-                {
-                    "name": "iOS"
-                },
-                {
-                    "name": "XML"
                 },
                 {
                     "name": "Firebase",
@@ -847,6 +982,12 @@
                     }
                 },
                 {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
                     "name": "Android",
                     "icon": {
                         "codePoint": "0xef1c",
@@ -854,7 +995,17 @@
                     }
                 },
                 {
-                    "name": "Kotlin"
+                    "name": "Kotlin",
+                    "icon": {
+                        "assetName": "assets/icons/other/kotlin.svg"
+                    }
+                },
+                {
+                    "name": "iOS",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
                 },
                 {
                     "name": "Swift",
@@ -862,12 +1013,6 @@
                         "codePoint": "0xf0aa",
                         "fontFamily": "FontAwesome"
                     }
-                },
-                {
-                    "name": "iOS"
-                },
-                {
-                    "name": "XML"
                 }
             ]
         },
@@ -899,9 +1044,9 @@
             ]
         },
         {
-            "name": "flutter_prayer_time_calculator",
-            "description": "Pub.dev package. Calculates Islamic prayer times with customizable calculation methods and location/timezone support.",
-            "url": "https://pub.dev/packages/flutter_prayer_time_calculator",
+            "name": "flutter_scanner_devxhub",
+            "description": "Pub.dev package. Barcode and QR code scanning plugin for Flutter apps on Android and iOS, supporting a wide range of code types.",
+            "url": "https://pub.dev/packages/flutter_scanner_devxhub",
             "icon": {
                 "codePoint": "0xea6f",
                 "fontFamily": "FontAwesome",
@@ -953,6 +1098,33 @@
             ]
         },
         {
+            "name": "flutter_prayer_time_calculator",
+            "description": "Pub.dev package. Calculates Islamic prayer times with customizable calculation methods and location/timezone support.",
+            "url": "https://pub.dev/packages/flutter_prayer_time_calculator",
+            "icon": {
+                "codePoint": "0xea6f",
+                "fontFamily": "FontAwesome",
+                "color": "0xffffffff"
+            },
+            "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
+                },
+                {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
+                    "name": "Open Source"
+                }
+            ]
+        },
+        {
             "name": "flutter_scroll_date_picker",
             "description": "Pub.dev package. A customizable, easy-to-use scroll date picker for Flutter, compatible with Android, iOS, and Web.",
             "url": "https://pub.dev/packages/flutter_scroll_date_picker",
@@ -978,40 +1150,6 @@
                     "name": "Open Source"
                 }
             ]
-        },
-        {
-            "name": "ar_measure (in progress)",
-            "description": "GitHub project. Cross-platform AR \"quick measure\" for Flutter — point the camera, tap to place anchors, and read live real-world distances and areas, wrapping ARKit and ARCore.",
-            "url": "https://github.com/sujit70777/ar_measure",
-            "icon": {
-                "codePoint": "0xefb7",
-                "fontFamily": "FontAwesome",
-                "color": "0xffffffff"
-            },
-            "technologies": [
-                {
-                    "name": "Flutter",
-                    "icon": {
-                        "assetName": "assets/icons/software-development/flutter.svg"
-                    }
-                },
-                {
-                    "name": "Dart",
-                    "icon": {
-                        "assetName": "assets/icons/other/dart.svg"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Awesome Mobile App Development",
-            "description": "GitHub project. Curated collection of mobile development resources spanning Kotlin/Android, Flutter, and Swift/iOS — articles, libraries, tools, templates, and open-source app examples.",
-            "url": "https://github.com/sujit70777/Awsome-Mobile-App-Development",
-            "icon": {
-                "codePoint": "0xefb7",
-                "fontFamily": "FontAwesome",
-                "color": "0xffffffff"
-            }
         },
         {
             "name": "Fitness Tracker (SENSEit)",
@@ -1040,52 +1178,14 @@
             ]
         },
         {
-            "name": "Jatri — Bangladesh Transit App (in progress)",
-            "description": "GitHub project. Transit app prototype for Bangladesh covering the core journey: onboarding, a four-tab home/tickets/routes shell, journey search, route results, itinerary detail, and ticket purchase, using real MRT Line 6 and BRTA bus route data. Routing and payments are UI-complete but not yet wired to live services.",
-            "url": "https://github.com/sujit70777/Jatri---Bangladesh-Transit-App",
+            "name": "Awesome Mobile App Development",
+            "description": "GitHub project. Curated collection of mobile development resources spanning Kotlin/Android, Flutter, and Swift/iOS — articles, libraries, tools, templates, and open-source app examples.",
+            "url": "https://github.com/sujit70777/Awsome-Mobile-App-Development",
             "icon": {
                 "codePoint": "0xefb7",
                 "fontFamily": "FontAwesome",
                 "color": "0xffffffff"
-            },
-            "technologies": [
-                {
-                    "name": "Flutter",
-                    "icon": {
-                        "assetName": "assets/icons/software-development/flutter.svg"
-                    }
-                },
-                {
-                    "name": "Dart",
-                    "icon": {
-                        "assetName": "assets/icons/other/dart.svg"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "OMR Scanner",
-            "description": "GitHub project. Offline exam/OMR management app: create exams, set a multi-answer-capable answer key, calibrate the bubble grid once per sheet layout, then scan answer sheets with a live camera guide and auto-capture for instant per-roll-number scoring — no OCR, using registration-mark alignment and homography.",
-            "url": "https://github.com/sujit70777/omr_scanner_flutter",
-            "icon": {
-                "codePoint": "0xefb7",
-                "fontFamily": "FontAwesome",
-                "color": "0xffffffff"
-            },
-            "technologies": [
-                {
-                    "name": "Flutter",
-                    "icon": {
-                        "assetName": "assets/icons/software-development/flutter.svg"
-                    }
-                },
-                {
-                    "name": "Dart",
-                    "icon": {
-                        "assetName": "assets/icons/other/dart.svg"
-                    }
-                }
-            ]
+            }
         }
     ],
     "languages": [
@@ -1113,5 +1213,10 @@
     "resume": "Resume",
     "downloadResume": "Download Resume",
     "openUrlError": "Could not open the url",
-    "unknownLanguageError": "Language unknown"
+    "unknownLanguageError": "Language unknown",
+    "sectionEyebrowAbout": "01 — About",
+    "sectionEyebrowExperience": "02 — Experience",
+    "sectionEyebrowSkills": "03 — Skills",
+    "sectionEyebrowProjects": "04 — Shipped Work",
+    "projectsMoreLabel": "More shipped work"
 }
