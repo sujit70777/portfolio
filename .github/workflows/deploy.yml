@@ -14,13 +14,24 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          flutter-version: '3.38.0'
 
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Analyze
+        run: flutter analyze --fatal-infos
+
+      - name: Test
+        run: flutter test
+
       - name: Build web app
         run: flutter build web --release
+
+      - name: Verify build output before deploying
+        run: |
+          test -f build/web/index.html
+          test -f build/web/main.dart.js
 
       - name: Deploy to Namecheap via rsync
         uses: burnett01/rsync-deployments@7.0.1
