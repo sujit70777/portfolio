@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -45,15 +46,17 @@ Widget _buildResumeLanguageTileContent(
 }) {
   final languages = ref.watch(languageRepositoryProvider).getLanguages();
   final resumeLanguageCode = resume.languageCode;
-  if (resumeLanguageCode == null) {
+  final language = resumeLanguageCode == null
+      ? null
+      : languages.firstWhereOrNull(
+          (language) => language.code == resumeLanguageCode,
+        );
+  if (language == null) {
     return Text(
       tr(LocaleKeys.unknownLanguageError),
       style: Theme.of(context).textTheme.titleMedium,
     );
   }
-  final language = languages.firstWhere((language) {
-    return language.code == resumeLanguageCode;
-  });
   return Row(
     children: [
       MyIcon(

@@ -28,7 +28,7 @@ class ResumeLanguageDialog extends ConsumerWidget {
           return Column(
             children: [
               ResumeLanguageDialogTile(resume: resume),
-              if (index != resumes.length) const Divider(height: 0)
+              if (index != resumes.length - 1) const Divider(height: 0)
             ],
           );
         }),

@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/personal_info/domain/resume.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/resume_language_dialog.dart';
@@ -10,10 +7,6 @@ import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-/// Pubspec-relative path the resume PDF must be added at (see pubspec.yaml
-/// `assets/documents/`) for the Download Resume button to actually resolve.
-const _resumeAssetPath = 'assets/documents/resume.pdf';
 
 class ResumeButton extends ConsumerStatefulWidget {
   const ResumeButton({super.key, required this.resumes});
@@ -28,24 +21,6 @@ class _ResumeButtonState extends ConsumerState<ResumeButton> {
   bool _isHovered = false;
   void _hoverEffectOn() => setState(() => _isHovered = true);
   void _hoverEffectOff() => setState(() => _isHovered = false);
-
-  @override
-  void initState() {
-    super.initState();
-    unawaited(_warnIfResumeAssetMissing());
-  }
-
-  Future<void> _warnIfResumeAssetMissing() async {
-    try {
-      await rootBundle.load(_resumeAssetPath);
-    } catch (_) {
-      debugPrint(
-        'ResumeButton: no resume found at "$_resumeAssetPath" — the '
-        'Download Resume button is wired up but will 404 until you add '
-        'your resume PDF at that exact path.',
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
