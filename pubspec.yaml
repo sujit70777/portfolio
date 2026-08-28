@@ -82,6 +82,24 @@ flutter:
     - family: FontAwesome
       fonts:
         - asset: assets/fonts/FontAwesome.ttf
+    # Local copies of the two Google Fonts used by the TextTheme
+    # (lib/src/constants/themes.dart). Filenames must end with exactly
+    # "<GoogleFontsFamily>-<Weight>" (e.g. "Inter-Regular") — that's the
+    # convention the google_fonts package's local-asset detection matches
+    # against (see google_fonts_family_with_variant.dart), so it loads these
+    # instead of fetching from fonts.gstatic.com at runtime.
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
+    - family: SpaceGrotesk
+      fonts:
+        - asset: assets/fonts/SpaceGrotesk-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/SpaceGrotesk-Bold.ttf
+          weight: 700
 
 
 flutter_native_splash:
