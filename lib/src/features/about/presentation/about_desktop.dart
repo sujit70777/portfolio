@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/about/data/about_repository.dart';
 import 'package:portfolio/src/features/about/presentation/widgets/skills_panel.dart';
@@ -17,6 +18,8 @@ class AboutDesktop extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SectionEyebrow(label: tr(LocaleKeys.sectionEyebrowAbout)),
+        gapH8,
         Padding(
           padding: const EdgeInsets.only(bottom: 32),
           child: Text(
@@ -30,11 +33,15 @@ class AboutDesktop extends ConsumerWidget {
         ),
         if (skillCategories.isNotEmpty) ...[
           gapH40,
-          Text(
-            tr(LocaleKeys.skillsSectionTitle),
-            style: Theme.of(context).textTheme.titleLarge,
+          SectionEyebrow(label: tr(LocaleKeys.sectionEyebrowSkills)),
+          gapH8,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Text(
+              tr(LocaleKeys.skillsSectionTitle),
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
           ),
-          gapH16,
           SkillsPanel(categories: skillCategories),
         ],
       ],
