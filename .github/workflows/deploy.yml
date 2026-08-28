@@ -33,6 +33,14 @@ jobs:
           test -f build/web/index.html
           test -f build/web/main.dart.js
 
+      - name: Pre-compress static assets
+        run: |
+          sudo apt-get install -y brotli
+          find build/web -type f \
+            \( -name '*.js' -o -name '*.mjs' -o -name '*.wasm' -o -name '*.json' \
+               -o -name '*.css' -o -name '*.svg' \) \
+            -exec brotli -q 11 -k {} \; -exec gzip -9 -k {} \;
+
       - name: Deploy to Namecheap via rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:

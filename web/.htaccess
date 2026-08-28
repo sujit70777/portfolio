@@ -5,17 +5,23 @@
 # long-term, or updates would never be picked up by returning visitors.
 # Fonts and images rarely change and are safe to cache aggressively; if one
 # is ever updated, rename the file to bust the cache.
+#
+# Pre-compressed .br/.gz siblings (built in CI — see
+# .github/workflows/deploy.yml, "Pre-compress static assets") match the same
+# rule as their original extension below via the optional (\.br|\.gz)?
+# suffix on each pattern: cache policy is about what a file is, not whether
+# it happens to be pre-compressed.
 
 <IfModule mod_headers.c>
-  <FilesMatch "\.(html|json)$">
+  <FilesMatch "\.(html|json)(\.br|\.gz)?$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
 
-  <FilesMatch "\.(js|mjs|wasm)$">
+  <FilesMatch "\.(js|mjs|wasm)(\.br|\.gz)?$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
 
-  <FilesMatch "\.(ttf|otf|woff|woff2|png|jpg|jpeg|webp|gif|svg|ico)$">
+  <FilesMatch "\.(ttf|otf|woff|woff2|png|jpg|jpeg|webp|gif|svg|ico)(\.br|\.gz)?$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 </IfModule>
@@ -31,6 +37,79 @@
   ExpiresByType image/svg+xml "access plus 1 year"
 </IfModule>
 
+# Many shared Apache installs don't have these registered, and a wrong
+# Content-Type on a .wasm response blocks streaming compilation entirely
+# (the browser has to buffer the whole file and guess instead).
+AddType application/wasm .wasm
+AddType text/javascript .mjs
+
+# --- Pre-compressed assets ---------------------------------------------
+# CI runs `brotli -k` and `gzip -k` over js/mjs/wasm/json/css/svg after the
+# build, producing "<file>.br"/"<file>.gz" siblings next to every original.
+# mod_rewrite serves whichever compressed sibling the client's
+# Accept-Encoding allows and actually exists on disk, preferring Brotli —
+# chosen over mod_negotiation/MultiViews because it only depends on
+# mod_rewrite, which is close to universally enabled on shared hosts, where
+# MultiViews is more often locked out of .htaccess by the host's
+# AllowOverride setting.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTP:Accept-Encoding} br
+  RewriteCond %{REQUEST_FILENAME}.br -f
+  RewriteRule ^(.*)$ $1.br [L]
+
+  RewriteCond %{HTTP:Accept-Encoding} gzip
+  RewriteCond %{REQUEST_FILENAME}.gz -f
+  RewriteRule ^(.*)$ $1.gz [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # The rewrite above serves e.g. "main.dart.js.br" for a request to
+  # "main.dart.js". Left alone, Apache would derive Content-Type from the
+  # .br/.gz suffix instead of the real one underneath — a script served as
+  # anything other than a JS/module MIME type won't execute, and the same
+  # goes for wasm streaming compilation.
+  <FilesMatch "\.js\.(br|gz)$">
+    Header set Content-Type "application/javascript"
+  </FilesMatch>
+  <FilesMatch "\.mjs\.(br|gz)$">
+    Header set Content-Type "text/javascript"
+  </FilesMatch>
+  <FilesMatch "\.wasm\.(br|gz)$">
+    Header set Content-Type "application/wasm"
+  </FilesMatch>
+  <FilesMatch "\.json\.(br|gz)$">
+    Header set Content-Type "application/json"
+  </FilesMatch>
+  <FilesMatch "\.css\.(br|gz)$">
+    Header set Content-Type "text/css"
+  </FilesMatch>
+  <FilesMatch "\.svg\.(br|gz)$">
+    Header set Content-Type "image/svg+xml"
+  </FilesMatch>
+
+  <FilesMatch "\.br$">
+    Header set Content-Encoding "br"
+  </FilesMatch>
+  <FilesMatch "\.gz$">
+    Header set Content-Encoding "gzip"
+  </FilesMatch>
+
+  # A cache or proxy in front of this origin (e.g. Cloudflare) must not
+  # hand a Brotli body to a client that sent no "br" in Accept-Encoding.
+  <FilesMatch "\.(js|mjs|wasm|json|css|svg)(\.br|\.gz)?$">
+    Header append Vary "Accept-Encoding"
+  </FilesMatch>
+</IfModule>
+
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE application/javascript application/wasm text/html text/css application/json image/svg+xml
+  # js/mjs/wasm/json/css/svg are pre-compressed in CI and served via the
+  # rewrite above — recompressing them here on every request would be
+  # redundant, and shared-host mod_deflate is throttled and can't reach
+  # Brotli's ratios anyway, which is the reason for the CI step. Only
+  # text/html is left to mod_deflate: it isn't part of the pre-compressed
+  # set, since it's the one file `flutter build web` produces that CI
+  # doesn't otherwise touch.
+  AddOutputFilterByType DEFLATE text/html
 </IfModule>
