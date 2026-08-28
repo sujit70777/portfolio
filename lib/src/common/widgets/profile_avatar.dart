@@ -5,7 +5,7 @@ class ProfileAvatar extends StatelessWidget {
 
   final double size;
 
-  static const _assetPath = 'assets/images/profile.jpg';
+  static const _assetPath = 'assets/images/profile.webp';
 
   @override
   Widget build(BuildContext context) {
