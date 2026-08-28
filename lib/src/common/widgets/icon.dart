@@ -29,6 +29,7 @@ const _faIconsByCodePoint = <String, IconData>{
   '0xefc5': IconData(0xefc5, fontFamily: 'FontAwesome'), // google play
   '0xefe7': IconData(0xefe7, fontFamily: 'FontAwesome'), // java (coffee cup)
   '0xeffb': IconData(0xeffb, fontFamily: 'FontAwesome'), // linkedin
+  '0xed85': IconData(0xed85, fontFamily: 'FontAwesome'), // star (solid) — rating
   '0xf0aa': IconData(0xf0aa, fontFamily: 'FontAwesome'), // swift
   '0xf0d9': IconData(0xf0d9, fontFamily: 'FontAwesome'), // whatsapp
 };
