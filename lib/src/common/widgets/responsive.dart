@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Responsive extends ConsumerWidget {
+class Responsive extends StatelessWidget {
   final Widget desktop;
   final Widget? tablet;
   final Widget? mobile;
@@ -34,7 +33,7 @@ class Responsive extends ConsumerWidget {
       MediaQuery.sizeOf(context).width >= 1280;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final maxWidth = MediaQuery.sizeOf(context).width;
     if (maxWidth < 640 && mobile != null) {
       return mobile!;
