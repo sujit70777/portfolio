@@ -53,7 +53,7 @@ class VersionRail extends StatelessWidget {
                   fontSize: 13,
                   color: isCurrent
                       ? theme.colorScheme.tertiary
-                      : theme.colorScheme.onSurface.withAlpha(140),
+                      : theme.colorScheme.onSurface.withAlpha(180),
                 ),
               ),
             ],

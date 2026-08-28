@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/personal_info/domain/resume.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/resume_language_dialog.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
@@ -12,52 +11,33 @@ class ResumeButton extends StatelessWidget {
 
   final List<Resume> resumes;
 
+  // Deliberately quiet — design brief 2, content problem #3: the resume is
+  // the secondary ask. Email/WhatsApp (see PersonalInfoSection) carry the
+  // primary-CTA visual weight; this is a plain underlined text link.
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return SelectionContainer.disabled(
-      child: OutlinedButton(
+      child: TextButton(
         style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
+          padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+          minimumSize: const WidgetStatePropertyAll(Size(0, 0)),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
             return states.contains(WidgetState.hovered)
-                ? theme.colorScheme.tertiary.withValues(alpha: 0.1)
-                : null;
+                ? theme.colorScheme.tertiary
+                : theme.colorScheme.onSurface.withAlpha(180);
           }),
-          side: WidgetStateProperty.resolveWith((states) {
-            return BorderSide(
-              width: states.contains(WidgetState.hovered) ? 2 : 1,
-              color: theme.colorScheme.tertiary,
-            );
-          }),
-          elevation: const WidgetStatePropertyAll(16),
-          shape: const WidgetStatePropertyAll(StadiumBorder()),
-          padding: const WidgetStatePropertyAll(
-            EdgeInsets.symmetric(horizontal: 36, vertical: 12),
-          ),
         ),
         onPressed: () => _onPressed(context),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Icon(
-              const IconData(
-                0xeec7,
-                fontFamily: "FontAwesome",
-              ),
-              size: 24,
-              color: theme.colorScheme.inverseSurface,
-            ),
-            gapW12,
-            Text(
-              tr(LocaleKeys.downloadResume),
-              style: theme.textTheme.titleMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ],
+        child: Text(
+          tr(LocaleKeys.downloadResume),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            decoration: TextDecoration.underline,
+            decorationColor: theme.colorScheme.onSurface.withAlpha(100),
+          ),
         ),
       ),
     );

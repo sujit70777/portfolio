@@ -21,6 +21,7 @@ _$ProjectImpl _$$ProjectImplFromJson(Map<String, dynamic> json) =>
       links: (json['links'] as List<dynamic>?)
           ?.map((e) => Link.fromJson(e as Map<String, dynamic>))
           .toList(),
+      featured: json['featured'] as bool?,
     );
 
 Map<String, dynamic> _$$ProjectImplToJson(_$ProjectImpl instance) =>
@@ -32,4 +33,5 @@ Map<String, dynamic> _$$ProjectImplToJson(_$ProjectImpl instance) =>
       'screenshotPath': instance.screenshotPath,
       'technologies': instance.technologies?.map((e) => e.toJson()).toList(),
       'links': instance.links?.map((e) => e.toJson()).toList(),
+      'featured': instance.featured,
     };

@@ -323,7 +323,8 @@ abstract class _Project implements Project {
       final IconModel? icon,
       final String? screenshotPath,
       final List<Technology>? technologies,
-      final List<Link>? links}) = _$ProjectImpl;
+      final List<Link>? links,
+      final bool? featured}) = _$ProjectImpl;
 
   factory _Project.fromJson(Map<String, dynamic> json) = _$ProjectImpl.fromJson;
 
@@ -341,6 +342,8 @@ abstract class _Project implements Project {
   List<Technology>? get technologies;
   @override
   List<Link>? get links;
+  @override
+  bool? get featured;
 
   /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.

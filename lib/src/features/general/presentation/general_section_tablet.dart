@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:portfolio/src/common/widgets/animated_fade_slide.dart';
 import 'package:portfolio/src/common/widgets/selection_area.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/about/presentation/about_section.dart';
 import 'package:portfolio/src/features/experience/presentation/experience_section.dart';
+import 'package:portfolio/src/features/general/presentation/widgets/site_footer.dart';
 import 'package:portfolio/src/features/personal_info/presentation/personal_info_section.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/sliver_app_bar.dart';
 import 'package:portfolio/src/features/project/presentation/project_section.dart';
@@ -35,38 +35,40 @@ class GeneralTablet extends ConsumerWidget {
                         padding: _buildResponsivePadding(context: context),
                         child: Align(
                           alignment: Alignment.topLeft,
-                          child: AnimatedFadeSlide(
-                            offset: const Offset(-128, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                  ),
-                                  child: PersonalInfoSection(
-                                    key: ref.watch(homeSectionKeyProvider),
-                                  ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
                                 ),
-                                gapH100,
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                  ),
-                                  child: AboutSection(
-                                    key: ref.watch(aboutSectionKeyProvider),
-                                  ),
+                                child: PersonalInfoSection(
+                                  key: ref.watch(homeSectionKeyProvider),
                                 ),
-                                gapH100,
-                                ExperienceSection(
-                                  key: ref.watch(experienceSectionKeyProvider),
+                              ),
+                              gapH100,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
                                 ),
-                                gapH100,
-                                ProjectSection(
-                                  key: ref.watch(projectSectionKeyProvider),
+                                child: AboutSection(
+                                  key: ref.watch(aboutSectionKeyProvider),
                                 ),
-                              ],
-                            ),
+                              ),
+                              gapH100,
+                              ExperienceSection(
+                                key: ref.watch(experienceSectionKeyProvider),
+                              ),
+                              gapH100,
+                              ProjectSection(
+                                key: ref.watch(projectSectionKeyProvider),
+                              ),
+                              gapH100,
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12),
+                                child: SiteFooter(),
+                              ),
+                            ],
                           ),
                         ),
                       ),

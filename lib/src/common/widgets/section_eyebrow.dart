@@ -17,7 +17,7 @@ class SectionEyebrow extends StatelessWidget {
       style: monoLabelStyle(
         fontSize: 12,
         letterSpacing: 0.08,
-        color: Theme.of(context).colorScheme.onSurface.withAlpha(140),
+        color: Theme.of(context).colorScheme.onSurface.withAlpha(180),
       ),
     );
   }
