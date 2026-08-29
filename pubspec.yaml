@@ -38,7 +38,11 @@ dev_dependencies:
   build_runner: ^2.15.1
   freezed: ^3.2.3
   json_serializable: ^6.11.2
-  flutter_native_splash: ^2.4.8
+  # Pinned below latest: 2.4.8 bumped its `meta` requirement to ^1.18.0,
+  # which is newer than the `meta` version some Flutter SDK releases pin
+  # via flutter_test (e.g. 1.17.0), breaking `pub get` on those SDKs.
+  # 2.4.7 only needs meta ^1.16.0, satisfied by 1.17.0.
+  flutter_native_splash: 2.4.7
   flutter_launcher_icons: ^0.14.4
 
 flutter:

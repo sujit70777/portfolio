@@ -2,16 +2,9 @@ import 'package:flutter/material.dart';
 
 /// A quiet phone-silhouette frame around [screen] — design brief 2's
 /// signature device-frame motif, reused at hero scale and at
-/// featured-project card scale. Deliberately plain: a rounded bezel and a
-/// notch, no glass/glow/3D — the screenshot inside carries the visual
-/// weight, not the frame around it.
-///
-/// [screen] gets a subtle dark scrim regardless of its own colors — a
-/// prototype pass surfaced that an arbitrary screenshot's own brand colors
-/// (a client's app, not this site's) can otherwise compete with the
-/// Signal accent right next to it. The scrim reads any screenshot as "the
-/// app's own UI, recessed behind this page's chrome" rather than a color
-/// clash, without needing to hand-tune per-screenshot.
+/// featured-project card scale. Deliberately plain: a rounded bezel, no
+/// glass/glow/3D/scrim — the screenshot inside carries the visual weight,
+/// not the frame around it.
 class DeviceFrame extends StatelessWidget {
   const DeviceFrame({super.key, required this.width, required this.screen});
 
@@ -54,27 +47,9 @@ class DeviceFrame extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.all(bezelWidth * 0.7),
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(screenRadius),
-                child: DecoratedBox(
-                  position: DecorationPosition.foreground,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        // Colors.black.withAlpha(90),
-                        // Colors.black.withAlpha(35),
-                        // Colors.black.withAlpha(130),
-                      ],
-                    ),
-                  ),
-                  child: SizedBox.expand(child: screen),
-                ),
-              ),
-            ],
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(screenRadius),
+            child: SizedBox.expand(child: screen),
           ),
         ),
       ),
