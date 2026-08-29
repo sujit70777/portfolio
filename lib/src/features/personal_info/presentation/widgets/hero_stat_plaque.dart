@@ -32,22 +32,23 @@ class HeroStatPlaque extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             _Stat(
-              value: '★${tr(LocaleKeys.stats_rating)}',
+              leadingPrefix: '★',
+              rawValue: tr(LocaleKeys.stats_rating),
               label: tr(LocaleKeys.stats_ratingLabel),
             ),
             _divider(theme),
             _Stat(
-              value: tr(LocaleKeys.stats_apps),
+              rawValue: tr(LocaleKeys.stats_apps),
               label: tr(LocaleKeys.stats_appsLabel),
             ),
             _divider(theme),
             _Stat(
-              value: tr(LocaleKeys.stats_users),
+              rawValue: tr(LocaleKeys.stats_users),
               label: tr(LocaleKeys.stats_usersLabel),
             ),
             _divider(theme),
             _Stat(
-              value: '${tr(LocaleKeys.stats_years)}yr',
+              rawValue: '${tr(LocaleKeys.stats_years)}yr',
               label: tr(LocaleKeys.stats_yearsLabel),
             ),
           ],
@@ -69,9 +70,10 @@ class HeroStatPlaque extends StatelessWidget {
 }
 
 class _Stat extends StatelessWidget {
-  const _Stat({required this.value, required this.label});
+  const _Stat({this.leadingPrefix = '', required this.rawValue, required this.label});
 
-  final String value;
+  final String leadingPrefix;
+  final String rawValue;
   final String label;
 
   @override
@@ -80,8 +82,9 @@ class _Stat extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          value,
+        _CountUpValue(
+          leadingPrefix: leadingPrefix,
+          rawValue: rawValue,
           style: monoLabelStyle(fontSize: 16, color: theme.colorScheme.tertiary),
         ),
         const SizedBox(height: 2),
@@ -94,6 +97,76 @@ class _Stat extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// Counts up from zero to the numeric lead of [rawValue] once, on first
+/// build — e.g. "50+" counts 0→50 then appends the static "+"; "4.7" counts
+/// with one decimal place preserved throughout. Runs once only (no repeat
+/// on rebuild) and jumps straight to the final value under
+/// `prefers-reduced-motion`.
+class _CountUpValue extends StatefulWidget {
+  const _CountUpValue({this.leadingPrefix = '', required this.rawValue, this.style});
+
+  final String leadingPrefix;
+  final String rawValue;
+  final TextStyle? style;
+
+  @override
+  State<_CountUpValue> createState() => _CountUpValueState();
+}
+
+class _CountUpValueState extends State<_CountUpValue> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _curve;
+  late final double _target;
+  late final int _decimals;
+  late final String _suffix;
+
+  @override
+  void initState() {
+    super.initState();
+    final match = RegExp(r'^(\d+(\.\d+)?)').firstMatch(widget.rawValue);
+    final numStr = match?.group(1) ?? '0';
+    _decimals = numStr.contains('.') ? numStr.split('.').last.length : 0;
+    _target = double.tryParse(numStr) ?? 0;
+    _suffix = widget.rawValue.substring(match?.end ?? 0);
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200));
+    _curve = CurvedAnimation(parent: _controller, curve: Curves.easeOut);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_controller.isAnimating && _controller.value == 0) {
+      if (MediaQuery.disableAnimationsOf(context)) {
+        _controller.value = 1;
+      } else {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _controller.forward();
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _curve,
+      builder: (context, _) {
+        final value = _target * _curve.value;
+        return Text(
+          '${widget.leadingPrefix}${value.toStringAsFixed(_decimals)}$_suffix',
+          style: widget.style,
+        );
+      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/widgets/scroll_reveal.dart';
 import 'package:portfolio/src/common/widgets/selection_area.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/about/presentation/about_section.dart';
@@ -51,22 +52,28 @@ class GeneralTablet extends ConsumerWidget {
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 12,
                                 ),
-                                child: AboutSection(
-                                  key: ref.watch(aboutSectionKeyProvider),
+                                child: ScrollReveal(
+                                  child: AboutSection(
+                                    key: ref.watch(aboutSectionKeyProvider),
+                                  ),
                                 ),
                               ),
                               gapH100,
-                              ExperienceSection(
-                                key: ref.watch(experienceSectionKeyProvider),
+                              ScrollReveal(
+                                child: ExperienceSection(
+                                  key: ref.watch(experienceSectionKeyProvider),
+                                ),
                               ),
                               gapH100,
-                              ProjectSection(
-                                key: ref.watch(projectSectionKeyProvider),
+                              ScrollReveal(
+                                child: ProjectSection(
+                                  key: ref.watch(projectSectionKeyProvider),
+                                ),
                               ),
                               gapH100,
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 12),
-                                child: SiteFooter(),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 12),
+                                child: ScrollReveal(child: const SiteFooter()),
                               ),
                             ],
                           ),

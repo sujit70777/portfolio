@@ -44,7 +44,7 @@ class TechnologyChip extends StatelessWidget {
           ),
         Text(
           technologyName,
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.labelSmall,
         ),
         gapW4
       ],

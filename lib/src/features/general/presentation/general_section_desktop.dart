@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/widgets/scroll_reveal.dart';
 import 'package:portfolio/src/common/widgets/selection_area.dart';
 import 'package:portfolio/src/features/about/presentation/about_section.dart';
 import 'package:portfolio/src/features/experience/data/experience_repository.dart';
@@ -52,8 +53,10 @@ class GeneralDesktop extends ConsumerWidget {
                             const SizedBox(height: 96),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 12),
-                              child: AboutSection(
-                                key: ref.watch(aboutSectionKeyProvider),
+                              child: ScrollReveal(
+                                child: AboutSection(
+                                  key: ref.watch(aboutSectionKeyProvider),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 96),
@@ -71,14 +74,18 @@ class GeneralDesktop extends ConsumerWidget {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      ExperienceSection(
-                                        key: ref.watch(
-                                            experienceSectionKeyProvider),
+                                      ScrollReveal(
+                                        child: ExperienceSection(
+                                          key: ref.watch(
+                                              experienceSectionKeyProvider),
+                                        ),
                                       ),
                                       const SizedBox(height: 96),
-                                      ProjectSection(
-                                        key: ref
-                                            .watch(projectSectionKeyProvider),
+                                      ScrollReveal(
+                                        child: ProjectSection(
+                                          key: ref
+                                              .watch(projectSectionKeyProvider),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -86,9 +93,9 @@ class GeneralDesktop extends ConsumerWidget {
                               ],
                             ),
                             const SizedBox(height: 96),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 12),
-                              child: SiteFooter(),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              child: ScrollReveal(child: const SiteFooter()),
                             ),
                           ],
                         ),

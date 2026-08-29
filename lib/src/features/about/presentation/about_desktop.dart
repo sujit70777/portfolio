@@ -17,6 +17,7 @@ class AboutDesktop extends ConsumerWidget {
     final skillCategories =
         ref.watch(aboutRepositoryProvider).getSkillCategories();
     final paragraphs = tr(LocaleKeys.aboutDescription).split('\n');
+    final theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +31,7 @@ class AboutDesktop extends ConsumerWidget {
           padding: const EdgeInsets.only(bottom: 32),
           child: Text(
             tr(LocaleKeys.aboutSectionTitleAlt),
-            style: Theme.of(context).textTheme.titleLarge,
+            style: theme.textTheme.titleLarge,
           ),
         ),
         for (final (index, paragraph) in paragraphs.indexed)
@@ -38,10 +39,7 @@ class AboutDesktop extends ConsumerWidget {
             padding: EdgeInsets.only(
               bottom: index == paragraphs.length - 1 ? 0 : 16,
             ),
-            child: Text(
-              paragraph,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
+            child: Text(paragraph, style: theme.textTheme.bodyLarge),
           ),
         if (skillCategories.isNotEmpty) ...[
           gapH40,

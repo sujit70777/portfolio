@@ -2,17 +2,32 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/widgets/animated_fade_slide.dart';
 import 'package:portfolio/src/common/widgets/device_frame.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
+import 'package:portfolio/src/features/about/presentation/widgets/profile_photo.dart';
 import 'package:portfolio/src/features/personal_info/data/personal_info_repository.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/availability_badge.dart';
+import 'package:portfolio/src/features/personal_info/presentation/widgets/hero_background.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/hero_stat_plaque.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/resume_button.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+
+/// Hero entrance: each line fades up ~20px in sequence, ~80ms apart, total
+/// well under 800ms — quick on purpose, since a slow entrance is only
+/// charming once and annoying on every repeat visit.
+Widget _entrance(int step, Widget child) {
+  return AnimatedFadeSlide(
+    delay: Duration(milliseconds: 80 * step),
+    duration: const Duration(milliseconds: 280),
+    offset: const Offset(0, 20),
+    child: child,
+  );
+}
 
 /// The hero screenshot — Peace of Mind's Picture Bank map view. Curated,
 /// not derived from the folder-listing provider: the hero is the site's
@@ -54,63 +69,85 @@ class PersonalInfoSection extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const AvailabilityBadge(),
-        gapH16,
-        Text(
-          tr(LocaleKeys.name),
-          style: stacked ? textTheme.displayMedium : textTheme.displayLarge,
+        _entrance(0, const AvailabilityBadge()),
+        gapH20,
+        _entrance(1, const ProfilePhoto(size: 96)),
+        gapH20,
+        _entrance(
+          2,
+          Text(
+            tr(LocaleKeys.name),
+            style: stacked ? textTheme.displayMedium : textTheme.displayLarge,
+          ),
         ),
         gapH8,
-        Text(tr(LocaleKeys.description), style: textTheme.titleLarge),
+        _entrance(
+            3, Text(tr(LocaleKeys.description), style: textTheme.titleLarge)),
         gapH12,
-        Text(
-          tr(LocaleKeys.subDescription).toUpperCase(),
-          style: monoLabelStyle(
-            fontSize: 12,
-            color: Theme.of(context).colorScheme.onSurface.withAlpha(180),
+        _entrance(
+          4,
+          Text(
+            tr(LocaleKeys.subDescription).toUpperCase(),
+            style: monoLabelStyle(
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.onSurface.withAlpha(180),
+            ),
           ),
         ),
         const SizedBox(height: 28),
-        Wrap(
-          spacing: 18,
-          runSpacing: 14,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            if (emailContact?.url != null)
-              _HeroCta.primary(
-                label: tr(LocaleKeys.heroPrimaryCta),
-                url: emailContact!.url!,
-              ),
-            if (whatsappContact?.url != null)
-              _HeroCta.secondary(
-                label: tr(LocaleKeys.heroSecondaryCta),
-                url: whatsappContact!.url!,
-              ),
-            if (resumes.isNotEmpty) ResumeButton(resumes: resumes),
-          ],
+        _entrance(
+          5,
+          Wrap(
+            spacing: 18,
+            runSpacing: 14,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              if (emailContact?.url != null)
+                _HeroCta.primary(
+                  label: tr(LocaleKeys.heroPrimaryCta),
+                  url: emailContact!.url!,
+                ),
+              if (whatsappContact?.url != null)
+                _HeroCta.secondary(
+                  label: tr(LocaleKeys.heroSecondaryCta),
+                  url: whatsappContact!.url!,
+                ),
+              if (resumes.isNotEmpty) ResumeButton(resumes: resumes),
+            ],
+          ),
         ),
       ],
     );
 
-    final deviceBlock = _HeroDevice(width: stacked ? 220 : 230);
+    final deviceBlock = _entrance(3, _HeroDevice(width: stacked ? 220 : 230));
 
     if (stacked) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      return Stack(
         children: [
-          textBlock,
-          gapH32,
-          Center(child: deviceBlock),
+          const HeroBackground(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              textBlock,
+              gapH32,
+              Center(child: deviceBlock),
+            ],
+          ),
         ],
       );
     }
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
       children: [
-        Expanded(child: textBlock),
-        gapW40,
-        deviceBlock,
+        const HeroBackground(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: textBlock),
+            gapW40,
+            deviceBlock,
+          ],
+        ),
       ],
     );
   }

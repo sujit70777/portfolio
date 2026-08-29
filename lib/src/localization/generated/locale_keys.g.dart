@@ -34,6 +34,7 @@ abstract class  LocaleKeys {
   static const homeSectionTitle = 'homeSectionTitle';
   static const aboutSectionTitle = 'aboutSectionTitle';
   static const aboutSectionTitleAlt = 'aboutSectionTitleAlt';
+  static const aboutLocationCaption = 'aboutLocationCaption';
   static const skillsSectionTitle = 'skillsSectionTitle';
   static const experienceSectionTitle = 'experienceSectionTitle';
   static const projectsSectionTitle = 'projectsSectionTitle';

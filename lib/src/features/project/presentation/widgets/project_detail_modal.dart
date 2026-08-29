@@ -20,12 +20,14 @@ import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 /// same place to be seen in full rather than jumping straight offsite.
 Future<void> showProjectDetailModal(BuildContext context,
     {required Project project}) {
+  final reduceMotion = MediaQuery.disableAnimationsOf(context);
   return showGeneralDialog<void>(
     context: context,
     barrierDismissible: true,
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     barrierColor: Colors.black87,
-    transitionDuration: const Duration(milliseconds: 220),
+    transitionDuration:
+        reduceMotion ? Duration.zero : const Duration(milliseconds: 150),
     pageBuilder: (context, animation, secondaryAnimation) {
       return ProjectDetailModal(project: project);
     },
@@ -53,7 +55,6 @@ class ProjectDetailModal extends ConsumerStatefulWidget {
 
 class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
   final _focusNode = FocusNode();
-  late final _pageController = PageController();
   int _currentIndex = 0;
   List<String> _images = const [];
 
@@ -67,7 +68,6 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
   @override
   void dispose() {
     _focusNode.dispose();
-    _pageController.dispose();
     super.dispose();
   }
 
@@ -103,14 +103,16 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
     }
   }
 
+  // Index-based cross-fade rather than a PageView slide — swipe still
+  // navigates (via the gallery's drag detector), it just triggers this same
+  // fade instead of a physical drag-following page turn.
   void _goTo(int index) {
     final total = _images.length;
     if (total == 0) return;
-    _pageController.animateToPage(
-      (index + total) % total,
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.easeOut,
-    );
+    final next = (index + total) % total;
+    setState(() => _currentIndex = next);
+    _resolveAspectRatio(next);
+    _prefetchNeighbors(next);
   }
 
   KeyEventResult _handleKey(FocusNode node, KeyEvent event) {
@@ -168,12 +170,6 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
                       images: _images,
                       currentIndex: _currentIndex,
                       aspectRatio: _aspectRatios[_currentIndex],
-                      pageController: _pageController,
-                      onPageChanged: (index) {
-                        setState(() => _currentIndex = index);
-                        _resolveAspectRatio(index);
-                        _prefetchNeighbors(index);
-                      },
                       onNavigate: _goTo,
                       placeholder: EmptyProjectPlaceholder(project: project),
                     ),
@@ -282,8 +278,6 @@ class _Gallery extends StatelessWidget {
     required this.images,
     required this.currentIndex,
     required this.aspectRatio,
-    required this.pageController,
-    required this.onPageChanged,
     required this.onNavigate,
     required this.placeholder,
   });
@@ -294,8 +288,6 @@ class _Gallery extends StatelessWidget {
   // portrait phone ratio (most of this site's screenshots) so the box
   // doesn't flash as a wide landscape shape before that resolves.
   final double? aspectRatio;
-  final PageController pageController;
-  final ValueChanged<int> onPageChanged;
   final ValueChanged<int> onNavigate;
   final Widget placeholder;
 
@@ -304,6 +296,7 @@ class _Gallery extends StatelessWidget {
   // legible rather than shrunk to fit a small box — clamped down only on
   // short viewports.
   static const _standardHeight = 620.0;
+  static const _swipeVelocityThreshold = 200.0;
 
   bool get _hasMultiple => images.length > 1;
 
@@ -311,6 +304,7 @@ class _Gallery extends StatelessWidget {
   Widget build(BuildContext context) {
     final galleryHeight = (MediaQuery.sizeOf(context).height * 0.68)
         .clamp(320.0, _standardHeight);
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
 
     // The dark backdrop spans the gallery's full width and a fixed height;
     // the image itself is centered inside at its own aspect ratio. Nav
@@ -324,20 +318,32 @@ class _Gallery extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Center(
-              child: AspectRatio(
-                aspectRatio: aspectRatio ?? _fallbackAspectRatio,
-                // Lazy: PageView.builder only materializes the current
-                // page and its immediate neighbors, so the rest of a
-                // project's screenshots never decode until the visitor
-                // pages to them.
-                child: PageView.builder(
-                  controller: pageController,
-                  itemCount: images.length,
-                  onPageChanged: onPageChanged,
-                  itemBuilder: (context, index) {
-                    return Image.asset(
-                      images[index],
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onHorizontalDragEnd: _hasMultiple
+                  ? (details) {
+                      final velocity = details.primaryVelocity ?? 0;
+                      if (velocity <= -_swipeVelocityThreshold) {
+                        onNavigate(currentIndex + 1);
+                      } else if (velocity >= _swipeVelocityThreshold) {
+                        onNavigate(currentIndex - 1);
+                      }
+                    }
+                  : null,
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: aspectRatio ?? _fallbackAspectRatio,
+                  // Only the current image (plus whatever the modal state
+                  // has already precached for its immediate neighbors) is
+                  // ever built here, so the rest of a project's screenshots
+                  // never decode until the visitor navigates to them.
+                  child: AnimatedSwitcher(
+                    duration: reduceMotion
+                        ? Duration.zero
+                        : const Duration(milliseconds: 220),
+                    child: Image.asset(
+                      images[currentIndex],
+                      key: ValueKey(currentIndex),
                       fit: BoxFit.contain,
                       errorBuilder: (_, __, ___) => placeholder,
                       frameBuilder:
@@ -347,21 +353,11 @@ class _Gallery extends StatelessWidget {
                           duration: const Duration(milliseconds: 200),
                           child: frame != null
                               ? child
-                              : const Center(
-                                  key: ValueKey('loading'),
-                                  child: SizedBox(
-                                    width: 28,
-                                    height: 28,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2.5,
-                                      color: Colors.white70,
-                                    ),
-                                  ),
-                                ),
+                              : const _GalleryShimmer(key: ValueKey('loading')),
                         );
                       },
-                    );
-                  },
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -416,6 +412,72 @@ class _Gallery extends StatelessWidget {
             ],
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// A moving highlight sweeping across a dark box while a gallery image
+/// decodes — reads as "this is loading", not as blank empty space. Freezes
+/// to a static mid-tone box under `prefers-reduced-motion`.
+class _GalleryShimmer extends StatefulWidget {
+  const _GalleryShimmer({super.key});
+
+  @override
+  State<_GalleryShimmer> createState() => _GalleryShimmerState();
+}
+
+class _GalleryShimmerState extends State<_GalleryShimmer>
+    with SingleTickerProviderStateMixin {
+  late final _controller = AnimationController(
+      vsync: this, duration: const Duration(milliseconds: 1400));
+
+  // See HeroBackground's identical guard: an infinitely-repeating ticker
+  // never lets pumpAndSettle() settle, so it must not start under the test
+  // binding.
+  static bool get _isTestBinding => WidgetsBinding.instance.runtimeType
+      .toString()
+      .contains('TestWidgetsFlutterBinding');
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (MediaQuery.disableAnimationsOf(context) || _isTestBinding) {
+      _controller.stop();
+    } else if (!_controller.isAnimating) {
+      _controller.repeat();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.expand(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, _) {
+          return ShaderMask(
+            shaderCallback: (bounds) {
+              final t = _controller.value;
+              return LinearGradient(
+                begin: Alignment(-1 - t * 2, 0),
+                end: Alignment(1 - t * 2, 0),
+                colors: const [
+                  Color(0xFF2A2A2A),
+                  Color(0xFF454545),
+                  Color(0xFF2A2A2A)
+                ],
+                stops: const [0.35, 0.5, 0.65],
+              ).createShader(bounds);
+            },
+            child: const ColoredBox(color: Color(0xFF2A2A2A)),
+          );
+        },
       ),
     );
   }

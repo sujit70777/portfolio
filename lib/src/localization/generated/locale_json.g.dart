@@ -1256,6 +1256,7 @@ class CodegenLoader extends AssetLoader{
   "homeSectionTitle": "Home",
   "aboutSectionTitle": "About",
   "aboutSectionTitleAlt": "About Me",
+  "aboutLocationCaption": "Rajshahi, Bangladesh · UTC+6",
   "skillsSectionTitle": "Skills",
   "experienceSectionTitle": "Experience",
   "projectsSectionTitle": "Projects",

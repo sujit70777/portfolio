@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/domain/app_section.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
+import 'package:portfolio/src/common/widgets/scroll_reveal.dart';
 import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/project/data/project_repository.dart';
@@ -13,20 +14,21 @@ import 'package:portfolio/src/features/project/presentation/widgets/project_list
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 
 const _gridSpacing = 20.0;
+const _minCardWidth = 200.0;
 const _collapsedCount = 6;
+const _cardStagger = Duration(milliseconds: 60);
 
 /// Curated (design brief 2, content problem #5): featured projects — real
-/// shipped work with the strongest story — get the device-frame treatment
-/// in a 4-column grid; the other, longer tail (small pub.dev packages,
-/// in-progress repos) render as plain rows, collapsed to the first
-/// [_collapsedCount] by default.
+/// shipped work with the strongest story — get the largest, most generous
+/// treatment on the page since this section is the actual evidence; the
+/// other, longer tail (small pub.dev packages, in-progress repos) render
+/// as plain rows, collapsed to the first [_collapsedCount] by default.
 class ProjectDesktop extends ConsumerWidget {
   const ProjectDesktop({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final projects =
-        ref.watch(projectRepositoryProvider).getProjects().toList();
+    final projects = ref.watch(projectRepositoryProvider).getProjects().toList();
     final featured = projects.where((p) => p.featured == true).toList();
     final others = projects.where((p) => p.featured != true).toList();
 
@@ -38,11 +40,18 @@ class ProjectDesktop extends ConsumerWidget {
           label: tr(LocaleKeys.sectionEyebrowProjects),
         ),
         gapH8,
+        Text(
+          tr(LocaleKeys.projectsSectionTitle),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        gapH4,
         Padding(
-          padding: const EdgeInsets.only(bottom: 20),
+          padding: const EdgeInsets.only(bottom: 28),
           child: Text(
-            tr(LocaleKeys.projectsSectionTitle),
-            style: Theme.of(context).textTheme.titleLarge,
+            '50+ shipped. Here are the ones worth showing.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface.withAlpha(160),
+                ),
           ),
         ),
         if (featured.isNotEmpty) _FeaturedGrid(projects: featured),
@@ -60,7 +69,9 @@ class ProjectDesktop extends ConsumerWidget {
   }
 }
 
-/// 4 columns on desktop, 2 on tablet, 1 on mobile.
+/// 4 generous columns on desktop, 2 on tablet, 1 on mobile — cards don't
+/// shrink below [_minCardWidth] before dropping a column, so "4 columns"
+/// never means cramped.
 class _FeaturedGrid extends StatelessWidget {
   const _FeaturedGrid({required this.projects});
 
@@ -68,23 +79,29 @@ class _FeaturedGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final columns = Responsive.isDesktop(context)
+    final maxColumns = Responsive.isDesktop(context)
         ? 4
         : Responsive.isTablet(context)
             ? 2
             : 1;
     return LayoutBuilder(
       builder: (context, constraints) {
-        final cardWidth =
-            (constraints.maxWidth - _gridSpacing * (columns - 1)) / columns;
+        var columns = maxColumns;
+        while (columns > 1 &&
+            (constraints.maxWidth - _gridSpacing * (columns - 1)) / columns < _minCardWidth) {
+          columns--;
+        }
+        final cardWidth = (constraints.maxWidth - _gridSpacing * (columns - 1)) / columns;
         return Wrap(
           spacing: _gridSpacing,
           runSpacing: _gridSpacing,
-          children: projects.map((project) {
+          children: projects.mapIndexed((index, project) {
             return SizedBox(
               width: cardWidth,
-              child:
-                  FeaturedProjectCard(project: project, width: cardWidth - 24),
+              child: ScrollReveal(
+                delay: _cardStagger * index,
+                child: FeaturedProjectCard(project: project),
+              ),
             );
           }).toList(),
         );
