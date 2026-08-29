@@ -44,8 +44,7 @@ class CodegenLoader extends AssetLoader{
       "tooltip": "LinkedIn",
       "url": "https://www.linkedin.com/in/sujit70777",
       "icon": {
-        "codePoint": "0xeffb",
-        "fontFamily": "FontAwesome"
+        "assetName": "assets/icons/other/linkedin.svg"
       }
     },
     {
@@ -68,32 +67,28 @@ class CodegenLoader extends AssetLoader{
       "tooltip": "WhatsApp: +880 1747-931646",
       "url": "https://wa.me/8801747931646",
       "icon": {
-        "codePoint": "0xf0d9",
-        "fontFamily": "FontAwesome"
+        "assetName": "assets/icons/other/whatsapp.svg"
       }
     },
     {
       "tooltip": "App Store",
       "url": "https://apps.apple.com/us/developer/shekh-ehsanur-rahman/id1892682672",
       "icon": {
-        "codePoint": "0xef23",
-        "fontFamily": "FontAwesome"
+        "assetName": "assets/icons/other/app-store.svg"
       }
     },
     {
       "tooltip": "Google Play — Devxhub",
       "url": "https://play.google.com/store/apps/dev?id=4646660586516176141",
       "icon": {
-        "codePoint": "0xefc5",
-        "fontFamily": "FontAwesome"
+        "assetName": "assets/icons/other/google-play.svg"
       }
     },
     {
       "tooltip": "Google Play — Prabartan",
       "url": "https://play.google.com/store/apps/dev?id=6504002943007145339",
       "icon": {
-        "codePoint": "0xefc5",
-        "fontFamily": "FontAwesome"
+        "assetName": "assets/icons/other/google-play.svg"
       }
     },
     {

@@ -32,6 +32,11 @@ class ContactIconButton extends StatelessWidget {
 
     return OutlinedButton(
       style: ButtonStyle(
+        foregroundColor: WidgetStateProperty.resolveWith((states) {
+          return states.contains(WidgetState.hovered)
+              ? theme.colorScheme.tertiary
+              : theme.colorScheme.onSurface;
+        }),
         backgroundColor: WidgetStateProperty.resolveWith((states) {
           return states.contains(WidgetState.hovered)
               ? theme.colorScheme.tertiary.withValues(alpha: 0.1)
