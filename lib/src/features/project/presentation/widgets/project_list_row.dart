@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/widgets/icon.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/project_detail_modal.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
@@ -9,6 +11,10 @@ import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 /// 2, content problem #5) — most of these are small pub.dev packages or
 /// in-progress repos with no screenshot to show, so this doesn't pretend
 /// they need one the way FeaturedProjectCard's tier does.
+///
+/// Tapping the row opens the full project detail modal; the trailing
+/// arrow icon is a separate hit target that bypasses it and goes straight
+/// to the project's own URL.
 class ProjectListRow extends StatelessWidget {
   const ProjectListRow({super.key, required this.project});
 
@@ -20,7 +26,7 @@ class ProjectListRow extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () => _onTap(context),
+        onTap: () => showProjectDetailModal(context, project: project),
         hoverColor: theme.colorScheme.tertiary.withAlpha(12),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -50,6 +56,8 @@ class ProjectListRow extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+              gapW12,
+              ProjectStatusBadge(status: project.status, fontSize: 10),
               gapW16,
               Expanded(
                 flex: 5,
@@ -63,11 +71,19 @@ class ProjectListRow extends StatelessWidget {
                 ),
               ),
               gapW16,
-              Icon(
-                Icons.arrow_outward,
-                size: 16,
-                color: theme.colorScheme.onSurface.withAlpha(120),
-              ),
+              if (project.url != null)
+                Tooltip(
+                  message: 'Open project directly',
+                  child: IconButton(
+                    visualDensity: VisualDensity.compact,
+                    icon: Icon(
+                      Icons.arrow_outward,
+                      size: 16,
+                      color: theme.colorScheme.onSurface.withAlpha(120),
+                    ),
+                    onPressed: () => _openDirectly(context),
+                  ),
+                ),
             ],
           ),
         ),
@@ -75,7 +91,7 @@ class ProjectListRow extends StatelessWidget {
     );
   }
 
-  Future<void> _onTap(BuildContext context) async {
+  Future<void> _openDirectly(BuildContext context) async {
     final url = project.url;
     if (url == null) return;
     try {

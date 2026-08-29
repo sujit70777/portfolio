@@ -15,6 +15,11 @@ GlobalKey aboutSectionKey(Ref ref) {
 }
 
 @riverpod
+GlobalKey skillsSectionKey(Ref ref) {
+  return GlobalKey();
+}
+
+@riverpod
 GlobalKey experienceSectionKey(Ref ref) {
   return GlobalKey();
 }

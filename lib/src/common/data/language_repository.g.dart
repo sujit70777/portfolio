@@ -6,24 +6,49 @@ part of 'language_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(languageRepository)
+final languageRepositoryProvider = LanguageRepositoryProvider._();
+
+final class LanguageRepositoryProvider extends $FunctionalProvider<
+    LanguageRepository,
+    LanguageRepository,
+    LanguageRepository> with $Provider<LanguageRepository> {
+  LanguageRepositoryProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'languageRepositoryProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$languageRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<LanguageRepository> $createElement(
+          $ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  LanguageRepository create(Ref ref) {
+    return languageRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(LanguageRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<LanguageRepository>(value),
+    );
+  }
+}
+
 String _$languageRepositoryHash() =>
     r'52a0c28d28ebab9401293863f5363462764f3e54';
-
-/// See also [languageRepository].
-@ProviderFor(languageRepository)
-final languageRepositoryProvider =
-    AutoDisposeProvider<LanguageRepository>.internal(
-  languageRepository,
-  name: r'languageRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$languageRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef LanguageRepositoryRef = AutoDisposeProviderRef<LanguageRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -5,7 +5,11 @@ import 'package:url_launcher/url_launcher.dart';
 class LaunchUrlHelper {
   LaunchUrlHelper._();
 
-  static Future<void> launchURL(String url, {bool openInNewTab = false}) async {
+  // Defaults to a new tab: this is a single-page site, so every outbound
+  // link (project, contact, social) should leave the page open rather than
+  // navigating away from it. `noopener,noreferrer` is always applied by
+  // url_launcher_web's `window.open` call regardless of this flag.
+  static Future<void> launchURL(String url, {bool openInNewTab = true}) async {
     try {
       await launchUrl(
         Uri.parse(url),

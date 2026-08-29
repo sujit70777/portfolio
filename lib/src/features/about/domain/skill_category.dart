@@ -4,7 +4,7 @@ part 'skill_category.freezed.dart';
 part 'skill_category.g.dart';
 
 @freezed
-class SkillCategory with _$SkillCategory {
+abstract class SkillCategory with _$SkillCategory {
   const factory SkillCategory({
     String? category,
     List<String>? skills,

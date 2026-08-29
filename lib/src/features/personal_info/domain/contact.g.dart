@@ -6,8 +6,7 @@ part of 'contact.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ContactImpl _$$ContactImplFromJson(Map<String, dynamic> json) =>
-    _$ContactImpl(
+_Contact _$ContactFromJson(Map<String, dynamic> json) => _Contact(
       tooltip: json['tooltip'] as String?,
       url: json['url'] as String?,
       icon: json['icon'] == null
@@ -15,8 +14,7 @@ _$ContactImpl _$$ContactImplFromJson(Map<String, dynamic> json) =>
           : IconModel.fromJson(json['icon'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$ContactImplToJson(_$ContactImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ContactToJson(_Contact instance) => <String, dynamic>{
       'tooltip': instance.tooltip,
       'url': instance.url,
       'icon': instance.icon?.toJson(),

@@ -72,6 +72,15 @@ class EndDrawer extends ConsumerWidget {
                       ),
                       gapH40,
                       AnimatedFadeSlide(
+                        offset: const Offset(104, 0),
+                        duration: const Duration(milliseconds: 360),
+                        child: MyDrawerButton(
+                          title: tr(LocaleKeys.skillsSectionTitle),
+                          sectionKey: ref.watch(skillsSectionKeyProvider),
+                        ),
+                      ),
+                      gapH40,
+                      AnimatedFadeSlide(
                         offset: const Offset(96, 0),
                         duration: const Duration(milliseconds: 375),
                         child: MyDrawerButton(

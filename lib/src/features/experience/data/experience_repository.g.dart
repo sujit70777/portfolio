@@ -6,24 +6,49 @@ part of 'experience_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(experienceRepository)
+final experienceRepositoryProvider = ExperienceRepositoryProvider._();
+
+final class ExperienceRepositoryProvider extends $FunctionalProvider<
+    ExperienceRepository,
+    ExperienceRepository,
+    ExperienceRepository> with $Provider<ExperienceRepository> {
+  ExperienceRepositoryProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'experienceRepositoryProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$experienceRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<ExperienceRepository> $createElement(
+          $ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  ExperienceRepository create(Ref ref) {
+    return experienceRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ExperienceRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ExperienceRepository>(value),
+    );
+  }
+}
+
 String _$experienceRepositoryHash() =>
     r'e2c93a9890fd3b967e19e1f30e156328bc48034b';
-
-/// See also [experienceRepository].
-@ProviderFor(experienceRepository)
-final experienceRepositoryProvider =
-    AutoDisposeProvider<ExperienceRepository>.internal(
-  experienceRepository,
-  name: r'experienceRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$experienceRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ExperienceRepositoryRef = AutoDisposeProviderRef<ExperienceRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

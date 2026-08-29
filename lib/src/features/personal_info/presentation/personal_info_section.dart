@@ -10,10 +10,20 @@ import 'package:portfolio/src/features/personal_info/data/personal_info_reposito
 import 'package:portfolio/src/features/personal_info/presentation/widgets/availability_badge.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/hero_stat_plaque.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/resume_button.dart';
-import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+
+/// The hero screenshot — Peace of Mind's Picture Bank map view. Curated,
+/// not derived from the folder-listing provider: the hero is the site's
+/// single most prominent image, so it's pinned by hand rather than
+/// picking up whatever sorts first alphabetically. Previously showed
+/// Tanto; that client's business closed and its UI can no longer be
+/// featured here.
+const _heroImagePath =
+    'assets/projectimage/peace-of-mind-pom/img_picture_bank_demo_9.webp';
+const _heroImageAlt =
+    'Peace of Mind app — Picture Bank map view showing geotagged photo collections';
 
 /// The hero — design brief 2's signature moment. Identity and the one
 /// primary CTA read first (content problem #3: one obvious way to start a
@@ -36,9 +46,6 @@ class PersonalInfoSection extends ConsumerWidget {
     final whatsappContact = contacts.firstWhereOrNull(
       (c) => c.url?.contains('wa.me') == true,
     );
-    final tantoImages = ref
-        .watch(projectImagesProvider('Tanto'))
-        .maybeWhen(data: (value) => value, orElse: () => const <String>[]);
 
     final stacked = Responsive.isMobile(context);
     final textTheme = Theme.of(context).textTheme;
@@ -85,10 +92,7 @@ class PersonalInfoSection extends ConsumerWidget {
       ],
     );
 
-    final deviceBlock = _HeroDevice(
-      imagePath: tantoImages.isNotEmpty ? tantoImages.first : null,
-      width: stacked ? 220 : 230,
-    );
+    final deviceBlock = _HeroDevice(width: stacked ? 220 : 230);
 
     if (stacked) {
       return Column(
@@ -112,31 +116,40 @@ class PersonalInfoSection extends ConsumerWidget {
   }
 }
 
-class _HeroDevice extends StatelessWidget {
-  const _HeroDevice({required this.imagePath, required this.width});
+class _HeroDevice extends StatefulWidget {
+  const _HeroDevice({required this.width});
 
-  final String? imagePath;
   final double width;
 
   @override
+  State<_HeroDevice> createState() => _HeroDeviceState();
+}
+
+class _HeroDeviceState extends State<_HeroDevice> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // The hero screenshot is this page's LCP element — warm the decode
+    // cache as soon as this widget is built rather than waiting for
+    // Image.asset's own on-demand load, unlike every other project
+    // screenshot on the page (ProjectImage), which stays undecoded until
+    // it's scrolled near the viewport.
+    precacheImage(const AssetImage(_heroImagePath), context);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final width = widget.width;
     final dpr = MediaQuery.devicePixelRatioOf(context);
     final height = width / DeviceFrame.aspectRatio;
 
-    final Widget screen = imagePath == null
-        ? ColoredBox(
-            color: theme.colorScheme.secondaryContainer,
-            child: const Center(
-              child: Icon(Icons.smartphone_outlined, color: Colors.white38),
-            ),
-          )
-        : Image.asset(
-            imagePath!,
-            fit: BoxFit.cover,
-            cacheWidth: (width * dpr).round(),
-            cacheHeight: (height * dpr).round(),
-          );
+    final Widget screen = Image.asset(
+      _heroImagePath,
+      fit: BoxFit.cover,
+      cacheWidth: (width * dpr).round(),
+      cacheHeight: (height * dpr).round(),
+      semanticLabel: _heroImageAlt,
+    );
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 26),

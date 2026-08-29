@@ -6,22 +6,47 @@ part of 'brightness_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(BrightnessController)
+final brightnessControllerProvider = BrightnessControllerProvider._();
+
+final class BrightnessControllerProvider
+    extends $AsyncNotifierProvider<BrightnessController, Brightness> {
+  BrightnessControllerProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'brightnessControllerProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$brightnessControllerHash();
+
+  @$internal
+  @override
+  BrightnessController create() => BrightnessController();
+}
+
 String _$brightnessControllerHash() =>
     r'ea3b122a28db7153eb49b41206cb7a457043f3a8';
 
-/// See also [BrightnessController].
-@ProviderFor(BrightnessController)
-final brightnessControllerProvider =
-    AutoDisposeAsyncNotifierProvider<BrightnessController, Brightness>.internal(
-  BrightnessController.new,
-  name: r'brightnessControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$brightnessControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$BrightnessController = AutoDisposeAsyncNotifier<Brightness>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$BrightnessController extends $AsyncNotifier<Brightness> {
+  FutureOr<Brightness> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<Brightness>, Brightness>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<AsyncValue<Brightness>, Brightness>,
+        AsyncValue<Brightness>,
+        Object?,
+        Object?>;
+    element.handleCreate(ref, build);
+  }
+}

@@ -14,32 +14,32 @@ dependencies:
     sdk: flutter
   flex_color_scheme: 8.4.0
   google_fonts: ^8.2.1
-  riverpod_annotation: 2.6.1
-  hooks_riverpod: 2.6.1
-  flutter_hooks: 0.20.5
+  riverpod_annotation: ^4.0.0
+  hooks_riverpod: ^3.1.0
+  flutter_hooks: ^0.21.3+1
   collection: 1.19.1
-  url_launcher: 6.2.6
+  url_launcher: ^6.3.2
   intl: ^0.20.2
-  easy_localization: 3.0.7+1
-  freezed_annotation: 2.4.4
-  shared_preferences: 2.5.2
-  flutter_svg: 2.0.17
-  animated_toggle_switch: 0.8.4
+  easy_localization: ^3.0.8
+  freezed_annotation: ^3.1.0
+  shared_preferences: ^2.5.5
+  flutter_svg: ^2.3.0
+  animated_toggle_switch: ^0.8.7
   path: 1.9.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: 5.0.0
-  custom_lint: 0.7.3
-  riverpod_lint: 2.6.4
-  riverpod_generator: 2.6.4
-  build_runner: 2.4.15
-  freezed: 2.5.8
-  json_serializable: 6.9.4
-  flutter_native_splash: 2.4.0
-  flutter_launcher_icons: 0.14.3
+  flutter_lints: ^6.0.0
+  custom_lint: ^0.8.1
+  riverpod_lint: ^3.1.0
+  riverpod_generator: ^4.0.0+1
+  build_runner: ^2.15.1
+  freezed: ^3.2.3
+  json_serializable: ^6.11.2
+  flutter_native_splash: ^2.4.8
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
 
@@ -70,7 +70,6 @@ flutter:
     - assets/projectimage/local-voice/
     - assets/projectimage/flutter-crdt-sync-kit/
     - assets/projectimage/ar-measure-in-progress/
-    - assets/projectimage/awesome-mobile-app-development/
     - assets/projectimage/fitness-tracker-senseit/
     - assets/projectimage/jatri-bangladesh-transit-app-in-progress/
     - assets/projectimage/omr-scanner/

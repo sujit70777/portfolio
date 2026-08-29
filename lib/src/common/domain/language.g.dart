@@ -6,8 +6,7 @@ part of 'language.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LanguageImpl _$$LanguageImplFromJson(Map<String, dynamic> json) =>
-    _$LanguageImpl(
+_Language _$LanguageFromJson(Map<String, dynamic> json) => _Language(
       code: json['code'] as String?,
       name: json['name'] as String?,
       nativeName: json['nativeName'] as String?,
@@ -16,8 +15,7 @@ _$LanguageImpl _$$LanguageImplFromJson(Map<String, dynamic> json) =>
           : IconModel.fromJson(json['icon'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$LanguageImplToJson(_$LanguageImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$LanguageToJson(_Language instance) => <String, dynamic>{
       'code': instance.code,
       'name': instance.name,
       'nativeName': instance.nativeName,

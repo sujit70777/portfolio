@@ -19,10 +19,10 @@ class DeviceFrame extends StatelessWidget {
   final Widget screen;
 
   /// Real screenshots are portrait ~9:19.5 — see
-  /// assets/projectimage/tanto/ (414x896), the one project with real
-  /// assets today. Every device-framed screen uses that ratio so featured
-  /// cards line up consistently regardless of a given screenshot's actual
-  /// source resolution (screenshots are cover-fit inside).
+  /// assets/projectimage/tanto/ (414x896). Every device-framed screen uses
+  /// that ratio so featured cards line up consistently regardless of a
+  /// given screenshot's actual source resolution (screenshots are
+  /// cover-fit inside).
   static const aspectRatio = 414 / 896;
 
   static const _bezelColor = Color(0xFF332C3D);

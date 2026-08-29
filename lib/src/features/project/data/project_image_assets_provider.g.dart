@@ -6,209 +6,148 @@ part of 'project_image_assets_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$projectImageAssetsHash() =>
-    r'c0dc812a567ae54a1caff8c3f0347de8f1974147';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// Every bundled asset path under assets/projectimage/, refreshed on each
+/// app start (i.e. each hot restart / rebuild) so a screenshot dropped into
+/// a project's folder shows up without touching any code or translations.
+
+@ProviderFor(projectImageAssets)
+final projectImageAssetsProvider = ProjectImageAssetsProvider._();
 
 /// Every bundled asset path under assets/projectimage/, refreshed on each
 /// app start (i.e. each hot restart / rebuild) so a screenshot dropped into
 /// a project's folder shows up without touching any code or translations.
-///
-/// Copied from [projectImageAssets].
-@ProviderFor(projectImageAssets)
-final projectImageAssetsProvider =
-    AutoDisposeFutureProvider<List<String>>.internal(
-  projectImageAssets,
-  name: r'projectImageAssetsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$projectImageAssetsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ProjectImageAssetsRef = AutoDisposeFutureProviderRef<List<String>>;
-String _$projectImagesHash() => r'93843d61bcc18a1bd973dd0389ed985f7e0884b6';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-/// All bundled images inside a project's `assets/projectimage/<slug>/`
-/// folder, sorted alphabetically. Empty if the project has none. The first
-/// entry is what the card uses as its thumbnail, so existing single-image
-/// callers stay unaffected — this just also exposes the rest for a gallery.
-///
-/// Copied from [projectImages].
-@ProviderFor(projectImages)
-const projectImagesProvider = ProjectImagesFamily();
-
-/// All bundled images inside a project's `assets/projectimage/<slug>/`
-/// folder, sorted alphabetically. Empty if the project has none. The first
-/// entry is what the card uses as its thumbnail, so existing single-image
-/// callers stay unaffected — this just also exposes the rest for a gallery.
-///
-/// Copied from [projectImages].
-class ProjectImagesFamily extends Family<AsyncValue<List<String>>> {
-  /// All bundled images inside a project's `assets/projectimage/<slug>/`
-  /// folder, sorted alphabetically. Empty if the project has none. The first
-  /// entry is what the card uses as its thumbnail, so existing single-image
-  /// callers stay unaffected — this just also exposes the rest for a gallery.
-  ///
-  /// Copied from [projectImages].
-  const ProjectImagesFamily();
-
-  /// All bundled images inside a project's `assets/projectimage/<slug>/`
-  /// folder, sorted alphabetically. Empty if the project has none. The first
-  /// entry is what the card uses as its thumbnail, so existing single-image
-  /// callers stay unaffected — this just also exposes the rest for a gallery.
-  ///
-  /// Copied from [projectImages].
-  ProjectImagesProvider call(
-    String projectName,
-  ) {
-    return ProjectImagesProvider(
-      projectName,
-    );
-  }
-
-  @override
-  ProjectImagesProvider getProviderOverride(
-    covariant ProjectImagesProvider provider,
-  ) {
-    return call(
-      provider.projectName,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'projectImagesProvider';
-}
-
-/// All bundled images inside a project's `assets/projectimage/<slug>/`
-/// folder, sorted alphabetically. Empty if the project has none. The first
-/// entry is what the card uses as its thumbnail, so existing single-image
-/// callers stay unaffected — this just also exposes the rest for a gallery.
-///
-/// Copied from [projectImages].
-class ProjectImagesProvider extends AutoDisposeFutureProvider<List<String>> {
-  /// All bundled images inside a project's `assets/projectimage/<slug>/`
-  /// folder, sorted alphabetically. Empty if the project has none. The first
-  /// entry is what the card uses as its thumbnail, so existing single-image
-  /// callers stay unaffected — this just also exposes the rest for a gallery.
-  ///
-  /// Copied from [projectImages].
-  ProjectImagesProvider(
-    String projectName,
-  ) : this._internal(
-          (ref) => projectImages(
-            ref as ProjectImagesRef,
-            projectName,
-          ),
-          from: projectImagesProvider,
-          name: r'projectImagesProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$projectImagesHash,
-          dependencies: ProjectImagesFamily._dependencies,
-          allTransitiveDependencies:
-              ProjectImagesFamily._allTransitiveDependencies,
-          projectName: projectName,
+final class ProjectImageAssetsProvider extends $FunctionalProvider<
+        AsyncValue<List<String>>, List<String>, FutureOr<List<String>>>
+    with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
+  /// Every bundled asset path under assets/projectimage/, refreshed on each
+  /// app start (i.e. each hot restart / rebuild) so a screenshot dropped into
+  /// a project's folder shows up without touching any code or translations.
+  ProjectImageAssetsProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'projectImageAssetsProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
         );
 
-  ProjectImagesProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.projectName,
-  }) : super.internal();
+  @override
+  String debugGetCreateSourceHash() => _$projectImageAssetsHash();
 
-  final String projectName;
+  @$internal
+  @override
+  $FutureProviderElement<List<String>> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  Override overrideWith(
-    FutureOr<List<String>> Function(ProjectImagesRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: ProjectImagesProvider._internal(
-        (ref) => create(ref as ProjectImagesRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        projectName: projectName,
-      ),
-    );
+  FutureOr<List<String>> create(Ref ref) {
+    return projectImageAssets(ref);
+  }
+}
+
+String _$projectImageAssetsHash() =>
+    r'c0dc812a567ae54a1caff8c3f0347de8f1974147';
+
+/// All bundled images inside a project's `assets/projectimage/<slug>/`
+/// folder, sorted alphabetically. Empty if the project has none. The first
+/// entry is what the card uses as its thumbnail, so existing single-image
+/// callers stay unaffected — this just also exposes the rest for a gallery.
+
+@ProviderFor(projectImages)
+final projectImagesProvider = ProjectImagesFamily._();
+
+/// All bundled images inside a project's `assets/projectimage/<slug>/`
+/// folder, sorted alphabetically. Empty if the project has none. The first
+/// entry is what the card uses as its thumbnail, so existing single-image
+/// callers stay unaffected — this just also exposes the rest for a gallery.
+
+final class ProjectImagesProvider extends $FunctionalProvider<
+        AsyncValue<List<String>>, List<String>, FutureOr<List<String>>>
+    with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
+  /// All bundled images inside a project's `assets/projectimage/<slug>/`
+  /// folder, sorted alphabetically. Empty if the project has none. The first
+  /// entry is what the card uses as its thumbnail, so existing single-image
+  /// callers stay unaffected — this just also exposes the rest for a gallery.
+  ProjectImagesProvider._(
+      {required ProjectImagesFamily super.from, required String super.argument})
+      : super(
+          retry: null,
+          name: r'projectImagesProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$projectImagesHash();
+
+  @override
+  String toString() {
+    return r'projectImagesProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  AutoDisposeFutureProviderElement<List<String>> createElement() {
-    return _ProjectImagesProviderElement(this);
+  $FutureProviderElement<List<String>> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<String>> create(Ref ref) {
+    final argument = this.argument as String;
+    return projectImages(
+      ref,
+      argument,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ProjectImagesProvider && other.projectName == projectName;
+    return other is ProjectImagesProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, projectName.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin ProjectImagesRef on AutoDisposeFutureProviderRef<List<String>> {
-  /// The parameter `projectName` of this provider.
-  String get projectName;
-}
+String _$projectImagesHash() => r'93843d61bcc18a1bd973dd0389ed985f7e0884b6';
 
-class _ProjectImagesProviderElement
-    extends AutoDisposeFutureProviderElement<List<String>>
-    with ProjectImagesRef {
-  _ProjectImagesProviderElement(super.provider);
+/// All bundled images inside a project's `assets/projectimage/<slug>/`
+/// folder, sorted alphabetically. Empty if the project has none. The first
+/// entry is what the card uses as its thumbnail, so existing single-image
+/// callers stay unaffected — this just also exposes the rest for a gallery.
+
+final class ProjectImagesFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<List<String>>, String> {
+  ProjectImagesFamily._()
+      : super(
+          retry: null,
+          name: r'projectImagesProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
+
+  /// All bundled images inside a project's `assets/projectimage/<slug>/`
+  /// folder, sorted alphabetically. Empty if the project has none. The first
+  /// entry is what the card uses as its thumbnail, so existing single-image
+  /// callers stay unaffected — this just also exposes the rest for a gallery.
+
+  ProjectImagesProvider call(
+    String projectName,
+  ) =>
+      ProjectImagesProvider._(argument: projectName, from: this);
 
   @override
-  String get projectName => (origin as ProjectImagesProvider).projectName;
+  String toString() => r'projectImagesProvider';
 }
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

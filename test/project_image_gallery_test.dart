@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_image.dart';
 
 const _project = Project(name: 'Tanto');
@@ -177,6 +178,6 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.textContaining('more'), findsNothing);
-    expect(find.byIcon(Icons.code), findsOneWidget);
+    expect(find.byType(EmptyProjectPlaceholder), findsOneWidget);
   });
 }

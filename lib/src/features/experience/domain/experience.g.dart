@@ -6,8 +6,7 @@ part of 'experience.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ExperienceImpl _$$ExperienceImplFromJson(Map<String, dynamic> json) =>
-    _$ExperienceImpl(
+_Experience _$ExperienceFromJson(Map<String, dynamic> json) => _Experience(
       role: json['role'] as String?,
       company: json['company'] as String?,
       description: json['description'] as String?,
@@ -25,7 +24,7 @@ _$ExperienceImpl _$$ExperienceImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$ExperienceImplToJson(_$ExperienceImpl instance) =>
+Map<String, dynamic> _$ExperienceToJson(_Experience instance) =>
     <String, dynamic>{
       'role': instance.role,
       'company': instance.company,

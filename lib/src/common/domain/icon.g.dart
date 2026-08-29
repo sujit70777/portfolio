@@ -6,15 +6,14 @@ part of 'icon.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$IconModelImpl _$$IconModelImplFromJson(Map<String, dynamic> json) =>
-    _$IconModelImpl(
+_IconModel _$IconModelFromJson(Map<String, dynamic> json) => _IconModel(
       assetName: json['assetName'] as String?,
       codePoint: json['codePoint'] as String?,
       fontFamily: json['fontFamily'] as String?,
       color: json['color'] as String?,
     );
 
-Map<String, dynamic> _$$IconModelImplToJson(_$IconModelImpl instance) =>
+Map<String, dynamic> _$IconModelToJson(_IconModel instance) =>
     <String, dynamic>{
       'assetName': instance.assetName,
       'codePoint': instance.codePoint,

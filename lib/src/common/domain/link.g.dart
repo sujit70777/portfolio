@@ -6,13 +6,12 @@ part of 'link.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LinkImpl _$$LinkImplFromJson(Map<String, dynamic> json) => _$LinkImpl(
+_Link _$LinkFromJson(Map<String, dynamic> json) => _Link(
       url: json['url'] as String?,
       display: json['display'] as String?,
     );
 
-Map<String, dynamic> _$$LinkImplToJson(_$LinkImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$LinkToJson(_Link instance) => <String, dynamic>{
       'url': instance.url,
       'display': instance.display,
     };

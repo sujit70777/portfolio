@@ -6,22 +6,45 @@ part of 'about_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$aboutRepositoryHash() => r'b1d3c81555bea9f128d4546fd11a5f1860bb5494';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [aboutRepository].
 @ProviderFor(aboutRepository)
-final aboutRepositoryProvider = AutoDisposeProvider<AboutRepository>.internal(
-  aboutRepository,
-  name: r'aboutRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$aboutRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final aboutRepositoryProvider = AboutRepositoryProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AboutRepositoryRef = AutoDisposeProviderRef<AboutRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AboutRepositoryProvider extends $FunctionalProvider<AboutRepository,
+    AboutRepository, AboutRepository> with $Provider<AboutRepository> {
+  AboutRepositoryProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'aboutRepositoryProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$aboutRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<AboutRepository> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AboutRepository create(Ref ref) {
+    return aboutRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AboutRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AboutRepository>(value),
+    );
+  }
+}
+
+String _$aboutRepositoryHash() => r'b1d3c81555bea9f128d4546fd11a5f1860bb5494';

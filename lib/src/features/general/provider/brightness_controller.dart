@@ -1,6 +1,7 @@
+import 'dart:ui';
+
 import 'package:portfolio/src/common/provider/shared_preferences_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'dart:ui';
 
 part 'brightness_controller.g.dart';
 

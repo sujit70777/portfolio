@@ -37,14 +37,14 @@ abstract class  LocaleKeys {
   static const skillsSectionTitle = 'skillsSectionTitle';
   static const experienceSectionTitle = 'experienceSectionTitle';
   static const projectsSectionTitle = 'projectsSectionTitle';
+  static const resume = 'resume';
+  static const downloadResume = 'downloadResume';
+  static const openUrlError = 'openUrlError';
+  static const unknownLanguageError = 'unknownLanguageError';
   static const sectionEyebrowAbout = 'sectionEyebrowAbout';
   static const sectionEyebrowExperience = 'sectionEyebrowExperience';
   static const sectionEyebrowSkills = 'sectionEyebrowSkills';
   static const sectionEyebrowProjects = 'sectionEyebrowProjects';
   static const projectsMoreLabel = 'projectsMoreLabel';
-  static const resume = 'resume';
-  static const downloadResume = 'downloadResume';
-  static const openUrlError = 'openUrlError';
-  static const unknownLanguageError = 'unknownLanguageError';
 
 }

@@ -6,6 +6,9 @@ import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/project_detail_modal.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
@@ -14,11 +17,10 @@ import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 /// list — this is the small, strongest-work-first set; the rest render as
 /// plain rows in ProjectListRow, no image required).
 ///
-/// Simpler than the general-grid ProjectImage/ProjectCard it sits
-/// alongside: tapping opens the project's URL directly rather than the
-/// image lightbox gallery — a deliberate scope cut for this pass rather
-/// than reshaping the tested, landscape-oriented ProjectImage into a
-/// portrait device frame.
+/// Tapping the card body opens the full project detail modal (gallery,
+/// description, tech stack, role); the small corner icon bypasses it and
+/// goes straight to the project's own URL, for visitors who just want the
+/// store link.
 class FeaturedProjectCard extends ConsumerWidget {
   const FeaturedProjectCard({super.key, required this.project, required this.width});
 
@@ -41,12 +43,7 @@ class FeaturedProjectCard extends ConsumerWidget {
     final dpr = MediaQuery.devicePixelRatioOf(context);
     final screenHeight = width / DeviceFrame.aspectRatio;
     final Widget screen = imagePath == null
-        ? ColoredBox(
-            color: theme.colorScheme.secondaryContainer,
-            child: const Center(
-              child: Icon(Icons.smartphone_outlined, color: Colors.white38),
-            ),
-          )
+        ? EmptyProjectPlaceholder(project: project)
         : Image.asset(
             imagePath,
             fit: BoxFit.cover,
@@ -56,47 +53,65 @@ class FeaturedProjectCard extends ConsumerWidget {
 
     return Material(
       color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        onTap: () => _onTap(context),
-        hoverColor: theme.colorScheme.tertiary.withAlpha(15),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Center(child: DeviceFrame(width: width, screen: screen)),
-              gapH12,
-              Text(
-                projectName ?? '',
-                style: theme.textTheme.titleSmall,
-                overflow: TextOverflow.ellipsis,
+      child: Stack(
+        children: [
+          InkWell(
+            borderRadius: BorderRadius.circular(20),
+            onTap: () => showProjectDetailModal(context, project: project),
+            hoverColor: theme.colorScheme.tertiary.withAlpha(15),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Center(child: DeviceFrame(width: width, screen: screen)),
+                  gapH12,
+                  Text(
+                    projectName ?? '',
+                    style: theme.textTheme.titleSmall,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  gapH4,
+                  _statusTag(context),
+                ],
               ),
-              gapH4,
-              Text(
-                _statusTag(),
-                style: monoLabelStyle(
-                  fontSize: 11,
-                  color: theme.colorScheme.tertiary,
+            ),
+          ),
+          if (project.url != null)
+            Positioned(
+              top: 4,
+              right: 4,
+              child: Tooltip(
+                message: 'Open project directly',
+                child: IconButton(
+                  visualDensity: VisualDensity.compact,
+                  icon: Icon(
+                    Icons.open_in_new,
+                    size: 16,
+                    color: theme.colorScheme.onSurface.withAlpha(160),
+                  ),
+                  onPressed: () => _openDirectly(context),
                 ),
               ),
-            ],
-          ),
-        ),
+            ),
+        ],
       ),
     );
   }
 
-  String _statusTag() {
+  Widget _statusTag(BuildContext context) {
     final firstTech = project.technologies?.firstOrNull?.name;
-    return [
-      'SHIPPED',
-      if (firstTech != null) firstTech.toUpperCase(),
-    ].join(' · ');
+    return Text(
+      [
+        statusLabel(project.status),
+        if (firstTech != null) firstTech.toUpperCase(),
+      ].join(' · '),
+      style: monoLabelStyle(fontSize: 11, color: statusColor(context, project.status)),
+    );
   }
 
-  Future<void> _onTap(BuildContext context) async {
+  Future<void> _openDirectly(BuildContext context) async {
     final url = project.url;
     if (url == null) return;
     try {

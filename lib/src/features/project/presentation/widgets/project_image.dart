@@ -7,6 +7,7 @@ import 'package:portfolio/src/features/general/provider/scroll_controller.dart';
 import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_image_lightbox.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
 import 'package:portfolio/src/common/widgets/icon.dart';
 
 /// How far outside the visible screen (in logical pixels) a card is still
@@ -201,7 +202,9 @@ class _ProjectImageState extends ConsumerState<ProjectImage> {
     final screenshotPath =
         widget.project.screenshotPath ??
             (images.isNotEmpty ? images.first : null);
-    if (screenshotPath == null) return const Icon(Icons.code);
+    if (screenshotPath == null) {
+      return EmptyProjectPlaceholder(project: widget.project);
+    }
     // Sized to the card's actual rendered box (LayoutBuilder's width, and
     // the fixed max container height) in physical pixels, so the decoder
     // doesn't allocate a full-resolution bitmap for a screenshot that only

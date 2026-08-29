@@ -6,8 +6,7 @@ part of 'project.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProjectImpl _$$ProjectImplFromJson(Map<String, dynamic> json) =>
-    _$ProjectImpl(
+_Project _$ProjectFromJson(Map<String, dynamic> json) => _Project(
       name: json['name'] as String?,
       description: json['description'] as String?,
       url: json['url'] as String?,
@@ -22,10 +21,11 @@ _$ProjectImpl _$$ProjectImplFromJson(Map<String, dynamic> json) =>
           ?.map((e) => Link.fromJson(e as Map<String, dynamic>))
           .toList(),
       featured: json['featured'] as bool?,
+      status: $enumDecodeNullable(_$ProjectStatusEnumMap, json['status']),
+      role: json['role'] as String?,
     );
 
-Map<String, dynamic> _$$ProjectImplToJson(_$ProjectImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ProjectToJson(_Project instance) => <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
       'url': instance.url,
@@ -34,4 +34,11 @@ Map<String, dynamic> _$$ProjectImplToJson(_$ProjectImpl instance) =>
       'technologies': instance.technologies?.map((e) => e.toJson()).toList(),
       'links': instance.links?.map((e) => e.toJson()).toList(),
       'featured': instance.featured,
+      'status': _$ProjectStatusEnumMap[instance.status],
+      'role': instance.role,
     };
+
+const _$ProjectStatusEnumMap = {
+  ProjectStatus.shipped: 'shipped',
+  ProjectStatus.inDevelopment: 'inDevelopment',
+};

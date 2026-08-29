@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,88 +9,62 @@ part of 'skill_category.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-SkillCategory _$SkillCategoryFromJson(Map<String, dynamic> json) {
-  return _SkillCategory.fromJson(json);
-}
 
 /// @nodoc
 mixin _$SkillCategory {
-  String? get category => throw _privateConstructorUsedError;
-  List<String>? get skills => throw _privateConstructorUsedError;
-
-  /// Serializes this SkillCategory to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String? get category;
+  List<String>? get skills;
 
   /// Create a copy of SkillCategory
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SkillCategoryCopyWith<SkillCategory> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SkillCategoryCopyWith<$Res> {
-  factory $SkillCategoryCopyWith(
-          SkillCategory value, $Res Function(SkillCategory) then) =
-      _$SkillCategoryCopyWithImpl<$Res, SkillCategory>;
-  @useResult
-  $Res call({String? category, List<String>? skills});
-}
-
-/// @nodoc
-class _$SkillCategoryCopyWithImpl<$Res, $Val extends SkillCategory>
-    implements $SkillCategoryCopyWith<$Res> {
-  _$SkillCategoryCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SkillCategory
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $SkillCategoryCopyWith<SkillCategory> get copyWith =>
+      _$SkillCategoryCopyWithImpl<SkillCategory>(
+          this as SkillCategory, _$identity);
+
+  /// Serializes this SkillCategory to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? category = freezed,
-    Object? skills = freezed,
-  }) {
-    return _then(_value.copyWith(
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String?,
-      skills: freezed == skills
-          ? _value.skills
-          : skills // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SkillCategory &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            const DeepCollectionEquality().equals(other.skills, skills));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, category, const DeepCollectionEquality().hash(skills));
+
+  @override
+  String toString() {
+    return 'SkillCategory(category: $category, skills: $skills)';
   }
 }
 
 /// @nodoc
-abstract class _$$SkillCategoryImplCopyWith<$Res>
-    implements $SkillCategoryCopyWith<$Res> {
-  factory _$$SkillCategoryImplCopyWith(
-          _$SkillCategoryImpl value, $Res Function(_$SkillCategoryImpl) then) =
-      __$$SkillCategoryImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $SkillCategoryCopyWith<$Res> {
+  factory $SkillCategoryCopyWith(
+          SkillCategory value, $Res Function(SkillCategory) _then) =
+      _$SkillCategoryCopyWithImpl;
   @useResult
   $Res call({String? category, List<String>? skills});
 }
 
 /// @nodoc
-class __$$SkillCategoryImplCopyWithImpl<$Res>
-    extends _$SkillCategoryCopyWithImpl<$Res, _$SkillCategoryImpl>
-    implements _$$SkillCategoryImplCopyWith<$Res> {
-  __$$SkillCategoryImplCopyWithImpl(
-      _$SkillCategoryImpl _value, $Res Function(_$SkillCategoryImpl) _then)
-      : super(_value, _then);
+class _$SkillCategoryCopyWithImpl<$Res>
+    implements $SkillCategoryCopyWith<$Res> {
+  _$SkillCategoryCopyWithImpl(this._self, this._then);
+
+  final SkillCategory _self;
+  final $Res Function(SkillCategory) _then;
 
   /// Create a copy of SkillCategory
   /// with the given fields replaced by the non-null parameter values.
@@ -100,27 +74,183 @@ class __$$SkillCategoryImplCopyWithImpl<$Res>
     Object? category = freezed,
     Object? skills = freezed,
   }) {
-    return _then(_$SkillCategoryImpl(
+    return _then(_self.copyWith(
       category: freezed == category
-          ? _value.category
+          ? _self.category
           : category // ignore: cast_nullable_to_non_nullable
               as String?,
       skills: freezed == skills
-          ? _value._skills
+          ? _self.skills
           : skills // ignore: cast_nullable_to_non_nullable
               as List<String>?,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [SkillCategory].
+extension SkillCategoryPatterns on SkillCategory {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SkillCategory value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SkillCategory() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_SkillCategory value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SkillCategory():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SkillCategory value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SkillCategory() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String? category, List<String>? skills)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SkillCategory() when $default != null:
+        return $default(_that.category, _that.skills);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String? category, List<String>? skills) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SkillCategory():
+        return $default(_that.category, _that.skills);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String? category, List<String>? skills)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SkillCategory() when $default != null:
+        return $default(_that.category, _that.skills);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$SkillCategoryImpl implements _SkillCategory {
-  const _$SkillCategoryImpl({this.category, final List<String>? skills})
+class _SkillCategory implements SkillCategory {
+  const _SkillCategory({this.category, final List<String>? skills})
       : _skills = skills;
-
-  factory _$SkillCategoryImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SkillCategoryImplFromJson(json);
+  factory _SkillCategory.fromJson(Map<String, dynamic> json) =>
+      _$SkillCategoryFromJson(json);
 
   @override
   final String? category;
@@ -134,16 +264,26 @@ class _$SkillCategoryImpl implements _SkillCategory {
     return EqualUnmodifiableListView(value);
   }
 
+  /// Create a copy of SkillCategory
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'SkillCategory(category: $category, skills: $skills)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SkillCategoryCopyWith<_SkillCategory> get copyWith =>
+      __$SkillCategoryCopyWithImpl<_SkillCategory>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SkillCategoryToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SkillCategoryImpl &&
+            other is _SkillCategory &&
             (identical(other.category, category) ||
                 other.category == category) &&
             const DeepCollectionEquality().equals(other._skills, _skills));
@@ -154,39 +294,50 @@ class _$SkillCategoryImpl implements _SkillCategory {
   int get hashCode => Object.hash(
       runtimeType, category, const DeepCollectionEquality().hash(_skills));
 
-  /// Create a copy of SkillCategory
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SkillCategoryImplCopyWith<_$SkillCategoryImpl> get copyWith =>
-      __$$SkillCategoryImplCopyWithImpl<_$SkillCategoryImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SkillCategoryImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SkillCategory(category: $category, skills: $skills)';
   }
 }
 
-abstract class _SkillCategory implements SkillCategory {
-  const factory _SkillCategory(
-      {final String? category,
-      final List<String>? skills}) = _$SkillCategoryImpl;
-
-  factory _SkillCategory.fromJson(Map<String, dynamic> json) =
-      _$SkillCategoryImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$SkillCategoryCopyWith<$Res>
+    implements $SkillCategoryCopyWith<$Res> {
+  factory _$SkillCategoryCopyWith(
+          _SkillCategory value, $Res Function(_SkillCategory) _then) =
+      __$SkillCategoryCopyWithImpl;
   @override
-  String? get category;
-  @override
-  List<String>? get skills;
+  @useResult
+  $Res call({String? category, List<String>? skills});
+}
+
+/// @nodoc
+class __$SkillCategoryCopyWithImpl<$Res>
+    implements _$SkillCategoryCopyWith<$Res> {
+  __$SkillCategoryCopyWithImpl(this._self, this._then);
+
+  final _SkillCategory _self;
+  final $Res Function(_SkillCategory) _then;
 
   /// Create a copy of SkillCategory
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SkillCategoryImplCopyWith<_$SkillCategoryImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? category = freezed,
+    Object? skills = freezed,
+  }) {
+    return _then(_SkillCategory(
+      category: freezed == category
+          ? _self.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      skills: freezed == skills
+          ? _self._skills
+          : skills // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ));
+  }
 }
+
+// dart format on

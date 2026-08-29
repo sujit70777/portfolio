@@ -5,7 +5,7 @@ part 'technology.freezed.dart';
 part 'technology.g.dart';
 
 @freezed
-class Technology with _$Technology {
+abstract class Technology with _$Technology {
   const factory Technology({
     String? name,
     IconModel? icon,

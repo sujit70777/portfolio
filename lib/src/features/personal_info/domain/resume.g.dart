@@ -6,14 +6,13 @@ part of 'resume.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ResumeImpl _$$ResumeImplFromJson(Map<String, dynamic> json) => _$ResumeImpl(
+_Resume _$ResumeFromJson(Map<String, dynamic> json) => _Resume(
       languageCode: json['languageCode'] as String?,
       language: json['language'] as String?,
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$$ResumeImplToJson(_$ResumeImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ResumeToJson(_Resume instance) => <String, dynamic>{
       'languageCode': instance.languageCode,
       'language': instance.language,
       'url': instance.url,

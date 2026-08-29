@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/domain/app_section.dart';
 import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
@@ -22,7 +23,10 @@ class ExperienceDesktop extends ConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 12, bottom: 8),
-          child: SectionEyebrow(label: tr(LocaleKeys.sectionEyebrowExperience)),
+          child: SectionEyebrow(
+            section: AppSection.experience,
+            label: tr(LocaleKeys.sectionEyebrowExperience),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 12, bottom: 20),

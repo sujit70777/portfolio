@@ -4,7 +4,7 @@ part 'icon.freezed.dart';
 part 'icon.g.dart';
 
 @freezed
-class IconModel with _$IconModel {
+abstract class IconModel with _$IconModel {
   const factory IconModel({
     String? assetName,
     String? codePoint,
