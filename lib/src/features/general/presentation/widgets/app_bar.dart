@@ -69,12 +69,6 @@ class MyAppBar extends ConsumerWidget {
                     },
                   ),
                   AppBarButton(
-                    title: tr(LocaleKeys.skillsSectionTitle),
-                    onPressed: () {
-                      _onAppBarButtonTap(ref.watch(skillsSectionKeyProvider));
-                    },
-                  ),
-                  AppBarButton(
                     title: tr(LocaleKeys.experienceSectionTitle),
                     onPressed: () {
                       _onAppBarButtonTap(
