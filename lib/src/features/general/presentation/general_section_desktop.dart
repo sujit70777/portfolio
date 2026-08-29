@@ -43,7 +43,7 @@ class GeneralDesktop extends ConsumerWidget {
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       final contentWidth =
-                          constraints.maxWidth < 1040 ? constraints.maxWidth : 1040.0;
+                          constraints.maxWidth < 1200 ? constraints.maxWidth : 1200.0;
                       return SizedBox(
                         width: contentWidth,
                         child: Column(
