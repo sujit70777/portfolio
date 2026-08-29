@@ -22,6 +22,10 @@ analyzer:
     - linux/**
   errors:
     invalid_annotation_target: ignore
+    # custom_lint 0.8.1 (see pubspec.yaml) only documents the list syntax
+    # below — there's no alternative it supports yet under the analyzer's
+    # newer plugin system, so this is expected noise, not a real issue.
+    analysis_options_deprecated_plugins: ignore
   plugins:
     - custom_lint
 
