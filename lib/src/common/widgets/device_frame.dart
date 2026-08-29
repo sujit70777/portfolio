@@ -53,7 +53,7 @@ class DeviceFrame extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.all(bezelWidth * 2.4),
+          padding: EdgeInsets.all(bezelWidth * 0.7),
           child: Stack(
             children: [
               ClipRRect(
@@ -65,28 +65,13 @@ class DeviceFrame extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Colors.black.withAlpha(90),
-                        Colors.black.withAlpha(35),
-                        Colors.black.withAlpha(130),
+                        // Colors.black.withAlpha(90),
+                        // Colors.black.withAlpha(35),
+                        // Colors.black.withAlpha(130),
                       ],
                     ),
                   ),
                   child: SizedBox.expand(child: screen),
-                ),
-              ),
-              Positioned(
-                top: width * 0.02,
-                left: 0,
-                right: 0,
-                child: Center(
-                  child: Container(
-                    width: width * 0.32,
-                    height: width * 0.045,
-                    decoration: BoxDecoration(
-                      color: _caseColor,
-                      borderRadius: BorderRadius.circular(width * 0.03),
-                    ),
-                  ),
                 ),
               ),
             ],

@@ -225,8 +225,8 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
               ? Center(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                      maxWidth: 720,
-                      maxHeight: MediaQuery.sizeOf(context).height * 0.86,
+                      maxWidth: 860,
+                      maxHeight: MediaQuery.sizeOf(context).height * 0.88,
                     ),
                     child: content,
                   ),
@@ -300,93 +300,101 @@ class _Gallery extends StatelessWidget {
   final Widget placeholder;
 
   static const _fallbackAspectRatio = 9 / 19.5;
-  static const _maxHeight = 480.0;
+  // A generous, fixed "standard" height so a screenshot's UI is actually
+  // legible rather than shrunk to fit a small box — clamped down only on
+  // short viewports.
+  static const _standardHeight = 620.0;
 
   bool get _hasMultiple => images.length > 1;
 
   @override
   Widget build(BuildContext context) {
-    final maxHeight =
-        (MediaQuery.sizeOf(context).height * 0.55).clamp(240.0, _maxHeight);
+    final galleryHeight = (MediaQuery.sizeOf(context).height * 0.68)
+        .clamp(320.0, _standardHeight);
 
-    return Center(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: maxHeight),
-        child: AspectRatio(
-          aspectRatio: aspectRatio ?? _fallbackAspectRatio,
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              // Lazy: PageView.builder only materializes the current page
-              // and its immediate neighbors, so the rest of a project's
-              // screenshots never decode until the visitor pages to them.
-              PageView.builder(
-                controller: pageController,
-                itemCount: images.length,
-                onPageChanged: onPageChanged,
-                itemBuilder: (context, index) {
-                  return Image.asset(
-                    images[index],
-                    // contain, never cover: the box is already sized to the
-                    // current image's own ratio, so this only guards against
-                    // a mismatched fallback ratio while it's still resolving.
-                    fit: BoxFit.contain,
-                    errorBuilder: (_, __, ___) => placeholder,
-                  );
-                },
+    // The dark backdrop spans the gallery's full width and a fixed height;
+    // the image itself is centered inside at its own aspect ratio. Nav
+    // buttons are positioned against this full-width frame, not the
+    // (often much narrower, portrait) image, so they sit in open space
+    // beside it instead of covering the screenshot's own UI.
+    return SizedBox(
+      height: galleryHeight,
+      child: ColoredBox(
+        color: Colors.black,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Center(
+              child: AspectRatio(
+                aspectRatio: aspectRatio ?? _fallbackAspectRatio,
+                // Lazy: PageView.builder only materializes the current
+                // page and its immediate neighbors, so the rest of a
+                // project's screenshots never decode until the visitor
+                // pages to them.
+                child: PageView.builder(
+                  controller: pageController,
+                  itemCount: images.length,
+                  onPageChanged: onPageChanged,
+                  itemBuilder: (context, index) {
+                    return Image.asset(
+                      images[index],
+                      fit: BoxFit.contain,
+                      errorBuilder: (_, __, ___) => placeholder,
+                    );
+                  },
+                ),
               ),
-              if (_hasMultiple) ...[
-                Positioned(
-                  left: 8,
-                  top: 0,
-                  bottom: 0,
-                  child: Center(
-                    child: _NavButton(
-                      icon: Icons.chevron_left,
-                      tooltip: 'Previous image',
-                      onPressed: () => onNavigate(currentIndex - 1),
-                    ),
+            ),
+            if (_hasMultiple) ...[
+              Positioned(
+                left: 12,
+                top: 0,
+                bottom: 0,
+                child: Center(
+                  child: _NavButton(
+                    icon: Icons.chevron_left,
+                    tooltip: 'Previous image',
+                    onPressed: () => onNavigate(currentIndex - 1),
                   ),
                 ),
-                Positioned(
-                  right: 8,
-                  top: 0,
-                  bottom: 0,
-                  child: Center(
-                    child: _NavButton(
-                      icon: Icons.chevron_right,
-                      tooltip: 'Next image',
-                      onPressed: () => onNavigate(currentIndex + 1),
-                    ),
+              ),
+              Positioned(
+                right: 12,
+                top: 0,
+                bottom: 0,
+                child: Center(
+                  child: _NavButton(
+                    icon: Icons.chevron_right,
+                    tooltip: 'Next image',
+                    onPressed: () => onNavigate(currentIndex + 1),
                   ),
                 ),
-                Positioned(
-                  bottom: 12,
-                  left: 0,
-                  right: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(images.length, (index) {
-                      final isActive = index == currentIndex;
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 3),
-                        child: SizedBox.square(
-                          dimension: isActive ? 8 : 6,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color:
-                                  Colors.white.withAlpha(isActive ? 255 : 120),
-                            ),
+              ),
+              Positioned(
+                bottom: 14,
+                left: 0,
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(images.length, (index) {
+                    final isActive = index == currentIndex;
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 3),
+                      child: SizedBox.square(
+                        dimension: isActive ? 8 : 6,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withAlpha(isActive ? 255 : 120),
                           ),
                         ),
-                      );
-                    }),
-                  ),
+                      ),
+                    );
+                  }),
                 ),
-              ],
+              ),
             ],
-          ),
+          ],
         ),
       ),
     );
