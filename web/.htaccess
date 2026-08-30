@@ -4,7 +4,11 @@
 # instead of a full re-download when nothing changed) rather than cached
 # long-term, or updates would never be picked up by returning visitors.
 # Fonts and images rarely change and are safe to cache aggressively; if one
-# is ever updated, rename the file to bust the cache.
+# is ever updated, rename the file to bust the cache. Same idea for the
+# resume PDF, except its cache-busting is automatic: the deploy workflow
+# (.github/workflows/deploy.yml, "Cache-bust resume PDF URLs") stamps a
+# content hash onto its URL on every build, so a changed resume is always a
+# new URL and long-term caching here is safe.
 #
 # Pre-compressed .br/.gz siblings (built in CI — see
 # .github/workflows/deploy.yml, "Pre-compress static assets") match the same
@@ -21,7 +25,7 @@
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
 
-  <FilesMatch "\.(ttf|otf|woff|woff2|png|jpg|jpeg|webp|gif|svg|ico)(\.br|\.gz)?$">
+  <FilesMatch "\.(ttf|otf|woff|woff2|png|jpg|jpeg|webp|gif|svg|ico|pdf)(\.br|\.gz)?$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 </IfModule>
@@ -35,6 +39,7 @@
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/webp "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType application/pdf "access plus 1 year"
 </IfModule>
 
 # Many shared Apache installs don't have these registered, and a wrong

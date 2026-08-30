@@ -311,7 +311,7 @@
         {
             "name": "Farenow",
             "description": "All-in-one super app for a US-based client (Houston, TX), built while at Devxhub: ride-hailing, on-demand service bookings, food and grocery delivery, virtual consultations, and a real estate/marketplace listings module in a single app.",
-            "role": "Flutter lead at Devxhub — architected the app end to end across ride-hailing, delivery, bookings, and marketplace modules.",
+            "role": "Team lead and sole developer — owned architecture, implementation, release and delivery end to end across ride-hailing, delivery, bookings, and marketplace modules.",
             "url": "https://play.google.com/store/apps/details?id=com.app.farenow",
             "icon": {
                 "codePoint": "0xefc5",
@@ -370,8 +370,8 @@
         },
         {
             "name": "Peace of Mind (POM)",
-            "description": "iOS legacy and estate-planning app: digital will management, a biometric-secured vault, a life timeline, and Apple StoreKit 2 subscriptions with individual and family plans. Resolved StoreKit subscription race conditions and led App Store submission and compliance.",
-            "role": "Sole iOS developer — SwiftUI app, StoreKit 2 subscriptions, App Store submission and compliance.",
+            "description": "Flutter estate-planning app for iOS: digital will management, a biometric-secured vault, an interactive life timeline, and Apple StoreKit 2 subscriptions with individual and family plans. Built the native iOS layer solo, resolving StoreKit subscription race conditions, and led App Store submission and compliance.",
+            "role": "Team lead and sole developer — Flutter app with the native iOS layer built solo, including StoreKit 2 subscriptions, App Store submission and compliance.",
             "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
             "icon": {
                 "codePoint": "0xef23",
@@ -381,6 +381,18 @@
             "status": "shipped",
             "featured": true,
             "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
+                },
+                {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
                 {
                     "name": "Swift",
                     "icon": {
@@ -394,9 +406,6 @@
                         "codePoint": "0xef21",
                         "fontFamily": "FontAwesome"
                     }
-                },
-                {
-                    "name": "SwiftUI"
                 },
                 {
                     "name": "StoreKit"
@@ -445,7 +454,7 @@
         {
             "name": "Muslim Times Pro",
             "description": "Prayer times with azan alerts, full Quran with recitation and translation, a mosque locator, Qibla compass, and Hijri calendar.",
-            "role": "Sole developer — designed and shipped the app end to end.",
+            "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
             "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
             "icon": {
                 "codePoint": "0xef23",
@@ -498,7 +507,7 @@
         {
             "name": "ProofSell",
             "description": "Bangladesh e-commerce marketplace for electronics, fashion, home goods, and daily essentials, with verified sellers, cashback rewards, and a social-impact model funding orphanages and sustainability initiatives.",
-            "role": "Flutter developer — implementation and delivery.",
+            "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
             "url": "https://apps.apple.com/us/app/proofsell/id6755882846",
             "icon": {
                 "codePoint": "0xef23",
@@ -846,7 +855,7 @@
         {
             "name": "SK Mobile School",
             "description": "Secure educational platform for streaming enrolled course videos with screenshot and recording protection, progress tracking, and course search.",
-            "role": "Flutter developer — implementation and delivery.",
+            "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
             "url": "https://apps.apple.com/us/app/sk-mobile-school/id6475169754",
             "icon": {
                 "codePoint": "0xef23",
@@ -893,7 +902,7 @@
         {
             "name": "Notivio",
             "description": "Notes, reminders, task planner, and calendar app with custom checklists, notifications, and cross-device cloud sync.",
-            "role": "Sole developer — designed and shipped the app end to end.",
+            "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
             "url": "https://apps.apple.com/us/app/notivio-notes-task-planner/id6748751923",
             "icon": {
                 "codePoint": "0xef23",
@@ -934,7 +943,7 @@
         {
             "name": "eSIM247",
             "description": "eSIM marketplace app for purchasing and managing mobile data plans.",
-            "role": "Flutter developer — implementation and delivery.",
+            "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
             "url": "https://play.google.com/store/apps/details?id=com.esim247.app",
             "icon": {
                 "codePoint": "0xefc5",

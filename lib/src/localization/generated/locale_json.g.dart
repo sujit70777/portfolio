@@ -110,7 +110,7 @@ class CodegenLoader extends AssetLoader{
     {
       "languageCode": "en",
       "language": "English",
-      "url": "assets/assets/documents/resume.pdf"
+      "url": "assets/documents/resume.pdf"
     }
   ],
   "aboutDescription": "I build Flutter apps that keep working when the network doesn't.\n11 years in mobile — 50+ shipped apps, 1M+ users, 4.7+ average store rating. My specialty is offline-first architecture and conflict-free data synchronisation: the part that quietly breaks most mobile apps in the field. I've built and open-sourced a CRDT-based sync library for Flutter, and shipped production apps holding a 4.7 rating at 100,000+ daily active users.\nRecent work includes an enterprise reimbursement platform for a Brazilian client — AI invoice capture, SEFAZ tax-agency integration, instant Pix payout — and a multi-service super app for a US client in Houston.\nI currently work shifted hours to overlap with a Brazil-based team, so adapting to US or UK business hours is routine rather than a promise. Available as an independent contractor.",
@@ -327,7 +327,7 @@ class CodegenLoader extends AssetLoader{
     {
       "name": "Farenow",
       "description": "All-in-one super app for a US-based client (Houston, TX), built while at Devxhub: ride-hailing, on-demand service bookings, food and grocery delivery, virtual consultations, and a real estate/marketplace listings module in a single app.",
-      "role": "Sole Flutter developer at Devxhub — architected the app end to end across ride-hailing, delivery, bookings, and marketplace modules.",
+      "role": "Team lead and sole developer — owned architecture, implementation, release and delivery end to end across ride-hailing, delivery, bookings, and marketplace modules.",
       "url": "https://play.google.com/store/apps/details?id=com.app.farenow",
       "icon": {
         "codePoint": "0xefc5",
@@ -335,6 +335,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": true,
       "technologies": [
         {
           "name": "Flutter",
@@ -381,13 +382,12 @@ class CodegenLoader extends AssetLoader{
             "assetName": "assets/icons/other/firebase.svg"
           }
         }
-      ],
-      "featured": true
+      ]
     },
     {
       "name": "Peace of Mind (POM)",
-      "description": "iOS legacy and estate-planning app: digital will management, a biometric-secured vault, a life timeline, and Apple StoreKit 2 subscriptions with individual and family plans. Resolved StoreKit subscription race conditions and led App Store submission and compliance.",
-      "role": "Sole iOS developer — SwiftUI app, StoreKit 2 subscriptions, App Store submission and compliance.",
+      "description": "Flutter estate-planning app for iOS: digital will management, a biometric-secured vault, an interactive life timeline, and Apple StoreKit 2 subscriptions with individual and family plans. Built the native iOS layer solo, resolving StoreKit subscription race conditions, and led App Store submission and compliance.",
+      "role": "Team lead and sole developer — Flutter app with the native iOS layer built solo, including StoreKit 2 subscriptions, App Store submission and compliance.",
       "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
       "icon": {
         "codePoint": "0xef23",
@@ -395,7 +395,20 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": true,
       "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        },
         {
           "name": "Swift",
           "icon": {
@@ -411,28 +424,12 @@ class CodegenLoader extends AssetLoader{
           }
         },
         {
-          "name": "SwiftUI",
-          "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
-          }
+          "name": "StoreKit"
         },
         {
-          "name": "StoreKit",
-          "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "Apple Pay",
-          "icon": {
-            "codePoint": "0xef22",
-            "fontFamily": "FontAwesome"
-          }
+          "name": "Apple Pay"
         }
-      ],
-      "featured": true
+      ]
     },
     {
       "name": "flutter_crdt_sync_kit",
@@ -445,6 +442,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": true,
       "technologies": [
         {
           "name": "Flutter",
@@ -467,13 +465,12 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Open Source"
         }
-      ],
-      "featured": true
+      ]
     },
     {
       "name": "Muslim Times Pro",
       "description": "Prayer times with azan alerts, full Quran with recitation and translation, a mosque locator, Qibla compass, and Hijri calendar.",
-      "role": "Sole developer — designed and shipped the app end to end.",
+      "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
       "icon": {
         "codePoint": "0xef23",
@@ -481,6 +478,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": true,
       "technologies": [
         {
           "name": "Flutter",
@@ -520,13 +518,12 @@ class CodegenLoader extends AssetLoader{
             "assetName": "assets/icons/other/firebase.svg"
           }
         }
-      ],
-      "featured": true
+      ]
     },
     {
       "name": "ProofSell",
       "description": "Bangladesh e-commerce marketplace for electronics, fashion, home goods, and daily essentials, with verified sellers, cashback rewards, and a social-impact model funding orphanages and sustainability initiatives.",
-      "role": "Flutter developer — implementation and delivery.",
+      "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://apps.apple.com/us/app/proofsell/id6755882846",
       "icon": {
         "codePoint": "0xef23",
@@ -534,6 +531,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": true,
       "technologies": [
         {
           "name": "Flutter",
@@ -567,8 +565,7 @@ class CodegenLoader extends AssetLoader{
             "assetName": "assets/icons/other/firebase.svg"
           }
         }
-      ],
-      "featured": true
+      ]
     },
     {
       "name": "Forward SMS",
@@ -581,6 +578,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": true,
       "technologies": [
         {
           "name": "Swift",
@@ -597,17 +595,12 @@ class CodegenLoader extends AssetLoader{
           }
         },
         {
-          "name": "StoreKit",
-          "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
-          }
+          "name": "StoreKit"
         },
         {
           "name": "Automation"
         }
-      ],
-      "featured": true
+      ]
     },
     {
       "name": "flutter_a11y_lens",
@@ -620,6 +613,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": true,
       "technologies": [
         {
           "name": "Flutter",
@@ -639,8 +633,7 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Open Source"
         }
-      ],
-      "featured": true
+      ]
     },
     {
       "name": "OMR Scanner",
@@ -653,6 +646,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "inDevelopment",
+      "featured": true,
       "technologies": [
         {
           "name": "Flutter",
@@ -675,8 +669,7 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Open Source"
         }
-      ],
-      "featured": true
+      ]
     },
     {
       "name": "Tanto",
@@ -688,6 +681,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -753,6 +747,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -785,6 +780,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -817,6 +813,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "inDevelopment",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -849,6 +846,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "inDevelopment",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -863,25 +861,17 @@ class CodegenLoader extends AssetLoader{
           }
         },
         {
-          "name": "ARKit",
-          "icon": {
-            "codePoint": "0xee48",
-            "fontFamily": "FontAwesome"
-          }
+          "name": "ARKit"
         },
         {
-          "name": "ARCore",
-          "icon": {
-            "codePoint": "0xee48",
-            "fontFamily": "FontAwesome"
-          }
+          "name": "ARCore"
         }
       ]
     },
     {
       "name": "SK Mobile School",
       "description": "Secure educational platform for streaming enrolled course videos with screenshot and recording protection, progress tracking, and course search.",
-      "role": "Flutter developer — implementation and delivery.",
+      "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://apps.apple.com/us/app/sk-mobile-school/id6475169754",
       "icon": {
         "codePoint": "0xef23",
@@ -889,6 +879,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -927,7 +918,7 @@ class CodegenLoader extends AssetLoader{
     {
       "name": "Notivio",
       "description": "Notes, reminders, task planner, and calendar app with custom checklists, notifications, and cross-device cloud sync.",
-      "role": "Sole developer — designed and shipped the app end to end.",
+      "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://apps.apple.com/us/app/notivio-notes-task-planner/id6748751923",
       "icon": {
         "codePoint": "0xef23",
@@ -935,6 +926,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -967,7 +959,7 @@ class CodegenLoader extends AssetLoader{
     {
       "name": "eSIM247",
       "description": "eSIM marketplace app for purchasing and managing mobile data plans.",
-      "role": "Flutter developer — implementation and delivery.",
+      "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://play.google.com/store/apps/details?id=com.esim247.app",
       "icon": {
         "codePoint": "0xefc5",
@@ -975,6 +967,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -1021,6 +1014,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -1074,6 +1068,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -1103,6 +1098,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -1132,6 +1128,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -1161,6 +1158,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -1190,6 +1188,7 @@ class CodegenLoader extends AssetLoader{
         "color": "0xffffffff"
       },
       "status": "shipped",
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -1205,34 +1204,6 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "Open Source"
-        }
-      ]
-    },
-    {
-      "name": "Fitness Tracker (SENSEit)",
-      "description": "GitHub project. Android sensor-tracking app using a foreground service to continuously log device sensor data, with battery-optimization handling for reliable background tracking.",
-      "role": "Sole developer — personal project.",
-      "url": "https://github.com/sujit70777/Fitness-Tracker",
-      "icon": {
-        "codePoint": "0xefb7",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
-      },
-      "status": "shipped",
-      "technologies": [
-        {
-          "name": "Android",
-          "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "Java",
-          "icon": {
-            "codePoint": "0xefe7",
-            "fontFamily": "FontAwesome"
-          }
         }
       ]
     }
@@ -1267,8 +1238,8 @@ class CodegenLoader extends AssetLoader{
   "sectionEyebrowAbout": "About",
   "sectionEyebrowExperience": "Experience",
   "sectionEyebrowSkills": "Skills",
-  "sectionEyebrowProjects": "Shipped Work",
-  "projectsMoreLabel": "More shipped work"
+  "sectionEyebrowProjects": "Projects",
+  "projectsMoreLabel": "More projects"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en};
 }
