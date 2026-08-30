@@ -7,22 +7,22 @@ part of 'experience.dart';
 // **************************************************************************
 
 _Experience _$ExperienceFromJson(Map<String, dynamic> json) => _Experience(
-      role: json['role'] as String?,
-      company: json['company'] as String?,
-      description: json['description'] as String?,
-      url: json['url'] as String?,
-      isPresent: json['isPresent'] as bool?,
-      startYear: (json['startYear'] as num?)?.toInt(),
-      startMonth: (json['startMonth'] as num?)?.toInt(),
-      endYear: (json['endYear'] as num?)?.toInt(),
-      endMonth: (json['endMonth'] as num?)?.toInt(),
-      technologies: (json['technologies'] as List<dynamic>?)
-          ?.map((e) => Technology.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      links: (json['links'] as List<dynamic>?)
-          ?.map((e) => Link.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+  role: json['role'] as String?,
+  company: json['company'] as String?,
+  description: json['description'] as String?,
+  url: json['url'] as String?,
+  isPresent: json['isPresent'] as bool?,
+  startYear: (json['startYear'] as num?)?.toInt(),
+  startMonth: (json['startMonth'] as num?)?.toInt(),
+  endYear: (json['endYear'] as num?)?.toInt(),
+  endMonth: (json['endMonth'] as num?)?.toInt(),
+  technologies: (json['technologies'] as List<dynamic>?)
+      ?.map((e) => Technology.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  links: (json['links'] as List<dynamic>?)
+      ?.map((e) => Link.fromJson(e as Map<String, dynamic>))
+      .toList(),
+);
 
 Map<String, dynamic> _$ExperienceToJson(_Experience instance) =>
     <String, dynamic>{

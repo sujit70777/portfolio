@@ -15,15 +15,15 @@ final brightnessControllerProvider = BrightnessControllerProvider._();
 final class BrightnessControllerProvider
     extends $AsyncNotifierProvider<BrightnessController, Brightness> {
   BrightnessControllerProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'brightnessControllerProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'brightnessControllerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$brightnessControllerHash();
@@ -42,11 +42,14 @@ abstract class _$BrightnessController extends $AsyncNotifier<Brightness> {
   @override
   void runBuild() {
     final ref = this.ref as $Ref<AsyncValue<Brightness>, Brightness>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<AsyncValue<Brightness>, Brightness>,
-        AsyncValue<Brightness>,
-        Object?,
-        Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<Brightness>, Brightness>,
+              AsyncValue<Brightness>,
+              Object?,
+              Object?
+            >;
     element.handleCreate(ref, build);
   }
 }

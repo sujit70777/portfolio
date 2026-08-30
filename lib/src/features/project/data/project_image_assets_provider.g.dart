@@ -19,22 +19,27 @@ final projectImageAssetsProvider = ProjectImageAssetsProvider._();
 /// app start (i.e. each hot restart / rebuild) so a screenshot dropped into
 /// a project's folder shows up without touching any code or translations.
 
-final class ProjectImageAssetsProvider extends $FunctionalProvider<
-        AsyncValue<List<String>>, List<String>, FutureOr<List<String>>>
+final class ProjectImageAssetsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<String>>,
+          List<String>,
+          FutureOr<List<String>>
+        >
     with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
   /// Every bundled asset path under assets/projectimage/, refreshed on each
   /// app start (i.e. each hot restart / rebuild) so a screenshot dropped into
   /// a project's folder shows up without touching any code or translations.
   ProjectImageAssetsProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'projectImageAssetsProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'projectImageAssetsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$projectImageAssetsHash();
@@ -42,8 +47,8 @@ final class ProjectImageAssetsProvider extends $FunctionalProvider<
   @$internal
   @override
   $FutureProviderElement<List<String>> $createElement(
-          $ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
   FutureOr<List<String>> create(Ref ref) {
@@ -67,22 +72,28 @@ final projectImagesProvider = ProjectImagesFamily._();
 /// entry is what the card uses as its thumbnail, so existing single-image
 /// callers stay unaffected — this just also exposes the rest for a gallery.
 
-final class ProjectImagesProvider extends $FunctionalProvider<
-        AsyncValue<List<String>>, List<String>, FutureOr<List<String>>>
+final class ProjectImagesProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<String>>,
+          List<String>,
+          FutureOr<List<String>>
+        >
     with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
   /// All bundled images inside a project's `assets/projectimage/<slug>/`
   /// folder, sorted alphabetically. Empty if the project has none. The first
   /// entry is what the card uses as its thumbnail, so existing single-image
   /// callers stay unaffected — this just also exposes the rest for a gallery.
-  ProjectImagesProvider._(
-      {required ProjectImagesFamily super.from, required String super.argument})
-      : super(
-          retry: null,
-          name: r'projectImagesProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+  ProjectImagesProvider._({
+    required ProjectImagesFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'projectImagesProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
   String debugGetCreateSourceHash() => _$projectImagesHash();
@@ -97,16 +108,13 @@ final class ProjectImagesProvider extends $FunctionalProvider<
   @$internal
   @override
   $FutureProviderElement<List<String>> $createElement(
-          $ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
   FutureOr<List<String>> create(Ref ref) {
     final argument = this.argument as String;
-    return projectImages(
-      ref,
-      argument,
-    );
+    return projectImages(ref, argument);
   }
 
   @override
@@ -130,22 +138,20 @@ String _$projectImagesHash() => r'93843d61bcc18a1bd973dd0389ed985f7e0884b6';
 final class ProjectImagesFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<List<String>>, String> {
   ProjectImagesFamily._()
-      : super(
-          retry: null,
-          name: r'projectImagesProvider',
-          dependencies: null,
-          $allTransitiveDependencies: null,
-          isAutoDispose: true,
-        );
+    : super(
+        retry: null,
+        name: r'projectImagesProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
 
   /// All bundled images inside a project's `assets/projectimage/<slug>/`
   /// folder, sorted alphabetically. Empty if the project has none. The first
   /// entry is what the card uses as its thumbnail, so existing single-image
   /// callers stay unaffected — this just also exposes the rest for a gallery.
 
-  ProjectImagesProvider call(
-    String projectName,
-  ) =>
+  ProjectImagesProvider call(String projectName) =>
       ProjectImagesProvider._(argument: projectName, from: this);
 
   @override

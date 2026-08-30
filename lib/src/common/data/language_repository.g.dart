@@ -12,20 +12,24 @@ part of 'language_repository.dart';
 @ProviderFor(languageRepository)
 final languageRepositoryProvider = LanguageRepositoryProvider._();
 
-final class LanguageRepositoryProvider extends $FunctionalProvider<
-    LanguageRepository,
-    LanguageRepository,
-    LanguageRepository> with $Provider<LanguageRepository> {
+final class LanguageRepositoryProvider
+    extends
+        $FunctionalProvider<
+          LanguageRepository,
+          LanguageRepository,
+          LanguageRepository
+        >
+    with $Provider<LanguageRepository> {
   LanguageRepositoryProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'languageRepositoryProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'languageRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$languageRepositoryHash();
@@ -33,8 +37,8 @@ final class LanguageRepositoryProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<LanguageRepository> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   LanguageRepository create(Ref ref) {

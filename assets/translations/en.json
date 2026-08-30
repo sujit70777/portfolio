@@ -1381,8 +1381,8 @@
         }
     ],
     "bottomBanner": {
-        "message": "Open source portfolio -",
-        "displayLink": "Fork it",
+        "message": "This site is a Flutter Web app —",
+        "displayLink": "read how it's built",
         "linkUrl": "https://github.com/sujit70777/portfolio#readme"
     },
     "portfolio": "Shekh Ehsanur Rahman",

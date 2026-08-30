@@ -12,20 +12,24 @@ part of 'experience_repository.dart';
 @ProviderFor(experienceRepository)
 final experienceRepositoryProvider = ExperienceRepositoryProvider._();
 
-final class ExperienceRepositoryProvider extends $FunctionalProvider<
-    ExperienceRepository,
-    ExperienceRepository,
-    ExperienceRepository> with $Provider<ExperienceRepository> {
+final class ExperienceRepositoryProvider
+    extends
+        $FunctionalProvider<
+          ExperienceRepository,
+          ExperienceRepository,
+          ExperienceRepository
+        >
+    with $Provider<ExperienceRepository> {
   ExperienceRepositoryProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'experienceRepositoryProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'experienceRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$experienceRepositoryHash();
@@ -33,8 +37,8 @@ final class ExperienceRepositoryProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<ExperienceRepository> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   ExperienceRepository create(Ref ref) {

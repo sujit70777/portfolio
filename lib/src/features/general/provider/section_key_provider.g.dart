@@ -12,21 +12,24 @@ part of 'section_key_provider.dart';
 @ProviderFor(homeSectionKey)
 final homeSectionKeyProvider = HomeSectionKeyProvider._();
 
-final class HomeSectionKeyProvider extends $FunctionalProvider<
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>>
+final class HomeSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
     with $Provider<GlobalKey<State<StatefulWidget>>> {
   HomeSectionKeyProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'homeSectionKeyProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'homeSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$homeSectionKeyHash();
@@ -34,8 +37,8 @@ final class HomeSectionKeyProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   GlobalKey<State<StatefulWidget>> create(Ref ref) {
@@ -46,8 +49,9 @@ final class HomeSectionKeyProvider extends $FunctionalProvider<
   Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride:
-          $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(value),
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
     );
   }
 }
@@ -57,21 +61,24 @@ String _$homeSectionKeyHash() => r'd56b3e47a2cc874ccbbd299ae7fb856a691e93f0';
 @ProviderFor(aboutSectionKey)
 final aboutSectionKeyProvider = AboutSectionKeyProvider._();
 
-final class AboutSectionKeyProvider extends $FunctionalProvider<
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>>
+final class AboutSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
     with $Provider<GlobalKey<State<StatefulWidget>>> {
   AboutSectionKeyProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'aboutSectionKeyProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'aboutSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$aboutSectionKeyHash();
@@ -79,8 +86,8 @@ final class AboutSectionKeyProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   GlobalKey<State<StatefulWidget>> create(Ref ref) {
@@ -91,8 +98,9 @@ final class AboutSectionKeyProvider extends $FunctionalProvider<
   Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride:
-          $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(value),
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
     );
   }
 }
@@ -102,21 +110,24 @@ String _$aboutSectionKeyHash() => r'e04467f6d05609fe04b0b415f990533d6a05d4ec';
 @ProviderFor(skillsSectionKey)
 final skillsSectionKeyProvider = SkillsSectionKeyProvider._();
 
-final class SkillsSectionKeyProvider extends $FunctionalProvider<
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>>
+final class SkillsSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
     with $Provider<GlobalKey<State<StatefulWidget>>> {
   SkillsSectionKeyProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'skillsSectionKeyProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'skillsSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$skillsSectionKeyHash();
@@ -124,8 +135,8 @@ final class SkillsSectionKeyProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   GlobalKey<State<StatefulWidget>> create(Ref ref) {
@@ -136,8 +147,9 @@ final class SkillsSectionKeyProvider extends $FunctionalProvider<
   Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride:
-          $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(value),
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
     );
   }
 }
@@ -147,21 +159,24 @@ String _$skillsSectionKeyHash() => r'b7dcf27e5f39b1132bbfa28ac940b1c0e64b0112';
 @ProviderFor(experienceSectionKey)
 final experienceSectionKeyProvider = ExperienceSectionKeyProvider._();
 
-final class ExperienceSectionKeyProvider extends $FunctionalProvider<
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>>
+final class ExperienceSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
     with $Provider<GlobalKey<State<StatefulWidget>>> {
   ExperienceSectionKeyProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'experienceSectionKeyProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'experienceSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$experienceSectionKeyHash();
@@ -169,8 +184,8 @@ final class ExperienceSectionKeyProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   GlobalKey<State<StatefulWidget>> create(Ref ref) {
@@ -181,8 +196,9 @@ final class ExperienceSectionKeyProvider extends $FunctionalProvider<
   Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride:
-          $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(value),
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
     );
   }
 }
@@ -193,21 +209,24 @@ String _$experienceSectionKeyHash() =>
 @ProviderFor(projectSectionKey)
 final projectSectionKeyProvider = ProjectSectionKeyProvider._();
 
-final class ProjectSectionKeyProvider extends $FunctionalProvider<
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>,
-        GlobalKey<State<StatefulWidget>>>
+final class ProjectSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
     with $Provider<GlobalKey<State<StatefulWidget>>> {
   ProjectSectionKeyProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'projectSectionKeyProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'projectSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$projectSectionKeyHash();
@@ -215,8 +234,8 @@ final class ProjectSectionKeyProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   GlobalKey<State<StatefulWidget>> create(Ref ref) {
@@ -227,8 +246,9 @@ final class ProjectSectionKeyProvider extends $FunctionalProvider<
   Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride:
-          $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(value),
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
     );
   }
 }

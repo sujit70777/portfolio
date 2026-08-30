@@ -12,20 +12,24 @@ part of 'personal_info_repository.dart';
 @ProviderFor(personalInfoRepository)
 final personalInfoRepositoryProvider = PersonalInfoRepositoryProvider._();
 
-final class PersonalInfoRepositoryProvider extends $FunctionalProvider<
-    PersonalInfoRepository,
-    PersonalInfoRepository,
-    PersonalInfoRepository> with $Provider<PersonalInfoRepository> {
+final class PersonalInfoRepositoryProvider
+    extends
+        $FunctionalProvider<
+          PersonalInfoRepository,
+          PersonalInfoRepository,
+          PersonalInfoRepository
+        >
+    with $Provider<PersonalInfoRepository> {
   PersonalInfoRepositoryProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'personalInfoRepositoryProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'personalInfoRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$personalInfoRepositoryHash();
@@ -33,8 +37,8 @@ final class PersonalInfoRepositoryProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<PersonalInfoRepository> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   PersonalInfoRepository create(Ref ref) {

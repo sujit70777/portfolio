@@ -7,11 +7,11 @@ part of 'icon.dart';
 // **************************************************************************
 
 _IconModel _$IconModelFromJson(Map<String, dynamic> json) => _IconModel(
-      assetName: json['assetName'] as String?,
-      codePoint: json['codePoint'] as String?,
-      fontFamily: json['fontFamily'] as String?,
-      color: json['color'] as String?,
-    );
+  assetName: json['assetName'] as String?,
+  codePoint: json['codePoint'] as String?,
+  fontFamily: json['fontFamily'] as String?,
+  color: json['color'] as String?,
+);
 
 Map<String, dynamic> _$IconModelToJson(_IconModel instance) =>
     <String, dynamic>{
