@@ -2,9 +2,9 @@
 
 # ehsanur.com
 
-**Senior Flutter Engineer — Portfolio**
+**Portfolio site of Ehsanur Rahman — Senior Flutter Engineer, 11 years in mobile**
 
-A Flutter Web site that ships apps the way it ships itself: data-driven, cache-safe, and built to survive a real production deploy.
+Built in Flutter Web. Data-driven, cache-safe, and deployed by a pipeline that survives a real production host.
 
 <img src="web/og-preview.png" alt="ehsanur.com preview" width="640" />
 
@@ -19,59 +19,58 @@ A Flutter Web site that ships apps the way it ships itself: data-driven, cache-s
 
 ---
 
-## Contents
+## Why Flutter for a website
 
-- [Why Flutter for a website](#why-flutter-for-a-website)
-- [Features](#features)
-- [Editing content](#editing-content)
-- [Notable engineering details](#notable-engineering-details)
-- [Project structure](#project-structure)
-- [Running locally](#running-locally)
-- [Deployment](#deployment)
-- [Credits](#credits)
-- [License](#license)
-- [About me](#about-me)
+Most portfolio sites are React or static HTML. This one is Flutter Web on purpose: I build Flutter for a living, so the site is itself a working sample of the widget composition, theming and animation patterns I use in production apps.
+
+The trade-offs were deliberate. A Flutter Web bundle is heavier than static HTML, and Flutter doesn't emit crawlable markup, so SEO needs explicit handling. For a site whose audience is technical — hiring managers, engineers, clients — both were worth paying.
 
 ---
 
-## Why Flutter for a website
+## What's interesting in here
 
-Most portfolio sites are React or plain HTML. I built this in Flutter Web deliberately — I'm a Flutter engineer, so the site itself is a working sample of what I do. It also let me reuse the same widget composition, theming and animation patterns I use in production mobile apps.
+Everything below exists because it broke in practice, not because it looked good in a design doc.
 
-Trade-offs I accepted: a heavier initial payload than a static site, and SEO that needs explicit handling (see below). Both were worth it for a site whose audience is technical.
+**The resume PDF can't be served stale.** The deploy workflow stamps a content hash onto the resume's URL on every build. A re-uploaded resume is never cached by a browser, an ISP proxy, or the host itself — and no manual purge is needed.
+
+**The service worker self-destructs.** Instead of caching the app for offline use — and stranding returning visitors on a stale build — it unregisters on activate and forces a clean reload.
+
+**Static assets are pre-compressed in CI, not at request time.** The shared host's on-the-fly compression is slow and capped well below Brotli's ratio, so `.br` and `.gz` siblings are built once and served through an `.htaccess` rewrite.
+
+**Icons survive font tree-shaking.** FontAwesome glyphs referenced only from JSON content arrive as runtime strings, not compile-time `const IconData`, so Flutter's icon tree-shaker can't see them and strips them from the build. The codepoint whitelist in `lib/src/common/widgets/icon.dart` keeps them.
 
 ---
 
 ## Features
 
-- **Fully data-driven** — all content lives in a single JSON file; no code changes needed to add a project or update experience
-- **Multi-storefront links** — a project shipped to both the App Store and Google Play shows both, auto-labelled and iconed from a `platform` tag, with a small cross-platform badge on its card
-- **Responsive** — desktop, tablet and mobile layouts
-- **Light/dark themes**
-- **SEO-aware** — meta tags, Open Graph and Twitter cards rendered in `web/index.html`, since Flutter Web doesn't emit crawlable markup by default
+- **Fully data-driven** — every piece of content lives in one JSON file; adding a project or updating experience takes no code changes
+- **Multi-storefront links** — a project shipped to both stores renders both buttons, labelled and iconed from its `platform` tag, plus a cross-platform badge on the card
+- **Responsive** — separate desktop, tablet and mobile layouts
+- **Light and dark themes**
+- **SEO-aware** — meta tags, Open Graph and Twitter cards rendered directly in `web/index.html`
 - **Multi-platform** — the same codebase builds for web, Android, iOS, macOS, Windows and Linux
-- **Automated deploy** — push to `main` builds, pre-compresses, and ships to production
+- **Automated deploy** — a push to `main` builds, cache-busts, pre-compresses and ships
 
 ---
 
 ## Editing content
 
-Everything visible on the site comes from one file:
+Everything visible on the site comes from a single file:
 
 ```
 assets/translations/en.json
 ```
 
-It contains the profile summary, skills, experience, projects and contact links.
+Profile summary, skills, experience, projects and contact links all live there.
 
 > [!IMPORTANT]
-> Editing this file alone does **nothing** — it's compiled into `lib/src/localization/generated/*.g.dart` at build time via `easy_localization`, and that generated copy is what the app actually reads. After every edit, regenerate before running or committing:
+> Editing that file alone does **nothing**. It's compiled into `lib/src/localization/generated/*.g.dart` at build time by `easy_localization`, and the generated copy is what the app actually reads. Regenerate after every edit:
 > ```bash
 > make localization
 > ```
-> The deploy workflow also runs this automatically, so a push is always safe even if you forget — but `flutter run` / `flutter build` locally will silently show stale content until you do.
+> CI runs this too, so a push is always safe — but a local `flutter run` or `flutter build` will silently show stale content until you do.
 
-Adding a project looks like this:
+A project entry:
 
 ```json
 {
@@ -85,7 +84,7 @@ Adding a project looks like this:
 }
 ```
 
-Shipped on more than one store? Add `links` — each entry's `platform` (`ios`, `android`, `web`, `github` or `pubdev`) drives its button's label and icon in the project modal, and a project with both `ios` and `android` gets a small platform badge on its card:
+Shipped to more than one store? Add `links`. Each entry's `platform` — `ios`, `android`, `web`, `github` or `pubdev` — drives that button's label and icon in the project modal, and a project with both `ios` and `android` picks up a platform badge on its card:
 
 ```json
 {
@@ -100,17 +99,6 @@ Shipped on more than one store? Add `links` — each entry's `platform` (`ios`, 
 
 ---
 
-## Notable engineering details
-
-A few things in here exist because they broke in practice, not because they looked good in a design doc:
-
-- **Resume PDF is cache-proof.** The deploy workflow stamps a content hash onto the resume's URL on every build, so a re-uploaded resume is never served stale by a browser, an ISP proxy, or the host's own cache — no purge required.
-- **The service worker self-destructs.** Rather than caching the app for offline use (and risking returning visitors getting stuck on a stale build), it unregisters itself on activate and forces a clean reload.
-- **Static assets are pre-compressed in CI**, not at request time — the shared host's on-the-fly compression is slow and capped well below Brotli's ratio, so `.br`/`.gz` siblings are built once and served via an `.htaccess` rewrite.
-- **Icons survive font tree-shaking.** FontAwesome glyphs referenced only from JSON content (a runtime string, not a compile-time `const IconData`) are invisible to Flutter's icon tree-shaker unless explicitly whitelisted — see the codepoint map in `lib/src/common/widgets/icon.dart`.
-
----
-
 ## Project structure
 
 ```
@@ -120,10 +108,10 @@ assets/
   icons/                Tech and platform icons
   images/               Project screenshots
 web/
-  assets/documents/     Resume PDF (served as a static file, not a bundled asset —
-                         see the comment in pubspec.yaml for why)
+  assets/documents/     Resume PDF (a static file, not a bundled asset —
+                        see the note in pubspec.yaml)
   index.html            Web entry point, meta tags, favicons
-  .htaccess             Cache-control, compression and MIME rules for the host
+  .htaccess             Cache-control, compression and MIME rules
 .github/workflows/      Build and deploy pipeline
 test/                   Widget tests
 ```
@@ -132,51 +120,45 @@ test/                   Widget tests
 
 ## Running locally
 
-Requires the Flutter SDK (stable channel).
+Requires the Flutter SDK on the stable channel.
 
 ```bash
 git clone https://github.com/sujit70777/portfolio.git
 cd portfolio
 
 flutter pub get
-make localization   # compiles assets/translations/en.json into generated Dart
+make localization       # compiles assets/translations/en.json into Dart
 flutter run -d chrome
 ```
 
-To build for production:
+Production build:
 
 ```bash
-flutter build web --release
+flutter build web --release   # output lands in build/web/
 ```
-
-Output lands in `build/web/`.
 
 ---
 
 ## Deployment
 
-Pushing to `main` triggers a GitHub Actions workflow that generates localization, builds the web bundle, cache-busts the resume PDF, pre-compresses static assets, and deploys to a self-hosted Linux server over rsync. Configuration lives in `.github/workflows/deploy.yml`.
+A push to `main` triggers a GitHub Actions workflow that generates localization, builds the web bundle, cache-busts the resume PDF, pre-compresses static assets, and rsyncs the result to a self-hosted Linux server. The pipeline is in `.github/workflows/deploy.yml`.
 
 ---
 
-## Credits
+## Credits and license
 
-Built on the open-source [AladdineDev/portfolio](https://github.com/AladdineDev/portfolio) template, substantially restructured — new information architecture, redesigned sections, custom theming, and rewritten content model.
+Built on the open-source [AladdineDev/portfolio](https://github.com/AladdineDev/portfolio) template and substantially restructured — new information architecture, redesigned sections, custom theming, rewritten content model.
 
----
-
-## License
-
-MIT — see [LICENSE](LICENSE). Feel free to fork it for your own portfolio; a link back is appreciated but not required.
+MIT licensed, see [LICENSE](LICENSE). Fork it for your own portfolio; a link back is appreciated, not required.
 
 ---
 
 ## About me
 
-Senior Flutter engineer, 11 years in mobile. I specialise in offline-first architecture and conflict-free data synchronisation — apps that keep working when the network doesn't.
+Senior Flutter engineer, 11 years in mobile. I specialise in offline-first architecture and conflict-free data synchronisation — apps that keep working when the network doesn't. Most recently I've led mobile teams as sole developer end to end: architecture, implementation, release and store delivery.
 
-50+ apps shipped · 1M+ users · [9 packages on pub.dev](https://pub.dev/publishers/ehsanur.com/packages)
+**50+ apps shipped · 1M+ users · [9 packages on pub.dev](https://pub.dev/publishers/ehsanur.com/packages)**
 
-Open to remote Senior/Lead Flutter roles with US, UK and EU teams.
+Available for remote Senior/Lead Flutter roles, full-time or contract, with US, UK and EU teams.
 
 [ehsanur.com](https://ehsanur.com) · [LinkedIn](https://www.linkedin.com/in/sujit70777) · [mail@ehsanur.com](mailto:mail@ehsanur.com)
