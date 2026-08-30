@@ -94,7 +94,7 @@
         {
             "languageCode": "en",
             "language": "English",
-            "url": "assets/assets/documents/resume.pdf"
+            "url": "assets/documents/resume.pdf"
         }
     ],
     "aboutDescription": "I build Flutter apps that keep working when the network doesn't.\n11 years in mobile — 50+ shipped apps, 1M+ users, 4.7+ average store rating. My specialty is offline-first architecture and conflict-free data synchronisation: the part that quietly breaks most mobile apps in the field. I've built and open-sourced a CRDT-based sync library for Flutter, and shipped production apps holding a 4.7 rating at 100,000+ daily active users.\nRecent work includes an enterprise reimbursement platform for a Brazilian client — AI invoice capture, SEFAZ tax-agency integration, instant Pix payout — and a multi-service super app for a US client in Houston.\nI currently work shifted hours to overlap with a Brazil-based team, so adapting to US or UK business hours is routine rather than a promise. Available as an independent contractor.",
@@ -311,7 +311,7 @@
         {
             "name": "Farenow",
             "description": "All-in-one super app for a US-based client (Houston, TX), built while at Devxhub: ride-hailing, on-demand service bookings, food and grocery delivery, virtual consultations, and a real estate/marketplace listings module in a single app.",
-            "role": "Sole Flutter developer at Devxhub — architected the app end to end across ride-hailing, delivery, bookings, and marketplace modules.",
+            "role": "Flutter lead at Devxhub — architected the app end to end across ride-hailing, delivery, bookings, and marketplace modules.",
             "url": "https://play.google.com/store/apps/details?id=com.app.farenow",
             "icon": {
                 "codePoint": "0xefc5",
@@ -319,6 +319,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": true,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -365,8 +366,7 @@
                         "assetName": "assets/icons/other/firebase.svg"
                     }
                 }
-            ],
-            "featured": true
+            ]
         },
         {
             "name": "Peace of Mind (POM)",
@@ -379,6 +379,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": true,
             "technologies": [
                 {
                     "name": "Swift",
@@ -395,28 +396,15 @@
                     }
                 },
                 {
-                    "name": "SwiftUI",
-                    "icon": {
-                        "codePoint": "0xef21",
-                        "fontFamily": "FontAwesome"
-                    }
+                    "name": "SwiftUI"
                 },
                 {
-                    "name": "StoreKit",
-                    "icon": {
-                        "codePoint": "0xef21",
-                        "fontFamily": "FontAwesome"
-                    }
+                    "name": "StoreKit"
                 },
                 {
-                    "name": "Apple Pay",
-                    "icon": {
-                        "codePoint": "0xef22",
-                        "fontFamily": "FontAwesome"
-                    }
+                    "name": "Apple Pay"
                 }
-            ],
-            "featured": true
+            ]
         },
         {
             "name": "flutter_crdt_sync_kit",
@@ -429,6 +417,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": true,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -451,8 +440,7 @@
                 {
                     "name": "Open Source"
                 }
-            ],
-            "featured": true
+            ]
         },
         {
             "name": "Muslim Times Pro",
@@ -465,6 +453,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": true,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -504,8 +493,7 @@
                         "assetName": "assets/icons/other/firebase.svg"
                     }
                 }
-            ],
-            "featured": true
+            ]
         },
         {
             "name": "ProofSell",
@@ -518,6 +506,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": true,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -551,8 +540,7 @@
                         "assetName": "assets/icons/other/firebase.svg"
                     }
                 }
-            ],
-            "featured": true
+            ]
         },
         {
             "name": "Forward SMS",
@@ -565,6 +553,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": true,
             "technologies": [
                 {
                     "name": "Swift",
@@ -581,17 +570,12 @@
                     }
                 },
                 {
-                    "name": "StoreKit",
-                    "icon": {
-                        "codePoint": "0xef21",
-                        "fontFamily": "FontAwesome"
-                    }
+                    "name": "StoreKit"
                 },
                 {
                     "name": "Automation"
                 }
-            ],
-            "featured": true
+            ]
         },
         {
             "name": "flutter_a11y_lens",
@@ -604,6 +588,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": true,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -623,8 +608,7 @@
                 {
                     "name": "Open Source"
                 }
-            ],
-            "featured": true
+            ]
         },
         {
             "name": "OMR Scanner",
@@ -637,6 +621,7 @@
                 "color": "0xffffffff"
             },
             "status": "inDevelopment",
+            "featured": true,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -659,8 +644,7 @@
                 {
                     "name": "Open Source"
                 }
-            ],
-            "featured": true
+            ]
         },
         {
             "name": "Tanto",
@@ -672,6 +656,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -737,6 +722,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -769,6 +755,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -801,6 +788,7 @@
                 "color": "0xffffffff"
             },
             "status": "inDevelopment",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -833,6 +821,7 @@
                 "color": "0xffffffff"
             },
             "status": "inDevelopment",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -847,18 +836,10 @@
                     }
                 },
                 {
-                    "name": "ARKit",
-                    "icon": {
-                        "codePoint": "0xee48",
-                        "fontFamily": "FontAwesome"
-                    }
+                    "name": "ARKit"
                 },
                 {
-                    "name": "ARCore",
-                    "icon": {
-                        "codePoint": "0xee48",
-                        "fontFamily": "FontAwesome"
-                    }
+                    "name": "ARCore"
                 }
             ]
         },
@@ -873,6 +854,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -919,6 +901,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -959,6 +942,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -1005,6 +989,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -1058,6 +1043,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -1087,6 +1073,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -1116,6 +1103,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -1145,6 +1133,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -1174,6 +1163,7 @@
                 "color": "0xffffffff"
             },
             "status": "shipped",
+            "featured": false,
             "technologies": [
                 {
                     "name": "Flutter",
@@ -1189,34 +1179,6 @@
                 },
                 {
                     "name": "Open Source"
-                }
-            ]
-        },
-        {
-            "name": "Fitness Tracker (SENSEit)",
-            "description": "GitHub project. Android sensor-tracking app using a foreground service to continuously log device sensor data, with battery-optimization handling for reliable background tracking.",
-            "role": "Sole developer — personal project.",
-            "url": "https://github.com/sujit70777/Fitness-Tracker",
-            "icon": {
-                "codePoint": "0xefb7",
-                "fontFamily": "FontAwesome",
-                "color": "0xffffffff"
-            },
-            "status": "shipped",
-            "technologies": [
-                {
-                    "name": "Android",
-                    "icon": {
-                        "codePoint": "0xef1c",
-                        "fontFamily": "FontAwesome"
-                    }
-                },
-                {
-                    "name": "Java",
-                    "icon": {
-                        "codePoint": "0xefe7",
-                        "fontFamily": "FontAwesome"
-                    }
                 }
             ]
         }
@@ -1251,6 +1213,6 @@
     "sectionEyebrowAbout": "About",
     "sectionEyebrowExperience": "Experience",
     "sectionEyebrowSkills": "Skills",
-    "sectionEyebrowProjects": "Shipped Work",
-    "projectsMoreLabel": "More shipped work"
+    "sectionEyebrowProjects": "Projects",
+    "projectsMoreLabel": "More projects"
 }
