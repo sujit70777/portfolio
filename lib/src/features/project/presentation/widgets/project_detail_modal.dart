@@ -91,7 +91,7 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
       if (height > 0) {
         setState(() => _aspectRatios[index] = width / height);
       }
-    }, onError: (_, __) => stream.removeListener(listener));
+    }, onError: (_, _) => stream.removeListener(listener));
     stream.addListener(listener);
   }
 
@@ -348,7 +348,7 @@ class _Gallery extends StatelessWidget {
                       images[currentIndex],
                       key: ValueKey(currentIndex),
                       fit: BoxFit.contain,
-                      errorBuilder: (_, __, ___) => placeholder,
+                      errorBuilder: (_, _, _) => placeholder,
                       frameBuilder:
                           (context, child, frame, wasSynchronouslyLoaded) {
                         if (wasSynchronouslyLoaded) return child;

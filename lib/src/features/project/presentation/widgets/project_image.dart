@@ -219,7 +219,7 @@ class _ProjectImageState extends ConsumerState<ProjectImage> {
         width: cacheWidth,
         height: cacheHeight,
       ),
-      imageErrorBuilder: (_, __, ___) => const Placeholder(),
+      imageErrorBuilder: (_, _, _) => const Placeholder(),
       fit: BoxFit.cover,
       placeholderFit: BoxFit.cover,
     );
