@@ -49,6 +49,13 @@ flutter:
 
   uses-material-design: true
 
+  # resume.pdf is deliberately NOT declared here — it lives in
+  # web/assets/documents/ instead. A pubspec asset always gets served one
+  # path segment deeper than its declared path (flutter build web nests
+  # everything under an extra "assets/"), which the resume's URL — opened
+  # directly via url_launcher, not resolved through Flutter's AssetBundle —
+  # has no way to account for. Files under web/ are copied to the build
+  # root verbatim, so this is the only way to get a predictable URL for it.
   assets:
     - assets/fonts/
     - assets/icons/flags/
