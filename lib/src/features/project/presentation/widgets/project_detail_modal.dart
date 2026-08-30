@@ -3,12 +3,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/domain/link.dart';
+import 'package:portfolio/src/common/widgets/icon.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/common/widgets/technology_wrap_chips.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/link_platform_display.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
@@ -205,7 +208,7 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
             ),
           ),
           _ActionBar(
-              url: project.url, onClose: () => Navigator.of(context).pop()),
+              project: project, onClose: () => Navigator.of(context).pop()),
         ],
       ),
     );
@@ -511,10 +514,25 @@ class _NavButton extends StatelessWidget {
 }
 
 class _ActionBar extends StatelessWidget {
-  const _ActionBar({required this.url, required this.onClose});
+  const _ActionBar({required this.project, required this.onClose});
 
-  final String? url;
+  final Project project;
   final VoidCallback onClose;
+
+  // `links` covers a project shipped to more than one storefront (App
+  // Store + Google Play); `url` is the single-link case every other
+  // project uses, with no `platform` tag, so its button falls back to
+  // sniffing the label from the URL's host. An entry with `url: null` is
+  // a storefront that's known but not yet supplied — dropped here so it
+  // never renders as a dead button.
+  List<Link> get _links {
+    final links = project.links;
+    if (links != null && links.isNotEmpty) {
+      return links.where((l) => l.url != null).toList();
+    }
+    final url = project.url;
+    return url == null ? const [] : [Link(url: url)];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -526,8 +544,11 @@ class _ActionBar extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+        child: Wrap(
+          alignment: WrapAlignment.end,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 12,
+          runSpacing: 8,
           children: [
             OutlinedButton(
               style: ButtonStyle(
@@ -540,22 +561,35 @@ class _ActionBar extends StatelessWidget {
               onPressed: onClose,
               child: const Text('Close'),
             ),
-            if (url != null) ...[
-              gapW12,
-              FilledButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      WidgetStatePropertyAll(theme.colorScheme.tertiary),
-                  foregroundColor:
-                      WidgetStatePropertyAll(theme.colorScheme.secondary),
-                ),
-                onPressed: () => _visit(context, url!),
-                child: Text(_ctaLabel(url!)),
-              ),
-            ],
+            for (final link in _links) _storeButton(theme, context, link),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _storeButton(ThemeData theme, BuildContext context, Link link) {
+    final url = link.url!;
+    final label = link.platform != null
+        ? linkPlatformLabel(link.platform)
+        : _ctaLabel(url);
+    final style = ButtonStyle(
+      backgroundColor: WidgetStatePropertyAll(theme.colorScheme.tertiary),
+      foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
+    );
+    final icon = linkPlatformIcon(link.platform);
+    if (icon == null) {
+      return FilledButton(
+        style: style,
+        onPressed: () => _visit(context, url),
+        child: Text(label),
+      );
+    }
+    return FilledButton.icon(
+      style: style,
+      onPressed: () => _visit(context, url),
+      icon: MyIcon(icon: icon, size: 16),
+      label: Text(label),
     );
   }
 

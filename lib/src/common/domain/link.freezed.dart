@@ -15,7 +15,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Link {
   String? get url;
-  String? get display;
+  String? get label;
+  LinkPlatform? get platform;
 
   /// Create a copy of Link
   /// with the given fields replaced by the non-null parameter values.
@@ -33,16 +34,18 @@ mixin _$Link {
         (other.runtimeType == runtimeType &&
             other is Link &&
             (identical(other.url, url) || other.url == url) &&
-            (identical(other.display, display) || other.display == display));
+            (identical(other.label, label) || other.label == label) &&
+            (identical(other.platform, platform) ||
+                other.platform == platform));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, url, display);
+  int get hashCode => Object.hash(runtimeType, url, label, platform);
 
   @override
   String toString() {
-    return 'Link(url: $url, display: $display)';
+    return 'Link(url: $url, label: $label, platform: $platform)';
   }
 }
 
@@ -51,7 +54,7 @@ abstract mixin class $LinkCopyWith<$Res> {
   factory $LinkCopyWith(Link value, $Res Function(Link) _then) =
       _$LinkCopyWithImpl;
   @useResult
-  $Res call({String? url, String? display});
+  $Res call({String? url, String? label, LinkPlatform? platform});
 }
 
 /// @nodoc
@@ -67,17 +70,22 @@ class _$LinkCopyWithImpl<$Res> implements $LinkCopyWith<$Res> {
   @override
   $Res call({
     Object? url = freezed,
-    Object? display = freezed,
+    Object? label = freezed,
+    Object? platform = freezed,
   }) {
     return _then(_self.copyWith(
       url: freezed == url
           ? _self.url
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
-      display: freezed == display
-          ? _self.display
-          : display // ignore: cast_nullable_to_non_nullable
+      label: freezed == label
+          ? _self.label
+          : label // ignore: cast_nullable_to_non_nullable
               as String?,
+      platform: freezed == platform
+          ? _self.platform
+          : platform // ignore: cast_nullable_to_non_nullable
+              as LinkPlatform?,
     ));
   }
 }
@@ -175,13 +183,14 @@ extension LinkPatterns on Link {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String? url, String? display)? $default, {
+    TResult Function(String? url, String? label, LinkPlatform? platform)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _Link() when $default != null:
-        return $default(_that.url, _that.display);
+        return $default(_that.url, _that.label, _that.platform);
       case _:
         return orElse();
     }
@@ -202,12 +211,13 @@ extension LinkPatterns on Link {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String? url, String? display) $default,
+    TResult Function(String? url, String? label, LinkPlatform? platform)
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Link():
-        return $default(_that.url, _that.display);
+        return $default(_that.url, _that.label, _that.platform);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -227,12 +237,13 @@ extension LinkPatterns on Link {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String? url, String? display)? $default,
+    TResult? Function(String? url, String? label, LinkPlatform? platform)?
+        $default,
   ) {
     final _that = this;
     switch (_that) {
       case _Link() when $default != null:
-        return $default(_that.url, _that.display);
+        return $default(_that.url, _that.label, _that.platform);
       case _:
         return null;
     }
@@ -242,13 +253,15 @@ extension LinkPatterns on Link {
 /// @nodoc
 @JsonSerializable()
 class _Link implements Link {
-  const _Link({this.url, this.display});
+  const _Link({this.url, this.label, this.platform});
   factory _Link.fromJson(Map<String, dynamic> json) => _$LinkFromJson(json);
 
   @override
   final String? url;
   @override
-  final String? display;
+  final String? label;
+  @override
+  final LinkPlatform? platform;
 
   /// Create a copy of Link
   /// with the given fields replaced by the non-null parameter values.
@@ -271,16 +284,18 @@ class _Link implements Link {
         (other.runtimeType == runtimeType &&
             other is _Link &&
             (identical(other.url, url) || other.url == url) &&
-            (identical(other.display, display) || other.display == display));
+            (identical(other.label, label) || other.label == label) &&
+            (identical(other.platform, platform) ||
+                other.platform == platform));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, url, display);
+  int get hashCode => Object.hash(runtimeType, url, label, platform);
 
   @override
   String toString() {
-    return 'Link(url: $url, display: $display)';
+    return 'Link(url: $url, label: $label, platform: $platform)';
   }
 }
 
@@ -290,7 +305,7 @@ abstract mixin class _$LinkCopyWith<$Res> implements $LinkCopyWith<$Res> {
       __$LinkCopyWithImpl;
   @override
   @useResult
-  $Res call({String? url, String? display});
+  $Res call({String? url, String? label, LinkPlatform? platform});
 }
 
 /// @nodoc
@@ -306,17 +321,22 @@ class __$LinkCopyWithImpl<$Res> implements _$LinkCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   $Res call({
     Object? url = freezed,
-    Object? display = freezed,
+    Object? label = freezed,
+    Object? platform = freezed,
   }) {
     return _then(_Link(
       url: freezed == url
           ? _self.url
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
-      display: freezed == display
-          ? _self.display
-          : display // ignore: cast_nullable_to_non_nullable
+      label: freezed == label
+          ? _self.label
+          : label // ignore: cast_nullable_to_non_nullable
               as String?,
+      platform: freezed == platform
+          ? _self.platform
+          : platform // ignore: cast_nullable_to_non_nullable
+              as LinkPlatform?,
     ));
   }
 }

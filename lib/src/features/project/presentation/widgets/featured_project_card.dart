@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/domain/link.dart';
+import 'package:portfolio/src/common/widgets/icon.dart';
 import 'package:portfolio/src/common/widgets/technology_chip.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/link_platform_display.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_detail_modal.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
@@ -143,6 +146,12 @@ class _FeaturedProjectCardState extends ConsumerState<FeaturedProjectCard> {
                   child: _ExternalLinkButton(
                       onPressed: () => _openDirectly(context)),
                 ),
+              if (_hasBothMobileStores(project))
+                const Positioned(
+                  top: 8,
+                  left: 8,
+                  child: _PlatformBadges(),
+                ),
             ],
           ),
         ),
@@ -160,6 +169,48 @@ class _FeaturedProjectCardState extends ConsumerState<FeaturedProjectCard> {
         ScaffoldMessengerHelper.showLaunchUrlError(context, url: url);
       }
     }
+  }
+}
+
+/// True when the project links to both an App Store and a Google Play
+/// listing — cross-platform reach is the thing worth signalling here, not
+/// the mere presence of multiple links.
+bool _hasBothMobileStores(Project project) {
+  final platforms = project.links
+          ?.where((l) => l.url != null)
+          .map((l) => l.platform)
+          .toSet() ??
+      const <LinkPlatform?>{};
+  return platforms.contains(LinkPlatform.ios) &&
+      platforms.contains(LinkPlatform.android);
+}
+
+class _PlatformBadges extends StatelessWidget {
+  const _PlatformBadges();
+
+  @override
+  Widget build(BuildContext context) {
+    final iosIcon = linkPlatformIcon(LinkPlatform.ios)
+        ?.copyWith(color: '0xffffffff');
+    final androidIcon = linkPlatformIcon(LinkPlatform.android)
+        ?.copyWith(color: '0xffffffff');
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.black.withAlpha(130),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            MyIcon(icon: iosIcon, size: 13),
+            gapW4,
+            MyIcon(icon: androidIcon, size: 13),
+          ],
+        ),
+      ),
+    );
   }
 }
 

@@ -328,7 +328,7 @@ class CodegenLoader extends AssetLoader{
       "name": "Farenow",
       "description": "All-in-one super app for a US-based client (Houston, TX), built while at Devxhub: ride-hailing, on-demand service bookings, food and grocery delivery, virtual consultations, and a real estate/marketplace listings module in a single app.",
       "role": "Team lead and sole developer — owned architecture, implementation, release and delivery end to end across ride-hailing, delivery, bookings, and marketplace modules.",
-      "url": "https://play.google.com/store/apps/details?id=com.app.farenow",
+      "url": "https://apps.apple.com/us/app/farenow/id1638701755",
       "icon": {
         "codePoint": "0xefc5",
         "fontFamily": "FontAwesome",
@@ -382,6 +382,18 @@ class CodegenLoader extends AssetLoader{
             "assetName": "assets/icons/other/firebase.svg"
           }
         }
+      ],
+      "links": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/farenow/id1638701755",
+          "platform": "ios"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.app.farenow",
+          "platform": "android"
+        }
       ]
     },
     {
@@ -429,6 +441,18 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Apple Pay"
         }
+      ],
+      "links": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
+          "platform": "ios"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.peaceofmind.app",
+          "platform": "android"
+        }
       ]
     },
     {
@@ -464,6 +488,13 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "Open Source"
+        }
+      ],
+      "links": [
+        {
+          "label": "View on pub.dev",
+          "url": "https://pub.dev/packages/flutter_crdt_sync_kit",
+          "platform": "pubdev"
         }
       ]
     },
@@ -518,6 +549,18 @@ class CodegenLoader extends AssetLoader{
             "assetName": "assets/icons/other/firebase.svg"
           }
         }
+      ],
+      "links": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
+          "platform": "ios"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.devxhub.muslimtimespro",
+          "platform": "android"
+        }
       ]
     },
     {
@@ -565,6 +608,18 @@ class CodegenLoader extends AssetLoader{
             "assetName": "assets/icons/other/firebase.svg"
           }
         }
+      ],
+      "links": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/proofsell/id6755882846",
+          "platform": "ios"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.proofsell.customer",
+          "platform": "android"
+        }
       ]
     },
     {
@@ -600,6 +655,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Automation"
         }
+      ],
+      "links": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/forward-sms-sms-forwarder/id6759511643",
+          "platform": "ios"
+        }
       ]
     },
     {
@@ -632,6 +694,13 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "Open Source"
+        }
+      ],
+      "links": [
+        {
+          "label": "View on pub.dev",
+          "url": "https://pub.dev/packages/flutter_a11y_lens",
+          "platform": "pubdev"
         }
       ]
     },
@@ -668,6 +737,13 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "Open Source"
+        }
+      ],
+      "links": [
+        {
+          "label": "View on GitHub",
+          "url": "https://github.com/sujit70777/omr_scanner_flutter",
+          "platform": "github"
         }
       ]
     },
@@ -734,7 +810,8 @@ class CodegenLoader extends AssetLoader{
             "assetName": "assets/icons/other/firebase.svg"
           }
         }
-      ]
+      ],
+      "links": []
     },
     {
       "name": "flutter_liquid_glass_widgets",
@@ -766,6 +843,13 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "Open Source"
+        }
+      ],
+      "links": [
+        {
+          "label": "View on pub.dev",
+          "url": "https://pub.dev/packages/flutter_liquid_glass_widgets",
+          "platform": "pubdev"
         }
       ]
     },
@@ -800,6 +884,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Open Source"
         }
+      ],
+      "links": [
+        {
+          "label": "View on pub.dev",
+          "url": "https://pub.dev/packages/local_voice",
+          "platform": "pubdev"
+        }
       ]
     },
     {
@@ -833,6 +924,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Open Source"
         }
+      ],
+      "links": [
+        {
+          "label": "View on GitHub",
+          "url": "https://github.com/sujit70777/Jatri---Bangladesh-Transit-App",
+          "platform": "github"
+        }
       ]
     },
     {
@@ -865,6 +963,13 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "ARCore"
+        }
+      ],
+      "links": [
+        {
+          "label": "View on GitHub",
+          "url": "https://github.com/sujit70777/ar_measure",
+          "platform": "github"
         }
       ]
     },
@@ -913,6 +1018,18 @@ class CodegenLoader extends AssetLoader{
             "assetName": "assets/icons/other/firebase.svg"
           }
         }
+      ],
+      "links": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/sk-mobile-school/id6475169754",
+          "platform": "ios"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.devxhub.skmobileschool",
+          "platform": "android"
+        }
       ]
     },
     {
@@ -953,6 +1070,18 @@ class CodegenLoader extends AssetLoader{
             "codePoint": "0xef21",
             "fontFamily": "FontAwesome"
           }
+        }
+      ],
+      "links": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/notivio-notes-task-planner/id6748751923",
+          "platform": "ios"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.devxhub.notivio",
+          "platform": "android"
         }
       ]
     },
@@ -1000,6 +1129,13 @@ class CodegenLoader extends AssetLoader{
           "icon": {
             "assetName": "assets/icons/other/firebase.svg"
           }
+        }
+      ],
+      "links": [
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.esim247.app",
+          "platform": "android"
         }
       ]
     },
@@ -1055,6 +1191,13 @@ class CodegenLoader extends AssetLoader{
             "fontFamily": "FontAwesome"
           }
         }
+      ],
+      "links": [
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/dev?id=6504002943007145339",
+          "platform": "android"
+        }
       ]
     },
     {
@@ -1084,6 +1227,13 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "Open Source"
+        }
+      ],
+      "links": [
+        {
+          "label": "View on pub.dev",
+          "url": "https://pub.dev/packages/flutter_fabric",
+          "platform": "pubdev"
         }
       ]
     },
@@ -1115,6 +1265,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Open Source"
         }
+      ],
+      "links": [
+        {
+          "label": "View on pub.dev",
+          "url": "https://pub.dev/packages/flutter_scanner_devxhub",
+          "platform": "pubdev"
+        }
       ]
     },
     {
@@ -1144,6 +1301,13 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "Open Source"
+        }
+      ],
+      "links": [
+        {
+          "label": "View on pub.dev",
+          "url": "https://pub.dev/packages/flutter_zoom_image",
+          "platform": "pubdev"
         }
       ]
     },
@@ -1175,6 +1339,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Open Source"
         }
+      ],
+      "links": [
+        {
+          "label": "View on pub.dev",
+          "url": "https://pub.dev/packages/flutter_prayer_time_calculator",
+          "platform": "pubdev"
+        }
       ]
     },
     {
@@ -1204,6 +1375,13 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "Open Source"
+        }
+      ],
+      "links": [
+        {
+          "label": "View on pub.dev",
+          "url": "https://pub.dev/packages/flutter_scroll_date_picker",
+          "platform": "pubdev"
         }
       ]
     }

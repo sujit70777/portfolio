@@ -18,7 +18,7 @@ class WrapLinks extends ConsumerWidget {
       runSpacing: 4,
       children: links.where((link) => link.url != null).map((link) {
         final projectLinkUrl = link.url;
-        final projectLinkDisplay = link.display;
+        final projectLinkDisplay = link.label;
         if (projectLinkUrl == null) return const SizedBox.shrink();
         return MyLink(
           url: projectLinkUrl,
