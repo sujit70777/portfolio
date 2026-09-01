@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Toptal Stage 1 — One Page Cheat Sheet</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+@page {
+    size: A4 landscape;
+    margin: 7mm;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #000000;
+    color: #eaffff;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+.sheet {
+    width: 297mm;
+    min-height: 210mm;
+    margin: 0px auto;
+    padding: 3mm;
+    background: #050505;
+    box-shadow:
+        0 0 25px rgba(0, 255, 255, 0.15),
+        0 0 60px rgba(0, 255, 255, 0.08);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 2px solid #00ffff;
+
+    padding-bottom: 7px;
+    margin-bottom: 8px;
+
+    box-shadow: 0 2px 12px rgba(0, 255, 255, 0.15);
+}
+
+.title {
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 1;
+
+    color: #00ffff;
+
+
+}
+
+.subtitle {
+    font-size: 11px;
+    color: #9affff;
+    margin-top: 4px;
+}
+
+.identity {
+    display: flex;
+    gap: 6px;
+}
+
+.identity span {
+    border: 1px solid #00ffff;
+    border-radius: 5px;
+
+    padding: 5px 8px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    color: #00ffff;
+
+    background: #001414;
+
+    box-shadow:
+        0 0 5px rgba(0, 255, 255, 0.35);
+}
+
+
+/* =========================
+   MAIN GRID
+========================= */
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 7px;
+}
+
+.column {
+    min-width: 0;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    border: 1px solid #164f52;
+    border-radius: 7px;
+
+    margin-bottom: 7px;
+
+    overflow: hidden;
+
+    background: #080b0b;
+
+    box-shadow:
+        inset 0 0 15px rgba(0, 255, 255, 0.025);
+}
+
+.section-title {
+    background: #071b1c;
+
+    border-bottom: 1px solid #164f52;
+
+    padding: 5px 7px;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    letter-spacing: .4px;
+
+    color: #00ffff;
+
+
+}
+
+.section-body {
+    padding: 6px 7px;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.keywords {
+    font-size: 10.5px;
+    line-height: 1.45;
+
+    font-weight: 650;
+
+    color: #d9ffff;
+}
+
+.mini {
+    font-size: 9.5px;
+    line-height: 1.4;
+
+    color: #b8dede;
+}
+
+.label {
+    font-size: 8.5px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    color: #00ff9d;
+
+    margin-bottom: 2px;
+
+
+}
+
+
+/* =========================
+   KEYWORD BOX
+========================= */
+
+.keyword-box {
+    border: 1px solid #164f52;
+
+    border-radius: 7px;
+
+    padding: 7px 9px;
+
+    margin: 6px 0;
+
+    background: #050909;
+}
+
+.keyword-box strong {
+    color: #00ff9d;
+
+
+}
+
+
+/* =========================
+   PROJECT
+========================= */
+
+.project {
+    padding: 5px 0;
+
+    border-bottom: 1px dashed #164f52;
+}
+
+.project:last-child {
+    border-bottom: 0;
+}
+
+.project-name {
+    font-size: 11px;
+
+    font-weight: 900;
+
+    color: #00ffff;
+
+    margin-bottom: 2px;
+
+
+}
+
+.project-text {
+    font-size: 9.5px;
+
+    line-height: 1.4;
+
+    color: #d8ffff;
+}
+
+
+/* =========================
+   FLOW
+========================= */
+
+.flow {
+    font-size: 9.5px;
+
+    font-weight: 800;
+
+    line-height: 1.5;
+
+    color: #ffffff;
+}
+
+.arrow {
+    color: #00ff9d;
+
+    padding: 0 2px;
+
+
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+.q {
+    margin-bottom: 6px;
+}
+
+.q:last-child {
+    margin-bottom: 0;
+}
+
+.q-title {
+    font-size: 9.5px;
+
+    font-weight: 900;
+
+    color: #00ffff;
+
+
+}
+
+.q-answer {
+    font-size: 9px;
+
+    line-height: 1.35;
+
+    color: #d8ffff;
+}
+
+
+/* =========================
+   SPECIAL CARDS
+========================= */
+
+.special {
+    border: 2px solid #00ffff;
+
+    border-radius: 7px;
+
+    padding: 7px;
+
+    margin-bottom: 7px;
+
+    background: #001010;
+
+    box-shadow:
+        0 0 8px rgba(0, 255, 255, 0.25),
+        inset 0 0 15px rgba(0, 255, 255, 0.04);
+}
+
+.special-title {
+    font-size: 10px;
+
+    font-weight: 900;
+
+    margin-bottom: 4px;
+
+    color: #00ffff;
+
+
+}
+
+.special-content {
+    font-size: 11px;
+
+    font-weight: 850;
+
+    line-height: 1.45;
+
+    color: #eaffff;
+}
+
+
+/* =========================
+   BIG MEMORY
+========================= */
+
+.big-memory {
+    border: 2px solid #00ff9d;
+
+    border-radius: 7px;
+
+    padding: 10px;
+
+    margin-top: 7px;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    line-height: 1.45;
+
+    color: #00ff9d;
+
+    background: #00100a;
+
+
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 157, 0.2);
+}
+
+
+/* =========================
+   FORMULA
+========================= */
+
+.formula {
+    padding: 9px;
+
+    border: 1px solid #164f52;
+
+    border-radius: 6px;
+
+    margin: 6px 0;
+
+    font-weight: 800;
+
+    font-size: 9.5px;
+
+    line-height: 1.5;
+
+    color: #eaffff;
+
+    background: #060909;
+}
+
+
+/* =========================
+   FINAL MEMORY
+========================= */
+
+.final {
+    border: 2px solid #00ffff;
+
+    border-radius: 7px;
+
+    padding: 7px;
+
+    text-align: center;
+
+    margin-top: 7px;
+
+    background: #001010;
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.final-title {
+    font-size: 9px;
+
+    font-weight: 900;
+
+    margin-bottom: 3px;
+
+    color: #00ffff;
+
+
+}
+
+.final-line {
+    font-size: 10.5px;
+
+    font-weight: 900;
+
+    line-height: 1.4;
+
+    color: #eaffff;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    text-align: center;
+
+    margin-top: 10px;
+
+    color: #4fcaca;
+
+    font-size: 9px;
+}
+
+
+/* =========================
+   PRINT
+========================= */
+
+@media print {
+
+    html,
+    body {
+        background: #000000;
+    }
+
+    .sheet {
+        width: auto;
+
+        min-height: auto;
+
+        margin: 0;
+
+        padding: 0;
+
+        box-shadow: none;
+    }
+
+    .section,
+    .special,
+    .final,
+    .keyword-box,
+    .project {
+        break-inside: avoid;
+    }
+}
+
+
+/* =========================
+   MOBILE / SMALL SCREEN
+========================= */
+
+@media (max-width: 1000px) {
+
+    body {
+        background: #000000;
+    }
+
+    .sheet {
+        width: 100%;
+
+        min-height: auto;
+
+        margin: 0;
+
+        padding: 15px;
+
+        box-shadow: none;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .identity {
+        display: none;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sheet">
+
+    <!-- HEADER -->
+
+    <!--<div class="header">-->
+
+    <!--    <div>-->
+    <!--        <div class="title">-->
+    <!--            TOPTAL STAGE 1 — QUICK CHEAT SHEET-->
+    <!--        </div>-->
+
+    <!--        <div class="subtitle">-->
+    <!--            Shekh Ehsanur Rahman · Senior Flutter Engineer-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+    <!--    <div class="identity">-->
+    <!--        <span>11 YRS MOBILE</span>-->
+    <!--        <span>~7 YRS FLUTTER</span>-->
+    <!--        <span>50+ APPS</span>-->
+    <!--        <span>1M+ USERS</span>-->
+    <!--    </div>-->
+
+    <!--</div>-->
+
+
+    <!-- THREE COLUMNS -->
+
+    <div class="grid">
+
+
+        <!-- ================================================= -->
+        <!-- COLUMN 1 -->
+        <!-- ================================================= -->
+
+        <div class="column">
+
+
+            <div class="special">
+
+                <div class="special-title">
+                    🎯 CORE POSITIONING
+                </div>
+
+                <div class="special-content">
+
+                    11 yrs Mobile
+                    <span class="arrow">→</span>
+                    Android
+                    <span class="arrow">→</span>
+                    Flutter
+                    <span class="arrow">→</span>
+                    50+ Apps
+                    <span class="arrow">→</span>
+                    1M+ Users
+
+                    <br><br>
+
+                    <b>Specialty:</b>
+                    Offline-first Architecture +
+                    Data Synchronization
+
+                </div>
+
+            </div>
+
+
+            <!-- INTRO -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    01 · TELL ME ABOUT YOURSELF
+                </div>
+
+                <div class="section-body">
+
+                    <div class="flow">
+
+                        2015
+                        <span class="arrow">→</span>
+                        Android / Java
+                        <span class="arrow">→</span>
+                        Flutter
+                        <span class="arrow">→</span>
+                        Production
+                        <span class="arrow">→</span>
+                        50+ Apps
+                        <span class="arrow">→</span>
+                        1M+ Users
+
+                    </div>
+
+                    <br>
+
+                    <div class="mini">
+
+                        Consumer · Education · Fintech · Enterprise
+
+                        <br><br>
+
+                        <b>My differentiator:</b><br>
+
+                        Weak/no internet
+                        → keep working
+                        → local data
+                        → reconnect
+                        → sync
+                        → conflict resolution
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FARENOW -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    02 · MOST RECENT — FARENOW
+                </div>
+
+                <div class="section-body">
+
+                    <div class="project">
+
+                        <div class="project-name">
+                            Houston, USA · Super App
+                        </div>
+
+                        <div class="project-text">
+
+                            Ride-hailing · Service Booking ·
+                            Food/Grocery · Video Consultation ·
+                            Real Estate
+
+                        </div>
+
+                    </div>
+
+                    <div class="project">
+
+                        <div class="label">
+                            My Role
+                        </div>
+
+                        <div class="project-text">
+
+                            Flutter · Architecture · Data Flow ·
+                            State Management · APIs · Firebase ·
+                            Android/iOS Releases
+
+                        </div>
+
+                    </div>
+
+                    <div class="project">
+
+                        <div class="label">
+                            Challenge → Solution → Result
+                        </div>
+
+                        <div class="project-text">
+
+                            Large app
+                            → complexity
+                            → feature interference
+
+                            <br>
+
+                            Modules
+                            → boundaries
+                            → shared core
+
+                            <br>
+
+                            Independent development
+                            → safer changes
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TANTO -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    03 · TANTO — BRAZIL
+                </div>
+
+                <div class="section-body">
+
+                    <div class="flow">
+
+                        Invoice Photo
+                        →
+                        AI Code
+                        →
+                        Tax Authority
+                        →
+                        Company Policy
+                        →
+                        Pix
+
+                    </div>
+
+                    <br>
+
+                    <div class="mini">
+
+                        <b>Role:</b>
+                        Flutter + Brazilian team
+
+                        <br>
+
+                        <b>Hook:</b>
+                        International collaboration +
+                        timezone flexibility
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- COLUMN 2 -->
+        <!-- ================================================= -->
+
+        <div class="column">
+
+
+            <!-- TECHNOLOGIES -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    04 · STRONGEST TECHNOLOGIES
+                </div>
+
+                <div class="section-body">
+
+                    <div class="keywords">
+
+                        <b>Flutter / Dart</b>
+                        — ~7 yrs · Primary
+
+                        <br>
+
+                        <b>Kotlin / Android</b>
+                        — ~9 yrs · Native
+
+                        <br>
+
+                        <b>Swift / iOS</b>
+                        — ~5 yrs · StoreKit 2
+
+                        <br>
+
+                        <b>Firebase</b>
+                        — Firestore · Auth · Functions · Crashlytics
+
+                        <br>
+
+                        <b>Architecture</b>
+                        — Clean Architecture · SOLID · DI
+
+                        <br>
+
+                        <b>State</b>
+                        — BLoC · Riverpod
+
+                        <br>
+
+                        <b>Testing</b>
+                        — Unit · Widget · Integration
+
+                        <br>
+
+                        <b>Delivery</b>
+                        — CI/CD · Automated Releases
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- OFFLINE -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    05 · OFFLINE-FIRST — KEY DIFFERENTIATOR
+                </div>
+
+                <div class="section-body">
+
+                    <div class="flow">
+
+                        OFFLINE
+                        →
+                        LOCAL DATA
+                        →
+                        KEEP WORKING
+                        →
+                        RECONNECT
+                        →
+                        SYNC
+                        →
+                        CONFLICT RESOLUTION
+
+                    </div>
+
+                    <br>
+
+                    <div class="mini">
+
+                        <b>Goal:</b>
+                        No lost data · No duplicate data
+
+                        <br><br>
+
+                        <b>Open Source:</b>
+                        9 pub.dev packages
+
+                        <br>
+
+                        <b>Sync library:</b>
+                        concurrent offline edits
+                        → automatic merge
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PEACE OF MIND -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    06 · DIFFICULT PROJECT — PEACE OF MIND
+                </div>
+
+                <div class="section-body">
+
+                    <div class="project">
+
+                        <div class="project-name">
+                            iOS · Estate Planning · StoreKit 2
+                        </div>
+
+                        <div class="project-text">
+
+                            Apple payment SUCCESS
+                            → app didn't record
+                            → customer could be locked out
+
+                        </div>
+
+                    </div>
+
+                    <div class="project">
+
+                        <div class="label">
+                            Approach
+                        </div>
+
+                        <div class="project-text">
+
+                            Rebuilt purchase flow
+                            → Apple's transaction = source of truth
+                            → less reliance on local state
+
+                        </div>
+
+                    </div>
+
+                    <div class="project">
+
+                        <div class="label">
+                            Keywords
+                        </div>
+
+                        <div class="project-text">
+
+                            Subscription · Verification ·
+                            Synchronization · Reliability ·
+                            Production Debugging
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LEADERSHIP -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    07 · LEADERSHIP
+                </div>
+
+                <div class="section-body">
+
+                    <div class="keywords">
+
+                        Managed <b>6 developers</b>
+
+                        <br>
+
+                        Distributed teams
+
+                        <br>
+
+                        Technical decisions
+
+                        <br>
+
+                        <b>200+ students</b> trained
+
+                        <br>
+
+                        Complex idea
+                        →
+                        Simple explanation
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ANSWER FORMULA -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    08 · ANSWER FORMULA
+                </div>
+
+                <div class="section-body">
+
+                    <div class="mini">
+
+                        <b>Experience:</b><br>
+                        Situation → Problem → Action → Result → Lesson
+
+                        <br><br>
+
+                        <b>Technical:</b><br>
+                        Understand → Think → Explain → Trade-off → Answer
+
+                        <br><br>
+
+                        <b>Disagreement:</b><br>
+                        Why → Alternative → Evidence → Result
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- COLUMN 3 -->
+        <!-- ================================================= -->
+
+        <div class="column">
+
+
+            <!-- TOPTAL -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    09 · WHY TOPTAL?
+                </div>
+
+                <div class="section-body">
+
+                    <div class="flow">
+
+                        International Teams
+                        →
+                        Long-term Work
+                        →
+                        Selective Network
+                        →
+                        Specialization
+                        →
+                        Right Projects
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROJECT TYPE -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    10 · WHAT PROJECTS DO I WANT?
+                </div>
+
+                <div class="section-body">
+
+                    <div class="keywords">
+
+                        Complex Mobile Products
+
+                        <br>
+
+                        Complex Data
+
+                        <br>
+
+                        Offline Needs
+
+                        <br>
+
+                        Many Users
+
+                        <br>
+
+                        Field Work / Logistics
+
+                        <br><br>
+
+                        <b>Role:</b>
+
+                        Lead Small Mobile Team
+                        OR
+                        Own Mobile Side
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- COMMON QUESTIONS -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    11 · COMMON QUESTIONS
+                </div>
+
+                <div class="section-body">
+
+
+                    <div class="q">
+
+                        <div class="q-title">
+                            TIME ZONES?
+                        </div>
+
+                        <div class="q-answer">
+
+                            Brazil team → shifted hours →
+                            clear updates → agreed availability →
+                            flexible
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="q">
+
+                        <div class="q-title">
+                            DISAGREEMENT?
+                        </div>
+
+                        <div class="q-answer">
+
+                            Client wanted speed →
+                            saw future risk →
+                            prototype →
+                            evidence →
+                            alternative →
+                            accepted
+
+                            <br>
+
+                            <b>Lesson: Show > Argue</b>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="q">
+
+                        <div class="q-title">
+                            ENGLISH?
+                        </div>
+
+                        <div class="q-answer">
+
+                            US · Brazil · Europe →
+                            meetings · code reviews · writing · teaching
+
+                            <br>
+
+                            Professional working level
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="q">
+
+                        <div class="q-title">
+                            RATE?
+                        </div>
+
+                        <div class="q-answer">
+
+                            Normal senior Flutter range →
+                            long-term fit →
+                            fair rate →
+                            give range if pressed
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- DON'T KNOW -->
+
+            <div class="special">
+
+                <div class="special-title">
+                    🚨 IF I DON'T KNOW
+                </div>
+
+                <div class="special-content">
+
+                    DON'T BLUFF
+
+                    <br><br>
+
+                    Clarify
+                    →
+                    Assumptions
+                    →
+                    Break Down
+                    →
+                    Approach
+                    →
+                    Trade-offs
+                    →
+                    Solution
+
+                    <br><br>
+
+                    <span style="font-size:9.5px;">
+                        “I haven't worked with that directly,
+                        but I would approach it by…”
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTIONS TO TOPTAL -->
+
+            <div class="section">
+
+                <div class="section-title">
+                    12 · QUESTIONS FOR TOPTAL
+                </div>
+
+                <div class="section-body">
+
+                    <div class="q">
+
+                        <div class="q-title">
+                            1.
+                        </div>
+
+                        <div class="q-answer">
+
+                            For mobile specialists,
+                            are engagements usually long-term
+                            or shorter projects?
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="q">
+
+                        <div class="q-title">
+                            2.
+                        </div>
+
+                        <div class="q-answer">
+
+                            What happens after Stage 1,
+                            and what should I prepare for
+                            the technical rounds?
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FINAL MEMORY -->
+
+            <div class="final">
+
+                <div class="final-title">
+                    ⭐ 10-SECOND IDENTITY
+                </div>
+
+                <div class="final-line">
+
+                    11 yrs Mobile
+                    →
+                    7 yrs Flutter
+                    →
+                    50+ Apps
+                    →
+                    1M+ Users
+                    →
+                    Offline-first
+                    →
+                    Data Sync
+                    →
+                    Architecture
+                    →
+                    Android/iOS
+                    →
+                    Leadership
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
