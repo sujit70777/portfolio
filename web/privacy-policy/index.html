@@ -7,29 +7,52 @@
 <meta name="description" content="Privacy policy for the Computer Science Engineering, Machine Learning and Learn Python apps by Prabartan Information Technology.">
 <style>
   :root{--ink:#1b1b1f;--ink-soft:#54545c;--paper:#fbfbf9;--rule:#dcdcd6;--mark:#3d5a4a;--mark-bg:#eef2ef}
-  @media (prefers-color-scheme: dark){:root{--ink:#e6e6e3;--ink-soft:#a0a09b;--paper:#16171a;--rule:#33343a;--mark:#8fbfa6;--mark-bg:#1e2422}}
+  @media (prefers-color-scheme:dark){:root{--ink:#e6e6e3;--ink-soft:#a0a09b;--paper:#16171a;--rule:#33343a;--mark:#8fbfa6;--mark-bg:#1e2422}}
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 Charter,"Bitstream Charter","Iowan Old Style",Georgia,"Times New Roman",serif}
-  .wrap{max-width:41rem;margin:0 auto;padding:4rem 1.5rem 6rem}
-  header{border-bottom:1px solid var(--rule);padding-bottom:1.75rem;margin-bottom:2.5rem}
-  h1{font-size:1.9rem;line-height:1.2;margin:0 0 .6rem;font-weight:600;letter-spacing:-.01em}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font:400 clamp(16px,0.98rem + 0.2vw,19px)/1.65 Charter,"Bitstream Charter","Iowan Old Style",Georgia,"Times New Roman",serif}
+  .wrap{max-width:42rem;margin:0 auto;padding:clamp(2rem,7vw,4rem) clamp(1.15rem,5vw,1.5rem) clamp(3rem,10vw,6rem)}
+  header{border-bottom:1px solid var(--rule);padding-bottom:clamp(1.1rem,4vw,1.75rem);margin-bottom:clamp(1.75rem,6vw,2.5rem)}
+  h1{font-size:clamp(1.5rem,1.15rem + 1.5vw,2rem);line-height:1.2;margin:0 0 .6rem;font-weight:600;letter-spacing:-.01em}
   .meta{color:var(--ink-soft);font-size:.9rem;margin:0}
-  h2{font-size:1.18rem;font-weight:600;margin:2.8rem 0 .7rem;line-height:1.3}
+  h2{font-size:clamp(1.08rem,1rem + .35vw,1.2rem);font-weight:600;margin:clamp(2rem,6vw,2.8rem) 0 .7rem;line-height:1.3}
   h3{font-size:1rem;font-weight:600;margin:1.8rem 0 .4rem}
   p{margin:0 0 1rem}
-  ul{margin:0 0 1rem;padding-left:1.2rem}
+  ul,ol{margin:0 0 1rem;padding-left:1.2rem}
   li{margin-bottom:.4rem}
   a{color:var(--mark);text-underline-offset:.15em}
-  a:focus-visible{outline:2px solid var(--mark);outline-offset:3px;border-radius:2px}
+  a:focus-visible,summary:focus-visible{outline:2px solid var(--mark);outline-offset:3px;border-radius:2px}
   .summary{background:var(--mark-bg);border-left:3px solid var(--mark);padding:1.1rem 1.3rem;margin:0 0 1rem;border-radius:0 3px 3px 0}
   .summary p:last-child,.summary ul:last-child{margin-bottom:0}
+  code{font:.85em ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
   table{width:100%;border-collapse:collapse;font-size:.92rem;margin:0 0 1.25rem}
   th,td{text-align:left;vertical-align:top;padding:.55rem .5rem;border-bottom:1px solid var(--rule)}
   th{font-weight:600;color:var(--ink-soft)}
-  code{font:0.85em ui-monospace,SFMono-Regular,Menlo,monospace}
-  footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--rule);color:var(--ink-soft);font-size:.88rem}
-  @media print{body{background:#fff;color:#000}.wrap{padding:0}}
+  details{border-bottom:1px solid var(--rule);padding:.9rem 0}
+  summary{cursor:pointer;font-weight:600;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"+";color:var(--mark);font-weight:600;margin-right:.6rem}
+  details[open] summary::before{content:"3"}
+  details p{margin:.7rem 0 0}
+  footer{margin-top:clamp(2.5rem,8vw,3.5rem);padding-top:1.5rem;border-top:1px solid var(--rule);color:var(--ink-soft);font-size:.88rem}
+  /* narrow screens: stack table rows into labelled blocks instead of overflowing */
+  @media (max-width:34rem){
+    table,tbody,tr,td{display:block;width:100%}
+    thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+    tr{border-bottom:1px solid var(--rule);padding:.7rem 0}
+    td{border:0;padding:.1rem 0}
+    td:first-child{font-weight:600;margin-bottom:.25rem}
+    td:not(:first-child)::before{content:attr(data-label) ": ";color:var(--ink-soft)}
+  }
+  @media print{
+    body{background:#fff;color:#000}
+    .wrap{padding:0;max-width:none}
+    a{color:#000;text-decoration:none}
+    details{border:0}
+    summary::before,details[open] summary::before{content:""}
+    details p{display:block}
+  }
 </style>
 </head>
 <body>
@@ -53,14 +76,14 @@
 <p>This policy applies to these six apps and no others:</p>
 
 <table>
-  <tr><th>App</th><th>Android package</th><th>Apple App ID</th></tr>
-  <tr><td>Computer Science Engineering</td><td><code>io.ionic.cse</code></td><td>6790156339</td></tr>
-  <tr><td>CSE Pro: Computer Science</td><td><code>com.pit.cse.paid</code></td><td>6790156153</td></tr>
-  <tr><td>Learn Machine Learning &amp; AI</td><td><code>com.pit.machinelearning</code></td><td>6762052315</td></tr>
-  <tr><td>ML Pro: Machine Learning</td><td><code>com.pit.machinelearning.paid</code></td><td>6762052250</td></tr>
-  <tr><td>Learn Python: Coding Course</td><td><code>com.pit.python</code></td><td>6790156509</td></tr>
-  <tr><td>Python Pro: Learn Coding</td><td><code>com.pit.python.paid</code></td><td>6790156449</td></tr>
-</table>
+  <thead><tr><th>App</th><th>Android package</th><th>Apple App ID</th></tr></thead><tbody>
+  <tr><td data-label="App">Computer Science Engineering</td><td data-label="Android package"><code>io.ionic.cse</code></td><td data-label="Apple App ID">6790156339</td></tr>
+  <tr><td data-label="App">CSE Pro: Computer Science</td><td data-label="Android package"><code>com.pit.cse.paid</code></td><td data-label="Apple App ID">6790156153</td></tr>
+  <tr><td data-label="App">Learn Machine Learning &amp; AI</td><td data-label="Android package"><code>com.pit.machinelearning</code></td><td data-label="Apple App ID">6762052315</td></tr>
+  <tr><td data-label="App">ML Pro: Machine Learning</td><td data-label="Android package"><code>com.pit.machinelearning.paid</code></td><td data-label="Apple App ID">6762052250</td></tr>
+  <tr><td data-label="App">Learn Python: Coding Course</td><td data-label="Android package"><code>com.pit.python</code></td><td data-label="Apple App ID">6790156509</td></tr>
+  <tr><td data-label="App">Python Pro: Learn Coding</td><td data-label="Android package"><code>com.pit.python.paid</code></td><td data-label="Apple App ID">6790156449</td></tr>
+</tbody></table>
 
 <h2>2. What we do not collect</h2>
 
@@ -213,7 +236,7 @@
 <p>To find server log entries relating to you we generally need the approximate date and time you used the app and the IP address you were using. Without those we may be unable to locate any record, and we will tell you so honestly rather than guess.</p>
 
 <h3>Deleting your data</h3>
-<p>The data held on your own device needs no involvement from us — clear the app's storage or uninstall it, as described in section 3. For anything else, see our <a href="/data-deletion">data deletion page</a>.</p>
+<p>The data held on your own device needs no involvement from us — clear the app's storage or uninstall it, as described in section 3. For anything else, see our <a href="/data-deletion/">data deletion page</a>.</p>
 
 <h2>12. Security</h2>
 
@@ -239,7 +262,7 @@ Support: <a href="mailto:pit.service.co@gmail.com">pit.service.co@gmail.com</a>
 </p>
 
 <footer>
-  <p>Prabartan Information Technology · <a href="/terms">Terms of Service</a> · <a href="/data-deletion">Data deletion</a> · <a href="/support">Support</a></p>
+  <p>Prabartan Information Technology · <a href="/terms/">Terms of Service</a> · <a href="/data-deletion/">Data deletion</a> · <a href="/support/">Support</a></p>
 </footer>
 
 </div>

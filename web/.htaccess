@@ -67,6 +67,20 @@ AddType text/javascript .mjs
   RewriteCond %{HTTP:Accept-Encoding} gzip
   RewriteCond %{REQUEST_FILENAME}.gz -f
   RewriteRule ^(.*)$ $1.gz [L]
+
+  # --- SPA fallback -----------------------------------------------------
+  # Flutter Web is a single-page app: any path it doesn't recognise itself
+  # needs to resolve to index.html rather than 404, so the app shell can
+  # load and handle it client-side. But the static legal pages required by
+  # the app stores (web/privacy-policy/, web/terms/, web/data-deletion/,
+  # web/support/ — each a real index.html, not a Flutter route) must be
+  # served as themselves. This guard has to run first, or those paths
+  # would be swallowed by the catch-all below.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  RewriteRule ^ index.html [L]
 </IfModule>
 
 <IfModule mod_headers.c>

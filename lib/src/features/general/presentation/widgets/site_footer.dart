@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/constants/sizes.dart';
+import 'package:portfolio/src/features/general/presentation/widgets/legal_links_bar.dart';
 import 'package:portfolio/src/features/personal_info/data/personal_info_repository.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/contact_bar.dart';
 
@@ -23,6 +24,8 @@ class SiteFooter extends ConsumerWidget {
         Divider(color: Theme.of(context).colorScheme.onSurface.withAlpha(24)),
         gapH24,
         ContactBar(contacts: contacts),
+        gapH16,
+        const LegalLinksBar(),
       ],
     );
   }
