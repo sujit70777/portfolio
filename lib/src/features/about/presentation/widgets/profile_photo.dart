@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const _webpPath = 'assets/images/profile.webp';
 const _jpgPath = 'assets/images/profile.jpg';
-const _photoAlt = 'Shekh Ehsanur Rahman, Senior Flutter Engineer';
+const _photoAlt = 'Shekh Ehsanur Rahman, Senior Mobile Engineer (Flutter & React Native)';
 
 /// Circular profile photo beside the About text — WebP first (CanvasKit
 /// decodes it natively, no browser fallback needed), falling back to a

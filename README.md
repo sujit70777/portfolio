@@ -2,7 +2,7 @@
 
 # ehsanur.com
 
-**Portfolio site of Ehsanur Rahman — Senior Flutter Engineer, 11 years in mobile**
+**Portfolio site of Ehsanur Rahman — Senior Mobile Engineer (Flutter & React Native), 11 years in mobile**
 
 Built in Flutter Web. Data-driven, cache-safe, and deployed by a pipeline that survives a real production host.
 
@@ -155,10 +155,10 @@ MIT licensed, see [LICENSE](LICENSE). Fork it for your own portfolio; a link bac
 
 ## About me
 
-Senior Flutter engineer, 11 years in mobile. I specialise in offline-first architecture and conflict-free data synchronisation — apps that keep working when the network doesn't. Most recently I've led mobile teams as sole developer end to end: architecture, implementation, release and store delivery.
+Senior Mobile Engineer, 11 years in mobile — Flutter & React Native. I specialise in offline-first architecture and conflict-free data synchronisation — apps that keep working when the network doesn't. Most recently I've led mobile teams as sole developer end to end: architecture, implementation, release and store delivery.
 
 **50+ apps shipped · 1M+ users · [9 packages on pub.dev](https://pub.dev/publishers/ehsanur.com/packages)**
 
-Available for remote Senior/Lead Flutter roles, full-time or contract, with US, UK and EU teams.
+Available for remote Senior/Lead Mobile roles (Flutter or React Native), full-time or contract, with US, UK and EU teams.
 
 [ehsanur.com](https://ehsanur.com) · [LinkedIn](https://www.linkedin.com/in/sujit70777) · [mail@ehsanur.com](mailto:mail@ehsanur.com)

@@ -16,7 +16,7 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> _en = {
   "name": "Shekh Ehsanur Rahman",
-  "description": "Senior Flutter Engineer — Offline-First & Data-Sync Architecture",
+  "description": "Senior Mobile Engineer — Offline-First & Data-Sync Architecture — Flutter & React Native",
   "subDescription": "Based in Bangladesh · hours shifted to overlap EU/US",
   "heroPrimaryCta": "Email me",
   "heroSecondaryCta": "WhatsApp",
@@ -113,7 +113,7 @@ class CodegenLoader extends AssetLoader{
       "url": "assets/documents/resume.pdf"
     }
   ],
-  "aboutDescription": "I build Flutter apps that keep working when the network doesn't.\n11 years in mobile — 50+ shipped apps, 1M+ users, 4.7+ average store rating. My specialty is offline-first architecture and conflict-free data synchronisation: the part that quietly breaks most mobile apps in the field. I've built and open-sourced a CRDT-based sync library for Flutter, and shipped production apps holding a 4.7 rating at 100,000+ daily active users.\nRecent work includes an enterprise reimbursement platform for a Brazilian client — AI invoice capture, SEFAZ tax-agency integration, instant Pix payout — and a multi-service super app for a US client in Houston.\nI currently work shifted hours to overlap with a Brazil-based team, so adapting to US or UK business hours is routine rather than a promise. Available as an independent contractor.",
+  "aboutDescription": "I build Mobile apps that keep working when the network doesn't.\n11 years in mobile — 50+ shipped apps, 1M+ users, 4.7+ average store rating. My specialty is offline-first architecture and conflict-free data synchronisation: the part that quietly breaks most mobile apps in the field. I've built and open-sourced a CRDT-based sync library for Flutter, and shipped production apps holding a 4.7 rating at 100,000+ daily active users.\nRecent work includes an enterprise reimbursement platform for a Brazilian client — AI invoice capture, SEFAZ tax-agency integration, instant Pix payout — and a multi-service super app for a US client in Houston.\nI currently work shifted hours to overlap with a Brazil-based team, so adapting to US or UK business hours is routine rather than a promise. Available as an independent contractor.",
   "skillCategories": [
     {
       "category": "Offline-First & Data Sync",
@@ -129,6 +129,7 @@ class CodegenLoader extends AssetLoader{
       "category": "Mobile Architecture & Development",
       "skills": [
         "Flutter (Expert)",
+        "React Native",
         "Native Android",
         "Native iOS / SwiftUI",
         "Cross-Platform Development",
@@ -181,9 +182,9 @@ class CodegenLoader extends AssetLoader{
   ],
   "experiences": [
     {
-      "role": "Senior Flutter Developer — Level III",
+      "role": "Senior Mobile Developer — Level III",
       "company": "Developer eXperience Hub (Devxhub)",
-      "description": "Architect the Flutter application layer for enterprise FinTech and expense-management products serving 50,000+ users, owning data flow, state management and release process end to end. Built an offline-first local/Firebase sync architecture that keeps core functionality available through network interruptions, with deterministic conflict resolution on reconnect. Designed the team CI/CD pipeline for a 4-developer team spanning multiple time zones. Published 9 reusable Flutter packages to pub.dev covering accessibility auditing, CRDT sync, UI and utility tooling. Led delivery of Tanto (Brazil) and Farenow (US).",
+      "description": "Architect the Mobile application layer for enterprise FinTech and expense-management products serving 50,000+ users, owning data flow, state management and release process end to end. Built an offline-first local/Firebase sync architecture that keeps core functionality available through network interruptions, with deterministic conflict resolution on reconnect. Designed the team CI/CD pipeline for a 4-developer team spanning multiple time zones. Published 9 reusable Flutter packages to pub.dev covering accessibility auditing, CRDT sync, UI and utility tooling. Led delivery of Tanto (Brazil) and Farenow (US).",
       "url": "https://devxhub.com",
       "isPresent": true,
       "startYear": 2023,
@@ -199,6 +200,18 @@ class CodegenLoader extends AssetLoader{
           "name": "Dart",
           "icon": {
             "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "React Native",
+          "icon": {
+            "assetName": "assets/icons/software-development/react-native.svg"
+          }
+        },
+        {
+          "name": "TypeScript",
+          "icon": {
+            "assetName": "assets/icons/software-development/typescript.svg"
           }
         },
         {
@@ -224,7 +237,7 @@ class CodegenLoader extends AssetLoader{
     {
       "role": "Senior Mobile Application Developer",
       "company": "Prabartan Information Technology",
-      "description": "Led development of an offline-first, multi-language EdTech platform reaching 100,000+ students across 5 countries, engineered so lessons and progress remain available without connectivity. Sustained a 4.7-star store rating at 100,000+ daily active users by building the Firebase/SQLite synchronisation layer and resolving sync-conflict edge cases at scale. Managed a 6-developer team and modernised the stack with Flutter 3.0, Jetpack Compose and SwiftUI.",
+      "description": "Led development of an offline-first, multi-language EdTech platform reaching 100,000+ students across 5 countries, engineered so lessons and progress remain available without connectivity. Sustained a 4.7-star store rating at 100,000+ daily active users by building the Firebase/SQLite synchronisation layer and resolving sync-conflict edge cases at scale. Managed a 6-developer team and modernised the stack with Flutter 3.0, React Native, Jetpack Compose and SwiftUI.",
       "isPresent": false,
       "startYear": 2019,
       "startMonth": 6,
@@ -241,6 +254,18 @@ class CodegenLoader extends AssetLoader{
           "name": "Dart",
           "icon": {
             "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "React Native",
+          "icon": {
+            "assetName": "assets/icons/software-development/react-native.svg"
+          }
+        },
+        {
+          "name": "TypeScript",
+          "icon": {
+            "assetName": "assets/icons/software-development/typescript.svg"
           }
         },
         {
@@ -1397,8 +1422,8 @@ class CodegenLoader extends AssetLoader{
     }
   ],
   "bottomBanner": {
-    "message": "Open source portfolio -",
-    "displayLink": "Fork it",
+    "message": "This site is a Flutter Web app —",
+    "displayLink": "read how it's built",
     "linkUrl": "https://github.com/sujit70777/portfolio#readme"
   },
   "portfolio": "Shekh Ehsanur Rahman",
