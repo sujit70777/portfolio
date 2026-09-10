@@ -9,10 +9,10 @@ import 'package:portfolio/src/features/project/presentation/widgets/project_imag
 
 const _project = Project(name: 'Tanto');
 const _images = [
-  'assets/projectimage/tanto/Frame 1.png',
-  'assets/projectimage/tanto/Frame 2.png',
-  'assets/projectimage/tanto/Frame 3.png',
-  'assets/projectimage/tanto/Frame 4.png',
+  'assets/projectimage/tanto/Frame 1.webp',
+  'assets/projectimage/tanto/Frame 2.webp',
+  'assets/projectimage/tanto/Frame 3.webp',
+  'assets/projectimage/tanto/Frame 4.webp',
 ];
 
 Future<void> _pumpCard(

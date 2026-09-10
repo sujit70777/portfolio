@@ -1,6 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // Made for FlexColorScheme version 7.0.0. Make sure you
 // use same or higher package version, but still same major version.
@@ -15,12 +14,20 @@ import 'package:google_fonts/google_fonts.dart';
 // a saturated chartreuse, used sparingly: CTAs, links, version/rating tags.
 // Never a gradient or a glow, always a flat fill or text color.
 
+// The three families below are referenced by the family names declared in
+// pubspec.yaml `fonts:`, rather than through the google_fonts package. Both
+// routes end up at the same .ttf in assets/fonts/, but the package re-reads
+// those bytes through its own loader and registers a second FontFace for
+// them, so every one of these faces was downloaded and decoded twice on
+// first paint. Naming the bundled family directly renders identically for
+// half the font bytes, and drops the dependency altogether.
+//
 // Display/headline/title all use a single Archivo weight (ExtraBold/800) —
-// that's the only static instance bundled (see pubspec.yaml `fonts:` and
-// assets/fonts/), so every heading-tier style below must request exactly
-// FontWeight.w800 or google_fonts won't find a local match for it.
+// that's the only static instance bundled, so every heading-tier style below
+// must request exactly FontWeight.w800 to get a match.
 TextStyle _display({required double fontSize, double? height, double? letterSpacing}) {
-  return GoogleFonts.archivo(
+  return TextStyle(
+    fontFamily: 'Archivo',
     fontSize: fontSize,
     fontWeight: FontWeight.w800,
     height: height,
@@ -35,7 +42,8 @@ TextStyle monoLabelStyle({
   Color? color,
   double letterSpacing = 0.02,
 }) {
-  return GoogleFonts.jetBrainsMono(
+  return TextStyle(
+    fontFamily: 'JetBrainsMono',
     fontSize: fontSize,
     fontWeight: FontWeight.w500,
     letterSpacing: letterSpacing,
@@ -53,12 +61,12 @@ final _textTheme = TextTheme(
   titleLarge: _display(fontSize: 22, height: 1.2),
   titleMedium: _display(fontSize: 18, height: 1.2),
   titleSmall: _display(fontSize: 16, height: 1.2),
-  bodyLarge: GoogleFonts.publicSans(fontSize: 18, height: 1.55),
-  bodyMedium: GoogleFonts.publicSans(fontSize: 16, height: 1.55),
-  bodySmall: GoogleFonts.publicSans(fontSize: 14, height: 1.5),
-  labelLarge: GoogleFonts.publicSans(fontSize: 16, fontWeight: FontWeight.w600),
-  labelMedium: GoogleFonts.publicSans(fontSize: 14, fontWeight: FontWeight.w600),
-  labelSmall: GoogleFonts.publicSans(fontSize: 12, fontWeight: FontWeight.w600),
+  bodyLarge: TextStyle(fontFamily: 'PublicSans', fontSize: 18, height: 1.55),
+  bodyMedium: TextStyle(fontFamily: 'PublicSans', fontSize: 16, height: 1.55),
+  bodySmall: TextStyle(fontFamily: 'PublicSans', fontSize: 14, height: 1.5),
+  labelLarge: TextStyle(fontFamily: 'PublicSans', fontSize: 16, fontWeight: FontWeight.w600),
+  labelMedium: TextStyle(fontFamily: 'PublicSans', fontSize: 14, fontWeight: FontWeight.w600),
+  labelSmall: TextStyle(fontFamily: 'PublicSans', fontSize: 12, fontWeight: FontWeight.w600),
 );
 
 const _subThemesData = FlexSubThemesData(
@@ -111,6 +119,14 @@ final lightTheme = FlexThemeData.light(
     error: Color(0xffb00020),
   ),
   textTheme: _textTheme,
+  // Anything that renders text without picking a family off the TextTheme —
+  // Material internals like tooltips and dialogs, and any bare TextStyle —
+  // otherwise falls through to Flutter's default family, Roboto, which isn't
+  // bundled. On the web that means CanvasKit fetching Roboto from
+  // fonts.gstatic.com at runtime: a cross-origin round trip for a face that
+  // was never meant to appear in this design. Pointing the default at a
+  // bundled family keeps every glyph local.
+  fontFamily: 'PublicSans',
   subThemesData: _subThemesData,
   keyColors: const FlexKeyColors(
     useSecondary: true,
@@ -144,6 +160,14 @@ final darkTheme = FlexThemeData.dark(
     error: Color(0xffcf6679),
   ),
   textTheme: _textTheme,
+  // Anything that renders text without picking a family off the TextTheme —
+  // Material internals like tooltips and dialogs, and any bare TextStyle —
+  // otherwise falls through to Flutter's default family, Roboto, which isn't
+  // bundled. On the web that means CanvasKit fetching Roboto from
+  // fonts.gstatic.com at runtime: a cross-origin round trip for a face that
+  // was never meant to appear in this design. Pointing the default at a
+  // bundled family keeps every glyph local.
+  fontFamily: 'PublicSans',
   subThemesData: _subThemesData,
   keyColors: const FlexKeyColors(
     useSecondary: true,

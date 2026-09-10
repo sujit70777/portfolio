@@ -43,6 +43,118 @@
   <meta name="apple-mobile-web-app-title" content="Ehsanur Rahman">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
+  <!-- Preload the cold-start critical path ------------------------------
+       Flutter Web's boot is a request chain: the browser has to run
+       flutter_bootstrap.js to learn about main.dart.js, run main.dart.js to
+       learn which CanvasKit variant it needs, and run CanvasKit before the
+       Dart code can ask for the asset manifest, fonts and translations. Each
+       step is a full round trip that only starts once the previous one has
+       landed, so on a slow connection most of the wait is latency, not
+       bytes. These hints start every one of those downloads while the HTML is
+       still being parsed, collapsing the chain into a single parallel fetch.
+
+       Keep the CanvasKit URLs in sync with web/flutter_bootstrap.js, which
+       points canvasKitBaseUrl at this origin's own canvaskit/ directory. -->
+  <link rel="preload" href="assets/assets/images/profile.webp" as="image">
+  <link rel="preload" href="assets/AssetManifest.bin" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/FontManifest.json" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/translations/en.json" as="fetch" crossorigin="anonymous">
+  <!-- Two kinds of font preload here, and the distinction matters.
+
+       Icon fonts are only ever loaded by Flutter, which doesn't hand bundled
+       fonts to the CSS font loader — it pulls the bytes with fetch() and
+       builds a FontFace from them. So they want as="fetch", and they want
+       crossorigin with it: an as="fetch" preload is always issued in CORS
+       mode and is only reused by a request made the same way. Without the
+       attribute these download twice. Verified, not assumed.
+
+       The three text faces are loaded twice by design, once by the @font-face
+       rules that paint the pre-Flutter hero and again by Flutter's own font
+       loader once it boots. Nothing dedupes those two: they have different
+       request destinations, so they get separate cache entries even under
+       the year-long immutable caching web/.htaccess sets. That costs ~140KB
+       of re-download, against showing a real page at ~110ms instead of
+       ~2.2s — worth it. They are preloaded as fetches rather than as fonts,
+       which the CSS load would suggest, because it measured ~100ms faster to
+       first contentful paint: a font preload is deprioritised until the
+       stylesheet proves the face is needed, a fetch preload starts at once. -->
+  <link rel="preload" href="assets/fonts/MaterialIcons-Regular.otf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/FontAwesome.ttf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/Archivo-ExtraBold.ttf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/PublicSans-Regular.ttf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/PublicSans-SemiBold.ttf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/JetBrainsMono-Medium.ttf" as="fetch" crossorigin="anonymous">
+  <script>
+    // Everything below main.dart.* is picked by browser feature detection
+    // that normally happens inside flutter.js, long after the parser could
+    // have started the download. This mirrors that decision so the two
+    // largest files on the page — the app and the renderer, together most of
+    // the bytes in a cold load — begin downloading with the HTML instead of
+    // after two round trips.
+    //
+    // The branches mirror flutter.js: the dart2wasm build is used when the
+    // browser supports WasmGC, and each compile target then picks a renderer
+    // variant from the same feature probes (see the `I = (n, e, s, t) =>` and
+    // `U = async (n, e, s, t) =>` helpers there). If any of this guesses
+    // wrong the page still works — a wrong guess costs one unused preload,
+    // because the engine always requests whatever it actually wants. Both
+    // branches are kept live so that flipping `flutter build web --wasm` on
+    // or off needs no edit here.
+    (function () {
+      function hint(rel, href, as) {
+        var l = document.createElement("link");
+        l.rel = rel;
+        l.href = href;
+        if (as) {
+          l.as = as;
+          l.setAttribute("fetchpriority", "high");
+          // crossorigin belongs on as="fetch" and nowhere else here. Those
+          // preloads are issued in CORS mode and only match a fetch() made
+          // the same way — that's the note on the static tags above. But
+          // main.dart.js is loaded by an ordinary <script src> tag, which is
+          // not a CORS request: putting crossorigin on its preload makes the
+          // two miss each other and downloads the app twice.
+          if (as === "fetch") l.crossOrigin = "anonymous";
+        }
+        document.head.appendChild(l);
+      }
+
+      var isBlink = navigator.vendor === "Google Inc." ||
+        navigator.userAgent.indexOf("Edg/") !== -1;
+      // Matches flutter.js's hasImageCodecs / hasChromiumBreakIterators.
+      var richBrowser = isBlink &&
+        typeof ImageDecoder !== "undefined" &&
+        typeof Intl.v8BreakIterator !== "undefined" &&
+        typeof Intl.Segmenter !== "undefined";
+      // The WasmGC probe flutter_bootstrap.js uses, byte for byte.
+      var supportsWasmGC = WebAssembly.validate(new Uint8Array(
+        [0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 95, 1, 120, 0]));
+      // Whether the deployed build has a dart2wasm variant at all. This can't
+      // be read from _flutter.buildConfig: that lands with
+      // flutter_bootstrap.js, and the whole point of this script is to run
+      // before then. So it's stated here, and the deploy workflow re-checks
+      // it against the actual build output and fails if the two disagree
+      // (see .github/workflows/deploy.yml, "Verify preload hints match the
+      // build"). Flip it in the same commit that adds or drops --wasm.
+      var HAS_WASM_BUILD = true;
+
+      if (supportsWasmGC && HAS_WASM_BUILD) {
+        // main.dart.mjs is dynamically imported; main.dart.wasm goes through
+        // compileStreaming(fetch(...)).
+        hint("modulepreload", "main.dart.mjs");
+        hint("preload", "main.dart.wasm", "fetch");
+        var skwasm = richBrowser ? "skwasm" : "skwasm_heavy";
+        hint("modulepreload", "canvaskit/" + skwasm + ".js");
+        hint("preload", "canvaskit/" + skwasm + ".wasm", "fetch");
+      } else {
+        hint("preload", "main.dart.js", "script");
+        var base = richBrowser ? "canvaskit/chromium/" : "canvaskit/";
+        hint("modulepreload", base + "canvaskit.js");
+        hint("preload", base + "canvaskit.wasm", "fetch");
+      }
+    })();
+  </script>
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
@@ -71,115 +183,330 @@
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <style id="splash-screen-style">
+    /* The pre-Flutter hero.
+
+       A Flutter Web app cannot paint anything until the engine and the
+       compiled app have both arrived — around 2MB compressed, so a couple of
+       seconds on mobile no matter how well the download is tuned. Rather
+       than spend that time on a spinner, this paints the real hero in plain
+       HTML at first render (~150ms), and Flutter replaces it in place once
+       it boots. The visitor sees the page, and the name and contact buttons
+       are live, long before any of Flutter exists.
+
+       The tokens, type scale and copy below are transcriptions of the real
+       hero: colours from lib/src/constants/themes.dart, sizes from
+       _DesktopHero in personal_info_section.dart, copy from
+       assets/translations/en.json. They are duplicated, not shared, so an
+       edit to any of those needs a matching edit here or the handover to
+       Flutter becomes visible as a jump. */
+
+    :root {
+      /* FlexColorScheme `primary` (content surface) and `secondary` (page
+         chrome) from the light theme, plus the chartreuse accent. */
+      --pl-surface: #ffffff;
+      --pl-chrome: #eef0f2;
+      --pl-text: #1b1b1f;
+      --pl-accent: #4e6810;
+      --pl-on-accent: #eef0f2;
+      --pl-hairline: rgba(27, 27, 31, 0.24);
+    }
+
+    :root[data-theme="dark"] {
+      --pl-surface: #1e1922;
+      --pl-chrome: #15121a;
+      --pl-text: #e8e0e8;
+      --pl-accent: #d7ff3b;
+      --pl-on-accent: #15121a;
+      --pl-hairline: rgba(232, 224, 232, 0.24);
+    }
+
+    /* The three faces the hero uses, loaded straight from the app bundle so
+       there is no second copy to ship and no third-party font request.
+       font-display:swap lets the text paint immediately in a system face and
+       upgrade in place — the whole point here is to not wait. */
+    @font-face {
+      font-family: "PlArchivo";
+      src: url("assets/assets/fonts/Archivo-ExtraBold.ttf") format("truetype");
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "PlPublicSans";
+      src: url("assets/assets/fonts/PublicSans-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "PlPublicSans";
+      src: url("assets/assets/fonts/PublicSans-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "PlMono";
+      src: url("assets/assets/fonts/JetBrainsMono-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-display: swap;
+    }
+
     html {
-      height: 100%
+      height: 100%;
     }
 
     body {
       margin: 0;
       min-height: 100%;
-      background-color: #f7f8fa;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #0b0f14;
-      }
+      background-color: var(--pl-surface);
     }
 
     #loading {
       position: fixed;
       inset: 0;
+      /* Scrollable rather than clipped: on a short viewport the hero is
+         taller than the screen, and until Flutter takes over this is the
+         only thing the visitor has. */
+      overflow-y: auto;
+      background: var(--pl-surface);
+      color: var(--pl-text);
+      font-family: "PlPublicSans", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, sans-serif;
+      /* Flutter's first frame swaps this out; the fade makes that read as
+         the page finishing rather than as a flicker. */
+      transition: opacity 180ms ease-out;
+    }
+
+    #loading.pl-done {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .pl-bar {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      height: 56px;
+      padding: 0 20px;
+      background: var(--pl-chrome);
+      font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .pl-prompt {
+      color: var(--pl-accent);
+      font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 500;
+    }
+
+    .pl-hero {
+      /* Mirrors the desktop hero's left column: same order, same gaps, and
+         the same width. That width matters more than it looks — the real
+         hero is a split layout whose left column is about half the viewport,
+         which is what makes the name wrap after "Ehsanur". Let this run the
+         full page width instead and the name sits on one line, so Flutter's
+         first frame would visibly reflow it. */
+      box-sizing: border-box;
+      /* ~545px of content, which is what the split layout leaves the left
+         column at desktop widths. Padding is asymmetric on purpose: the left
+         inset lines the hero up with the app's, while the right side only
+         needs enough to keep text off the edge on narrow screens. */
+      --pl-inset: clamp(20px, 8vw, 120px);
+      max-width: calc(545px + var(--pl-inset) + 24px);
+      padding: clamp(32px, 6vh, 72px) 24px clamp(32px, 6vh, 72px) var(--pl-inset);
+    }
+
+    .pl-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .pl-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pl-accent);
+      box-shadow: 0 0 6px 3px color-mix(in srgb, var(--pl-accent) 24%, transparent);
+    }
+
+    .pl-avatar {
+      display: block;
+      margin: 20px 0 16px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid color-mix(in srgb, var(--pl-accent) 63%, transparent);
+      padding: 3px;
+      box-sizing: border-box;
+    }
+
+    .pl-name {
+      /* fluidSize(min: 32, preferredVwPercent: 5, max: 56) — the Dart helper
+         in lib/src/common/utils/fluid_size.dart is a clamp() by another name. */
+      margin: 0;
+      font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 800;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -0.5px;
+    }
+
+    .pl-title {
+      /* fluidSize(min: 16, preferredVwPercent: 2, max: 21.6) */
+      margin: 8px 0 0;
+      font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 800;
+      font-size: clamp(16px, 2vw, 21.6px);
+      line-height: 1.2;
+    }
+
+    .pl-loc {
+      margin: 12px 0 0;
+      font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 500;
+      font-size: 12px;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .pl-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 18px;
+      margin-top: 28px;
+    }
+
+    .pl-cta {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      text-align: center;
-      padding: 24px;
-    }
-
-    #loading-spinner {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 3px solid rgba(15, 118, 110, 0.15);
-      border-top-color: #0f766e;
-      animation: loading-spin 0.8s linear infinite;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      #loading-spinner {
-        border-color: rgba(45, 212, 191, 0.15);
-        border-top-color: #2dd4bf;
-      }
-    }
-
-    #loading-name {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 15px;
+      min-height: 48px;
+      border-radius: 999px;
+      font-family: "PlPublicSans", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 600;
-      letter-spacing: 0.02em;
-      color: #6b7280;
+      font-size: 16px;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
-    @media (prefers-color-scheme: dark) {
-      #loading-name {
-        color: #9ca3af;
-      }
+    .pl-cta-primary {
+      padding: 14px 26px;
+      background: var(--pl-accent);
+      color: var(--pl-on-accent);
     }
 
-    /* Crawler/no-JS fallback copy — visually minimal since it's removed by
-       removeSplashFromWeb() the instant Flutter boots, but present in the
-       initial HTML for search engines and JS-disabled clients. Flutter Web
-       renders to a canvas, so this is the only text a crawler ever sees. */
-    #loading-summary {
-      max-width: 480px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    .pl-cta-secondary {
+      padding: 13px 22px;
+      border: 1px solid var(--pl-hairline);
+      color: var(--pl-text);
+    }
+
+    .pl-cta-text {
+      color: var(--pl-text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Crawler/no-JS copy. Flutter renders to a canvas, so the markup above
+       plus this is the only text a search engine ever sees. */
+    .pl-crawl {
+      margin: 28px 0 0;
+      max-width: 60ch;
       font-size: 13px;
       line-height: 1.5;
-      color: #9ca3af;
+      opacity: 0.6;
     }
 
-    #loading-summary a {
-      color: #0f766e;
+    .pl-crawl a {
+      color: var(--pl-accent);
     }
 
-    @media (prefers-color-scheme: dark) {
-      #loading-summary a {
-        color: #2dd4bf;
-      }
-    }
-
-    @keyframes loading-spin {
-      to {
-        transform: rotate(360deg);
-      }
+    @media (max-width: 640px) {
+      .pl-cta { flex: 1 1 100%; }
     }
   </style>
   <script id="splash-screen-script">
+    // Pick the theme before anything paints, so the hero never flashes the
+    // wrong one. The app persists the visitor's choice through
+    // shared_preferences, which on web is localStorage under a "flutter."
+    // prefix with a JSON-encoded value — see BrightnessController in
+    // lib/src/features/general/provider/brightness_controller.dart. Falling
+    // back to the OS preference matches what that controller does on a first
+    // visit, so the splash and the app agree either way.
+    (function () {
+      var stored = null;
+      try {
+        stored = JSON.parse(localStorage.getItem("flutter.brightness"));
+      } catch (e) {
+        stored = null;
+      }
+      var dark = stored === "dark" || (stored !== "light" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    })();
+
     function removeSplashFromWeb() {
-      document.getElementById("loading")?.remove();
+      var splash = document.getElementById("loading");
+      if (!splash) return;
+      // Fade rather than cut: Flutter has already painted underneath, so this
+      // reads as the page settling instead of a flicker. pointer-events goes
+      // to none with the class, so the hero's own links stop intercepting
+      // clicks meant for the live app the moment the handover starts.
+      splash.classList.add("pl-done");
+      setTimeout(function () { splash.remove(); }, 200);
       document.body.style.background = "transparent";
     }
+    // Flutter fires this once it has rendered its first frame, which is
+    // exactly when the splash has something to hand over to. It is dispatched
+    // on window in this engine version (see the "flutter/service_worker"
+    // channel handler in main.dart.js) even though Flutter's own docs say
+    // document; listening on both keeps this working either way, and the
+    // early return above makes a duplicate call harmless.
+    window.addEventListener("flutter-first-frame", removeSplashFromWeb);
+    document.addEventListener("flutter-first-frame", removeSplashFromWeb);
   </script>
 </head>
 <body>
   <div id="loading">
-    <div id="loading-spinner" aria-hidden="true"></div>
-    <div id="loading-name">Shekh Ehsanur Rahman</div>
-    <p id="loading-summary">
-      Senior Mobile Engineer specializing in Flutter & React
-      Native, with offline-first architecture and data sync
-      expertise. 11 years in mobile, 50+ apps shipped, 1M+ users. Open to
-      remote roles (US/UK/EU).
-      <br>
-      <a href="https://github.com/sujit70777">GitHub</a> ·
-      <a href="https://www.linkedin.com/in/sujit70777">LinkedIn</a>
-    </p>
+    <header class="pl-bar">
+      <span class="pl-prompt">&gt;_</span>
+      <span>Shekh Ehsanur Rahman</span>
+    </header>
+    <main class="pl-hero">
+      <div class="pl-badge"><span class="pl-dot"></span>Available for new work</div>
+      <img class="pl-avatar" src="assets/assets/images/profile.webp" width="72" height="72"
+           alt="Shekh Ehsanur Rahman, Senior Mobile Engineer (Flutter &amp; React Native)">
+      <h1 class="pl-name">Shekh Ehsanur Rahman</h1>
+      <p class="pl-title">Senior Mobile Engineer &mdash; Offline-First &amp; Data-Sync Architecture &mdash; Flutter &amp; React Native</p>
+      <p class="pl-loc">Based in Bangladesh &middot; hours shifted to overlap EU/US</p>
+      <!-- Real links, not placeholders: these work while Flutter is still
+           downloading, so a visitor on a slow connection can get in touch
+           without waiting for the app at all. -->
+      <div class="pl-ctas">
+        <a class="pl-cta pl-cta-primary" href="mailto:mail@ehsanur.com">Email me</a>
+        <a class="pl-cta pl-cta-secondary" href="https://wa.me/8801747931646">WhatsApp</a>
+        <a class="pl-cta pl-cta-text" href="assets/documents/resume.pdf">Download Resume</a>
+      </div>
+      <p class="pl-crawl">
+        11 years in mobile, 50+ apps shipped, 1M+ users, 4.7+ average store
+        rating. Offline-first architecture and conflict-free data
+        synchronisation. Open to remote roles (US/UK/EU).
+        <a href="https://github.com/sujit70777">GitHub</a> &middot;
+        <a href="https://www.linkedin.com/in/sujit70777">LinkedIn</a>
+      </p>
+    </main>
   </div>
 
-  <script src="flutter_bootstrap.js" async=""></script>
-
-
+  <script src="flutter_bootstrap.js" async></script>
 </body></html>

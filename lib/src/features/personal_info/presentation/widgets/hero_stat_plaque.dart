@@ -12,6 +12,15 @@ import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 /// [columns] is 4 (one row, tablet/desktop) or 2 (a 2×2 grid, mobile — four
 /// across becomes unreadable at phone width). [fullWidth] stretches the
 /// plaque to fill its parent instead of sizing to its own content.
+/// The rating star, drawn from the bundled FontAwesome subset rather than
+/// written as a literal '★' (U+2605). That character is in none of this
+/// app's fonts, so CanvasKit resolved it by downloading Noto Sans Symbols 2
+/// from fonts.gstatic.com — a 374KB cross-origin fetch, for one glyph, in
+/// the hero, on every first load. Keep this an [IconData]; see
+/// lib/src/common/widgets/icon.dart for why the codepoint has to appear as a
+/// const literal to survive icon tree-shaking.
+const _starIcon = IconData(0xed85, fontFamily: 'FontAwesome');
+
 class HeroStatPlaque extends StatelessWidget {
   const HeroStatPlaque({super.key, this.columns = 4, this.fullWidth = false});
 
@@ -28,7 +37,7 @@ class HeroStatPlaque extends StatelessWidget {
 
     final stats = [
       _StatData(
-        leadingPrefix: '★',
+        leadingIcon: _starIcon,
         rawValue: tr(LocaleKeys.stats_rating),
         label: tr(LocaleKeys.stats_ratingLabel),
       ),
@@ -116,9 +125,9 @@ class HeroStatPlaque extends StatelessWidget {
 
 class _StatData {
   const _StatData(
-      {this.leadingPrefix = '', required this.rawValue, required this.label});
+      {this.leadingIcon, required this.rawValue, required this.label});
 
-  final String leadingPrefix;
+  final IconData? leadingIcon;
   final String rawValue;
   final String label;
 }
@@ -135,11 +144,24 @@ class _Stat extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _CountUpValue(
-          leadingPrefix: data.leadingPrefix,
-          rawValue: data.rawValue,
-          style: monoLabelStyle(
-              fontSize: numberSize, color: theme.colorScheme.tertiary),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (data.leadingIcon != null) ...[
+              Icon(
+                data.leadingIcon,
+                size: numberSize * 0.72,
+                color: theme.colorScheme.tertiary,
+              ),
+              SizedBox(width: numberSize * 0.12),
+            ],
+            _CountUpValue(
+              rawValue: data.rawValue,
+              style: monoLabelStyle(
+                  fontSize: numberSize, color: theme.colorScheme.tertiary),
+            ),
+          ],
         ),
         const SizedBox(height: 2),
         Text(
@@ -163,9 +185,8 @@ class _Stat extends StatelessWidget {
 /// `prefers-reduced-motion`.
 class _CountUpValue extends StatefulWidget {
   const _CountUpValue(
-      {this.leadingPrefix = '', required this.rawValue, this.style});
+      {required this.rawValue, this.style});
 
-  final String leadingPrefix;
   final String rawValue;
   final TextStyle? style;
 
@@ -221,7 +242,7 @@ class _CountUpValueState extends State<_CountUpValue>
       builder: (context, _) {
         final value = _target * _curve.value;
         return Text(
-          '${widget.leadingPrefix}${value.toStringAsFixed(_decimals)}$_suffix',
+          '${value.toStringAsFixed(_decimals)}$_suffix',
           style: widget.style,
         );
       },

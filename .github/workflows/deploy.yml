@@ -37,12 +37,36 @@ jobs:
         run: flutter test
 
       - name: Build web app
-        run: flutter build web --release
+        # --wasm emits a dart2wasm build alongside the dart2js one and lets
+        # flutter_bootstrap.js pick per browser, so nothing regresses for
+        # clients without WasmGC — they keep getting the JS build. On the
+        # ones that have it the renderer is skwasm rather than CanvasKit,
+        # which measured ~240KB smaller and ~150ms faster to first frame on a
+        # 9Mbps connection. web/index.html's HAS_WASM_BUILD must stay true
+        # while this flag is here; the step below enforces that.
+        run: flutter build web --wasm --release
 
       - name: Verify build output before deploying
         run: |
           test -f build/web/index.html
           test -f build/web/main.dart.js
+          test -f build/web/main.dart.wasm
+
+      - name: Verify preload hints match the build
+        # web/index.html preloads the app and renderer during HTML parse,
+        # which means it has to name main.dart.js or main.dart.wasm before
+        # flutter_bootstrap.js is around to say which one this build has. It
+        # states that in a HAS_WASM_BUILD constant. If the build command
+        # gains or loses --wasm and that constant isn't updated in the same
+        # commit, every visitor silently downloads ~2MB of the wrong engine
+        # alongside the right one, which is worse than not preloading at all.
+        # Cheaper to fail here than to ship it.
+        run: |
+          if [ -f build/web/main.dart.wasm ]; then want=true; else want=false; fi
+          if ! grep -q "var HAS_WASM_BUILD = $want;" build/web/index.html; then
+            echo "::error::web/index.html sets HAS_WASM_BUILD to the opposite of what this build produced (expected $want). Update it to match the flutter build web flags."
+            exit 1
+          fi
 
       - name: Cache-bust resume PDF URLs
         # resume.pdf keeps a stable filename, so a plain redeploy gives
@@ -63,6 +87,14 @@ jobs:
               "$TRANSLATIONS" > "$TRANSLATIONS.tmp"
             mv "$TRANSLATIONS.tmp" "$TRANSLATIONS"
           done
+
+      - name: Drop debug symbol maps
+        # Each engine variant ships a multi-megabyte .symbols file next to it
+        # (canvaskit.js.symbols, skwasm.js.symbols, ...) — a name map for
+        # symbolising release stack traces locally. Nothing requests them at
+        # runtime, so all they do is take ~7MB of space on the host and get
+        # rsynced on every deploy.
+        run: find build/web -name '*.symbols' -delete
 
       - name: Pre-compress static assets
         run: |

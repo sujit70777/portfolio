@@ -13,7 +13,6 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   flex_color_scheme: 8.4.0
-  google_fonts: ^8.2.1
   riverpod_annotation: ^4.0.0
   hooks_riverpod: ^3.1.0
   flutter_hooks: ^0.21.3+1
@@ -57,8 +56,13 @@ flutter:
   # directly via url_launcher, not resolved through Flutter's AssetBundle —
   # has no way to account for. Files under web/ are copied to the build
   # root verbatim, so this is the only way to get a predictable URL for it.
+  # NOTE: assets/fonts/ is deliberately NOT listed here. Every font in that
+  # directory is already bundled by the `fonts:` section below, and listing
+  # the directory as a plain asset too made `flutter build` copy each .ttf
+  # verbatim instead of tree-shaking it — shipping the full 580KB
+  # FontAwesome.ttf for the 15 glyphs this app actually uses. Fonts block
+  # first text paint, so that was ~575KB of dead weight on the critical path.
   assets:
-    - assets/fonts/
     - assets/icons/flags/
     - assets/icons/other/
     - assets/icons/software-development/
@@ -112,6 +116,18 @@ flutter:
       fonts:
         - asset: assets/fonts/JetBrainsMono-Medium.ttf
           weight: 500
+    # Not a real Roboto. Flutter Web's engine scans the bundled font families
+    # for one literally named "Roboto" and, finding none, downloads Roboto
+    # from fonts.gstatic.com during startup — 63KB over a fresh cross-origin
+    # connection (DNS + TCP + TLS to a third party), on the critical path,
+    # for a face this design never shows. Declaring the name satisfies that
+    # check and keeps startup on this origin. It points at the Public Sans
+    # file on purpose: ThemeData.fontFamily is PublicSans (see
+    # lib/src/constants/themes.dart), so nothing should ever resolve to
+    # "Roboto" anyway — this entry only has to exist.
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/PublicSans-Regular.ttf
 
 
 flutter_native_splash:
