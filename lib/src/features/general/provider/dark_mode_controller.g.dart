@@ -8,11 +8,61 @@ part of 'dark_mode_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// [BrightnessController] expressed as a boolean, for the widgets that think
+/// in "is it dark" rather than in [Brightness].
+///
+/// This watches the controller's state, not its `.future`. Watching the
+/// future looks equivalent and isn't: the future only changes identity when
+/// the notifier passes through a loading state, so a straight data-to-data
+/// flip — which is exactly what toggling the theme now does — left every
+/// dependent holding the already-completed future from the first build and
+/// never rebuilt them. The visible symptom was a toggle that worked once and
+/// then appeared dead.
+///
+/// It is deliberately not a notifier. There is one writer, and it lives on
+/// [BrightnessController]; a second entry point that only forwarded to it was
+/// an easy way to end up with two ideas of the current theme.
 
-@ProviderFor(DarkMode)
+@ProviderFor(darkMode)
 final darkModeProvider = DarkModeProvider._();
 
-final class DarkModeProvider extends $AsyncNotifierProvider<DarkMode, bool> {
+/// [BrightnessController] expressed as a boolean, for the widgets that think
+/// in "is it dark" rather than in [Brightness].
+///
+/// This watches the controller's state, not its `.future`. Watching the
+/// future looks equivalent and isn't: the future only changes identity when
+/// the notifier passes through a loading state, so a straight data-to-data
+/// flip — which is exactly what toggling the theme now does — left every
+/// dependent holding the already-completed future from the first build and
+/// never rebuilt them. The visible symptom was a toggle that worked once and
+/// then appeared dead.
+///
+/// It is deliberately not a notifier. There is one writer, and it lives on
+/// [BrightnessController]; a second entry point that only forwarded to it was
+/// an easy way to end up with two ideas of the current theme.
+
+final class DarkModeProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<bool>,
+          AsyncValue<bool>,
+          AsyncValue<bool>
+        >
+    with $Provider<AsyncValue<bool>> {
+  /// [BrightnessController] expressed as a boolean, for the widgets that think
+  /// in "is it dark" rather than in [Brightness].
+  ///
+  /// This watches the controller's state, not its `.future`. Watching the
+  /// future looks equivalent and isn't: the future only changes identity when
+  /// the notifier passes through a loading state, so a straight data-to-data
+  /// flip — which is exactly what toggling the theme now does — left every
+  /// dependent holding the already-completed future from the first build and
+  /// never rebuilt them. The visible symptom was a toggle that worked once and
+  /// then appeared dead.
+  ///
+  /// It is deliberately not a notifier. There is one writer, and it lives on
+  /// [BrightnessController]; a second entry point that only forwarded to it was
+  /// an easy way to end up with two ideas of the current theme.
   DarkModeProvider._()
     : super(
         from: null,
@@ -29,25 +79,21 @@ final class DarkModeProvider extends $AsyncNotifierProvider<DarkMode, bool> {
 
   @$internal
   @override
-  DarkMode create() => DarkMode();
-}
+  $ProviderElement<AsyncValue<bool>> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
-String _$darkModeHash() => r'97b9a96d43a27fac47936b7d5202db7f600e2441';
-
-abstract class _$DarkMode extends $AsyncNotifier<bool> {
-  FutureOr<bool> build();
-  @$mustCallSuper
   @override
-  void runBuild() {
-    final ref = this.ref as $Ref<AsyncValue<bool>, bool>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<AsyncValue<bool>, bool>,
-              AsyncValue<bool>,
-              Object?,
-              Object?
-            >;
-    element.handleCreate(ref, build);
+  AsyncValue<bool> create(Ref ref) {
+    return darkMode(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AsyncValue<bool> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AsyncValue<bool>>(value),
+    );
   }
 }
+
+String _$darkModeHash() => r'e99cc7e73af019fe70e536fc122cfce22bd16533';

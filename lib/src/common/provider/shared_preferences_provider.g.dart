@@ -28,7 +28,7 @@ final class SharedPreferencesProvider
         argument: null,
         retry: null,
         name: r'sharedPreferencesProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -48,4 +48,4 @@ final class SharedPreferencesProvider
   }
 }
 
-String _$sharedPreferencesHash() => r'c70ada36a01b0dbe7c28424b60b9fdeed0e177f7';
+String _$sharedPreferencesHash() => r'22d9890268ef7f04858d59f952b9fb7a54011fd3';

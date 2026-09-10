@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/utils/fluid_size.dart';
+import 'package:portfolio/src/common/widgets/first_paint_entrance.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 
@@ -219,7 +220,13 @@ class _CountUpValueState extends State<_CountUpValue>
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!_controller.isAnimating && _controller.value == 0) {
-      if (MediaQuery.disableAnimationsOf(context)) {
+      // Two separate reasons to skip the count and land on the number: the
+      // visitor asked for less motion, or the pre-Flutter hero has already
+      // shown them these figures. On the phone layout that markup draws this
+      // plaque (see web/index.html), so counting up from zero here would take
+      // "4.7" the visitor was already reading and wind it back to "0.1".
+      if (MediaQuery.disableAnimationsOf(context) ||
+          !kAnimateFirstPaintEntrance) {
         _controller.value = 1;
       } else {
         WidgetsBinding.instance.addPostFrameCallback((_) {

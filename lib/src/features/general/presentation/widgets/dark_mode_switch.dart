@@ -1,6 +1,7 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/features/general/provider/brightness_controller.dart';
 import 'package:portfolio/src/features/general/provider/dark_mode_controller.dart';
 
 class DarkModeSwitch extends ConsumerWidget {
@@ -11,7 +12,8 @@ class DarkModeSwitch extends ConsumerWidget {
     return SelectionContainer.disabled(
       child: AnimatedToggleSwitch<bool>.dual(
         current: _getDarkMode(ref),
-        onChanged: (_) => ref.read(darkModeProvider.notifier).updateTheme(),
+        onChanged: (_) =>
+            ref.read(brightnessControllerProvider.notifier).updateBrightness(),
         first: false,
         second: true,
         spacing: 8,

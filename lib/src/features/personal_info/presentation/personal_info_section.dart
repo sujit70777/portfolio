@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/utils/fluid_size.dart';
-import 'package:portfolio/src/common/widgets/animated_fade_slide.dart';
+import 'package:portfolio/src/common/widgets/first_paint_entrance.dart';
 import 'package:portfolio/src/common/widgets/device_frame.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/constants/sizes.dart';
@@ -23,7 +23,7 @@ import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 /// well under 800ms — quick on purpose, since a slow entrance is only
 /// charming once and annoying on every repeat visit.
 Widget _entrance(int step, Widget child) {
-  return AnimatedFadeSlide(
+  return FirstPaintEntrance(
     delay: Duration(milliseconds: 80 * step),
     duration: const Duration(milliseconds: 280),
     offset: const Offset(0, 20),

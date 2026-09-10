@@ -187,18 +187,18 @@
 
        A Flutter Web app cannot paint anything until the engine and the
        compiled app have both arrived — around 2MB compressed, so a couple of
-       seconds on mobile no matter how well the download is tuned. Rather
-       than spend that time on a spinner, this paints the real hero in plain
-       HTML at first render (~150ms), and Flutter replaces it in place once
-       it boots. The visitor sees the page, and the name and contact buttons
-       are live, long before any of Flutter exists.
+       seconds on a phone no matter how well the download is tuned. Rather
+       than spend that on a spinner, this paints the real hero in plain HTML
+       at first render, and Flutter replaces it in place once it boots.
 
-       The tokens, type scale and copy below are transcriptions of the real
-       hero: colours from lib/src/constants/themes.dart, sizes from
-       _DesktopHero in personal_info_section.dart, copy from
-       assets/translations/en.json. They are duplicated, not shared, so an
-       edit to any of those needs a matching edit here or the handover to
-       Flutter becomes visible as a jump. */
+       Everything here is a transcription of the real hero, and the layout
+       has to track it at every width or the handover becomes a visible jump.
+       The three breakpoints below are Responsive's (lib/src/common/widgets/
+       responsive.dart) and the layouts are _MobileHero, _TabletHero and
+       _DesktopHero in personal_info_section.dart; page padding comes from
+       GeneralTablet/GeneralDesktop, colours from constants/themes.dart, copy
+       from assets/translations/en.json. Change any of those and this needs
+       the same change. */
 
     :root {
       /* FlexColorScheme `primary` (content surface) and `secondary` (page
@@ -209,6 +209,24 @@
       --pl-accent: #4e6810;
       --pl-on-accent: #eef0f2;
       --pl-hairline: rgba(27, 27, 31, 0.24);
+      --pl-muted: rgba(27, 27, 31, 0.7);
+
+      /* Mobile metrics (_MobileHero + GeneralTablet's <640 padding). These
+         are the defaults because the layout is mobile-first; the media
+         queries below widen them.
+
+         The inset is GeneralTablet's page padding plus the extra 12px it
+         wraps PersonalInfoSection in — 20 + 12 here, 48 + 12 on tablet. Only
+         GeneralDesktop, above 1280, drops that 12 and pads to 100. Miss it
+         and the whole hero slides sideways on handover. */
+      --pl-pad-x: 32px;
+      --pl-pad-top: 32px;
+      --pl-avatar: 56px;
+      --pl-gap-badge: 16px;
+      --pl-gap-title: 12px;
+      --pl-gap-loc: 8px;
+      --pl-gap-ctas: 24px;
+      --pl-col: 100%;
     }
 
     :root[data-theme="dark"] {
@@ -218,12 +236,13 @@
       --pl-accent: #d7ff3b;
       --pl-on-accent: #15121a;
       --pl-hairline: rgba(232, 224, 232, 0.24);
+      --pl-muted: rgba(232, 224, 232, 0.7);
     }
 
-    /* The three faces the hero uses, loaded straight from the app bundle so
-       there is no second copy to ship and no third-party font request.
-       font-display:swap lets the text paint immediately in a system face and
-       upgrade in place — the whole point here is to not wait. */
+    /* The faces the hero uses, loaded straight from the app bundle so there
+       is no second copy to ship and no third-party font request.
+       font-display:swap lets text paint immediately in a system face and
+       upgrade in place — not waiting is the entire point of this markup. */
     @font-face {
       font-family: "PlArchivo";
       src: url("assets/assets/fonts/Archivo-ExtraBold.ttf") format("truetype");
@@ -265,17 +284,17 @@
     #loading {
       position: fixed;
       inset: 0;
-      /* Scrollable rather than clipped: on a short viewport the hero is
-         taller than the screen, and until Flutter takes over this is the
-         only thing the visitor has. */
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
       background: var(--pl-surface);
       color: var(--pl-text);
       font-family: "PlPublicSans", -apple-system, BlinkMacSystemFont,
         "Segoe UI", Roboto, sans-serif;
-      /* Flutter's first frame swaps this out; the fade makes that read as
-         the page finishing rather than as a flicker. */
-      transition: opacity 180ms ease-out;
+      /* Flutter's first frame swaps this out. The cross-fade covers the small
+         differences between CSS text rendering and CanvasKit's — a hard cut
+         makes those land as a flicker. Kept short: the two layouts underneath
+         it are the same, so there is nothing to watch. */
+      transition: opacity 150ms linear;
     }
 
     #loading.pl-done {
@@ -283,16 +302,28 @@
       pointer-events: none;
     }
 
+    /* --- app bar ------------------------------------------------------- */
+
     .pl-bar {
       display: flex;
       align-items: center;
-      gap: 12px;
+      flex: none;
       height: 56px;
       padding: 0 20px;
       background: var(--pl-chrome);
+      gap: 12px;
+    }
+
+    .pl-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 800;
       font-size: 18px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .pl-prompt {
@@ -301,22 +332,59 @@
       font-weight: 500;
     }
 
-    .pl-hero {
-      /* Mirrors the desktop hero's left column: same order, same gaps, and
-         the same width. That width matters more than it looks — the real
-         hero is a split layout whose left column is about half the viewport,
-         which is what makes the name wrap after "Ehsanur". Let this run the
-         full page width instead and the name sits on one line, so Flutter's
-         first frame would visibly reflow it. */
-      box-sizing: border-box;
-      /* ~545px of content, which is what the split layout leaves the left
-         column at desktop widths. Padding is asymmetric on purpose: the left
-         inset lines the hero up with the app's, while the right side only
-         needs enough to keep text off the edge on narrow screens. */
-      --pl-inset: clamp(20px, 8vw, 120px);
-      max-width: calc(545px + var(--pl-inset) + 24px);
-      padding: clamp(32px, 6vh, 72px) 24px clamp(32px, 6vh, 72px) var(--pl-inset);
+    .pl-nav {
+      display: none;
+      margin-left: auto;
+      align-items: center;
+      gap: 28px;
+      font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 800;
+      font-size: 16px;
     }
+
+    /* The drawer button the app shows below the desktop breakpoint. Drawn
+       rather than iconified: pulling in an icon font for three lines would
+       cost more than the lines do. */
+    .pl-burger {
+      margin-left: auto;
+      width: 20px;
+      flex: none;
+    }
+
+    .pl-burger span {
+      display: block;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--pl-text);
+    }
+
+    .pl-burger span + span {
+      margin-top: 5px;
+    }
+
+    /* --- page ---------------------------------------------------------- */
+
+    .pl-page {
+      /* Scrolls rather than clips: until Flutter takes over this is the only
+         thing the visitor has, and on a short viewport the hero is taller
+         than the screen. */
+      flex: 1 1 auto;
+      overflow-y: auto;
+      box-sizing: border-box;
+      padding: var(--pl-pad-top) var(--pl-pad-x) 88px;
+    }
+
+    .pl-content {
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+
+    .pl-hero {
+      box-sizing: border-box;
+      width: var(--pl-col);
+    }
+
+    /* --- hero ---------------------------------------------------------- */
 
     .pl-badge {
       display: flex;
@@ -327,32 +395,44 @@
       font-size: 12px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      opacity: 0.7;
+      color: var(--pl-muted);
     }
 
     .pl-dot {
       width: 8px;
       height: 8px;
+      flex: none;
       border-radius: 50%;
       background: var(--pl-accent);
       box-shadow: 0 0 6px 3px color-mix(in srgb, var(--pl-accent) 24%, transparent);
     }
 
+    /* Photo and name share a row below the desktop breakpoint, and stack
+       above it — the same switch _MobileHero/_TabletHero make against
+       _DesktopHero. */
+    .pl-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: var(--pl-gap-badge);
+    }
+
     .pl-avatar {
       display: block;
-      margin: 20px 0 16px;
-      width: 72px;
-      height: 72px;
+      flex: none;
+      box-sizing: border-box;
+      width: var(--pl-avatar);
+      height: var(--pl-avatar);
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid color-mix(in srgb, var(--pl-accent) 63%, transparent);
       padding: 3px;
-      box-sizing: border-box;
     }
 
     .pl-name {
       /* fluidSize(min: 32, preferredVwPercent: 5, max: 56) — the Dart helper
-         in lib/src/common/utils/fluid_size.dart is a clamp() by another name. */
+         in lib/src/common/utils/fluid_size.dart is a clamp() by another
+         name, so the same three numbers give the same size at every width. */
       margin: 0;
       font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 800;
@@ -363,7 +443,7 @@
 
     .pl-title {
       /* fluidSize(min: 16, preferredVwPercent: 2, max: 21.6) */
-      margin: 8px 0 0;
+      margin: var(--pl-gap-title) 0 0;
       font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 800;
       font-size: clamp(16px, 2vw, 21.6px);
@@ -371,20 +451,73 @@
     }
 
     .pl-loc {
-      margin: 12px 0 0;
+      /* _LocationLine sets textAlign.center. That only shows once the text
+         wraps, which at phone widths it always does; wider up it fits on one
+         line and the centring is invisible either way. */
+      text-align: center;
+      margin: var(--pl-gap-loc) 0 0;
       font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
       font-weight: 500;
       font-size: 12px;
       text-transform: uppercase;
-      opacity: 0.7;
+      color: var(--pl-muted);
+    }
+
+    /* _MobileHero puts the stat plaque between the location line and the
+       CTAs — "a visitor needs a reason to care before they'll tap anything".
+       Reproduced only at that width: on tablet it sits below the phone
+       mockup and on desktop it is in the right-hand column, and neither of
+       those is above the buttons, so leaving it out there costs nothing.
+       Here, leaving it out would drop the CTAs ~170px when Flutter arrives. */
+    .pl-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 0;
+      margin-top: var(--pl-gap-ctas);
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--pl-chrome);
+      border: 1px solid color-mix(in srgb, var(--pl-text) 9%, transparent);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .pl-stat {
+      text-align: center;
+    }
+
+    /* The plaque separates its columns with a hairline rule, same as
+       HeroStatPlaque's _divider. */
+    .pl-stat:nth-child(odd) {
+      border-right: 1px solid color-mix(in srgb, var(--pl-text) 14%, transparent);
+    }
+
+    .pl-stat b {
+      display: block;
+      /* fluidSize(min: 20, preferredVwPercent: 2.5, max: 32) */
+      font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 500;
+      font-size: clamp(20px, 2.5vw, 32px);
+      line-height: 1.4;
+      color: var(--pl-accent);
+    }
+
+    .pl-stat span {
+      display: block;
+      margin-top: 2px;
+      font-family: "PlPublicSans", -apple-system, sans-serif;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--pl-muted);
     }
 
     .pl-ctas {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 14px 18px;
-      margin-top: 28px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      margin-top: var(--pl-gap-ctas);
     }
 
     .pl-cta {
@@ -392,6 +525,7 @@
       align-items: center;
       justify-content: center;
       min-height: 48px;
+      box-sizing: border-box;
       border-radius: 999px;
       font-family: "PlPublicSans", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 600;
@@ -413,27 +547,156 @@
     }
 
     .pl-cta-text {
+      align-self: center;
+      padding: 4px 0;
+      min-height: 0;
       color: var(--pl-text);
       text-decoration: underline;
       text-underline-offset: 3px;
     }
 
-    /* Crawler/no-JS copy. Flutter renders to a canvas, so the markup above
-       plus this is the only text a search engine ever sees. */
+    /* Crawler copy. Flutter renders to a canvas, so the markup above plus
+       this is the only text a search engine ever sees. */
     .pl-crawl {
       margin: 28px 0 0;
       max-width: 60ch;
       font-size: 13px;
       line-height: 1.5;
-      opacity: 0.6;
+      color: var(--pl-muted);
     }
 
     .pl-crawl a {
       color: var(--pl-accent);
     }
 
-    @media (max-width: 640px) {
-      .pl-cta { flex: 1 1 100%; }
+    /* --- tablet: 640–1023 (_TabletHero) -------------------------------- */
+
+    @media (min-width: 640px) {
+      :root {
+        --pl-pad-x: 60px;
+        --pl-pad-top: 60px;
+        --pl-avatar: 64px;
+        --pl-gap-badge: 20px;
+        --pl-gap-title: 16px;
+        --pl-gap-ctas: 24px;
+      }
+
+      /* _TabletHero centres a 640-wide column and centres its text. */
+      .pl-hero {
+        max-width: 640px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .pl-identity {
+        gap: 16px;
+      }
+
+      .pl-badge {
+        justify-content: center;
+      }
+
+      .pl-stats {
+        display: none;
+      }
+
+      .pl-ctas {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 12px 16px;
+      }
+
+      .pl-cta-text {
+        flex-basis: 100%;
+      }
+
+      .pl-crawl {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    /* --- desktop: 1024+ (_DesktopHero) --------------------------------- */
+
+    @media (min-width: 1024px) {
+      :root {
+        --pl-avatar: 72px;
+        --pl-gap-badge: 20px;
+        --pl-gap-title: 8px;
+        --pl-gap-loc: 12px;
+        --pl-gap-ctas: 28px;
+      }
+
+      /* _DesktopHero is a Row of Expanded(flex: 55) and Expanded(flex: 45)
+         with a 40px gap, and only the left half is reproduced here — the
+         right half is the phone mockup and the stat plaque, which are the
+         app's job. The name wrapping after "Ehsanur" is a consequence of
+         this width, so getting it right is what keeps the handover still. */
+      .pl-hero {
+        width: calc((100% - 40px) * 0.55);
+        max-width: none;
+        margin: 0;
+        text-align: left;
+      }
+
+      .pl-badge {
+        justify-content: flex-start;
+      }
+
+      .pl-loc {
+        text-align: left;
+      }
+
+      /* Photo sits above the name at this width, not beside it. */
+      .pl-identity {
+        display: block;
+      }
+
+      .pl-name {
+        margin-top: 16px;
+      }
+
+      .pl-ctas {
+        justify-content: flex-start;
+        gap: 14px 18px;
+      }
+
+      .pl-cta-text {
+        flex-basis: auto;
+        align-self: auto;
+      }
+
+      .pl-crawl {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .pl-nav {
+        display: flex;
+      }
+
+      .pl-burger {
+        display: none;
+      }
+    }
+
+    /* --- split-screen desktop: 1280+ (GeneralDesktop) ------------------ */
+
+    @media (min-width: 1280px) {
+      :root {
+        --pl-pad-x: 100px;
+        --pl-pad-top: 60px;
+      }
+    }
+
+    /* Someone who asked for less motion gets the handover as a cut rather
+       than a fade; there is nothing to see in it either way. */
+    @media (prefers-reduced-motion: reduce) {
+      #loading {
+        transition: none;
+      }
     }
   </style>
   <script id="splash-screen-script">
@@ -463,8 +726,16 @@
       // reads as the page settling instead of a flicker. pointer-events goes
       // to none with the class, so the hero's own links stop intercepting
       // clicks meant for the live app the moment the handover starts.
-      splash.classList.add("pl-done");
-      setTimeout(function () { splash.remove(); }, 200);
+      // Two frames of grace before the cross-fade starts. Flutter's first
+      // frame lands before it has decoded the profile photo, so fading on the
+      // event itself can show an empty avatar ring for a frame — the one bit
+      // of the hero that would still blink.
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          splash.classList.add("pl-done");
+          setTimeout(function () { splash.remove(); }, 200);
+        });
+      });
       document.body.style.background = "transparent";
     }
     // Flutter fires this once it has rendered its first frame, which is
@@ -480,32 +751,52 @@
 <body>
   <div id="loading">
     <header class="pl-bar">
-      <span class="pl-prompt">&gt;_</span>
-      <span>Shekh Ehsanur Rahman</span>
+      <span class="pl-brand"><span class="pl-prompt">&gt;_</span>Shekh Ehsanur Rahman</span>
+      <!-- Labels, not links. They become the real thing the moment Flutter
+           takes over; giving them hrefs here would mean a scroll-to-section
+           that works differently for a fraction of a second, which is worse
+           than one that plainly isn't ready yet. The hero's contact buttons
+           below are the opposite case: those are real, and they work. -->
+      <nav class="pl-nav" aria-hidden="true">
+        <span>About</span><span>Skills</span><span>Experience</span><span>Projects</span>
+      </nav>
+      <span class="pl-burger" aria-hidden="true"><span></span><span></span><span></span></span>
     </header>
-    <main class="pl-hero">
-      <div class="pl-badge"><span class="pl-dot"></span>Available for new work</div>
-      <img class="pl-avatar" src="assets/assets/images/profile.webp" width="72" height="72"
-           alt="Shekh Ehsanur Rahman, Senior Mobile Engineer (Flutter &amp; React Native)">
-      <h1 class="pl-name">Shekh Ehsanur Rahman</h1>
-      <p class="pl-title">Senior Mobile Engineer &mdash; Offline-First &amp; Data-Sync Architecture &mdash; Flutter &amp; React Native</p>
-      <p class="pl-loc">Based in Bangladesh &middot; hours shifted to overlap EU/US</p>
-      <!-- Real links, not placeholders: these work while Flutter is still
-           downloading, so a visitor on a slow connection can get in touch
-           without waiting for the app at all. -->
-      <div class="pl-ctas">
-        <a class="pl-cta pl-cta-primary" href="mailto:mail@ehsanur.com">Email me</a>
-        <a class="pl-cta pl-cta-secondary" href="https://wa.me/8801747931646">WhatsApp</a>
-        <a class="pl-cta pl-cta-text" href="assets/documents/resume.pdf">Download Resume</a>
+    <div class="pl-page">
+      <div class="pl-content">
+        <main class="pl-hero">
+          <div class="pl-badge"><span class="pl-dot"></span>Available for new work</div>
+          <div class="pl-identity">
+            <img class="pl-avatar" src="assets/assets/images/profile.webp" width="72" height="72"
+                 alt="Shekh Ehsanur Rahman, Senior Mobile Engineer (Flutter &amp; React Native)">
+            <h1 class="pl-name">Shekh Ehsanur Rahman</h1>
+          </div>
+          <p class="pl-title">Senior Mobile Engineer &mdash; Offline-First &amp; Data-Sync Architecture &mdash; Flutter &amp; React Native</p>
+          <p class="pl-loc">Based in Bangladesh &middot; hours shifted to overlap EU/US</p>
+          <div class="pl-stats" aria-hidden="true">
+            <div class="pl-stat"><b>&#9733;4.7</b><span>Rating</span></div>
+            <div class="pl-stat"><b>50+</b><span>Apps</span></div>
+            <div class="pl-stat"><b>1M+</b><span>Users</span></div>
+            <div class="pl-stat"><b>11yr</b><span>Years</span></div>
+          </div>
+          <!-- Real links: these work while Flutter is still downloading, so a
+               visitor on a slow connection can get in touch without waiting
+               for the app at all. -->
+          <div class="pl-ctas">
+            <a class="pl-cta pl-cta-primary" href="mailto:mail@ehsanur.com">Email me</a>
+            <a class="pl-cta pl-cta-secondary" href="https://wa.me/8801747931646">WhatsApp</a>
+            <a class="pl-cta pl-cta-text" href="assets/documents/resume.pdf">Download Resume</a>
+          </div>
+          <p class="pl-crawl">
+            11 years in mobile, 50+ apps shipped, 1M+ users, 4.7+ average store
+            rating. Offline-first architecture and conflict-free data
+            synchronisation. Open to remote roles (US/UK/EU).
+            <a href="https://github.com/sujit70777">GitHub</a> &middot;
+            <a href="https://www.linkedin.com/in/sujit70777">LinkedIn</a>
+          </p>
+        </main>
       </div>
-      <p class="pl-crawl">
-        11 years in mobile, 50+ apps shipped, 1M+ users, 4.7+ average store
-        rating. Offline-first architecture and conflict-free data
-        synchronisation. Open to remote roles (US/UK/EU).
-        <a href="https://github.com/sujit70777">GitHub</a> &middot;
-        <a href="https://www.linkedin.com/in/sujit70777">LinkedIn</a>
-      </p>
-    </main>
+    </div>
   </div>
 
   <script src="flutter_bootstrap.js" async></script>
