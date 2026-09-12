@@ -211,6 +211,13 @@
       --pl-hairline: rgba(27, 27, 31, 0.24);
       --pl-muted: rgba(27, 27, 31, 0.7);
 
+      /* Skeleton fill + shimmer highlight for the sections below the hero
+         (About/Skills/Experience/Projects) — see .pl-skeleton. Values are
+         low-alpha overlays of the text color so they auto-adjust with the
+         surface rather than needing their own light/dark pair. */
+      --pl-skel-base: rgba(27, 27, 31, 0.06);
+      --pl-skel-hi: rgba(27, 27, 31, 0.12);
+
       /* Mobile metrics (_MobileHero + GeneralTablet's <640 padding). These
          are the defaults because the layout is mobile-first; the media
          queries below widen them.
@@ -237,6 +244,8 @@
       --pl-on-accent: #15121a;
       --pl-hairline: rgba(232, 224, 232, 0.24);
       --pl-muted: rgba(232, 224, 232, 0.7);
+      --pl-skel-base: rgba(232, 224, 232, 0.07);
+      --pl-skel-hi: rgba(232, 224, 232, 0.15);
     }
 
     /* The faces the hero uses, loaded straight from the app bundle so there
@@ -569,6 +578,154 @@
       color: var(--pl-accent);
     }
 
+    /* --- skeleton: About/Skills/Experience/Projects placeholders ------- */
+    /* The hero is the only real content Flutter has an HTML stand-in for.
+       Below it, until now, was just the page background — which reads as
+       "that's the whole site" or "this is broken" rather than "more is
+       loading". This block never has to match what Flutter eventually
+       paints there (unlike the hero, it holds no real data to get out of
+       sync), so it only needs to look like plausible section shapes:
+       eyebrow + title + body for About/Skills, a couple of cards for
+       Experience, a tile grid for Projects. Structure borrowed from
+       AboutDesktop, ExperienceDesktop and ProjectDesktop. */
+
+    .pl-skeleton {
+      margin-top: 56px;
+    }
+
+    .pl-sk-section + .pl-sk-section {
+      margin-top: 64px;
+    }
+
+    /* The shimmer itself: a soft highlight band sweeping across a flat
+       fill. Every skeleton shape shares this via .pl-sk; the classes below
+       only set width/height/radius. */
+    .pl-sk {
+      border-radius: 8px;
+      background-color: var(--pl-skel-base);
+      background-image: linear-gradient(
+        100deg,
+        transparent 30%,
+        var(--pl-skel-hi) 50%,
+        transparent 70%
+      );
+      background-size: 250% 100%;
+      background-repeat: no-repeat;
+      animation: pl-shimmer 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pl-shimmer {
+      0% { background-position: 120% 0; }
+      100% { background-position: -120% 0; }
+    }
+
+    /* A shimmer sweep is exactly the kind of motion prefers-reduced-motion
+       exists for. The shapes stay — they're still useful as a "content is
+       coming" signal — the sweep just stops. */
+    @media (prefers-reduced-motion: reduce) {
+      .pl-sk {
+        animation: none;
+        background-image: none;
+      }
+    }
+
+    .pl-sk-eyebrow {
+      width: 130px;
+      height: 12px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+    }
+
+    .pl-sk-title {
+      height: 30px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .pl-sk-line {
+      height: 14px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .pl-sk-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .pl-sk-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .pl-sk-chip {
+      height: 30px;
+      border-radius: 999px;
+    }
+
+    .pl-sk-card {
+      height: 92px;
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+
+    .pl-sk-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .pl-sk-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .pl-sk-tile-image {
+      border-radius: 16px;
+      aspect-ratio: 4 / 3;
+      margin-bottom: 10px;
+    }
+
+    .pl-sk-tile-line {
+      height: 12px;
+      border-radius: 6px;
+    }
+
+    @media (min-width: 640px) {
+      .pl-skeleton {
+        margin-top: 80px;
+      }
+
+      .pl-sk-section + .pl-sk-section {
+        margin-top: 80px;
+      }
+
+      .pl-sk-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .pl-skeleton {
+        margin-top: 96px;
+      }
+
+      .pl-sk-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1280px) {
+      /* GeneralDesktop pads every section below the hero 12px further in
+         than the hero itself gets (see PersonalInfoSection vs. AboutSection
+         in general_section_desktop.dart) — the hero has no equivalent
+         inset, so this lives on .pl-skeleton alone, not on --pl-pad-x. */
+      .pl-skeleton {
+        padding: 0 12px;
+        box-sizing: border-box;
+      }
+    }
+
     /* --- tablet: 640–1023 (_TabletHero) -------------------------------- */
 
     @media (min-width: 640px) {
@@ -795,6 +952,47 @@
             <a href="https://www.linkedin.com/in/sujit70777">LinkedIn</a>
           </p>
         </main>
+
+        <!-- Placeholder shapes for About/Skills/Experience/Projects, which
+             have no HTML stand-in the way the hero does — Flutter paints
+             all of that. Purely decorative (aria-hidden): a screen reader
+             user loses nothing by skipping straight to the real sections
+             once Flutter announces them. -->
+        <section class="pl-skeleton" aria-hidden="true">
+          <div class="pl-sk-section">
+            <div class="pl-sk pl-sk-eyebrow"></div>
+            <div class="pl-sk pl-sk-title" style="width: 220px"></div>
+            <div class="pl-sk pl-sk-line" style="width: 92%"></div>
+            <div class="pl-sk pl-sk-line" style="width: 97%"></div>
+            <div class="pl-sk pl-sk-line" style="width: 68%"></div>
+            <div class="pl-sk pl-sk-eyebrow" style="width: 100px; margin-top: 36px"></div>
+            <div class="pl-sk pl-sk-title" style="width: 160px"></div>
+            <div class="pl-sk-chips">
+              <div class="pl-sk pl-sk-chip" style="width: 84px"></div>
+              <div class="pl-sk pl-sk-chip" style="width: 108px"></div>
+              <div class="pl-sk pl-sk-chip" style="width: 76px"></div>
+              <div class="pl-sk pl-sk-chip" style="width: 96px"></div>
+              <div class="pl-sk pl-sk-chip" style="width: 68px"></div>
+            </div>
+          </div>
+
+          <div class="pl-sk-section">
+            <div class="pl-sk pl-sk-eyebrow" style="width: 150px"></div>
+            <div class="pl-sk pl-sk-title" style="width: 200px"></div>
+            <div class="pl-sk pl-sk-card"></div>
+            <div class="pl-sk pl-sk-card"></div>
+          </div>
+
+          <div class="pl-sk-section">
+            <div class="pl-sk pl-sk-eyebrow" style="width: 120px"></div>
+            <div class="pl-sk pl-sk-title" style="width: 180px"></div>
+            <div class="pl-sk-grid">
+              <div><div class="pl-sk pl-sk-tile-image"></div><div class="pl-sk pl-sk-tile-line" style="width: 70%"></div></div>
+              <div><div class="pl-sk pl-sk-tile-image"></div><div class="pl-sk pl-sk-tile-line" style="width: 55%"></div></div>
+              <div><div class="pl-sk pl-sk-tile-image"></div><div class="pl-sk pl-sk-tile-line" style="width: 62%"></div></div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </div>

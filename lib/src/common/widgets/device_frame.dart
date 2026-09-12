@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 /// A quiet phone-silhouette frame around [screen] — design brief 2's
 /// signature device-frame motif, reused at hero scale and at
-/// featured-project card scale. Deliberately plain: a rounded bezel, no
-/// glass/glow/3D/scrim — the screenshot inside carries the visual weight,
-/// not the frame around it.
+/// featured-project card scale. Deliberately plain: a rounded bezel and a
+/// static diagonal glass glare over the screen, no glow/3D/scrim — the
+/// screenshot inside carries the visual weight, not the frame around it.
 class DeviceFrame extends StatelessWidget {
   const DeviceFrame({super.key, required this.width, required this.screen});
 
@@ -49,8 +49,41 @@ class DeviceFrame extends StatelessWidget {
           padding: EdgeInsets.all(bezelWidth * 0.7),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(screenRadius),
-            child: SizedBox.expand(child: screen),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                screen,
+                const IgnorePointer(child: _ScreenGlare()),
+              ],
+            ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// A fixed (non-animated) diagonal light band across the screen — the
+/// reflection real glass under studio lighting would show. Static rather
+/// than a sweeping "shimmer": this frame sits in the hero, and a moving
+/// highlight there would compete with the content the mockup exists to
+/// showcase.
+class _ScreenGlare extends StatelessWidget {
+  const _ScreenGlare();
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: const [0.30, 0.46, 0.62],
+          colors: [
+            Colors.white.withAlpha(0),
+            Colors.white.withAlpha(46),
+            Colors.white.withAlpha(0),
+          ],
         ),
       ),
     );
