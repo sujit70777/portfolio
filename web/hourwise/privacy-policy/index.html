@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Hourwise</title>
+<meta name="description" content="Hourwise records how long you worked in each app, on your Mac, and sends none of it anywhere. There is no account and no server.">
+<meta name="color-scheme" content="light dark">
+<!--
+  Deliberately self-contained: no webfonts, no analytics, no third-party
+  requests of any kind. A privacy policy that loads a tracker to render itself
+  is not one. Upload this single file; nothing else is needed.
+-->
+<style>
+  :root {
+    --navy: #2F3B50;
+    --navy-deep: #222C3C;
+    --amber: #C97400;
+    --cream: #F5EFDB;
+    --page: #FFFFFF;
+    --surface: #F7F7FA;
+    --ink: #17181C;
+    --ink-soft: #545764;
+    --rule: #E3E3EA;
+    --good: #1A8B5A;
+    --no: #B0343C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --navy: #46566F;
+      --navy-deep: #1B2432;
+      --amber: #ED8B00;
+      --page: #131417;
+      --surface: #1C1D22;
+      --ink: #ECEDF1;
+      --ink-soft: #A3A7B4;
+      --rule: #2E3039;
+      --good: #35B87E;
+      --no: #E56B60;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .masthead {
+    background: linear-gradient(150deg, var(--navy), var(--navy-deep));
+    color: #fff;
+    padding: 56px 24px 48px;
+  }
+  .masthead-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .mark { flex: none; border-radius: 14px; }
+  .masthead h1 {
+    font-family: ui-serif, "New York", Georgia, "Times New Roman", serif;
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.15;
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .masthead p { margin: 0; color: rgba(255,255,255,.72); font-size: 15px; }
+
+  main { max-width: 720px; margin: 0 auto; padding: 40px 24px 72px; }
+
+  .lede {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--amber);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin: 0 0 40px;
+  }
+  .lede p { margin: 0 0 12px; }
+  .lede p:last-child { margin-bottom: 0; }
+  .lede strong { color: var(--ink); }
+
+  h2 {
+    font-family: ui-serif, "New York", Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 44px 0 14px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  h3 { font-size: 17px; margin: 28px 0 8px; }
+  p { margin: 0 0 16px; }
+
+  ul { margin: 0 0 18px; padding: 0; list-style: none; }
+  ul li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+  }
+  ul li::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+  }
+  ul.does li::before { content: "✓"; color: var(--good); }
+  ul.never li::before { content: "✕"; color: var(--no); }
+  ul.plain li::before { content: "•"; color: var(--ink-soft); left: 8px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 16px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); }
+  tr:last-child td { border-bottom: none; }
+
+  a { color: var(--amber); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  footer {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 24px 64px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    .masthead { padding: 40px 20px 34px; }
+    main { padding: 32px 20px 56px; }
+    th, td { padding: 10px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <svg class="mark" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Hourwise">
+      <rect width="64" height="64" rx="15" fill="#2F3B50"/>
+      <rect x="14" y="17" width="36" height="6.4" rx="3.2" fill="#F5EFDB"/>
+      <rect x="14" y="28" width="27" height="6.4" rx="3.2" fill="#F5EFDB"/>
+      <rect x="14" y="39" width="21" height="6.4" rx="3.2" fill="#ED8B00"/>
+    </svg>
+    <div>
+      <h1>Hourwise Privacy Policy</h1>
+      <p>Last updated 13 September 2026</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="lede">
+    <p><strong>Hourwise does not collect your data.</strong> There is no account to create, no server to send anything to, and no analytics of any kind.</p>
+    <p>Everything Hourwise records stays in one file on your own Mac. Nobody — including the developer — can see your clients, your matters, or how you spend your day.</p>
+  </div>
+
+  <h2>What Hourwise records</h2>
+
+  <p>Hourwise works out how long you spent on each piece of work so you can bill it. To do that, it keeps a local record of:</p>
+
+  <ul class="does">
+    <li><strong>Which application was in front, and for how long.</strong> The app's name and its bundle identifier — for example "Microsoft Word" — with a start and end time.</li>
+    <li><strong>When you were at the Mac and when you were away.</strong> Periods of inactivity, so time you were not working is not billed, and so gaps can be offered to you as possible meetings or calls.</li>
+    <li><strong>The clients, matters, rates, time entries and invoices you create.</strong> The things you type in yourself.</li>
+    <li><strong>Calendar event titles and times</strong> — only if you switch on calendar matching, and only to compare them against the client and matter names you have already entered.</li>
+  </ul>
+
+  <h2>What Hourwise never records</h2>
+
+  <p>These are not settings you have to find and switch off. Hourwise has no ability to do any of them.</p>
+
+  <ul class="never">
+    <li><strong>The contents of anything.</strong> Not a document, not an email, not a message, not a web page.</li>
+    <li><strong>The names of your documents.</strong> Hourwise knows you were in Word. It does not know which file was open.</li>
+    <li><strong>Your screen.</strong> No screenshots, no screen recording, ever.</li>
+    <li><strong>Your keystrokes, passwords or clipboard.</strong> Hourwise is not a keylogger and contains no keyboard monitoring of any kind.</li>
+    <li><strong>Your browsing.</strong> No web addresses, no history, no page titles.</li>
+    <li><strong>Anything while tracking is paused,</strong> which you can do from the menu bar at any moment.</li>
+    <li><strong>Anything from an app you mark private.</strong> A private app is never recorded — not even the fact that it was open.</li>
+    <li><strong>Your location, contacts, photos, files, or anything about who you are.</strong></li>
+  </ul>
+
+  <h2>Where your data is kept</h2>
+
+  <p>In a single database file inside the app's own container on your Mac, within your user Library folder. It never moves from there unless you move it.</p>
+
+  <p>Because it lives in your user account, it is protected by FileVault if you have FileVault switched on — and on a machine holding privileged client material, it should be. Hourwise can also require Touch ID or your login password before it will open: <em>Settings › Privacy &amp; security › Require unlock to open</em>.</p>
+
+  <h2>What leaves your Mac</h2>
+
+  <p>Two things, and you start both of them.</p>
+
+  <table>
+    <thead>
+      <tr><th>What</th><th>Where it goes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Your purchase, if you buy Pro</strong></td>
+        <td>Handled entirely by Apple through the App Store. The developer never sees your name, your email or your payment details, and receives no information that identifies you.</td>
+      </tr>
+      <tr>
+        <td><strong>Files you export</strong></td>
+        <td>Invoices, spreadsheets, LEDES files and backups go wherever you choose to save or send them. Hourwise does not upload them anywhere.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>There is nothing else. Hourwise contains no analytics, no crash reporting service, no advertising, and no third-party software development kits. It makes no network request other than Apple's own check of your purchase.</p>
+
+  <h2>Permissions</h2>
+
+  <table>
+    <thead>
+      <tr><th>Permission</th><th>Why, and whether you need it</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Calendar</strong></td>
+        <td><strong>Optional.</strong> Only if you turn on calendar matching. Hourwise reads event titles and times so that a meeting named after a client or matter can fill in the block of time it overlaps. Event details are compared on your Mac and never sent anywhere. Hourwise never creates, edits or deletes anything in your calendar.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Hourwise asks for no permissions at launch, and it tracks your time without any. You can withdraw calendar access at any time in System Settings; Hourwise carries on working without it.</p>
+
+  <h2>Staying in control</h2>
+
+  <ul class="plain">
+    <li><strong>Pause</strong> tracking from the menu bar whenever you want. Nothing is recorded while it is paused.</li>
+    <li><strong>Mark an app private</strong> in <em>Settings › Private apps</em> and it is never recorded at all.</li>
+    <li><strong>Export everything</strong> you have ever recorded as a spreadsheet, from <em>Settings › Data &amp; backup</em>.</li>
+    <li><strong>Erase everything</strong> permanently from <em>Settings › Reset</em>.</li>
+    <li><strong>Delete the app.</strong> Removing Hourwise removes its container and the database inside it. Nothing is left behind on any server, because it was never on one.</li>
+  </ul>
+
+  <h2>How long data is kept</h2>
+
+  <p>For as long as you keep it, and no longer. Hourwise never deletes your records on its own, and never expires them. Because nothing is transmitted, there is no copy anywhere for anyone else to keep.</p>
+
+  <h2>Children</h2>
+
+  <p>Hourwise is a professional billing tool. It is not directed at children, and it collects no personal information from anyone of any age.</p>
+
+  <h2>Changes to this policy</h2>
+
+  <p>If this policy changes, the date at the top changes with it and the updated version ships with the app. Material changes will be described in the app's release notes rather than quietly amended here.</p>
+
+  <h2>Contact</h2>
+
+  <p>Hourwise is made by Shekh Ehsanur Rahman — <a href="https://ehsanur.com">ehsanur.com</a>. Questions about privacy, or about anything else, reach a real person at <a href="mailto:mail@ehsanur.com">mail@ehsanur.com</a>.</p>
+
+</main>
+
+<footer>
+  © 2026 Hourwise · Made by <a href="https://ehsanur.com">Shekh Ehsanur Rahman</a> · Your data never leaves your Mac.
+</footer>
+
+</body>
+</html>
