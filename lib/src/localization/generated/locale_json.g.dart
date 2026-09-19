@@ -363,15 +363,15 @@ class CodegenLoader extends AssetLoader{
       "featured": true,
       "technologies": [
         {
-          "name": "Flutter",
+          "name": "React Native",
           "icon": {
-            "assetName": "assets/icons/software-development/flutter.svg"
+            "assetName": "assets/icons/software-development/react-native.svg"
           }
         },
         {
-          "name": "Dart",
+          "name": "TypeScript",
           "icon": {
-            "assetName": "assets/icons/other/dart.svg"
+            "assetName": "assets/icons/software-development/typescript.svg"
           }
         },
         {
@@ -1422,9 +1422,9 @@ class CodegenLoader extends AssetLoader{
     }
   ],
   "bottomBanner": {
-    "message": "This site is a Flutter Web app —",
-    "displayLink": "read how it's built",
-    "linkUrl": "https://github.com/sujit70777/portfolio#readme"
+    "message": "© 2026 Shekh Ehsanur Rahman —",
+    "displayLink": "All rights reserved",
+    "linkUrl": "#"
   },
   "portfolio": "Shekh Ehsanur Rahman",
   "homeSectionTitle": "Home",

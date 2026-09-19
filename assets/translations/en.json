@@ -347,15 +347,15 @@
             "featured": true,
             "technologies": [
                 {
-                    "name": "Flutter",
+                    "name": "React Native",
                     "icon": {
-                        "assetName": "assets/icons/software-development/flutter.svg"
+                        "assetName": "assets/icons/software-development/react-native.svg"
                     }
                 },
                 {
-                    "name": "Dart",
+                    "name": "TypeScript",
                     "icon": {
-                        "assetName": "assets/icons/other/dart.svg"
+                        "assetName": "assets/icons/software-development/typescript.svg"
                     }
                 },
                 {
