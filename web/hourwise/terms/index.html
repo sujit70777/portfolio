@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms of Use — Hourwise</title>
+<meta name="description" content="The terms under which Hourwise is licensed, including subscription billing, renewal and cancellation.">
+<meta name="color-scheme" content="light dark">
+<!--
+  Self-contained: no webfonts, no analytics, no third-party requests.
+  Upload this single file to /hourwise/terms (or terms.html); nothing else
+  is needed. The app links to it from the purchase flow and from
+  Settings > Plan, and App Store Connect's EULA field must carry the same URL.
+-->
+<style>
+  :root {
+    --navy: #2F3B50;
+    --navy-deep: #222C3C;
+    --amber: #C97400;
+    --cream: #F5EFDB;
+    --page: #FFFFFF;
+    --surface: #F7F7FA;
+    --ink: #17181C;
+    --ink-soft: #545764;
+    --rule: #E3E3EA;
+    --good: #1A8B5A;
+    --no: #B0343C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --navy: #46566F;
+      --navy-deep: #1B2432;
+      --amber: #ED8B00;
+      --page: #131417;
+      --surface: #1C1D22;
+      --ink: #ECEDF1;
+      --ink-soft: #A3A7B4;
+      --rule: #2E3039;
+      --good: #35B87E;
+      --no: #E56B60;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .masthead {
+    background: linear-gradient(150deg, var(--navy), var(--navy-deep));
+    color: #fff;
+    padding: 56px 24px 48px;
+  }
+  .masthead-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .mark { flex: none; border-radius: 14px; }
+  .masthead h1 {
+    font-family: ui-serif, "New York", Georgia, "Times New Roman", serif;
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.15;
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .masthead p { margin: 0; color: rgba(255,255,255,.72); font-size: 15px; }
+
+  main { max-width: 720px; margin: 0 auto; padding: 40px 24px 72px; }
+
+  .lede {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--amber);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin: 0 0 40px;
+  }
+  .lede p { margin: 0 0 12px; }
+  .lede p:last-child { margin-bottom: 0; }
+  .lede strong { color: var(--ink); }
+
+  h2 {
+    font-family: ui-serif, "New York", Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 44px 0 14px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  h3 { font-size: 17px; margin: 28px 0 8px; }
+  p { margin: 0 0 16px; }
+
+  ul { margin: 0 0 18px; padding: 0; list-style: none; }
+  ul li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+  }
+  ul li::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+  }
+  ul.does li::before { content: "✓"; color: var(--good); }
+  ul.never li::before { content: "✕"; color: var(--no); }
+  ul.plain li::before { content: "•"; color: var(--ink-soft); left: 8px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 16px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); }
+  tr:last-child td { border-bottom: none; }
+
+  a { color: var(--amber); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  footer {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 24px 64px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    .masthead { padding: 40px 20px 34px; }
+    main { padding: 32px 20px 56px; }
+    th, td { padding: 10px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <h1>Terms of Use</h1>
+      <p>Hourwise for macOS &middot; Last updated 21 September 2026</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="lede">
+  <p><strong>Hourwise is licensed to you, not sold.</strong> These terms describe
+  what you may do with it, what it costs, and how a subscription renews and is
+  cancelled.</p>
+  <p>Hourwise stores your data on your own Mac. There is no account and no
+  server. What that means in detail is in the
+  <a href="privacy-policy">Privacy Policy</a>.</p>
+</div>
+
+<h2>1. The licence</h2>
+
+<p>Subject to these terms, you are granted a personal, non-transferable,
+non-exclusive licence to use Hourwise on Apple-branded devices that you own or
+control, as permitted by the App Store Terms of Service.</p>
+
+<p>You may not sell, rent, lease, sublicense, redistribute or decompile the
+application, except where that restriction is prohibited by applicable law.</p>
+
+<h2>2. Free and Pro</h2>
+
+<p>Time tracking and daily review are free, keeping the last seven days of
+history. Pro adds invoicing, every export format, practice analytics,
+attribution rules, the learning model and unlimited history.</p>
+
+<h2>3. Subscriptions, billing and renewal</h2>
+
+<p>Pro is offered as an auto-renewable subscription and as a one-time
+purchase:</p>
+
+<ul>
+  <li><strong>Monthly</strong> &mdash; billed every month.</li>
+  <li><strong>Yearly</strong> &mdash; billed every 12 months, and offered with a
+  free trial period where stated in the app.</li>
+  <li><strong>Lifetime</strong> &mdash; a one-time purchase that does not renew
+  and cannot be cancelled, because there is nothing recurring to cancel.</li>
+</ul>
+
+<p>The current price, the length of the subscription period, and the length of
+any free trial are shown in the app before you confirm a purchase, in your
+own currency and for your own storefront. Those figures are read from the App
+Store, so they are always the amount you will actually be charged.</p>
+
+<p><strong>Payment is charged to your Apple Account at confirmation of
+purchase.</strong> A subscription renews automatically at the price and interval
+shown at purchase unless it is cancelled at least 24 hours before the end of the
+current period. Your Apple Account is charged for renewal within 24 hours before
+the end of the current period.</p>
+
+<p><strong>If a free trial is offered, any unused part of it is forfeited when
+you buy a subscription.</strong> When the free period ends, the subscription
+begins and you are billed automatically unless you cancel before it ends.</p>
+
+<h2>4. Managing and cancelling</h2>
+
+<p>You can view, change or cancel a subscription at any time in
+<strong>System Settings &rsaquo; Apple Account &rsaquo; Media &amp; Purchases
+&rsaquo; Subscriptions</strong>, or in the App Store. Cancelling stops the next
+renewal; access continues until the end of the period you have already paid
+for.</p>
+
+<p><strong>Buying Lifetime does not cancel a subscription that is already
+running.</strong> The App Store has no mechanism to do that. If you buy Lifetime
+while subscribed, cancel the subscription yourself, or you will continue to be
+charged for it.</p>
+
+<h2>5. Refunds</h2>
+
+<p>Purchases are handled by Apple, and refunds are at Apple's discretion under
+the App Store Terms of Service. Requests are made at
+<a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>, not to
+us &mdash; we have no ability to issue a refund for an App Store purchase.</p>
+
+<h2>6. Your data</h2>
+
+<p>Hourwise records which application was frontmost and for how long, on your
+Mac, and keeps it in a database in the app's own container. Nothing is uploaded,
+and there is no analytics in the app. You can export it or delete it at any
+time. See the <a href="privacy-policy">Privacy Policy</a>.</p>
+
+<p><strong>Keeping backups of your data is your responsibility.</strong> The app
+includes a backup feature; using it is up to you.</p>
+
+<h2>7. What Hourwise is not</h2>
+
+<p>Hourwise is a record-keeping tool. It does not provide legal, accounting or
+tax advice, and its output &mdash; including invoices, analytics and any figure
+it displays &mdash; is yours to check before you rely on it or send it to a
+client. You remain responsible for the accuracy of anything you bill.</p>
+
+<h2>8. No warranty, and limits on liability</h2>
+
+<p>To the maximum extent permitted by law, the application is provided &ldquo;as
+is&rdquo;, without warranty of any kind, and neither the developer nor Apple
+will be liable for indirect, incidental or consequential damages, or for lost
+profits or lost data, arising from its use.</p>
+
+<p>Nothing in these terms limits any right you have under the consumer law of
+your own country that cannot be limited by agreement.</p>
+
+<h2>9. Apple's role</h2>
+
+<p>This licence is between you and the developer of Hourwise, not with Apple.
+Apple is not responsible for the application or its content. Apple has no
+obligation to provide support or maintenance. Apple and its subsidiaries are
+third-party beneficiaries of these terms and may enforce them against you.</p>
+
+<h2>10. Changes</h2>
+
+<p>These terms may change as the application changes. The date at the top of
+this page is the date of the current version, and a material change will be
+noted in the app's release notes.</p>
+
+<h2>11. Contact</h2>
+
+<p>Questions about these terms: <a href="mailto:support@ehsanur.com">support@ehsanur.com</a>.</p>
+
+</main>
+
+<footer>
+  © 2026 Hourwise · <a href="index.html">Hourwise</a> · <a href="privacy-policy">Privacy</a> · <a href="terms">Terms of Use</a> · Made by <a href="https://ehsanur.com">Shekh Ehsanur Rahman</a>
+</footer>
+</body>
+</html>
