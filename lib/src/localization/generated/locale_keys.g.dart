@@ -9,6 +9,7 @@ abstract class  LocaleKeys {
   static const heroPrimaryCta = 'heroPrimaryCta';
   static const heroSecondaryCta = 'heroSecondaryCta';
   static const availabilityBadge = 'availabilityBadge';
+  static const contractBadge = 'contractBadge';
   static const stats_years = 'stats.years';
   static const stats_yearsLabel = 'stats.yearsLabel';
   static const stats_apps = 'stats.apps';

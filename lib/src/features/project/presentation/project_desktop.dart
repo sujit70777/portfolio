@@ -7,9 +7,11 @@ import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/common/widgets/scroll_reveal.dart';
 import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
 import 'package:portfolio/src/constants/sizes.dart';
+import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/project/data/project_repository.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/featured_project_card.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/flagship_project_card.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_list_row.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 
@@ -18,9 +20,10 @@ const _minCardWidth = 200.0;
 const _collapsedCount = 6;
 const _cardStagger = Duration(milliseconds: 60);
 
-/// Curated (design brief 2, content problem #5): featured projects — real
-/// shipped work with the strongest story — get the largest, most generous
-/// treatment on the page since this section is the actual evidence; the
+/// Curated (design brief 2, content problem #5): flagship products get a
+/// full-width landscape card first; featured projects — real shipped work
+/// with the strongest story — get the most generous treatment after that,
+/// since this section is the actual evidence; the
 /// other, longer tail (small pub.dev packages, in-progress repos) render
 /// as plain rows, collapsed to the first [_collapsedCount] by default.
 class ProjectDesktop extends ConsumerWidget {
@@ -29,8 +32,13 @@ class ProjectDesktop extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final projects = ref.watch(projectRepositoryProvider).getProjects().toList();
-    final featured = projects.where((p) => p.featured == true).toList();
-    final others = projects.where((p) => p.featured != true).toList();
+    final flagship = projects.where((p) => p.flagship == true).toList();
+    final featured = projects
+        .where((p) => p.featured == true && p.flagship != true)
+        .toList();
+    final others = projects
+        .where((p) => p.featured != true && p.flagship != true)
+        .toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,10 +58,14 @@ class ProjectDesktop extends ConsumerWidget {
           child: Text(
             '50+ shipped. Here are the ones worth showing.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withAlpha(160),
+                  color: mutedTextColor(Theme.of(context).colorScheme),
                 ),
           ),
         ),
+        for (final project in flagship) ...[
+          ScrollReveal(child: FlagshipProjectCard(project: project)),
+          gapH32,
+        ],
         if (featured.isNotEmpty) _FeaturedGrid(projects: featured),
         if (others.isNotEmpty) ...[
           gapH40,

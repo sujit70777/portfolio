@@ -15,7 +15,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Project {
 
- String? get name; String? get description; String? get url; IconModel? get icon; String? get screenshotPath; List<Technology>? get technologies; List<Link>? get links; bool? get featured; ProjectStatus? get status; String? get role;
+ String? get name; String? get description; String? get url; IconModel? get icon; String? get screenshotPath; List<Technology>? get technologies; List<Link>? get links; bool? get featured;// The top tier: a wide, landscape card above the featured grid, for
+// flagship products whose screenshots aren't phone-shaped.
+ bool? get flagship;// Short architecture bullets shown on the flagship card.
+ List<String>? get highlights; ProjectStatus? get status; String? get role;
 /// Create a copy of Project
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +31,16 @@ $ProjectCopyWith<Project> get copyWith => _$ProjectCopyWithImpl<Project>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Project&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.url, url) || other.url == url)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.screenshotPath, screenshotPath) || other.screenshotPath == screenshotPath)&&const DeepCollectionEquality().equals(other.technologies, technologies)&&const DeepCollectionEquality().equals(other.links, links)&&(identical(other.featured, featured) || other.featured == featured)&&(identical(other.status, status) || other.status == status)&&(identical(other.role, role) || other.role == role));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Project&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.url, url) || other.url == url)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.screenshotPath, screenshotPath) || other.screenshotPath == screenshotPath)&&const DeepCollectionEquality().equals(other.technologies, technologies)&&const DeepCollectionEquality().equals(other.links, links)&&(identical(other.featured, featured) || other.featured == featured)&&(identical(other.flagship, flagship) || other.flagship == flagship)&&const DeepCollectionEquality().equals(other.highlights, highlights)&&(identical(other.status, status) || other.status == status)&&(identical(other.role, role) || other.role == role));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,description,url,icon,screenshotPath,const DeepCollectionEquality().hash(technologies),const DeepCollectionEquality().hash(links),featured,status,role);
+int get hashCode => Object.hash(runtimeType,name,description,url,icon,screenshotPath,const DeepCollectionEquality().hash(technologies),const DeepCollectionEquality().hash(links),featured,flagship,const DeepCollectionEquality().hash(highlights),status,role);
 
 @override
 String toString() {
-  return 'Project(name: $name, description: $description, url: $url, icon: $icon, screenshotPath: $screenshotPath, technologies: $technologies, links: $links, featured: $featured, status: $status, role: $role)';
+  return 'Project(name: $name, description: $description, url: $url, icon: $icon, screenshotPath: $screenshotPath, technologies: $technologies, links: $links, featured: $featured, flagship: $flagship, highlights: $highlights, status: $status, role: $role)';
 }
 
 
@@ -48,7 +51,7 @@ abstract mixin class $ProjectCopyWith<$Res>  {
   factory $ProjectCopyWith(Project value, $Res Function(Project) _then) = _$ProjectCopyWithImpl;
 @useResult
 $Res call({
- String? name, String? description, String? url, IconModel? icon, String? screenshotPath, List<Technology>? technologies, List<Link>? links, bool? featured, ProjectStatus? status, String? role
+ String? name, String? description, String? url, IconModel? icon, String? screenshotPath, List<Technology>? technologies, List<Link>? links, bool? featured, bool? flagship, List<String>? highlights, ProjectStatus? status, String? role
 });
 
 
@@ -65,7 +68,7 @@ class _$ProjectCopyWithImpl<$Res>
 
 /// Create a copy of Project
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? description = freezed,Object? url = freezed,Object? icon = freezed,Object? screenshotPath = freezed,Object? technologies = freezed,Object? links = freezed,Object? featured = freezed,Object? status = freezed,Object? role = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? description = freezed,Object? url = freezed,Object? icon = freezed,Object? screenshotPath = freezed,Object? technologies = freezed,Object? links = freezed,Object? featured = freezed,Object? flagship = freezed,Object? highlights = freezed,Object? status = freezed,Object? role = freezed,}) {
   return _then(_self.copyWith(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
@@ -75,7 +78,9 @@ as IconModel?,screenshotPath: freezed == screenshotPath ? _self.screenshotPath :
 as String?,technologies: freezed == technologies ? _self.technologies : technologies // ignore: cast_nullable_to_non_nullable
 as List<Technology>?,links: freezed == links ? _self.links : links // ignore: cast_nullable_to_non_nullable
 as List<Link>?,featured: freezed == featured ? _self.featured : featured // ignore: cast_nullable_to_non_nullable
-as bool?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as bool?,flagship: freezed == flagship ? _self.flagship : flagship // ignore: cast_nullable_to_non_nullable
+as bool?,highlights: freezed == highlights ? _self.highlights : highlights // ignore: cast_nullable_to_non_nullable
+as List<String>?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as ProjectStatus?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -174,10 +179,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? name,  String? description,  String? url,  IconModel? icon,  String? screenshotPath,  List<Technology>? technologies,  List<Link>? links,  bool? featured,  ProjectStatus? status,  String? role)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? name,  String? description,  String? url,  IconModel? icon,  String? screenshotPath,  List<Technology>? technologies,  List<Link>? links,  bool? featured,  bool? flagship,  List<String>? highlights,  ProjectStatus? status,  String? role)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Project() when $default != null:
-return $default(_that.name,_that.description,_that.url,_that.icon,_that.screenshotPath,_that.technologies,_that.links,_that.featured,_that.status,_that.role);case _:
+return $default(_that.name,_that.description,_that.url,_that.icon,_that.screenshotPath,_that.technologies,_that.links,_that.featured,_that.flagship,_that.highlights,_that.status,_that.role);case _:
   return orElse();
 
 }
@@ -195,10 +200,10 @@ return $default(_that.name,_that.description,_that.url,_that.icon,_that.screensh
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? name,  String? description,  String? url,  IconModel? icon,  String? screenshotPath,  List<Technology>? technologies,  List<Link>? links,  bool? featured,  ProjectStatus? status,  String? role)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? name,  String? description,  String? url,  IconModel? icon,  String? screenshotPath,  List<Technology>? technologies,  List<Link>? links,  bool? featured,  bool? flagship,  List<String>? highlights,  ProjectStatus? status,  String? role)  $default,) {final _that = this;
 switch (_that) {
 case _Project():
-return $default(_that.name,_that.description,_that.url,_that.icon,_that.screenshotPath,_that.technologies,_that.links,_that.featured,_that.status,_that.role);case _:
+return $default(_that.name,_that.description,_that.url,_that.icon,_that.screenshotPath,_that.technologies,_that.links,_that.featured,_that.flagship,_that.highlights,_that.status,_that.role);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -215,10 +220,10 @@ return $default(_that.name,_that.description,_that.url,_that.icon,_that.screensh
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? name,  String? description,  String? url,  IconModel? icon,  String? screenshotPath,  List<Technology>? technologies,  List<Link>? links,  bool? featured,  ProjectStatus? status,  String? role)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? name,  String? description,  String? url,  IconModel? icon,  String? screenshotPath,  List<Technology>? technologies,  List<Link>? links,  bool? featured,  bool? flagship,  List<String>? highlights,  ProjectStatus? status,  String? role)?  $default,) {final _that = this;
 switch (_that) {
 case _Project() when $default != null:
-return $default(_that.name,_that.description,_that.url,_that.icon,_that.screenshotPath,_that.technologies,_that.links,_that.featured,_that.status,_that.role);case _:
+return $default(_that.name,_that.description,_that.url,_that.icon,_that.screenshotPath,_that.technologies,_that.links,_that.featured,_that.flagship,_that.highlights,_that.status,_that.role);case _:
   return null;
 
 }
@@ -230,7 +235,7 @@ return $default(_that.name,_that.description,_that.url,_that.icon,_that.screensh
 @JsonSerializable()
 
 class _Project implements Project {
-  const _Project({this.name, this.description, this.url, this.icon, this.screenshotPath, final  List<Technology>? technologies, final  List<Link>? links, this.featured, this.status, this.role}): _technologies = technologies,_links = links;
+  const _Project({this.name, this.description, this.url, this.icon, this.screenshotPath, final  List<Technology>? technologies, final  List<Link>? links, this.featured, this.flagship, final  List<String>? highlights, this.status, this.role}): _technologies = technologies,_links = links,_highlights = highlights;
   factory _Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
 
 @override final  String? name;
@@ -257,6 +262,20 @@ class _Project implements Project {
 }
 
 @override final  bool? featured;
+// The top tier: a wide, landscape card above the featured grid, for
+// flagship products whose screenshots aren't phone-shaped.
+@override final  bool? flagship;
+// Short architecture bullets shown on the flagship card.
+ final  List<String>? _highlights;
+// Short architecture bullets shown on the flagship card.
+@override List<String>? get highlights {
+  final value = _highlights;
+  if (value == null) return null;
+  if (_highlights is EqualUnmodifiableListView) return _highlights;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
 @override final  ProjectStatus? status;
 @override final  String? role;
 
@@ -273,16 +292,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Project&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.url, url) || other.url == url)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.screenshotPath, screenshotPath) || other.screenshotPath == screenshotPath)&&const DeepCollectionEquality().equals(other._technologies, _technologies)&&const DeepCollectionEquality().equals(other._links, _links)&&(identical(other.featured, featured) || other.featured == featured)&&(identical(other.status, status) || other.status == status)&&(identical(other.role, role) || other.role == role));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Project&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.url, url) || other.url == url)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.screenshotPath, screenshotPath) || other.screenshotPath == screenshotPath)&&const DeepCollectionEquality().equals(other._technologies, _technologies)&&const DeepCollectionEquality().equals(other._links, _links)&&(identical(other.featured, featured) || other.featured == featured)&&(identical(other.flagship, flagship) || other.flagship == flagship)&&const DeepCollectionEquality().equals(other._highlights, _highlights)&&(identical(other.status, status) || other.status == status)&&(identical(other.role, role) || other.role == role));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,description,url,icon,screenshotPath,const DeepCollectionEquality().hash(_technologies),const DeepCollectionEquality().hash(_links),featured,status,role);
+int get hashCode => Object.hash(runtimeType,name,description,url,icon,screenshotPath,const DeepCollectionEquality().hash(_technologies),const DeepCollectionEquality().hash(_links),featured,flagship,const DeepCollectionEquality().hash(_highlights),status,role);
 
 @override
 String toString() {
-  return 'Project(name: $name, description: $description, url: $url, icon: $icon, screenshotPath: $screenshotPath, technologies: $technologies, links: $links, featured: $featured, status: $status, role: $role)';
+  return 'Project(name: $name, description: $description, url: $url, icon: $icon, screenshotPath: $screenshotPath, technologies: $technologies, links: $links, featured: $featured, flagship: $flagship, highlights: $highlights, status: $status, role: $role)';
 }
 
 
@@ -293,7 +312,7 @@ abstract mixin class _$ProjectCopyWith<$Res> implements $ProjectCopyWith<$Res> {
   factory _$ProjectCopyWith(_Project value, $Res Function(_Project) _then) = __$ProjectCopyWithImpl;
 @override @useResult
 $Res call({
- String? name, String? description, String? url, IconModel? icon, String? screenshotPath, List<Technology>? technologies, List<Link>? links, bool? featured, ProjectStatus? status, String? role
+ String? name, String? description, String? url, IconModel? icon, String? screenshotPath, List<Technology>? technologies, List<Link>? links, bool? featured, bool? flagship, List<String>? highlights, ProjectStatus? status, String? role
 });
 
 
@@ -310,7 +329,7 @@ class __$ProjectCopyWithImpl<$Res>
 
 /// Create a copy of Project
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? description = freezed,Object? url = freezed,Object? icon = freezed,Object? screenshotPath = freezed,Object? technologies = freezed,Object? links = freezed,Object? featured = freezed,Object? status = freezed,Object? role = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? description = freezed,Object? url = freezed,Object? icon = freezed,Object? screenshotPath = freezed,Object? technologies = freezed,Object? links = freezed,Object? featured = freezed,Object? flagship = freezed,Object? highlights = freezed,Object? status = freezed,Object? role = freezed,}) {
   return _then(_Project(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
@@ -320,7 +339,9 @@ as IconModel?,screenshotPath: freezed == screenshotPath ? _self.screenshotPath :
 as String?,technologies: freezed == technologies ? _self._technologies : technologies // ignore: cast_nullable_to_non_nullable
 as List<Technology>?,links: freezed == links ? _self._links : links // ignore: cast_nullable_to_non_nullable
 as List<Link>?,featured: freezed == featured ? _self.featured : featured // ignore: cast_nullable_to_non_nullable
-as bool?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as bool?,flagship: freezed == flagship ? _self.flagship : flagship // ignore: cast_nullable_to_non_nullable
+as bool?,highlights: freezed == highlights ? _self._highlights : highlights // ignore: cast_nullable_to_non_nullable
+as List<String>?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as ProjectStatus?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

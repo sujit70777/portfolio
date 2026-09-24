@@ -8,9 +8,11 @@ import 'package:portfolio/src/common/widgets/icon.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/common/widgets/technology_wrap_chips.dart';
 import 'package:portfolio/src/constants/sizes.dart';
+import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/project_highlights.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/link_platform_display.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
@@ -188,12 +190,16 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
                           Text(
                             'My role',
                             style: theme.textTheme.labelSmall?.copyWith(
-                              color: theme.colorScheme.onSurface.withAlpha(160),
+                              color: mutedTextColor(theme.colorScheme),
                             ),
                           ),
                           gapH4,
                           Text(project.role!,
                               style: theme.textTheme.bodyMedium),
+                        ],
+                        if (project.highlights?.isNotEmpty == true) ...[
+                          gapH16,
+                          ProjectHighlights(highlights: project.highlights!),
                         ],
                         if (project.technologies?.isNotEmpty == true) ...[
                           gapH16,

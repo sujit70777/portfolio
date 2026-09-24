@@ -18,6 +18,11 @@ abstract class Project with _$Project {
     List<Technology>? technologies,
     List<Link>? links,
     bool? featured,
+    // The top tier: a wide, landscape card above the featured grid, for
+    // flagship products whose screenshots aren't phone-shaped.
+    bool? flagship,
+    // Short architecture bullets shown on the flagship card.
+    List<String>? highlights,
     ProjectStatus? status,
     String? role,
   }) = _Project;

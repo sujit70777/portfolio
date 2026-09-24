@@ -5,6 +5,7 @@
     "heroPrimaryCta": "Email me",
     "heroSecondaryCta": "WhatsApp",
     "availabilityBadge": "Available for new work",
+    "contractBadge": "B2B contract ready · Direct invoicing / Deel",
     "stats": {
         "years": "11",
         "yearsLabel": "Years",
@@ -97,7 +98,7 @@
             "url": "assets/documents/resume.pdf"
         }
     ],
-    "aboutDescription": "I build Mobile apps that keep working when the network doesn't.\n11 years in mobile — 50+ shipped apps, 1M+ users, 4.7+ average store rating. My specialty is offline-first architecture and conflict-free data synchronisation: the part that quietly breaks most mobile apps in the field. I've built and open-sourced a CRDT-based sync library for Flutter, and shipped production apps holding a 4.7 rating at 100,000+ daily active users.\nRecent work includes an enterprise reimbursement platform for a Brazilian client — AI invoice capture, SEFAZ tax-agency integration, instant Pix payout — and a multi-service super app for a US client in Houston.\nI currently work shifted hours to overlap with a Brazil-based team, so adapting to US or UK business hours is routine rather than a promise. Available as an independent contractor.",
+    "aboutDescription": "I build Mobile apps that keep working when the network doesn't.\n11 years in mobile — 50+ shipped apps, 1M+ users, 4.7+ average store rating. My specialty is offline-first architecture and conflict-free data synchronisation: the part that quietly breaks most mobile apps in the field. I've built and open-sourced a CRDT-based sync library for Flutter, and shipped production apps holding a 4.7 rating at 100,000+ daily active users.\nRecent work includes an enterprise reimbursement platform for a Brazilian client — AI invoice capture, SEFAZ tax-agency integration, instant Pix payout — and a multi-service super app for a US client in Houston.\nI also build and ship my own products. Hourwise, a native macOS app (SwiftUI + AppKit) now on the Mac App Store, carries the same local-first thinking to the desktop: a sandboxed menu-bar app with a SQLite data layer and on-device learning, and no server at all.\nI currently work shifted hours to overlap with a Brazil-based team, so adapting to US or UK business hours is routine rather than a promise. Available as an independent contractor.",
     "skillCategories": [
         {
             "category": "Offline-First & Data Sync",
@@ -116,6 +117,7 @@
                 "React Native",
                 "Native Android",
                 "Native iOS / SwiftUI",
+                "Native macOS / AppKit",
                 "Cross-Platform Development",
                 "Performance Optimization",
                 "Platform Channels"
@@ -140,7 +142,7 @@
                 "Firebase (Firestore, Auth, Functions, Crashlytics)",
                 "REST APIs",
                 "Supabase",
-                "SQLite / Drift",
+                "SQLite / Drift / GRDB",
                 "PostgreSQL"
             ]
         },
@@ -333,6 +335,73 @@
     ],
     "present": "Present",
     "projects": [
+        {
+            "name": "Hourwise",
+            "description": "Native macOS menu-bar app for solo and small-firm lawyers. It records billable work passively (no timer to start or forget), attributes it to client matters, and turns it into invoices, then shows what never reached a bill. Local-first by design: no account, no server, and nothing leaves the Mac. Published on the Mac App Store.",
+            "role": "Founder and sole engineer — product, native macOS architecture, UI design, App Store release and launch.",
+            "url": "https://apps.apple.com/us/app/hourwise-billable-hours/id6811420308?mt=12",
+            "icon": {
+                "codePoint": "0xef21",
+                "fontFamily": "FontAwesome",
+                "color": "0xffffffff"
+            },
+            "status": "shipped",
+            "featured": true,
+            "flagship": true,
+            "highlights": [
+                "Native SwiftUI + AppKit menu-bar app, sandboxed for the Mac App Store — ~17k lines of Swift",
+                "Local-first data layer on SQLite (GRDB) with versioned migrations, backup and recovery — no account, no server",
+                "On-device attribution: a rule engine plus a naive-Bayes classifier trained on the user's own corrections, and EventKit calendar import",
+                "Invoicing pipeline with PDFKit rendering and hand-written XLSX, CSV, QuickBooks/Xero and LEDES 1998B exporters",
+                "StoreKit 2 subscriptions with a free tier, Swift Charts analytics and Touch ID app lock"
+            ],
+            "technologies": [
+                {
+                    "name": "Swift",
+                    "icon": {
+                        "codePoint": "0xf0aa",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "SwiftUI"
+                },
+                {
+                    "name": "AppKit"
+                },
+                {
+                    "name": "macOS",
+                    "icon": {
+                        "codePoint": "0xef21",
+                        "fontFamily": "FontAwesome"
+                    }
+                },
+                {
+                    "name": "SQLite / GRDB"
+                },
+                {
+                    "name": "StoreKit 2"
+                },
+                {
+                    "name": "EventKit"
+                },
+                {
+                    "name": "PDFKit"
+                }
+            ],
+            "links": [
+                {
+                    "label": "Mac App Store",
+                    "url": "https://apps.apple.com/us/app/hourwise-billable-hours/id6811420308?mt=12",
+                    "platform": "ios"
+                },
+                {
+                    "label": "Product site",
+                    "url": "https://ehsanur.com/hourwise/",
+                    "platform": "web"
+                }
+            ]
+        },
         {
             "name": "Farenow",
             "description": "All-in-one super app for a US-based client (Houston, TX), built while at Devxhub: ride-hailing, on-demand service bookings, food and grocery delivery, virtual consultations, and a real estate/marketplace listings module in a single app.",
@@ -1407,8 +1476,8 @@
     ],
     "bottomBanner": {
         "message": "© 2026 Shekh Ehsanur Rahman —",
-        "displayLink": "All rights reserved",
-        "linkUrl": "#"
+        "displayLink": "Try Hourwise for Mac",
+        "linkUrl": "https://ehsanur.com/hourwise/"
     },
     "portfolio": "Shekh Ehsanur Rahman",
     "homeSectionTitle": "Home",

@@ -31,16 +31,21 @@ Widget _entrance(int step, Widget child) {
   );
 }
 
-/// The hero screenshot — Peace of Mind's Picture Bank map view. Curated,
-/// not derived from the folder-listing provider: the hero is the site's
-/// single most prominent image, so it's pinned by hand rather than
-/// picking up whatever sorts first alphabetically. Previously showed
-/// Tanto; that client's business closed and its UI can no longer be
-/// featured here.
-const _heroImagePath =
-    'assets/projectimage/peace-of-mind-pom/img_picture_bank_demo_9.webp';
+/// The hero screenshot — Farenow's multi-service super-app home (taxi,
+/// parcel, delivery, wallet). Curated, not derived from the folder-listing
+/// provider: the hero is the site's single most prominent image, so it's
+/// pinned by hand, and it lives in assets/images/ so it doesn't also show up
+/// in Farenow's project gallery. Cropped from the gallery screenshot to drop
+/// its baked-in bezel, since [DeviceFrame] draws its own.
+///
+/// Chosen to line up with the bio's headline claims (enterprise FinTech +
+/// the Houston super app). Tanto, the FinTech app, can't be shown: that
+/// client's business closed and its UI can no longer be featured here.
+/// Previously Peace of Mind's Picture Bank map view, which didn't match
+/// either claim.
+const _heroImagePath = 'assets/images/hero_farenow_home.webp';
 const _heroImageAlt =
-    'Peace of Mind app — Picture Bank map view showing geotagged photo collections';
+    'Farenow super app home screen — taxi, parcel and delivery services with an in-app wallet';
 
 /// The hero — design brief 2's signature moment, restructured per an
 /// explicit responsive spec (three genuinely different layouts, not one
@@ -148,6 +153,8 @@ class _DesktopHero extends StatelessWidget {
         ),
         gapH12,
         _entrance(4, _LocationLine()),
+        gapH12,
+        _entrance(4, const _ContractBadge()),
         const SizedBox(height: 28),
         _entrance(
           5,
@@ -159,10 +166,10 @@ class _DesktopHero extends StatelessWidget {
               if (emailUrl != null)
                 _HeroCta.primary(
                     label: tr(LocaleKeys.heroPrimaryCta), url: emailUrl!),
+              if (resumes.isNotEmpty) ResumeButton(resumes: resumes.cast()),
               if (whatsappUrl != null)
                 _HeroCta.secondary(
                     label: tr(LocaleKeys.heroSecondaryCta), url: whatsappUrl!),
-              if (resumes.isNotEmpty) ResumeButton(resumes: resumes.cast()),
             ],
           ),
         ),
@@ -245,28 +252,28 @@ class _TabletHero extends StatelessWidget {
             ),
             gapH8,
             _entrance(3, _LocationLine()),
+            gapH12,
+            _entrance(3, const _ContractBadge()),
             gapH24,
             _entrance(
               4,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 16,
+                runSpacing: 12,
                 children: [
                   if (emailUrl != null)
                     _HeroCta.primary(
                         label: tr(LocaleKeys.heroPrimaryCta), url: emailUrl!),
-                  if (whatsappUrl != null) ...[
-                    gapW16,
+                  if (resumes.isNotEmpty)
+                    ResumeButton(resumes: resumes.cast()),
+                  if (whatsappUrl != null)
                     _HeroCta.secondary(
                         label: tr(LocaleKeys.heroSecondaryCta),
                         url: whatsappUrl!),
-                  ],
                 ],
               ),
             ),
-            if (resumes.isNotEmpty) ...[
-              gapH12,
-              _entrance(5, ResumeButton(resumes: resumes.cast())),
-            ],
             gapH40,
             _entrance(6, const _HeroDevice(width: 138)),
             gapH24,
@@ -327,6 +334,8 @@ class _MobileHero extends StatelessWidget {
         ),
         gapH8,
         _entrance(3, _LocationLine()),
+        gapH12,
+        _entrance(3, const _ContractBadge()),
         gapH24,
         // Stats before CTAs: a visitor needs a reason to care before
         // they'll tap anything.
@@ -342,16 +351,16 @@ class _MobileHero extends StatelessWidget {
                     label: tr(LocaleKeys.heroPrimaryCta),
                     url: emailUrl!,
                     fullWidth: true),
+              if (resumes.isNotEmpty) ...[
+                gapH12,
+                ResumeButton(resumes: resumes.cast(), fullWidth: true),
+              ],
               if (whatsappUrl != null) ...[
                 gapH12,
                 _HeroCta.secondary(
                     label: tr(LocaleKeys.heroSecondaryCta),
                     url: whatsappUrl!,
                     fullWidth: true),
-              ],
-              if (resumes.isNotEmpty) ...[
-                gapH16,
-                Center(child: ResumeButton(resumes: resumes.cast())),
               ],
             ],
           ),
@@ -375,7 +384,44 @@ class _LocationLine extends StatelessWidget {
       textAlign: TextAlign.center,
       style: monoLabelStyle(
         fontSize: 12,
-        color: Theme.of(context).colorScheme.onSurface.withAlpha(180),
+        color: mutedTextColor(Theme.of(context).colorScheme),
+      ),
+    );
+  }
+}
+
+/// Removes the "overseas hire = payroll/tax headache" objection up front,
+/// right under the location line, rather than leaving it to the last
+/// sentence of the About copy. Outlined pill so it reads as a fact/badge,
+/// not another button.
+class _ContractBadge extends StatelessWidget {
+  const _ContractBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: scheme.onSurface.withAlpha(70)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.verified_outlined, size: 14, color: scheme.tertiary),
+          gapW8,
+          Flexible(
+            child: Text(
+              tr(LocaleKeys.contractBadge).toUpperCase(),
+              style: monoLabelStyle(
+                fontSize: 11,
+                letterSpacing: 0.06,
+                color: mutedTextColor(scheme),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

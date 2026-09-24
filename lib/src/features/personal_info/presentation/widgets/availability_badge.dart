@@ -34,7 +34,7 @@ class AvailabilityBadge extends StatelessWidget {
           style: monoLabelStyle(
             fontSize: 12,
             letterSpacing: 0.06,
-            color: Theme.of(context).colorScheme.onSurface.withAlpha(180),
+            color: mutedTextColor(Theme.of(context).colorScheme),
           ),
         ),
       ],

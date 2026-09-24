@@ -7,38 +7,53 @@ import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
 class ResumeButton extends StatelessWidget {
-  const ResumeButton({super.key, required this.resumes});
+  const ResumeButton({super.key, required this.resumes, this.fullWidth = false});
 
   final List<Resume> resumes;
+  final bool fullWidth;
 
-  // Deliberately quiet — design brief 2, content problem #3: the resume is
-  // the secondary ask. Email/WhatsApp (see PersonalInfoSection) carry the
-  // primary-CTA visual weight; this is a plain underlined text link.
+  // Same pill size as the hero's Email/WhatsApp CTAs.
+  static const _minTouchHeight = 48.0;
+
+  // Recruiters land here wanting the CV first, so this carries near-equal
+  // weight to the primary "Email me" fill: a Signal-coloured border and
+  // download icon, sitting between the filled primary and WhatsApp's muted
+  // outline. Previously a quiet underlined text link, which read as an
+  // afterthought.
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final signal = theme.colorScheme.tertiary;
 
     return SelectionContainer.disabled(
-      child: TextButton(
+      child: OutlinedButton.icon(
         style: ButtonStyle(
-          padding: const WidgetStatePropertyAll(EdgeInsets.zero),
-          minimumSize: const WidgetStatePropertyAll(Size(0, 0)),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            return states.contains(WidgetState.hovered)
-                ? theme.colorScheme.tertiary
-                : theme.colorScheme.onSurface.withAlpha(180);
+          side: WidgetStateProperty.resolveWith((states) {
+            return BorderSide(
+              width: states.contains(WidgetState.hovered) ? 2.5 : 1.5,
+              color: signal,
+            );
           }),
+          foregroundColor: WidgetStatePropertyAll(theme.colorScheme.onSurface),
+          iconColor: WidgetStatePropertyAll(signal),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            return states.contains(WidgetState.hovered)
+                ? theme.colorScheme.tertiaryContainer.withAlpha(90)
+                : Colors.transparent;
+          }),
+          shape: const WidgetStatePropertyAll(StadiumBorder()),
+          minimumSize: WidgetStatePropertyAll(
+            Size(fullWidth ? double.infinity : 0,
+                fullWidth ? _minTouchHeight : 0),
+          ),
+          padding: const WidgetStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: 22, vertical: 13),
+          ),
+          textStyle: WidgetStatePropertyAll(theme.textTheme.labelLarge),
         ),
         onPressed: () => _onPressed(context),
-        child: Text(
-          tr(LocaleKeys.downloadResume),
-          style: theme.textTheme.bodyMedium?.copyWith(
-            decoration: TextDecoration.underline,
-            decorationColor: theme.colorScheme.onSurface.withAlpha(100),
-          ),
-        ),
+        icon: const Icon(Icons.download_rounded, size: 18),
+        label: Text(tr(LocaleKeys.downloadResume)),
       ),
     );
   }

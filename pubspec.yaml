@@ -67,6 +67,7 @@ flutter:
     - assets/icons/other/
     - assets/icons/software-development/
     - assets/images/
+    - assets/projectimage/hourwise/
     - assets/projectimage/peace-of-mind-pom/
     - assets/projectimage/forward-sms/
     - assets/projectimage/muslim-times-pro/

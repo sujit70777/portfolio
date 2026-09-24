@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/widgets/icon.dart';
 import 'package:portfolio/src/constants/sizes.dart';
+import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_detail_modal.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
@@ -64,7 +65,7 @@ class ProjectListRow extends StatelessWidget {
                 child: Text(
                   project.description ?? '',
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withAlpha(180),
+                    color: mutedTextColor(theme.colorScheme),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

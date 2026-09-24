@@ -51,6 +51,13 @@ TextStyle monoLabelStyle({
   );
 }
 
+/// Secondary/muted text — eyebrows, location line, stat labels, captions.
+/// Alpha 215 keeps it visibly quieter than body text while clearing WCAG AAA
+/// (7:1) on every page/card/container background in both themes — ≥8:1
+/// computed against the resolved onSurface values, not eyeballed. The
+/// previous alpha 180 measured ~6.0:1 in light mode and failed AAA.
+Color mutedTextColor(ColorScheme scheme) => scheme.onSurface.withAlpha(215);
+
 final _textTheme = TextTheme(
   displayLarge: _display(fontSize: 64, height: 1.02, letterSpacing: -0.5),
   displayMedium: _display(fontSize: 40, height: 1.05, letterSpacing: -0.3),

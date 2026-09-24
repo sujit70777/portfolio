@@ -171,7 +171,7 @@ class _Stat extends StatelessWidget {
           style: theme.textTheme.labelSmall?.copyWith(
             fontSize: 10,
             letterSpacing: 0.04,
-            color: theme.colorScheme.onSurface.withAlpha(180),
+            color: mutedTextColor(theme.colorScheme),
           ),
         ),
       ],
