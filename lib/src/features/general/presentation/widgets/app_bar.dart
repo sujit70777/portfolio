@@ -88,6 +88,13 @@ class MyAppBar extends ConsumerWidget {
                       _onAppBarButtonTap(ref.watch(projectSectionKeyProvider));
                     },
                   ),
+                  AppBarButton(
+                    title: tr(LocaleKeys.fitCheckSectionTitle),
+                    emphasized: true,
+                    onPressed: () {
+                      _onAppBarButtonTap(ref.watch(fitCheckSectionKeyProvider));
+                    },
+                  ),
                   _buildLocaleButton(context, ref),
                   gapW8,
                   const DarkModeSwitch(),

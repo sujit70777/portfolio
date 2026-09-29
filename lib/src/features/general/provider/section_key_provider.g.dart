@@ -254,3 +254,53 @@ final class ProjectSectionKeyProvider
 }
 
 String _$projectSectionKeyHash() => r'784a80cb653f8c5ca93b09b0933c65a1c71955c2';
+
+@ProviderFor(fitCheckSectionKey)
+final fitCheckSectionKeyProvider = FitCheckSectionKeyProvider._();
+
+final class FitCheckSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
+    with $Provider<GlobalKey<State<StatefulWidget>>> {
+  FitCheckSectionKeyProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fitCheckSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fitCheckSectionKeyHash();
+
+  @$internal
+  @override
+  $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GlobalKey<State<StatefulWidget>> create(Ref ref) {
+    return fitCheckSectionKey(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$fitCheckSectionKeyHash() =>
+    r'cd56b07c9b4ad31839b589d9524455b4abeff458';

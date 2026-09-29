@@ -43,6 +43,8 @@ Everything below exists because it broke in practice, not because it looked good
 
 ## Features
 
+- **Fit Check** — a recruiter pastes a job description or project brief and every requirement is matched to the role or project on the page that shows it, gaps included, with a copyable summary and a pre-filled email. Deterministic and entirely in-browser: nothing pasted leaves the page, and it can't claim experience the content doesn't show
+- **Shareable deep links** — `?project=<slug>` opens a project's detail modal (each modal has a "Copy link"), and `?section=fit-check` (or `about`, `skills`, `experience`, `projects`) scrolls straight to a section
 - **Fully data-driven** — every piece of content lives in one JSON file; adding a project or updating experience takes no code changes
 - **Multi-storefront links** — a project shipped to both stores renders both buttons, labelled and iconed from its `platform` tag, plus a cross-platform badge on the card
 - **Responsive** — separate desktop, tablet and mobile layouts

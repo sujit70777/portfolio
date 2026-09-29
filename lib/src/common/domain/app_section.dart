@@ -7,6 +7,7 @@ enum AppSection {
   skills,
   experience,
   projects,
+  fitCheck,
 }
 
 extension AppSectionNumber on AppSection {

@@ -26,7 +26,7 @@ class _BottomBannerState extends ConsumerState<BottomBanner> {
   static const _revealThreshold = 64.0;
 
   static const _iconSize = 18.0;
-  static const _flutterLogoAsset = 'assets/icons/flutter.svg';
+  static const _flutterLogoAsset = 'assets/icons/software-development/flutter.svg';
 
   final _linkRecognizer = TapGestureRecognizer();
   ScrollController? _scrollController;

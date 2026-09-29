@@ -27,3 +27,8 @@ GlobalKey experienceSectionKey(Ref ref) {
 GlobalKey projectSectionKey(Ref ref) {
   return GlobalKey();
 }
+
+@riverpod
+GlobalKey fitCheckSectionKey(Ref ref) {
+  return GlobalKey();
+}

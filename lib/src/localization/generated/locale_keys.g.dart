@@ -48,5 +48,32 @@ abstract class  LocaleKeys {
   static const sectionEyebrowSkills = 'sectionEyebrowSkills';
   static const sectionEyebrowProjects = 'sectionEyebrowProjects';
   static const projectsMoreLabel = 'projectsMoreLabel';
+  static const siteUrl = 'siteUrl';
+  static const fitCheckSectionTitle = 'fitCheckSectionTitle';
+  static const sectionEyebrowFitCheck = 'sectionEyebrowFitCheck';
+  static const fitCheck_title = 'fitCheck.title';
+  static const fitCheck_intro = 'fitCheck.intro';
+  static const fitCheck_privacy = 'fitCheck.privacy';
+  static const fitCheck_inputHint = 'fitCheck.inputHint';
+  static const fitCheck_checkButton = 'fitCheck.checkButton';
+  static const fitCheck_sampleButton = 'fitCheck.sampleButton';
+  static const fitCheck_clearButton = 'fitCheck.clearButton';
+  static const fitCheck_emailButton = 'fitCheck.emailButton';
+  static const fitCheck_copySummaryButton = 'fitCheck.copySummaryButton';
+  static const fitCheck_copiedSummary = 'fitCheck.copiedSummary';
+  static const fitCheck_emailSubject = 'fitCheck.emailSubject';
+  static const fitCheck_notShown = 'fitCheck.notShown';
+  static const fitCheck_listedOnly = 'fitCheck.listedOnly';
+  static const fitCheck_alsoBrings = 'fitCheck.alsoBrings';
+  static const fitCheck_nothingFound = 'fitCheck.nothingFound';
+  static const fitCheck_tooShort = 'fitCheck.tooShort';
+  static const fitCheck_disclaimer = 'fitCheck.disclaimer';
+  static const fitCheck_sampleText = 'fitCheck.sampleText';
+  static const fitCheck = 'fitCheck';
+  static const copyEmail = 'copyEmail';
+  static const emailCopied = 'emailCopied';
+  static const emailOpening = 'emailOpening';
+  static const copyProjectLink = 'copyProjectLink';
+  static const projectLinkCopied = 'projectLinkCopied';
 
 }

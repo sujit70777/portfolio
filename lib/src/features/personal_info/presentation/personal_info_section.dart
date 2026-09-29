@@ -570,6 +570,23 @@ class _HeroCta extends StatelessWidget {
   }
 
   Future<void> _onTap(BuildContext context) async {
+    const mailto = 'mailto:';
+    if (url.startsWith(mailto)) {
+      try {
+        // Same tab: a mailto opened in a new one leaves a blank tab behind
+        // in browsers that hand it straight to a mail app.
+        await LaunchUrlHelper.launchURL(url, openInNewTab: false);
+      } catch (_) {
+        // The fallback below covers this too.
+      }
+      if (context.mounted) {
+        ScaffoldMessengerHelper.showEmailFallback(
+          context,
+          email: url.substring(mailto.length).split('?').first,
+        );
+      }
+      return;
+    }
     try {
       await LaunchUrlHelper.launchURL(url);
     } catch (e) {

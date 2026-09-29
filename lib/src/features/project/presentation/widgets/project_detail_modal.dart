@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/domain/link.dart';
@@ -9,12 +11,14 @@ import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/common/widgets/technology_wrap_chips.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
+import 'package:portfolio/src/features/general/presentation/widgets/deep_link_handler.dart';
 import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_highlights.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/link_platform_display.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
+import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
@@ -567,6 +571,7 @@ class _ActionBar extends StatelessWidget {
               onPressed: onClose,
               child: const Text('Close'),
             ),
+            if (project.name != null) _CopyLinkButton(name: project.name!),
             for (final link in _links) _storeButton(theme, context, link),
           ],
         ),
@@ -616,5 +621,62 @@ class _ActionBar extends StatelessWidget {
     if (host.contains('pub.dev')) return 'View on pub.dev';
     if (host.contains('github.com')) return 'View on GitHub';
     return 'Visit project';
+  }
+}
+
+/// For a recruiter forwarding one project to a hiring manager: the link
+/// reopens this modal on arrival (see DeepLinkHandler). Confirms in place —
+/// a SnackBar would land on the page behind this modal's barrier.
+class _CopyLinkButton extends StatefulWidget {
+  const _CopyLinkButton({required this.name});
+
+  final String name;
+
+  @override
+  State<_CopyLinkButton> createState() => _CopyLinkButtonState();
+}
+
+class _CopyLinkButtonState extends State<_CopyLinkButton> {
+  static const _confirmationDuration = Duration(seconds: 2);
+
+  bool _copied = false;
+  Timer? _reset;
+
+  @override
+  void dispose() {
+    _reset?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _copy() async {
+    await Clipboard.setData(
+      ClipboardData(text: projectShareUrl(widget.name)),
+    );
+    if (!mounted) return;
+    setState(() => _copied = true);
+    _reset?.cancel();
+    _reset = Timer(_confirmationDuration, () {
+      if (mounted) setState(() => _copied = false);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      liveRegion: true,
+      child: TextButton.icon(
+        style: ButtonStyle(
+          foregroundColor:
+              WidgetStatePropertyAll(Theme.of(context).colorScheme.tertiary),
+        ),
+        onPressed: _copy,
+        icon: Icon(_copied ? Icons.check : Icons.link, size: 18),
+        label: Text(
+          _copied
+              ? tr(LocaleKeys.projectLinkCopied)
+              : tr(LocaleKeys.copyProjectLink),
+        ),
+      ),
+    );
   }
 }

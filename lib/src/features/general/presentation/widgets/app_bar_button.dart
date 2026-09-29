@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppBarButton extends ConsumerStatefulWidget {
-  const AppBarButton({super.key, this.onPressed, required this.title});
+  const AppBarButton({
+    super.key,
+    this.onPressed,
+    required this.title,
+    this.emphasized = false,
+  });
 
   final VoidCallback? onPressed;
   final String title;
+
+  /// Accent-coloured at rest, for the one nav item that's a tool rather
+  /// than a place to read.
+  final bool emphasized;
 
   @override
   ConsumerState<AppBarButton> createState() => _AppBarButtonState();
@@ -37,7 +46,7 @@ class _AppBarButtonState extends ConsumerState<AppBarButton> {
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.easeOutCubic,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: _isHovered
+                        color: _isHovered || widget.emphasized
                             ? accentColor
                             : Theme.of(context).textTheme.titleMedium?.color,
                       ),

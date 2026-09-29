@@ -5,6 +5,7 @@ import 'package:portfolio/src/common/widgets/selection_area.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/about/presentation/about_section.dart';
 import 'package:portfolio/src/features/experience/presentation/experience_section.dart';
+import 'package:portfolio/src/features/fit_check/presentation/fit_check_section.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/site_footer.dart';
 import 'package:portfolio/src/features/personal_info/presentation/personal_info_section.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/sliver_app_bar.dart';
@@ -68,6 +69,17 @@ class GeneralTablet extends ConsumerWidget {
                               ScrollReveal(
                                 child: ProjectSection(
                                   key: ref.watch(projectSectionKeyProvider),
+                                ),
+                              ),
+                              gapH100,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                ),
+                                child: ScrollReveal(
+                                  child: FitCheckSection(
+                                    key: ref.watch(fitCheckSectionKeyProvider),
+                                  ),
                                 ),
                               ),
                               gapH100,
