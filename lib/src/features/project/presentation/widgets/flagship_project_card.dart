@@ -1,9 +1,15 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/domain/link.dart';
+import 'package:portfolio/src/common/widgets/ambient_loop.dart';
+import 'package:portfolio/src/common/widgets/aurora_text.dart';
+import 'package:portfolio/src/common/widgets/gradient_button.dart';
 import 'package:portfolio/src/common/widgets/icon.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/common/widgets/technology_chip.dart';
+import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
@@ -131,30 +137,86 @@ class _FlagshipProjectCardState extends ConsumerState<FlagshipProjectCard> {
       );
     }
 
-    return AnimatedContainer(
+    final palette = Palette.of(context);
+    final card = AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeOut,
       padding: EdgeInsets.all(Responsive.isMobile(context) ? 14 : 20),
       decoration: BoxDecoration(
         color: theme.colorScheme.primary,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: _hovered
-              ? theme.colorScheme.tertiary
-              : theme.colorScheme.onSurface.withAlpha(24),
-          width: _hovered ? 1.5 : 1,
-        ),
+        borderRadius: BorderRadius.circular(_radius),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withAlpha(_hovered ? 60 : 30),
-            blurRadius: _hovered ? 32 : 16,
-            offset: Offset(0, _hovered ? 16 : 8),
+            color: palette.aurora.first
+                .withAlpha(_hovered ? palette.glowAlpha : palette.glowAlpha ~/ 3),
+            blurRadius: _hovered ? 48 : 28,
+            offset: Offset(-8, _hovered ? 18 : 10),
+          ),
+          BoxShadow(
+            color: palette.aurora[1]
+                .withAlpha(_hovered ? palette.glowAlpha : palette.glowAlpha ~/ 3),
+            blurRadius: _hovered ? 48 : 28,
+            offset: Offset(8, _hovered ? 18 : 10),
           ),
         ],
       ),
       child: body,
     );
+
+    // The flagship is the one card with a living border: the aurora
+    // turning slowly round its edge, so the eye lands here first in a
+    // section full of cards.
+    return AmbientLoop(
+      period: const Duration(seconds: 10),
+      child: card,
+      builder: (context, t, child) => CustomPaint(
+        foregroundPainter: _AuroraBorderPainter(
+          colors: palette.aurora,
+          rotation: t,
+          radius: _radius,
+          strokeWidth: _hovered ? 2.5 : 1.5,
+        ),
+        child: child,
+      ),
+    );
   }
+
+  static const _radius = 20.0;
+}
+
+class _AuroraBorderPainter extends CustomPainter {
+  const _AuroraBorderPainter({
+    required this.colors,
+    required this.rotation,
+    required this.radius,
+    required this.strokeWidth,
+  });
+
+  final List<Color> colors;
+  final double rotation;
+  final double radius;
+  final double strokeWidth;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = (Offset.zero & size).deflate(strokeWidth / 2);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(rect, Radius.circular(radius)),
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = strokeWidth
+        ..shader = SweepGradient(
+          colors: [...colors, colors.first],
+          transform: GradientRotation(rotation * 2 * math.pi),
+        ).createShader(rect),
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _AuroraBorderPainter old) =>
+      old.rotation != rotation ||
+      old.strokeWidth != strokeWidth ||
+      old.colors != colors;
 }
 
 class _Thumbnail extends StatelessWidget {
@@ -205,13 +267,9 @@ class _FlagshipDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
+        AuroraText(
           'FLAGSHIP PRODUCT',
-          style: monoLabelStyle(
-            fontSize: 11,
-            letterSpacing: 0.08,
-            color: theme.colorScheme.tertiary,
-          ),
+          style: monoLabelStyle(fontSize: 11, letterSpacing: 0.08),
         ),
         gapH8,
         Text(project.name ?? '', style: theme.textTheme.headlineSmall),
@@ -260,7 +318,7 @@ class _FlagshipLinkButton extends StatelessWidget {
     final theme = Theme.of(context);
     final label = link.label ?? linkPlatformLabel(link.platform);
     final foreground =
-        primary ? theme.colorScheme.secondary : theme.colorScheme.onSurface;
+        primary ? Palette.of(context).onAurora : theme.colorScheme.onSurface;
     final icon = linkPlatformIcon(link.platform);
     final child = Row(
       mainAxisSize: MainAxisSize.min,
@@ -287,10 +345,9 @@ class _FlagshipLinkButton extends StatelessWidget {
     );
 
     if (primary) {
-      return FilledButton(
-        style: style.copyWith(
-          backgroundColor: WidgetStatePropertyAll(theme.colorScheme.tertiary),
-        ),
+      return GradientButton(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        textStyle: theme.textTheme.labelMedium,
         onPressed: () => _open(context),
         child: child,
       );

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/utils/fluid_size.dart';
 import 'package:portfolio/src/common/widgets/first_paint_entrance.dart';
+import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 
@@ -36,21 +37,29 @@ class HeroStatPlaque extends StatelessWidget {
     final numberSize =
         fluidSize(context, min: 20, preferredVwPercent: 2.5, max: 32);
 
+    // One hue per figure, so the four read as four separate facts at a
+    // glance: gold for the star rating, then emerald, cyan, mint.
+    // web/index.html colours `.pl-stat b` the same way, in the same order.
+    final palette = Palette.of(context);
     final stats = [
       _StatData(
         leadingIcon: _starIcon,
         rawValue: tr(LocaleKeys.stats_rating),
         label: tr(LocaleKeys.stats_ratingLabel),
+        color: palette.hues[0],
       ),
       _StatData(
           rawValue: tr(LocaleKeys.stats_apps),
-          label: tr(LocaleKeys.stats_appsLabel)),
+          label: tr(LocaleKeys.stats_appsLabel),
+          color: palette.hues[1]),
       _StatData(
           rawValue: tr(LocaleKeys.stats_users),
-          label: tr(LocaleKeys.stats_usersLabel)),
+          label: tr(LocaleKeys.stats_usersLabel),
+          color: palette.hues[2]),
       _StatData(
         rawValue: '${tr(LocaleKeys.stats_years)}yr',
         label: tr(LocaleKeys.stats_yearsLabel),
+        color: palette.hues[6],
       ),
     ];
 
@@ -105,9 +114,27 @@ class HeroStatPlaque extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        child: content,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Stack(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              child: content,
+            ),
+            // An aurora rule along the top edge, like a lit bezel.
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 2,
+              child: DecoratedBox(
+                decoration: BoxDecoration(gradient: palette.auroraGradient),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -125,12 +152,17 @@ class HeroStatPlaque extends StatelessWidget {
 }
 
 class _StatData {
-  const _StatData(
-      {this.leadingIcon, required this.rawValue, required this.label});
+  const _StatData({
+    this.leadingIcon,
+    required this.rawValue,
+    required this.label,
+    required this.color,
+  });
 
   final IconData? leadingIcon;
   final String rawValue;
   final String label;
+  final Color color;
 }
 
 class _Stat extends StatelessWidget {
@@ -153,14 +185,13 @@ class _Stat extends StatelessWidget {
               Icon(
                 data.leadingIcon,
                 size: numberSize * 0.72,
-                color: theme.colorScheme.tertiary,
+                color: data.color,
               ),
               SizedBox(width: numberSize * 0.12),
             ],
             _CountUpValue(
               rawValue: data.rawValue,
-              style: monoLabelStyle(
-                  fontSize: numberSize, color: theme.colorScheme.tertiary),
+              style: monoLabelStyle(fontSize: numberSize, color: data.color),
             ),
           ],
         ),

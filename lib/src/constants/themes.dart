@@ -10,9 +10,15 @@ import 'package:flutter/material.dart';
 // experience_card.dart, app_bar.dart): `secondary` is the outer page/chrome
 // background, `primary` is the content-pane/card surface (kept a touch lighter
 // than `secondary` in dark mode / distinct in light mode for elevation without
-// borders), and `tertiary` is the single accent (design brief 2's "Signal") —
-// a saturated chartreuse, used sparingly: CTAs, links, version/rating tags.
-// Never a gradient or a glow, always a flat fill or text color.
+// borders), and `tertiary` is the signal accent (design brief 2's "Signal") —
+// gold on the dark theme, forest green on the light one — for links, status
+// and the availability dot.
+//
+// Colour beyond that lives in constants/palette.dart: the emerald → mint →
+// gold "aurora" for the signature moments (name, primary CTAs, the
+// flagship card, the progress bar) and a family of hues giving each skill
+// category, role and featured project its own identity. Add colour there,
+// not as one-off literals, so light/dark pairs and contrast stay in one place.
 
 // The three families below are referenced by the family names declared in
 // pubspec.yaml `fonts:`, rather than through the google_fonts package. Both
@@ -116,12 +122,11 @@ final lightTheme = FlexThemeData.light(
     // cream — deliberately not the "cream + terracotta" default look).
     secondary: Color(0xffeef0f2),
     secondaryContainer: Color(0xffe2e5e4),
-    // Signal — chartreuse, deepened for AA text/icon contrast on light
-    // backgrounds (5.5:1 on secondary, 6.3:1 on white — verified, not
-    // eyeballed). The bright value only ever appears as a fill (see dark
-    // tertiary below and tertiaryContainer), never as light-mode text.
-    tertiary: Color(0xff4e6810),
-    tertiaryContainer: Color(0xffe3f2b0),
+    // Signal — the brand's forest green, deep enough for AA text/icon
+    // contrast on both light backgrounds (~7:1 on white, ~6.3:1 on the
+    // #eef0f2 chrome). The dark theme's gold only works on dark surfaces.
+    tertiary: Color(0xff166534),
+    tertiaryContainer: Color(0xffd6f0df),
     appBarColor: Color(0xffeef0f2),
     error: Color(0xffb00020),
   ),
@@ -151,19 +156,20 @@ final lightTheme = FlexThemeData.light(
 
 final darkTheme = FlexThemeData.dark(
   colors: const FlexSchemeColor(
-    // Content-pane / card surface — a touch lighter than the page bg for
-    // elevation, without relying on borders. Warm plum-charcoal, not a cool
-    // blue-black — deliberately not the near-black-plus-teal default look.
-    primary: Color(0xff1e1922),
-    primaryContainer: Color(0xff2a2430),
-    // Outer page / chrome background.
-    secondary: Color(0xff15121a),
-    secondaryContainer: Color(0xff241f2b),
-    // Signal — bright chartreuse. Full brightness is safe as text/icon
-    // color here since the background is near-black (very high contrast).
-    tertiary: Color(0xffd7ff3b),
-    tertiaryContainer: Color(0xff3a4014),
-    appBarColor: Color(0xff15121a),
+    // The brand's forest green, sampled from the OG card (web/og-preview.jpg)
+    // and profile photo, so the site a visitor lands on is the card they
+    // clicked. Content-pane / card surface — a touch lighter than the page
+    // chrome for elevation, without relying on borders.
+    primary: Color(0xff0d261c),
+    primaryContainer: Color(0xff143326),
+    // Outer page / chrome background — the card's near-black edge green.
+    secondary: Color(0xff06150f),
+    secondaryContainer: Color(0xff10291f),
+    // Signal — the card's warm gold. Bright enough to be text/icon colour
+    // on these near-black greens (~11:1).
+    tertiary: Color(0xfffbc771),
+    tertiaryContainer: Color(0xff3f3113),
+    appBarColor: Color(0xff06150f),
     error: Color(0xffcf6679),
   ),
   textTheme: _textTheme,

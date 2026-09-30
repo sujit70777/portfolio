@@ -1,115 +1,70 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:portfolio/src/features/general/provider/scroll_controller.dart';
+import 'package:portfolio/src/common/widgets/ambient_loop.dart';
+import 'package:portfolio/src/constants/palette.dart';
 
-/// Full rotation period for the gradient drift — slow enough that the
-/// motion reads as ambient depth, never as something actively "playing".
-const _driftPeriod = Duration(seconds: 26);
+/// One full drift cycle — slow enough that the motion reads as light
+/// moving, never as something "playing".
+const _driftPeriod = Duration(seconds: 24);
 
-/// Very subtle depth behind the hero: a slow-drifting low-opacity gradient
-/// plus an optional static dot grid. Deliberately not a "hero animation" —
-/// no particles, no shapes, nothing that draws the eye away from the
-/// content in front of it.
+/// How far the glow spills past the hero's own box. The hero sits inside
+/// the page's content column; without this the light would stop in a hard
+/// vertical line at the column edge.
+const heroBackgroundBleed = EdgeInsets.fromLTRB(140, 110, 140, 60);
+
+/// The hero's backdrop, after the OG card (web/og-preview.jpg): a faint
+/// line grid, soft glows drifting on slow out-of-phase orbits (emerald on
+/// the left, gold on the right where the card's ring glows, mint low in
+/// the middle), and a scatter of gold dust that twinkles.
 ///
-/// The drift pauses whenever the hero scrolls out of view and never starts
-/// at all under `prefers-reduced-motion`, so this never costs a frame when
-/// nobody can see it and never runs when the visitor has asked for less
-/// motion.
-class HeroBackground extends ConsumerStatefulWidget {
+/// Plain radial gradients and dots — no blur filter — so it costs one
+/// cheap layer per frame and nothing at all once scrolled past (see
+/// [AmbientLoop]). It isn't part of web/index.html's pre-Flutter hero: the
+/// glows fade in when Flutter takes over, so the page visibly "lights up"
+/// as it becomes interactive instead of trying to match a static copy.
+class HeroBackground extends StatelessWidget {
   const HeroBackground({super.key});
-
-  @override
-  ConsumerState<HeroBackground> createState() => _HeroBackgroundState();
-}
-
-class _HeroBackgroundState extends ConsumerState<HeroBackground>
-    with SingleTickerProviderStateMixin {
-  late final _controller =
-      AnimationController(vsync: this, duration: _driftPeriod);
-  ScrollController? _scrollController;
-  bool _reduceMotion = false;
-
-  // An infinitely-repeating ticker never "settles", so it must never start
-  // under widget-test's TestWidgetsFlutterBinding — `pumpAndSettle()` would
-  // spin forever waiting for a frame that's never the last one. Runtime
-  // type name check avoids pulling the flutter_test package into app code.
-  static bool get _isTestBinding => WidgetsBinding.instance.runtimeType
-      .toString()
-      .contains('TestWidgetsFlutterBinding');
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _reduceMotion = MediaQuery.disableAnimationsOf(context) || _isTestBinding;
-    if (_reduceMotion) {
-      _controller.stop();
-    } else {
-      final controller = ref.read(scrollControllerProvider);
-      if (!identical(controller, _scrollController)) {
-        _scrollController?.removeListener(_checkVisibility);
-        _scrollController = controller..addListener(_checkVisibility);
-      }
-      WidgetsBinding.instance.addPostFrameCallback((_) => _checkVisibility());
-    }
-  }
-
-  @override
-  void dispose() {
-    _scrollController?.removeListener(_checkVisibility);
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _checkVisibility() {
-    if (_reduceMotion || !mounted) return;
-    final renderObject = context.findRenderObject();
-    if (renderObject is! RenderBox ||
-        !renderObject.attached ||
-        !renderObject.hasSize) {
-      return;
-    }
-    final top = renderObject.localToGlobal(Offset.zero).dy;
-    final bottom = top + renderObject.size.height;
-    final screenHeight = MediaQuery.sizeOf(context).height;
-    final visible = bottom >= 0 && top <= screenHeight;
-    if (visible && !_controller.isAnimating) {
-      _controller.repeat();
-    } else if (!visible && _controller.isAnimating) {
-      _controller.stop();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final accent = theme.colorScheme.tertiary;
-    return Positioned.fill(
+    final palette = Palette.of(context);
+
+    return Positioned(
+      left: -heroBackgroundBleed.left,
+      top: -heroBackgroundBleed.top,
+      right: -heroBackgroundBleed.right,
+      bottom: -heroBackgroundBleed.bottom,
       child: IgnorePointer(
         child: Stack(
+          fit: StackFit.expand,
           children: [
             CustomPaint(
-                size: Size.infinite,
-                painter: _DotGridPainter(color: theme.colorScheme.onSurface)),
-            AnimatedBuilder(
-              animation: _controller,
-              builder: (context, _) {
-                final angle = _controller.value * 2 * math.pi;
-                return DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment(math.cos(angle), math.sin(angle)),
-                      end: Alignment(-math.cos(angle), -math.sin(angle)),
-                      colors: [
-                        accent.withAlpha(14),
-                        Colors.transparent,
-                        accent.withAlpha(8),
-                      ],
+              painter: _GridPainter(color: theme.colorScheme.onSurface),
+            ),
+            TweenAnimationBuilder<double>(
+              tween: Tween(
+                begin: ambientMotionAllowed(context) ? 0 : 1,
+                end: 1,
+              ),
+              duration: const Duration(milliseconds: 1400),
+              curve: Curves.easeOut,
+              builder: (context, fadeIn, child) =>
+                  Opacity(opacity: fadeIn, child: child),
+              child: RepaintBoundary(
+                child: AmbientLoop(
+                  period: _driftPeriod,
+                  builder: (context, t, _) => CustomPaint(
+                    painter: _GlowPainter(
+                      t: t,
+                      glows: [palette.aurora[0], palette.aurora[2], palette.aurora[1]],
+                      dust: palette.aurora[2],
+                      alpha: palette.glowAlpha,
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ],
         ),
@@ -118,24 +73,132 @@ class _HeroBackgroundState extends ConsumerState<HeroBackground>
   }
 }
 
-class _DotGridPainter extends CustomPainter {
-  const _DotGridPainter({required this.color});
+/// The hero's own box inside the painter's (the painter's minus the
+/// bleed). Height is capped: on a phone the hero is ~3 screens tall, and
+/// the light belongs behind the name and CTAs, not smeared down the column.
+Rect _heroBox(Size size) {
+  final box = heroBackgroundBleed.deflateRect(Offset.zero & size);
+  return Rect.fromLTWH(box.left, box.top, box.width, math.min(box.height, 720));
+}
 
-  final Color color;
-  static const _spacing = 28.0;
-  static const _radius = 1.0;
+class _GlowPainter extends CustomPainter {
+  _GlowPainter({
+    required this.t,
+    required this.glows,
+    required this.dust,
+    required this.alpha,
+  });
+
+  final double t;
+
+  /// Left, right, low-middle.
+  final List<Color> glows;
+  final Color dust;
+  final int alpha;
+
+  /// Fixed positions (fractions of the hero box), sizes and twinkle phases —
+  /// seeded, so the dust is the same scatter on every visit.
+  static final _motes = () {
+    final random = math.Random(11);
+    return List.generate(22, (_) {
+      return (
+        Offset(random.nextDouble(), random.nextDouble()),
+        0.8 + random.nextDouble() * 1.4,
+        random.nextDouble(),
+        1 + random.nextInt(2),
+      );
+    });
+  }();
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = color.withAlpha(12);
-    for (double y = 0; y < size.height; y += _spacing) {
-      for (double x = 0; x < size.width; x += _spacing) {
-        canvas.drawCircle(Offset(x, y), _radius, paint);
-      }
+    final box = _heroBox(size);
+    final radius = (box.width * 0.42).clamp(220.0, 520.0);
+    final a = t * 2 * math.pi;
+
+    final blobs = <(Offset, Color, double)>[
+      (Offset(0.12 + 0.06 * math.sin(a), 0.22 + 0.08 * math.cos(a)),
+          glows[0], 0.9),
+      (Offset(0.8 + 0.06 * math.cos(a + 2.1), 0.2 + 0.08 * math.sin(a + 2.1)),
+          glows[1], 1.0),
+      (Offset(0.5 + 0.1 * math.sin(a * 2 + 4.2), 0.72 + 0.06 * math.cos(a + 4.2)),
+          glows[2], 0.5),
+    ];
+    for (final (position, color, weight) in blobs) {
+      final center = Offset(
+        box.left + position.dx * box.width,
+        box.top + position.dy * box.height,
+      );
+      final r = radius * (0.85 + 0.15 * weight);
+      canvas.drawCircle(
+        center,
+        r,
+        Paint()
+          ..shader = RadialGradient(
+            colors: [
+              color.withAlpha((alpha * weight).round()),
+              color.withAlpha((alpha * weight * 0.35).round()),
+              color.withAlpha(0),
+            ],
+            stops: const [0, 0.45, 1],
+          ).createShader(Rect.fromCircle(center: center, radius: r)),
+      );
+    }
+
+    // Gold dust: each mote brightens and fades on its own phase, a whole
+    // number of times per loop so the cycle closes without a jump. Scaled
+    // down hard on the light theme, where bright specks read as dirt.
+    final dustScale = math.pow(alpha / 70, 2).toDouble();
+    for (final (position, moteRadius, phase, speed) in _motes) {
+      final twinkle =
+          (0.5 + 0.5 * math.sin((t * speed + phase) * 2 * math.pi)) *
+              dustScale;
+      canvas.drawCircle(
+        Offset(
+          box.left + position.dx * box.width,
+          box.top + position.dy * box.height,
+        ),
+        moteRadius,
+        Paint()
+          ..color = dust.withAlpha((40 * dustScale + 150 * twinkle).round()),
+      );
     }
   }
 
   @override
-  bool shouldRepaint(covariant _DotGridPainter oldDelegate) =>
+  bool shouldRepaint(covariant _GlowPainter old) =>
+      old.t != t || old.alpha != alpha || old.glows != glows || old.dust != dust;
+}
+
+/// The OG card's faint square grid, behind the hero only — the bleed is
+/// for light, not texture.
+class _GridPainter extends CustomPainter {
+  const _GridPainter({required this.color});
+
+  final Color color;
+  static const _spacing = 64.0;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final area = heroBackgroundBleed.deflateRect(Offset.zero & size);
+    // Fades out downwards, so the texture never stops in a hard line where
+    // the hero ends.
+    final paint = Paint()
+      ..strokeWidth = 1
+      ..shader = LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [color.withAlpha(14), color.withAlpha(0)],
+      ).createShader(area);
+    for (double x = area.left; x <= area.right; x += _spacing) {
+      canvas.drawLine(Offset(x, area.top), Offset(x, area.bottom), paint);
+    }
+    for (double y = area.top; y <= area.bottom; y += _spacing) {
+      canvas.drawLine(Offset(area.left, y), Offset(area.right, y), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _GridPainter oldDelegate) =>
       oldDelegate.color != color;
 }

@@ -2,7 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/domain/app_section.dart';
+import 'package:portfolio/src/common/widgets/aurora_text.dart';
+import 'package:portfolio/src/common/widgets/rich_description.dart';
 import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
+import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/about/data/about_repository.dart';
 import 'package:portfolio/src/features/about/presentation/widgets/skills_panel.dart';
@@ -16,7 +19,12 @@ class AboutDesktop extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final skillCategories =
         ref.watch(aboutRepositoryProvider).getSkillCategories();
-    final paragraphs = tr(LocaleKeys.aboutDescription).split('\n');
+    // The first paragraph is the one-line pitch, set as a lead in the
+    // aurora; the rest is body copy with its bullet lists drawn as lists.
+    final description = tr(LocaleKeys.aboutDescription);
+    final split = description.indexOf('\n\n');
+    final lead = split < 0 ? description : description.substring(0, split);
+    final rest = split < 0 ? '' : description.substring(split + 2);
     final theme = Theme.of(context);
 
     return Column(
@@ -34,13 +42,19 @@ class AboutDesktop extends ConsumerWidget {
             style: theme.textTheme.titleLarge,
           ),
         ),
-        for (final (index, paragraph) in paragraphs.indexed)
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: index == paragraphs.length - 1 ? 0 : 16,
-            ),
-            child: Text(paragraph, style: theme.textTheme.bodyLarge),
+        AuroraText(
+          lead,
+          style: theme.textTheme.headlineSmall?.copyWith(height: 1.3),
+        ),
+        if (rest.isNotEmpty) ...[
+          gapH20,
+          RichDescription(
+            text: rest,
+            style: theme.textTheme.bodyLarge,
+            markerColors: Palette.of(context).aurora,
+            paragraphGap: 16,
           ),
+        ],
         if (skillCategories.isNotEmpty) ...[
           gapH40,
           KeyedSubtree(

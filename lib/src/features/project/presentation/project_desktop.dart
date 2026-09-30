@@ -6,6 +6,7 @@ import 'package:portfolio/src/common/domain/app_section.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/common/widgets/scroll_reveal.dart';
 import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
+import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/project/data/project_repository.dart';
@@ -112,7 +113,10 @@ class _FeaturedGrid extends StatelessWidget {
               width: cardWidth,
               child: ScrollReveal(
                 delay: _cardStagger * index,
-                child: FeaturedProjectCard(project: project),
+                child: FeaturedProjectCard(
+                  project: project,
+                  hue: Palette.of(context).hue(index + 1),
+                ),
               ),
             );
           }).toList(),

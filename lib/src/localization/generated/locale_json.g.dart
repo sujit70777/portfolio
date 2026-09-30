@@ -16,7 +16,7 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> _en = {
   "name": "Shekh Ehsanur Rahman",
-  "description": "Senior Mobile Engineer — Offline-First & Data-Sync Architecture — Flutter & React Native",
+  "description": "Senior Mobile & Full-Stack AI Engineer — Offline-First Sync & On-Device AI — Flutter · React Native · Swift",
   "subDescription": "Based in Bangladesh · hours shifted to overlap EU/US",
   "heroPrimaryCta": "Email me",
   "heroSecondaryCta": "WhatsApp",
@@ -114,7 +114,7 @@ class CodegenLoader extends AssetLoader{
       "url": "assets/documents/resume.pdf"
     }
   ],
-  "aboutDescription": "I build Mobile apps that keep working when the network doesn't.\n11 years in mobile — 50+ shipped apps, 1M+ users, 4.7+ average store rating. My specialty is offline-first architecture and conflict-free data synchronisation: the part that quietly breaks most mobile apps in the field. I've built and open-sourced a CRDT-based sync library for Flutter, and shipped production apps holding a 4.7 rating at 100,000+ daily active users.\nRecent work includes an enterprise reimbursement platform for a Brazilian client — AI invoice capture, SEFAZ tax-agency integration, instant Pix payout — and a multi-service super app for a US client in Houston.\nI also build and ship my own products. Hourwise, a native macOS app (SwiftUI + AppKit) now on the Mac App Store, carries the same local-first thinking to the desktop: a sandboxed menu-bar app with a SQLite data layer and on-device learning, and no server at all.\nI currently work shifted hours to overlap with a Brazil-based team, so adapting to US or UK business hours is routine rather than a promise. Available as an independent contractor.",
+  "aboutDescription": "I build apps that keep working when the network doesn't, and now apps where AI does the tedious part, privately.\n\n11 years in mobile: 50+ shipped apps and over 1 million users across Flutter, React Native, native Android and Swift/SwiftUI. I specialise in offline-first architecture and conflict-free (CRDT) data sync. I'm the author of flutter_crdt_sync_kit, one of 9 packages I've published on pub.dev.\n\nToday I'm the founder and sole engineer of Hourwise Labs. Hourwise is a native macOS time-tracking and invoicing app for lawyers, live on the Mac App Store. I'm growing it into a full-stack AI product:\n• On-device AI billing narratives with Apple Foundation Models\n• Private meeting capture and summaries\n• A Python/FastAPI + Postgres backend with CRDT sync across Mac, iOS and Android\n• A retrieval-based \"Ask my matters\" agent with citations and evals\n\nBefore that:\n• Led an offline-first EdTech platform at 100,000+ daily active users with a 4.7★ rating\n• Team lead and sole developer on Tanto (Brazilian corporate reimbursement with AI invoice capture, SEFAZ integration and instant Pix payouts) and Farenow (multi-service super app for a US client)\n• Built CI/CD with Fastlane and GitHub Actions, and cut crash rates with BLoC/Riverpod/Redux state management and Crashlytics tracking\n\nWhat I bring: ownership from architecture through App Store and Play approval, native platform integration, test discipline, and AI-assisted development with Claude Code under real code review.\n\nOpen to Senior Mobile, Senior Flutter / React Native, and AI / Full-Stack Engineer roles. Remote, full-time or contract (B2B via Deel, Wise or direct invoice). I worked shifted hours with a Brazil-based team for three years, so US, UK or EU hours are routine for me.",
   "skillCategories": [
     {
       "category": "Offline-First & Data Sync",
@@ -140,6 +140,17 @@ class CodegenLoader extends AssetLoader{
       ]
     },
     {
+      "category": "AI & LLM Apps",
+      "skills": [
+        "On-Device AI (Apple Foundation Models)",
+        "Large Language Models (LLM)",
+        "Generative AI & Prompt Engineering",
+        "Claude API",
+        "On-Device Classification",
+        "AI-Assisted Development (Claude Code)"
+      ]
+    },
+    {
       "category": "Languages & State Management",
       "skills": [
         "Dart",
@@ -147,8 +158,10 @@ class CodegenLoader extends AssetLoader{
         "Swift",
         "Java",
         "TypeScript",
+        "Python",
         "Bloc",
         "Riverpod",
+        "Redux",
         "Jetpack Compose"
       ]
     },
@@ -168,6 +181,7 @@ class CodegenLoader extends AssetLoader{
         "Unit / Widget / Integration Testing",
         "CI/CD Pipelines",
         "Fastlane",
+        "GitHub Actions",
         "Git & Code Review",
         "App Store & Play Release Management"
       ]
@@ -184,13 +198,86 @@ class CodegenLoader extends AssetLoader{
   ],
   "experiences": [
     {
+      "role": "Founder & Full-Stack AI Engineer",
+      "company": "Hourwise Labs",
+      "description": "Founder and sole engineer of Hourwise: private, AI-assisted timekeeping and billing for solo lawyers and small firms.\n\nLive on the Mac App Store\n• Native macOS menu-bar app: SwiftUI + AppKit, ~17k lines of Swift\n• Local-first SQLite/GRDB data layer; on-device time attribution with a rule engine and naive-Bayes classifier\n• EventKit calendar import; PDFKit invoices; LEDES 1998B, XLSX, CSV, QuickBooks and Xero exports\n• StoreKit 2 subscriptions; designed, built, shipped and marketed solo\n\nNow building: full-stack AI\n• On-device AI billing narratives with Apple Foundation Models, plus UTBMS code suggestions and billing-rule checks\n• Private meeting capture: on-device transcription and summaries that become draft time entries\n• Python/FastAPI + Postgres backend: auth, firm seats, CRDT sync across Swift and Dart clients, Claude API proxy\n• Flutter companion app for iOS and Android: timers, voice entries, Live Activities\n• \"Ask my matters\": a tool-using LLM agent with pgvector hybrid search, citations and evals",
+      "url": "https://ehsanur.com/hourwise/",
+      "isPresent": true,
+      "startYear": 2026,
+      "startMonth": 9,
+      "technologies": [
+        {
+          "name": "Swift",
+          "icon": {
+            "codePoint": "0xf0aa",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "SwiftUI"
+        },
+        {
+          "name": "macOS",
+          "icon": {
+            "codePoint": "0xef21",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "SQLite / GRDB",
+          "icon": {
+            "assetName": "assets/icons/other/sqlite.svg"
+          }
+        },
+        {
+          "name": "Apple Foundation Models"
+        },
+        {
+          "name": "LLMs"
+        },
+        {
+          "name": "Python",
+          "icon": {
+            "assetName": "assets/icons/software-development/python.svg"
+          }
+        },
+        {
+          "name": "FastAPI"
+        },
+        {
+          "name": "PostgreSQL",
+          "icon": {
+            "assetName": "assets/icons/software-development/postgresql.svg"
+          }
+        },
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        }
+      ],
+      "links": [
+        {
+          "url": "https://apps.apple.com/us/app/hourwise-billable-hours/id6811420308?mt=12",
+          "label": "Mac App Store"
+        },
+        {
+          "url": "https://ehsanur.com/hourwise/",
+          "label": "Hourwise"
+        }
+      ]
+    },
+    {
       "role": "Senior Mobile Developer — Level III",
       "company": "Developer eXperience Hub (Devxhub)",
-      "description": "Architect the Mobile application layer for enterprise FinTech and expense-management products serving 50,000+ users, owning data flow, state management and release process end to end. Built an offline-first local/Firebase sync architecture that keeps core functionality available through network interruptions, with deterministic conflict resolution on reconnect. Designed the team CI/CD pipeline for a 4-developer team spanning multiple time zones. Published 9 reusable Flutter packages to pub.dev covering accessibility auditing, CRDT sync, UI and utility tooling. Led delivery of Tanto (Brazil) and Farenow (US).",
+      "description": "• Architected the mobile application layer in Flutter and React Native for enterprise FinTech and expense-management products serving 50,000+ users, owning data flow, state management and release process end to end.\n• Built an offline-first local/Firebase sync architecture keeping core functionality available through network interruptions, with deterministic conflict resolution on reconnect.\n• Designed and implemented the team CI/CD pipeline (Fastlane, GitHub Actions) for a distributed 4-developer team spanning multiple time zones.\n• Reduced crash rates by introducing structured state management (BLoC and Riverpod in Flutter, Redux and Context in React Native) with Crashlytics monitoring and regression tracking.\n• Published 9 reusable open-source packages covering CRDT sync, accessibility auditing, on-device voice, canvas rendering and UI tooling.\n• Team lead and sole developer on multiple products, owning architecture through store release, including Tanto (Brazilian corporate reimbursement with AI invoice capture, SEFAZ tax-agency integration and instant Pix payouts) and Farenow (multi-service super app for a US client).\n• Integrated AI-assisted development workflows (Claude Code) into the team process while keeping code review and test discipline on all merged work.",
       "url": "https://devxhub.com",
-      "isPresent": true,
+      "isPresent": false,
       "startYear": 2023,
       "startMonth": 9,
+      "endYear": 2026,
+      "endMonth": 9,
       "technologies": [
         {
           "name": "Flutter",
@@ -227,19 +314,22 @@ class CodegenLoader extends AssetLoader{
         },
         {
           "name": "Bloc"
+        },
+        {
+          "name": "Redux"
         }
       ],
       "links": [
         {
           "url": "https://devxhub.com",
-          "display": "Devxhub"
+          "label": "Devxhub"
         }
       ]
     },
     {
       "role": "Senior Mobile Application Developer",
       "company": "Prabartan Information Technology",
-      "description": "Led development of an offline-first, multi-language EdTech platform reaching 100,000+ students across 5 countries, engineered so lessons and progress remain available without connectivity. Sustained a 4.7-star store rating at 100,000+ daily active users by building the Firebase/SQLite synchronisation layer and resolving sync-conflict edge cases at scale. Managed a 6-developer team and modernised the stack with Flutter 3.0, React Native, Jetpack Compose and SwiftUI.",
+      "description": "• Led development of an offline-first, multi-language EdTech platform reaching 100,000+ students across 5 countries, engineered so lessons and progress remain available without connectivity.\n• Sustained a 4.7-star store rating at 100,000+ daily active users by building the Firebase/SQLite synchronisation layer and resolving sync-conflict edge cases at scale.\n• Managed a 6-developer team and modernised the stack with Flutter 3.0, React Native, Jetpack Compose and SwiftUI.",
       "isPresent": false,
       "startYear": 2019,
       "startMonth": 6,
@@ -319,6 +409,7 @@ class CodegenLoader extends AssetLoader{
       "startYear": 2016,
       "startMonth": 5,
       "endYear": 2024,
+      "endMonth": 8,
       "technologies": [
         {
           "name": "Flutter",
@@ -353,7 +444,7 @@ class CodegenLoader extends AssetLoader{
   "projects": [
     {
       "name": "Hourwise",
-      "description": "Native macOS menu-bar app for solo and small-firm lawyers. It records billable work passively (no timer to start or forget), attributes it to client matters, and turns it into invoices, then shows what never reached a bill. Local-first by design: no account, no server, and nothing leaves the Mac. Published on the Mac App Store.",
+      "description": "Native macOS menu-bar app for solo and small-firm lawyers. It records billable work passively (no timer to start or forget), attributes it to client matters, and turns it into invoices, then shows what never reached a bill. Local-first by design: the shipped app needs no account or server, and nothing leaves the Mac. Published on the Mac App Store. Now growing into a full-stack AI product: on-device billing narratives with Apple Foundation Models, private meeting capture, cross-device sync, a Flutter companion app and an \"Ask my matters\" agent.",
       "role": "Founder and sole engineer — product, native macOS architecture, UI design, App Store release and launch.",
       "url": "https://apps.apple.com/us/app/hourwise-billable-hours/id6811420308?mt=12",
       "icon": {

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/common/widgets/gradient_button.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/fit_check/application/fit_summary.dart';
@@ -78,15 +79,13 @@ class FitResults extends StatelessWidget {
           runSpacing: 8,
           children: [
             if (onEmail != null)
-              FilledButton.icon(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(scheme.tertiary),
-                  foregroundColor: WidgetStatePropertyAll(scheme.secondary),
-                  shape: const WidgetStatePropertyAll(StadiumBorder()),
-                ),
+              GradientButton(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                textStyle: theme.textTheme.labelMedium,
                 onPressed: onEmail,
                 icon: const Icon(Icons.mail_outline, size: 18),
-                label: Text(tr(LocaleKeys.fitCheck_emailButton)),
+                child: Text(tr(LocaleKeys.fitCheck_emailButton)),
               ),
             OutlinedButton.icon(
               style: ButtonStyle(

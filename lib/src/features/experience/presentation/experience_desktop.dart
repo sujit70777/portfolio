@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/domain/app_section.dart';
 import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
+import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/experience/data/experience_repository.dart';
@@ -53,12 +54,17 @@ class ExperienceDesktop extends ConsumerWidget {
                         'v$version',
                         style: monoLabelStyle(
                           fontSize: 13,
-                          color: Theme.of(context).colorScheme.tertiary,
+                          color: Palette.of(context).roleHue(index),
                         ),
                       ),
                     ),
                   ),
-                  Expanded(child: ExperienceCard(experience: experience)),
+                  Expanded(
+                    child: ExperienceCard(
+                      experience: experience,
+                      hue: Palette.of(context).roleHue(index),
+                    ),
+                  ),
                 ],
               ),
               if (index != experiences.length - 1) gapH24,

@@ -22,9 +22,13 @@ import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 /// Tapping the card body opens the full project detail modal; the small
 /// corner icon bypasses it and goes straight to the project's own URL.
 class FeaturedProjectCard extends ConsumerStatefulWidget {
-  const FeaturedProjectCard({super.key, required this.project});
+  const FeaturedProjectCard({super.key, required this.project, this.hue});
 
   final Project project;
+
+  /// This card's identity colour — its border and hover glow. Defaults to
+  /// the signal colour.
+  final Color? hue;
 
   @override
   ConsumerState<FeaturedProjectCard> createState() =>
@@ -50,9 +54,8 @@ class _FeaturedProjectCardState extends ConsumerState<FeaturedProjectCard> {
     final hoverImage = images.length > 1 ? images[1] : null;
     final showHoverImage = _hovered && hoverImage != null;
 
-    final borderColor = _hovered
-        ? theme.colorScheme.tertiary
-        : theme.colorScheme.onSurface.withAlpha(24);
+    final hue = widget.hue ?? theme.colorScheme.tertiary;
+    final borderColor = _hovered ? hue : hue.withAlpha(60);
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -71,6 +74,11 @@ class _FeaturedProjectCardState extends ConsumerState<FeaturedProjectCard> {
               color: Colors.black.withAlpha(_hovered ? 60 : 30),
               blurRadius: _hovered ? 32 : 16,
               offset: Offset(0, _hovered ? 16 : 8),
+            ),
+            BoxShadow(
+              color: hue.withAlpha(_hovered ? 60 : 0),
+              blurRadius: 36,
+              offset: const Offset(0, 12),
             ),
           ],
         ),

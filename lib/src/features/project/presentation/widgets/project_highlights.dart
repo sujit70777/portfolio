@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/constants/palette.dart';
 
 /// A project's short architecture bullets ([Project.highlights]) — shared by
 /// the flagship card and the detail modal so both read the same. The marker
@@ -12,6 +13,7 @@ class ProjectHighlights extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final aurora = Palette.of(context).aurora;
     final style = theme.textTheme.bodySmall;
     final lineHeight = (style?.fontSize ?? 14) * (style?.height ?? 1.5);
     return Column(
@@ -29,7 +31,8 @@ class ProjectHighlights extends StatelessWidget {
                   width: 6,
                   height: 6,
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.tertiary,
+                    // Stepping through the aurora, bullet by bullet.
+                    color: aurora[index % aurora.length],
                     borderRadius: BorderRadius.circular(1.5),
                   ),
                 ),

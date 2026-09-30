@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/common/widgets/pulse_dot.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
@@ -13,21 +14,8 @@ class AvailabilityBadge extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          width: 8,
-          height: 8,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: signal,
-            boxShadow: [
-              BoxShadow(
-                color: signal.withAlpha(60),
-                blurRadius: 6,
-                spreadRadius: 3,
-              ),
-            ],
-          ),
-        ),
+        // A live indicator: the one thing a recruiter should notice first.
+        PulseDot(color: signal),
         gapW8,
         Text(
           tr(LocaleKeys.availabilityBadge).toUpperCase(),

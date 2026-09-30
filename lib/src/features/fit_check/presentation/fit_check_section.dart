@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/domain/app_section.dart';
+import 'package:portfolio/src/common/widgets/gradient_button.dart';
 import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
@@ -207,18 +208,14 @@ class _FitCheckSectionState extends ConsumerState<FitCheckSection> {
                 runSpacing: 8,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  FilledButton.icon(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(scheme.tertiary),
-                      foregroundColor: WidgetStatePropertyAll(scheme.secondary),
-                      shape: const WidgetStatePropertyAll(StadiumBorder()),
-                      padding: const WidgetStatePropertyAll(
-                        EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-                      ),
+                  GradientButton(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 22,
+                      vertical: 14,
                     ),
                     onPressed: _check,
                     icon: const Icon(Icons.fact_check_outlined, size: 18),
-                    label: Text(tr(LocaleKeys.fitCheck_checkButton)),
+                    child: Text(tr(LocaleKeys.fitCheck_checkButton)),
                   ),
                   _TextAction(
                     label: tr(LocaleKeys.fitCheck_sampleButton),

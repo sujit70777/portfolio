@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/utils/fluid_size.dart';
+import 'package:portfolio/src/common/widgets/aurora_text.dart';
+import 'package:portfolio/src/common/widgets/gradient_button.dart';
 import 'package:portfolio/src/common/widgets/first_paint_entrance.dart';
 import 'package:portfolio/src/common/widgets/device_frame.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
@@ -100,6 +102,8 @@ class PersonalInfoSection extends ConsumerWidget {
     }
 
     return Stack(
+      // The backdrop's light deliberately spills past the hero's box.
+      clipBehavior: Clip.none,
       children: [
         const HeroBackground(),
         content,
@@ -138,8 +142,9 @@ class _DesktopHero extends StatelessWidget {
         gapH16,
         _entrance(
           2,
-          Text(
+          AuroraText(
             tr(LocaleKeys.name),
+            flowing: true,
             style: textTheme.displayLarge?.copyWith(fontSize: nameSize),
           ),
         ),
@@ -232,8 +237,9 @@ class _TabletHero extends StatelessWidget {
                   const ProfilePhoto(size: 64),
                   gapW16,
                   Expanded(
-                    child: Text(
+                    child: AuroraText(
                       tr(LocaleKeys.name),
+                      flowing: true,
                       style:
                           textTheme.displayLarge?.copyWith(fontSize: nameSize),
                     ),
@@ -316,8 +322,9 @@ class _MobileHero extends StatelessWidget {
               const ProfilePhoto(size: 56),
               gapW12,
               Expanded(
-                child: Text(
+                child: AuroraText(
                   tr(LocaleKeys.name),
+                  flowing: true,
                   style: textTheme.displayMedium?.copyWith(fontSize: nameSize),
                 ),
               ),
@@ -529,19 +536,8 @@ class _HeroCta extends StatelessWidget {
       Size(fullWidth ? double.infinity : 0, fullWidth ? _minTouchHeight : 0),
     );
     if (_isPrimary) {
-      return FilledButton(
-        style: ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(theme.colorScheme.tertiary),
-          foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
-          shape: const WidgetStatePropertyAll(StadiumBorder()),
-          minimumSize: minimumSize,
-          padding: const WidgetStatePropertyAll(
-            EdgeInsets.symmetric(horizontal: 26, vertical: 14),
-          ),
-          textStyle: WidgetStatePropertyAll(
-            theme.textTheme.labelLarge,
-          ),
-        ),
+      return GradientButton(
+        minimumSize: minimumSize.value,
         onPressed: () => _onTap(context),
         child: Text(label),
       );

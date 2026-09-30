@@ -16,26 +16,27 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Senior Mobile Engineer specializing in Flutter & React Native, with offline-first architecture and data sync expertise. 11 years, 50+ apps shipped, 1M+ users. Open to remote roles (US/UK/EU).">
+  <meta name="description" content="Senior Mobile & Full-Stack AI Engineer: Flutter, React Native and Swift, offline-first sync and on-device AI. Founder of Hourwise Labs. 11 years, 50+ apps shipped, 1M+ users. Open to remote roles (US/UK/EU).">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://ehsanur.com">
 
   <!-- Open Graph / social link previews (LinkedIn, Slack, etc.) -->
-  <meta property="og:title" content="Shekh Ehsanur Rahman | Senior Mobile Engineer (Flutter & React Native)">
-  <meta property="og:description" content="Senior Mobile Engineer specializing in Flutter & React Native, with offline-first architecture and data sync expertise. 11 years, 50+ apps shipped, 1M+ users. Open to remote roles (US/UK/EU).">
+  <meta property="og:title" content="Shekh Ehsanur Rahman | Senior Mobile & Full-Stack AI Engineer">
+  <meta property="og:description" content="Senior Mobile & Full-Stack AI Engineer: Flutter, React Native and Swift, offline-first sync and on-device AI. Founder of Hourwise Labs. 11 years, 50+ apps shipped, 1M+ users. Open to remote roles (US/UK/EU).">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Shekh Ehsanur Rahman">
   <meta property="og:url" content="https://ehsanur.com">
-  <meta property="og:image" content="https://ehsanur.com/og-preview.png">
-  <meta property="og:image:type" content="image/png">
+  <meta property="og:image" content="https://ehsanur.com/og-preview.jpg">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
+  <meta property="og:image:alt" content="Shekh Ehsanur Rahman — Mobile &amp; Full-Stack AI Engineer. Flutter, React Native, Swift, Python. 11 years, 50+ apps shipped, 1M+ users.">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Shekh Ehsanur Rahman | Senior Mobile Engineer (Flutter & React Native)">
-  <meta name="twitter:description" content="Senior Mobile Engineer specializing in Flutter & React Native, with offline-first architecture and data sync expertise. 11 years, 50+ apps shipped, 1M+ users. Open to remote roles (US/UK/EU).">
-  <meta name="twitter:image" content="https://ehsanur.com/og-preview.png">
+  <meta name="twitter:title" content="Shekh Ehsanur Rahman | Senior Mobile & Full-Stack AI Engineer">
+  <meta name="twitter:description" content="Senior Mobile & Full-Stack AI Engineer: Flutter, React Native and Swift, offline-first sync and on-device AI. Founder of Hourwise Labs. 11 years, 50+ apps shipped, 1M+ users. Open to remote roles (US/UK/EU).">
+  <meta name="twitter:image" content="https://ehsanur.com/og-preview.jpg">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -158,7 +159,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <title>Shekh Ehsanur Rahman | Senior Mobile Engineer (Flutter & React Native)</title>
+  <title>Shekh Ehsanur Rahman | Senior Mobile & Full-Stack AI Engineer</title>
   <link rel="manifest" href="manifest.json">
 
   <!-- Structured data for search engines. Values are copied by hand from
@@ -169,9 +170,9 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Shekh Ehsanur Rahman",
-    "jobTitle": "Senior Mobile Engineer (Flutter & React Native)",
+    "jobTitle": "Senior Mobile & Full-Stack AI Engineer",
     "url": "https://ehsanur.com",
-    "knowsAbout": ["Flutter", "React Native", "Dart", "TypeScript", "Android", "iOS", "Swift", "SwiftUI", "macOS"],
+    "knowsAbout": ["Flutter", "React Native", "Dart", "TypeScript", "Android", "iOS", "Swift", "SwiftUI", "macOS", "Python", "Large Language Models", "On-device AI", "Offline-first architecture", "CRDT data sync"],
     "sameAs": [
       "https://github.com/sujit70777",
       "https://www.linkedin.com/in/sujit70777",
@@ -204,23 +205,40 @@
 
     :root {
       /* FlexColorScheme `primary` (content surface) and `secondary` (page
-         chrome) from the light theme, plus the chartreuse accent. */
+         chrome) from the light theme, plus the forest-green accent. The text
+         colour is FlexColorScheme's derived onSurface, not a theme input —
+         re-derive it (print darkTheme/lightTheme.colorScheme.onSurface)
+         whenever the theme colours change. */
       --pl-surface: #ffffff;
       --pl-chrome: #eef0f2;
-      --pl-text: #1b1b1f;
-      --pl-accent: #4e6810;
+      --pl-text: #1b1b1b;
+      --pl-accent: #166534;
       --pl-on-accent: #eef0f2;
-      --pl-hairline: rgba(27, 27, 31, 0.24);
+      --pl-hairline: rgba(27, 27, 27, 0.24);
       /* mutedTextColor() in themes.dart: onSurface at alpha 215 (0.843),
          which clears WCAG AAA 7:1 on every background in both themes. */
-      --pl-muted: rgba(27, 27, 31, 0.843);
+      --pl-muted: rgba(27, 27, 27, 0.843);
+
+      /* Palette in lib/src/constants/palette.dart: the aurora (name, photo
+         ring, stat rule), the primary-button pair and the text on it, and
+         the four stat hues in HeroStatPlaque's order. */
+      --pl-aurora-1: #15803d;
+      --pl-aurora-2: #0f766e;
+      --pl-aurora-3: #8a5a00;
+      --pl-button-1: #166534;
+      --pl-button-2: #0f766e;
+      --pl-on-button: #ffffff;
+      --pl-stat-1: #8a5a00;
+      --pl-stat-2: #15803d;
+      --pl-stat-3: #0e7490;
+      --pl-stat-4: #047857;
 
       /* Skeleton fill + shimmer highlight for the sections below the hero
          (About/Skills/Experience/Projects) — see .pl-skeleton. Values are
          low-alpha overlays of the text color so they auto-adjust with the
          surface rather than needing their own light/dark pair. */
-      --pl-skel-base: rgba(27, 27, 31, 0.06);
-      --pl-skel-hi: rgba(27, 27, 31, 0.12);
+      --pl-skel-base: rgba(27, 27, 27, 0.06);
+      --pl-skel-hi: rgba(27, 27, 27, 0.12);
 
       /* Mobile metrics (_MobileHero + GeneralTablet's <640 padding). These
          are the defaults because the layout is mobile-first; the media
@@ -241,15 +259,25 @@
     }
 
     :root[data-theme="dark"] {
-      --pl-surface: #1e1922;
-      --pl-chrome: #15121a;
-      --pl-text: #e8e0e8;
-      --pl-accent: #d7ff3b;
-      --pl-on-accent: #15121a;
-      --pl-hairline: rgba(232, 224, 232, 0.24);
-      --pl-muted: rgba(232, 224, 232, 0.843);
-      --pl-skel-base: rgba(232, 224, 232, 0.07);
-      --pl-skel-hi: rgba(232, 224, 232, 0.15);
+      --pl-surface: #0d261c;
+      --pl-chrome: #06150f;
+      --pl-text: #dee4de;
+      --pl-accent: #fbc771;
+      --pl-on-accent: #06150f;
+      --pl-hairline: rgba(222, 228, 222, 0.24);
+      --pl-muted: rgba(222, 228, 222, 0.843);
+      --pl-skel-base: rgba(222, 228, 222, 0.07);
+      --pl-skel-hi: rgba(222, 228, 222, 0.15);
+      --pl-aurora-1: #3ecf8e;
+      --pl-aurora-2: #8fe3b8;
+      --pl-aurora-3: #fbc771;
+      --pl-button-1: #fbc771;
+      --pl-button-2: #f0a93b;
+      --pl-on-button: #06150f;
+      --pl-stat-1: #fbc771;
+      --pl-stat-2: #4ade80;
+      --pl-stat-3: #5ee7ff;
+      --pl-stat-4: #6ee7b7;
     }
 
     /* The faces the hero uses, loaded straight from the app bundle so there
@@ -416,13 +444,34 @@
       color: var(--pl-muted);
     }
 
+    /* PulseDot: the dot plus a ring that ripples out and fades. */
     .pl-dot {
+      position: relative;
       width: 8px;
       height: 8px;
       flex: none;
       border-radius: 50%;
       background: var(--pl-accent);
-      box-shadow: 0 0 6px 3px color-mix(in srgb, var(--pl-accent) 24%, transparent);
+      box-shadow: 0 0 6px 1px color-mix(in srgb, var(--pl-accent) 35%, transparent);
+    }
+
+    .pl-dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid var(--pl-accent);
+      opacity: 0;
+      animation: pl-pulse 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+
+    @keyframes pl-pulse {
+      from { transform: scale(1); opacity: 0.7; }
+      to { transform: scale(3); opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pl-dot::after { animation: none; }
     }
 
     /* Photo and name share a row below the desktop breakpoint, and stack
@@ -443,8 +492,18 @@
       height: var(--pl-avatar);
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid color-mix(in srgb, var(--pl-accent) 63%, transparent);
-      padding: 3px;
+      /* ProfilePhoto's aurora ring at rest: a 2.5px sweep gradient starting
+         at 3 o'clock (Flutter's SweepGradient origin, hence "from 90deg"),
+         then 2.5px of gap before the photo. */
+      border: 2.5px solid transparent;
+      padding: 2.5px;
+      background:
+        linear-gradient(var(--pl-surface), var(--pl-surface)) padding-box,
+        conic-gradient(from 90deg, var(--pl-aurora-1), var(--pl-aurora-2),
+          var(--pl-aurora-3), var(--pl-aurora-1)) border-box;
+      box-shadow:
+        -4px 0 24px color-mix(in srgb, var(--pl-aurora-1) 27%, transparent),
+        4px 2px 24px color-mix(in srgb, var(--pl-aurora-2) 14%, transparent);
     }
 
     .pl-name {
@@ -457,6 +516,14 @@
       font-size: clamp(32px, 5vw, 56px);
       line-height: 1.02;
       letter-spacing: -0.5px;
+      /* AuroraText at rest. Fills the row like the Expanded the name sits
+         in, so the gradient spans the same width it will in Flutter. */
+      flex: 1;
+      min-width: 0;
+      background: linear-gradient(90deg, var(--pl-aurora-1), var(--pl-aurora-2), var(--pl-aurora-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .pl-title {
@@ -524,7 +591,11 @@
       margin-top: var(--pl-gap-ctas);
       padding: 14px 16px;
       border-radius: 16px;
-      background: var(--pl-chrome);
+      /* HeroStatPlaque's 2px aurora rule along the top edge. */
+      background:
+        linear-gradient(90deg, var(--pl-aurora-1), var(--pl-aurora-2), var(--pl-aurora-3))
+          top / 100% 2px no-repeat,
+        var(--pl-chrome);
       border: 1px solid color-mix(in srgb, var(--pl-text) 9%, transparent);
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
     }
@@ -548,6 +619,12 @@
       line-height: 1.4;
       color: var(--pl-accent);
     }
+
+    /* One hue per figure, in HeroStatPlaque's order. */
+    .pl-stat:nth-child(1) b { color: var(--pl-stat-1); }
+    .pl-stat:nth-child(2) b { color: var(--pl-stat-2); }
+    .pl-stat:nth-child(3) b { color: var(--pl-stat-3); }
+    .pl-stat:nth-child(4) b { color: var(--pl-stat-4); }
 
     .pl-stat span {
       display: block;
@@ -582,10 +659,12 @@
       white-space: nowrap;
     }
 
+    /* GradientButton at rest: the palette's button pair plus its soft glow. */
     .pl-cta-primary {
       padding: 14px 26px;
-      background: var(--pl-accent);
-      color: var(--pl-on-accent);
+      background: linear-gradient(90deg, var(--pl-button-1), var(--pl-button-2));
+      color: var(--pl-on-button);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--pl-button-2) 14%, transparent);
     }
 
     .pl-cta-secondary {
@@ -972,10 +1051,10 @@
           <div class="pl-badge"><span class="pl-dot"></span>Available for new work</div>
           <div class="pl-identity">
             <img class="pl-avatar" src="assets/assets/images/profile.webp" width="72" height="72"
-                 alt="Shekh Ehsanur Rahman, Senior Mobile Engineer (Flutter &amp; React Native)">
+                 alt="Shekh Ehsanur Rahman, Senior Mobile &amp; Full-Stack AI Engineer">
             <h1 class="pl-name">Shekh Ehsanur Rahman</h1>
           </div>
-          <p class="pl-title">Senior Mobile Engineer &mdash; Offline-First &amp; Data-Sync Architecture &mdash; Flutter &amp; React Native</p>
+          <p class="pl-title">Senior Mobile &amp; Full-Stack AI Engineer &mdash; Offline-First Sync &amp; On-Device AI &mdash; Flutter &middot; React Native &middot; Swift</p>
           <p class="pl-loc">Based in Bangladesh &middot; hours shifted to overlap EU/US</p>
           <p class="pl-contract">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 11.99 20.56 9.2l.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 11.99l2.44 2.79-.34 3.7 3.61.82 1.89 3.2L12 21.04l3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 11.99zm-3.95 1.48-.56.65.08.85.18 1.95-1.9.43-.84.19-.44.74-.99 1.68-1.78-.77-.79-.34-.79.34-1.78.77-.99-1.67-.44-.74-.84-.19-1.9-.43.18-1.96.08-.85-.56-.65L3.67 12l1.29-1.48.56-.65-.09-.86-.18-1.94 1.9-.43.84-.19.44-.74.99-1.68 1.78.77.79.34.79-.34 1.78-.77.99 1.68.44.74.84.19 1.9.43-.18 1.95-.08.85.56.65 1.29 1.47-1.28 1.48z"/><path d="m10.09 13.75-2.32-2.33-1.48 1.49 3.8 3.81 7.34-7.36-1.48-1.49z"/></svg>

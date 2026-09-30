@@ -6,6 +6,7 @@ import 'package:portfolio/src/features/general/presentation/widgets/bottom_banne
 import 'package:portfolio/src/features/general/presentation/widgets/deep_link_handler.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/end_drawer.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/safe_area.dart';
+import 'package:portfolio/src/features/general/presentation/widgets/scroll_progress_bar.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 
 class GeneralSection extends ConsumerWidget {
@@ -23,6 +24,10 @@ class GeneralSection extends ConsumerWidget {
         child: Stack(
           children: [
             isSplitScreen ? const GeneralDesktop() : const GeneralTablet(),
+            const Align(
+              alignment: Alignment.topCenter,
+              child: ScrollProgressBar(),
+            ),
             const Align(
               alignment: Alignment.bottomCenter,
               child: BottomBanner(),

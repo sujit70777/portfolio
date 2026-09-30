@@ -86,18 +86,43 @@ class _ScrollRevealState extends ConsumerState<ScrollReveal>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _curve,
-      builder: (context, child) {
-        return Opacity(
-          opacity: _curve.value,
-          child: Transform.translate(
-            offset: Offset(0, (1 - _curve.value) * _riseDistance),
-            child: child,
-          ),
-        );
-      },
-      child: widget.child,
+    return RevealScope._(
+      animation: _controller,
+      child: AnimatedBuilder(
+        animation: _curve,
+        builder: (context, child) {
+          return Opacity(
+            opacity: _curve.value,
+            child: Transform.translate(
+              offset: Offset(0, (1 - _curve.value) * _riseDistance),
+              child: child,
+            ),
+          );
+        },
+        child: widget.child,
+      ),
     );
   }
+}
+
+/// Lets widgets inside a [ScrollReveal] choreograph their own entrance
+/// against the same moment — an accent bar that draws itself in, chips
+/// that pop in one after another — instead of each needing its own
+/// visibility check. Outside any ScrollReveal the animation is already
+/// complete, so those widgets simply render in their final state.
+class RevealScope extends InheritedWidget {
+  const RevealScope._({required this.animation, required super.child});
+
+  /// The nearest [ScrollReveal]'s raw 0→1 progress (linear; apply your own
+  /// curve or [Interval]).
+  final Animation<double> animation;
+
+  static Animation<double> of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<RevealScope>()?.animation ??
+        kAlwaysCompleteAnimation;
+  }
+
+  @override
+  bool updateShouldNotify(RevealScope oldWidget) =>
+      animation != oldWidget.animation;
 }

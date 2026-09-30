@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/project/domain/project_status.dart';
 
-/// A muted amber, deliberately distinct from the app's one accent
-/// (`colorScheme.tertiary`, used for "shipped") — "in development" should
-/// never read as the same kind of signal as a finished, shipped project.
+/// A muted amber, deliberately distinct from the green used for "shipped"
+/// — "in development" should never read as the same kind of signal as a
+/// finished, shipped project.
 Color _inDevelopmentColor(BuildContext context) {
   return Theme.of(context).brightness == Brightness.dark
       ? const Color(0xffe0b04a)
@@ -15,13 +16,15 @@ String statusLabel(ProjectStatus? status) {
   return status == ProjectStatus.inDevelopment ? 'IN DEVELOPMENT' : 'SHIPPED';
 }
 
+/// Emerald for shipped — green for done, and never the dark theme's gold
+/// signal, which sits too close to the in-development amber.
 Color statusColor(BuildContext context, ProjectStatus? status) {
   return status == ProjectStatus.inDevelopment
       ? _inDevelopmentColor(context)
-      : Theme.of(context).colorScheme.tertiary;
+      : Palette.of(context).hues[1];
 }
 
-/// Small mono status tag — "SHIPPED" in the app's accent, "IN DEVELOPMENT"
+/// Small mono status tag — "SHIPPED" in emerald, "IN DEVELOPMENT"
 /// in a muted amber so the two are never confused at a glance.
 class ProjectStatusBadge extends StatelessWidget {
   const ProjectStatusBadge({super.key, required this.status, this.fontSize = 11});

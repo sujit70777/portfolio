@@ -3,9 +3,9 @@
     "short_name": "Ehsanur Rahman",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "Ehsanur Rahman — Senior Mobile Engineer (Flutter & React Native) with 9+ years of experience, 50+ shipped apps, and 1M+ users.",
+    "background_color": "#06150f",
+    "theme_color": "#06150f",
+    "description": "Ehsanur Rahman — Senior Mobile & Full-Stack AI Engineer (Flutter, React Native, Swift) with 11 years of experience, 50+ shipped apps, and 1M+ users.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

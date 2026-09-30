@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/common/widgets/pulse_dot.dart';
+import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 
@@ -6,6 +8,10 @@ import 'package:portfolio/src/constants/themes.dart';
 /// design brief 2's version/changelog wayfinding motif, made structural
 /// rather than decorative: it doesn't exist at any narrower breakpoint,
 /// it's real extra real estate only this width can afford.
+///
+/// Each marker takes its role's hue ([Palette.roleHue]) so it matches the
+/// card it indexes, and the current role's marker pulses like a live
+/// indicator.
 ///
 /// Static, not scroll-synced to the active section — a true sticky,
 /// position-tracking rail needs behavior this pass couldn't visually
@@ -22,38 +28,36 @@ class VersionRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final palette = Palette.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: List.generate(count, (index) {
         final version = count - index;
         final isCurrent = index == 0;
+        final hue = palette.roleHue(index);
         return Padding(
           padding: const EdgeInsets.only(bottom: 22),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                width: 7,
-                height: 7,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: isCurrent ? theme.colorScheme.tertiary : null,
-                  border: isCurrent
-                      ? null
-                      : Border.all(
-                          color: theme.colorScheme.onSurface.withAlpha(90),
-                        ),
+              if (isCurrent)
+                PulseDot(color: hue, size: 7)
+              else
+                Container(
+                  width: 7,
+                  height: 7,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: hue.withAlpha(200), width: 1.5),
+                  ),
                 ),
-              ),
               gapW8,
               Text(
                 'v$version',
                 style: monoLabelStyle(
                   fontSize: 13,
-                  color: isCurrent
-                      ? theme.colorScheme.tertiary
-                      : mutedTextColor(theme.colorScheme),
+                  color: isCurrent ? hue : mutedTextColor(theme.colorScheme),
                 ),
               ),
             ],
