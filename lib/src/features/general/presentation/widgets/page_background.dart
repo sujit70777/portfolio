@@ -31,7 +31,7 @@ class PageBackgroundSettings {
     // Motes
     this.showMotes = true,
     this.moteAreaPerMote = 22000,
-    this.moteMinCount = 1000,
+    this.moteMinCount = 300,
     this.moteMaxCount = 1524,
     this.moteMinRadius = 0.7,
     this.moteMaxRadius = 1.9,
