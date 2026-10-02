@@ -1,16 +1,20 @@
 import 'dart:math' as math;
+import 'dart:typed_data';
+import 'dart:ui' show PointMode;
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/widgets/ambient_loop.dart';
+import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/features/general/provider/scroll_controller.dart';
 
-/// Every tunable value of [PageBackground]. The defaults are the site's
-/// look; pass a different instance as `settings:` (or edit a default here)
-/// to change it. Sizes are logical pixels, times are durations, and the
-/// "intensity"/"brightness" values are multipliers, so 1.0 is the default
-/// and 0 hides that part.
+/// Every tunable value of [PageBackground]. The constructor's defaults are
+/// the desktop look; [tablet] and [mobile] start from those same defaults
+/// and override only what a smaller, slower screen needs, so editing a
+/// default here changes all three unless a preset overrides it. Sizes are
+/// logical pixels, times are durations, and the "intensity"/"brightness"
+/// values are multipliers, so 1.0 is the default and 0 hides that part.
 @immutable
 class PageBackgroundSettings {
   const PageBackgroundSettings({
@@ -32,7 +36,7 @@ class PageBackgroundSettings {
     this.showMotes = true,
     this.moteAreaPerMote = 22000,
     this.moteMinCount = 300,
-    this.moteMaxCount = 1524,
+    this.moteMaxCount = 400,
     this.moteMinRadius = 0.7,
     this.moteMaxRadius = 1.9,
     this.moteMinRiseSpeed = 10,
@@ -40,7 +44,7 @@ class PageBackgroundSettings {
     this.moteSway = 14,
     this.moteSwayPeriod = const Duration(seconds: 21),
     this.twinklePeriod = const Duration(seconds: 8),
-    this.moteBrightness = 1.0,
+    this.moteBrightness = 2.0,
     this.moteParallax = 1.0,
     // Links between motes
     this.showLinks = true,
@@ -102,7 +106,9 @@ class PageBackgroundSettings {
   /// Screen area each mote gets, in square pixels. Lower means more motes.
   final double moteAreaPerMote;
 
-  /// Bounds on the mote count, whatever the screen size.
+  /// Bounds on the mote count. The count is the screen area divided by
+  /// [moteAreaPerMote], clamped to these — so with a large
+  /// [moteAreaPerMote], [moteMinCount] is simply the count.
   final int moteMinCount;
   final int moteMaxCount;
 
@@ -154,6 +160,24 @@ class PageBackgroundSettings {
   final double pointerFollowSpeed;
   final double pointerFadeSpeed;
 
+  /// Desktop, 1024px wide and up: the constructor's defaults.
+  static const desktop = PageBackgroundSettings();
+
+  /// Tablet, 640–1023px wide. The same mote density as the desktop default
+  /// (700 on a 1440x900 window): ~420 on a 768x1024 iPad, ~520 at 820x1180.
+  static const tablet = PageBackgroundSettings(
+    moteMinCount: 220,
+    moteMaxCount: 400,
+  );
+
+  /// Phone, under 640px wide. A little sparser than desktop density
+  /// (~180 at 390x844): a phone has the least headroom, and the same field
+  /// on a small screen reads as busier.
+  static const mobile = PageBackgroundSettings(
+    moteMinCount: 100,
+    moteMaxCount: 150,
+  );
+
   Duration get _frameInterval =>
       Duration(microseconds: 1000000 ~/ frameRate - 1000);
 }
@@ -182,12 +206,18 @@ class PageBackground extends ConsumerStatefulWidget {
     super.key,
     required this.color,
     required this.child,
-    this.settings = const PageBackgroundSettings(),
+    this.desktopSettings = PageBackgroundSettings.desktop,
+    this.tabletSettings = PageBackgroundSettings.tablet,
+    this.mobileSettings = PageBackgroundSettings.mobile,
   });
 
   final Color color;
   final Widget child;
-  final PageBackgroundSettings settings;
+
+  /// Picked by window width, at the site's [Responsive] breakpoints.
+  final PageBackgroundSettings desktopSettings;
+  final PageBackgroundSettings tabletSettings;
+  final PageBackgroundSettings mobileSettings;
 
   @override
   ConsumerState<PageBackground> createState() => _PageBackgroundState();
@@ -200,6 +230,7 @@ class _PageBackgroundState extends ConsumerState<PageBackground>
   final _pointer = _PointerLight();
   Duration _lastFrame = Duration.zero;
   bool _allowed = false;
+  PageBackgroundSettings _settings = PageBackgroundSettings.desktop;
 
   @override
   void didChangeDependencies() {
@@ -213,8 +244,15 @@ class _PageBackgroundState extends ConsumerState<PageBackground>
     _syncTicker();
   }
 
+  /// Also re-runs when the window is resized (via the MediaQuery dependency
+  /// [Responsive] takes), so crossing a breakpoint swaps the preset.
   void _syncTicker() {
-    _allowed = ambientMotionAllowed(context) && widget.settings.enabled;
+    _settings = Responsive.isMobile(context)
+        ? widget.mobileSettings
+        : Responsive.isTablet(context)
+        ? widget.tabletSettings
+        : widget.desktopSettings;
+    _allowed = ambientMotionAllowed(context) && _settings.enabled;
     if (_allowed && !_ticker.isActive) {
       _lastFrame = Duration.zero;
       _ticker.start();
@@ -233,9 +271,9 @@ class _PageBackgroundState extends ConsumerState<PageBackground>
 
   void _onTick(Duration elapsed) {
     final dt = elapsed - _lastFrame;
-    if (dt < widget.settings._frameInterval) return;
+    if (dt < _settings._frameInterval) return;
     _lastFrame = elapsed;
-    _pointer.ease(dt.inMicroseconds / 1e6, widget.settings);
+    _pointer.ease(dt.inMicroseconds / 1e6, _settings);
     _clock.value = elapsed.inMicroseconds / 1e6;
   }
 
@@ -244,7 +282,7 @@ class _PageBackgroundState extends ConsumerState<PageBackground>
     final scrollController = ref.watch(scrollControllerProvider);
     final palette = Palette.of(context);
     final dark = Theme.of(context).brightness == Brightness.dark;
-    final settings = widget.settings;
+    final settings = _settings;
     if (!settings.enabled) {
       return ColoredBox(color: widget.color, child: widget.child);
     }
@@ -391,7 +429,7 @@ class _BackgroundPainter extends CustomPainter {
 
     if (!settings.showMotes) return;
     final motes = _motePositions(size, time, offset);
-    _paintLinks(canvas, motes, pointerStrength);
+    _paintLinks(canvas, size, motes, pointerStrength);
     _paintMotes(canvas, motes, time);
   }
 
@@ -489,21 +527,88 @@ class _BackgroundPainter extends CustomPainter {
     ];
   }
 
-  void _paintLinks(Canvas canvas, List<Offset> motes, double pointerStrength) {
-    final color = palette.aurora[1];
-    final linkDistance = settings.linkDistance;
-    final maxAlpha = (dark ? 34.0 : 22.0) * settings.linkIntensity;
+  /// Opacity steps that lines and motes are batched into. Hundreds of
+  /// motes mean thousands of lines a frame; drawn one call each, the calls
+  /// themselves are the cost. Bucketed, it's a few dozen calls, and steps
+  /// this fine are invisible at these opacities.
+  static const _alphaSteps = 10;
+
+  /// Size steps motes are batched into, for the same reason.
+  static const _radiusSteps = 3;
+
+  /// Joins motes closer than `linkDistance`. Motes are binned into a grid of
+  /// `linkDistance`-sized cells first, so each is only compared with the
+  /// motes in its own and adjacent cells — not with every other mote, which
+  /// at 700 motes would be ~245,000 checks a frame.
+  void _paintLinks(
+    Canvas canvas,
+    Size size,
+    List<Offset> motes,
+    double pointerStrength,
+  ) {
     final paint = Paint()..strokeWidth = settings.linkWidth;
-    for (var i = 0; settings.showLinks && i < motes.length; i++) {
-      for (var j = i + 1; j < motes.length; j++) {
-        final distance = (motes[i] - motes[j]).distance;
-        if (distance >= linkDistance) continue;
+    final linkDistance = settings.linkDistance;
+    if (settings.showLinks && linkDistance > 0 && motes.length > 1) {
+      final limit = linkDistance * linkDistance;
+      // One spare column/row each side for motes swaying or wrapping just
+      // off screen.
+      final cols = (size.width / linkDistance).ceil() + 2;
+      final rows = (size.height / linkDistance).ceil() + 2;
+      final grid = List.generate(cols * rows, (_) => <int>[]);
+      for (var i = 0; i < motes.length; i++) {
+        final cx = (motes[i].dx / linkDistance).floor() + 1;
+        final cy = (motes[i].dy / linkDistance).floor() + 1;
+        grid[cy.clamp(0, rows - 1) * cols + cx.clamp(0, cols - 1)].add(i);
+      }
+
+      final buckets = List.generate(_alphaSteps, (_) => <double>[]);
+      // Own cell plus the four "forward" neighbours, so each pair is seen
+      // exactly once.
+      const neighbours = [(0, 0), (1, 0), (-1, 1), (0, 1), (1, 1)];
+      for (var cy = 0; cy < rows; cy++) {
+        for (var cx = 0; cx < cols; cx++) {
+          final cell = grid[cy * cols + cx];
+          for (final (dx, dy) in neighbours) {
+            final nx = cx + dx, ny = cy + dy;
+            if (nx < 0 || nx >= cols || ny >= rows) continue;
+            final other = grid[ny * cols + nx];
+            final sameCell = dx == 0 && dy == 0;
+            for (var a = 0; a < cell.length; a++) {
+              final p = motes[cell[a]];
+              for (var b = sameCell ? a + 1 : 0; b < other.length; b++) {
+                final q = motes[other[b]];
+                final ddx = p.dx - q.dx, ddy = p.dy - q.dy;
+                final d2 = ddx * ddx + ddy * ddy;
+                if (d2 >= limit) continue;
+                final closeness = 1 - math.sqrt(d2) / linkDistance;
+                buckets[(closeness * _alphaSteps).floor().clamp(
+                      0,
+                      _alphaSteps - 1,
+                    )]
+                    .addAll([p.dx, p.dy, q.dx, q.dy]);
+              }
+            }
+          }
+        }
+      }
+
+      final color = palette.aurora[1];
+      final maxAlpha = (dark ? 34.0 : 22.0) * settings.linkIntensity;
+      for (var k = 0; k < _alphaSteps; k++) {
+        if (buckets[k].isEmpty) continue;
         paint.color = color.withAlpha(
-          ((1 - distance / linkDistance) * maxAlpha).round().clamp(0, 255),
+          ((k + 0.5) / _alphaSteps * maxAlpha).round().clamp(0, 255),
         );
-        canvas.drawLine(motes[i], motes[j], paint);
+        canvas.drawRawPoints(
+          PointMode.lines,
+          Float32List.fromList(buckets[k]),
+          paint,
+        );
       }
     }
+
+    // Cursor lines: only the motes within reach, so a handful — drawn
+    // directly.
     if (pointerStrength <= 0.01) return;
     final cursor = pointer.position;
     final reach = settings.pointerReach;
@@ -518,6 +623,8 @@ class _BackgroundPainter extends CustomPainter {
     }
   }
 
+  /// Drawn as round points, batched by colour, size and twinkle step — one
+  /// call per batch instead of one per mote.
   void _paintMotes(Canvas canvas, List<Offset> motes, double time) {
     // Toned right down on the light theme, where bright specks read as dirt.
     final base = (dark ? 70.0 : 30.0) * settings.moteBrightness;
@@ -525,16 +632,44 @@ class _BackgroundPainter extends CustomPainter {
     final twinkleSpeed = 2 * math.pi / _seconds(settings.twinklePeriod);
     final minRadius = settings.moteMinRadius;
     final radiusRange = settings.moteMaxRadius - minRadius;
-    final paint = Paint();
+    // Every third mote gold, the rest mint — the aurora's two ends.
+    final colors = [palette.aurora[1], palette.aurora[2]];
+
+    final batches = List.generate(
+      colors.length * _radiusSteps * _alphaSteps,
+      (_) => <double>[],
+    );
     for (var i = 0; i < motes.length; i++) {
       final mote = _motes[i];
       final twinkle = 0.5 + 0.5 * math.sin(time * twinkleSpeed + mote.phase);
-      // Every third mote gold, the rest mint — the aurora's two ends.
-      final color = i % 3 == 0 ? palette.aurora[2] : palette.aurora[1];
-      paint.color = color.withAlpha(
-        (base + range * twinkle).round().clamp(0, 255),
-      );
-      canvas.drawCircle(motes[i], minRadius + mote.radius * radiusRange, paint);
+      final c = i % 3 == 0 ? 1 : 0;
+      final r = (mote.radius * _radiusSteps).floor().clamp(0, _radiusSteps - 1);
+      final t = (twinkle * _alphaSteps).floor().clamp(0, _alphaSteps - 1);
+      batches[(c * _radiusSteps + r) * _alphaSteps + t].addAll([
+        motes[i].dx,
+        motes[i].dy,
+      ]);
+    }
+
+    final paint = Paint()..strokeCap = StrokeCap.round;
+    for (var c = 0; c < colors.length; c++) {
+      for (var r = 0; r < _radiusSteps; r++) {
+        final radius = minRadius + (r + 0.5) / _radiusSteps * radiusRange;
+        paint.strokeWidth = radius * 2;
+        for (var t = 0; t < _alphaSteps; t++) {
+          final points = batches[(c * _radiusSteps + r) * _alphaSteps + t];
+          if (points.isEmpty) continue;
+          final twinkle = (t + 0.5) / _alphaSteps;
+          paint.color = colors[c].withAlpha(
+            (base + range * twinkle).round().clamp(0, 255),
+          );
+          canvas.drawRawPoints(
+            PointMode.points,
+            Float32List.fromList(points),
+            paint,
+          );
+        }
+      }
     }
   }
 
