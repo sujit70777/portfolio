@@ -50,9 +50,7 @@ class DarkModeSwitch extends ConsumerWidget {
   bool _getDarkMode(WidgetRef ref) {
     return ref.watch(darkModeProvider).maybeWhen(
           data: (darkMode) => darkMode,
-          orElse: () =>
-              WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-              Brightness.dark,
+          orElse: () => true,
         );
   }
 

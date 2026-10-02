@@ -914,7 +914,7 @@
 
       /* _DesktopHero is a Row of Expanded(flex: 55) and Expanded(flex: 45)
          with a 40px gap, and only the left half is reproduced here — the
-         right half is the phone mockup and the stat plaque, which are the
+         right half is the device mockup and the stat plaque, which are the
          app's job. The name wrapping after "Ehsanur" is a consequence of
          this width, so getting it right is what keeps the handover still. */
       .pl-hero {
@@ -987,9 +987,9 @@
     // wrong one. The app persists the visitor's choice through
     // shared_preferences, which on web is localStorage under a "flutter."
     // prefix with a JSON-encoded value — see BrightnessController in
-    // lib/src/features/general/provider/brightness_controller.dart. Falling
-    // back to the OS preference matches what that controller does on a first
-    // visit, so the splash and the app agree either way.
+    // lib/src/features/general/provider/brightness_controller.dart. Dark is
+    // the default unless the visitor chose light, matching what that
+    // controller does on a first visit, so the splash and the app agree.
     (function () {
       var stored = null;
       try {
@@ -997,8 +997,7 @@
       } catch (e) {
         stored = null;
       }
-      var dark = stored === "dark" || (stored !== "light" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
+      var dark = stored !== "light";
       document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
     })();
 

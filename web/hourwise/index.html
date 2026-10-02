@@ -6,14 +6,14 @@
 <title>Hourwise — Billable hours for Mac, without the timer</title>
 <meta name="description" content="Hourwise records what you actually worked on, turns it into an invoice, and shows you the billable time that never reached a bill. A quiet Mac app for solo and small-firm lawyers. Nothing leaves your Mac.">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#121216">
 <script>
-  // Apply a saved theme before first paint so there's no flash. Light is the
-  // default; the choice lives only in this browser and never leaves it.
+  // Apply the theme before first paint so there's no flash. Dark is the
+  // default; a light choice lives only in this browser and never leaves it.
   (function () {
     var t = null;
     try { t = localStorage.getItem("hourwise-theme"); } catch (e) {}
-    if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+    if (t !== "light") document.documentElement.setAttribute("data-theme", "dark");
   })();
 </script>
 <link rel="canonical" href="https://ehsanur.com/hourwise/">
@@ -38,8 +38,9 @@
   images, video, the theme choice — comes from or stays on this site.
 -->
 <style>
-  /* Light is the default theme; [data-theme="dark"] swaps the palette.
-     Text colours in both themes clear WCAG AA on their backgrounds. */
+  /* Light palette here; [data-theme="dark"] swaps it. Dark is the default
+     (set before first paint, in the <head> script) unless the visitor chose
+     light. Text colours in both themes clear WCAG AA on their backgrounds. */
   :root {
     color-scheme: light;
     --page:      #FAFAFB;
@@ -751,6 +752,8 @@
           <a href="mailto:mail@ehsanur.com">mail@ehsanur.com</a>
           <a href="https://www.linkedin.com/in/sujit70777">LinkedIn</a>
           <a href="https://ehsanur.com">ehsanur.com</a>
+          <a href="https://www.linkedin.com/company/hourwise-labs">Hourwise Labs on LinkedIn</a>
+          <a href="https://www.facebook.com/profile.php?id=61595186930630">Hourwise Labs on Facebook</a>
         </div>
       </div>
     </div>
@@ -779,7 +782,8 @@
       <a href="privacy-policy">Privacy</a>
       <a href="terms">Terms</a>
       <a href="mailto:mail@ehsanur.com">Support</a>
-      <a href="https://www.linkedin.com/in/sujit70777">LinkedIn</a>
+      <a href="https://www.linkedin.com/company/hourwise-labs">LinkedIn</a>
+      <a href="https://www.facebook.com/profile.php?id=61595186930630">Facebook</a>
       <a href="https://apps.apple.com/us/app/hourwise-billable-hours/id6811420308?mt=12">Mac App Store</a>
     </div>
   </div>
@@ -857,6 +861,15 @@
     "url": "https://ehsanur.com",
     "image": "https://ehsanur.com/hourwise/assets/maker.webp",
     "jobTitle": "Founder, Hourwise Labs"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hourwise Labs",
+    "url": "https://ehsanur.com/hourwise/",
+    "sameAs": [
+      "https://www.linkedin.com/company/hourwise-labs",
+      "https://www.facebook.com/profile.php?id=61595186930630"
+    ]
   },
   "offers": [
     { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },

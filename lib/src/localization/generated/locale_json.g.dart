@@ -265,6 +265,14 @@ class CodegenLoader extends AssetLoader{
         {
           "url": "https://ehsanur.com/hourwise/",
           "label": "Hourwise"
+        },
+        {
+          "url": "https://www.linkedin.com/company/hourwise-labs",
+          "label": "LinkedIn"
+        },
+        {
+          "url": "https://www.facebook.com/profile.php?id=61595186930630",
+          "label": "Facebook"
         }
       ]
     },

@@ -6,6 +6,7 @@ import 'package:portfolio/src/features/about/presentation/about_section.dart';
 import 'package:portfolio/src/features/experience/data/experience_repository.dart';
 import 'package:portfolio/src/features/experience/presentation/experience_section.dart';
 import 'package:portfolio/src/features/fit_check/presentation/fit_check_section.dart';
+import 'package:portfolio/src/features/general/presentation/widgets/page_background.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/site_footer.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/version_rail.dart';
 import 'package:portfolio/src/features/personal_info/presentation/personal_info_section.dart';
@@ -34,7 +35,7 @@ class GeneralDesktop extends ConsumerWidget {
         const MyAppBar(),
         Expanded(
           child: MySelectionArea(
-            child: ColoredBox(
+            child: PageBackground(
               color: Theme.of(context).colorScheme.primary,
               child: SingleChildScrollView(
                 controller: scrollController,

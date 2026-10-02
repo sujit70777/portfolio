@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,6 @@ import 'package:portfolio/src/common/utils/fluid_size.dart';
 import 'package:portfolio/src/common/widgets/aurora_text.dart';
 import 'package:portfolio/src/common/widgets/gradient_button.dart';
 import 'package:portfolio/src/common/widgets/first_paint_entrance.dart';
-import 'package:portfolio/src/common/widgets/device_frame.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
@@ -33,21 +34,21 @@ Widget _entrance(int step, Widget child) {
   );
 }
 
-/// The hero screenshot — Farenow's multi-service super-app home (taxi,
-/// parcel, delivery, wallet). Curated, not derived from the folder-listing
-/// provider: the hero is the site's single most prominent image, so it's
-/// pinned by hand, and it lives in assets/images/ so it doesn't also show up
-/// in Farenow's project gallery. Cropped from the gallery screenshot to drop
-/// its baked-in bezel, since [DeviceFrame] draws its own.
+/// The hero image — Finora, a personal-finance app, shown across laptop,
+/// tablet and phone. Curated, not derived from the folder-listing provider:
+/// the hero is the site's single most prominent image, so it's pinned by
+/// hand, and it lives in assets/images/ so it doesn't also show up in any
+/// project gallery. Unlike the old single-phone screenshot, this mockup
+/// already has its device bezels baked in (on a transparent background), so
+/// it's drawn as-is rather than inside `DeviceFrame`.
 ///
-/// Chosen to line up with the bio's headline claims (enterprise FinTech +
-/// the Houston super app). Tanto, the FinTech app, can't be shown: that
-/// client's business closed and its UI can no longer be featured here.
-/// Previously Peace of Mind's Picture Bank map view, which didn't match
-/// either claim.
-const _heroImagePath = 'assets/images/hero_farenow_home.webp';
+/// Cropped to its opaque bounds; [_heroImageAspectRatio] must track the
+/// file's pixel size (960x690).
+const _heroImagePath = 'assets/images/hero_finora_devices.webp';
+const _heroImageAspectRatio = 960 / 690;
 const _heroImageAlt =
-    'Farenow super app home screen — taxi, parcel and delivery services with an in-app wallet';
+    'Finora personal-finance app on laptop, tablet and phone — balance, '
+    'income and expenses, recent transactions and spending by category';
 
 /// The hero — design brief 2's signature moment, restructured per an
 /// explicit responsive spec (three genuinely different layouts, not one
@@ -59,8 +60,8 @@ const _heroImageAlt =
 ///   name share a row; stats run full-width, still 4 across.
 /// - Mobile (<640): stats move up ahead of the CTAs — a visitor needs a
 ///   reason to care before tapping anything, and a big image between the
-///   title and the buttons pushes CTAs below the fold. The phone
-///   screenshot moves last and lazy-loads, since it's the heaviest asset
+///   title and the buttons pushes CTAs below the fold. The device
+///   mockup moves last and lazy-loads, since it's the heaviest asset
 ///   and the least important thing on a phone.
 class PersonalInfoSection extends ConsumerWidget {
   const PersonalInfoSection({super.key});
@@ -184,7 +185,7 @@ class _DesktopHero extends StatelessWidget {
     final right = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _entrance(2, const _HeroDevice(width: 230)),
+        _entrance(2, const _HeroDevice(width: 460)),
         gapH20,
         _entrance(3, const HeroStatPlaque()),
       ],
@@ -281,7 +282,7 @@ class _TabletHero extends StatelessWidget {
               ),
             ),
             gapH40,
-            _entrance(6, const _HeroDevice(width: 138)),
+            _entrance(6, const _HeroDevice(width: 420)),
             gapH24,
             _entrance(7, const HeroStatPlaque(fullWidth: true)),
           ],
@@ -375,7 +376,7 @@ class _MobileHero extends StatelessWidget {
         gapH32,
         // Heaviest asset, least important thing on a phone — last in the
         // order and lazy-loaded.
-        _entrance(6, Center(child: const _HeroDevice(width: 200, lazy: true))),
+        _entrance(6, Center(child: const _HeroDevice(width: 360, lazy: true))),
       ],
     );
   }
@@ -492,23 +493,26 @@ class _HeroDeviceState extends ConsumerState<_HeroDevice> {
 
   @override
   Widget build(BuildContext context) {
-    final width = widget.width;
-    final dpr = MediaQuery.devicePixelRatioOf(context);
-    final height = width / DeviceFrame.aspectRatio;
-    final theme = Theme.of(context);
-    final showImage = !widget.lazy || _isNearViewport;
+    return LayoutBuilder(builder: (context, constraints) {
+      // [widget.width] is a cap — the column may be narrower than that.
+      final width = math.min(widget.width, constraints.maxWidth);
+      final height = width / _heroImageAspectRatio;
+      final dpr = MediaQuery.devicePixelRatioOf(context);
+      final showImage = !widget.lazy || _isNearViewport;
 
-    final Widget screen = showImage
-        ? Image.asset(
-            _heroImagePath,
-            fit: BoxFit.cover,
-            cacheWidth: (width * dpr).round(),
-            cacheHeight: (height * dpr).round(),
-            semanticLabel: _heroImageAlt,
-          )
-        : ColoredBox(color: theme.colorScheme.secondaryContainer);
-
-    return DeviceFrame(width: width, screen: screen);
+      return SizedBox(
+        width: width,
+        height: height,
+        child: showImage
+            ? Image.asset(
+                _heroImagePath,
+                fit: BoxFit.contain,
+                cacheWidth: (width * dpr).round(),
+                semanticLabel: _heroImageAlt,
+              )
+            : null,
+      );
+    });
   }
 }
 

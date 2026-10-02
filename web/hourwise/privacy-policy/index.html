@@ -5,7 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — Hourwise</title>
 <meta name="description" content="Hourwise records how long you worked in each app, on your Mac, and sends none of it anywhere. There is no account and no server.">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark light">
+<script>
+  // Dark is the default. Honour a light choice made with the toggle on the
+  // Hourwise page; it lives only in this browser and never leaves it.
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("hourwise-theme"); } catch (e) {}
+    if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+  })();
+</script>
 <!--
   Deliberately self-contained: no webfonts, no analytics, no third-party
   requests of any kind. A privacy policy that loads a tracker to render itself
@@ -13,6 +22,7 @@
 -->
 <style>
   :root {
+    color-scheme: light;
     --navy: #2F3B50;
     --navy-deep: #222C3C;
     --amber: #C97400;
@@ -25,19 +35,18 @@
     --good: #1A8B5A;
     --no: #B0343C;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --navy: #46566F;
-      --navy-deep: #1B2432;
-      --amber: #ED8B00;
-      --page: #131417;
-      --surface: #1C1D22;
-      --ink: #ECEDF1;
-      --ink-soft: #A3A7B4;
-      --rule: #2E3039;
-      --good: #35B87E;
-      --no: #E56B60;
-    }
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --navy: #46566F;
+    --navy-deep: #1B2432;
+    --amber: #ED8B00;
+    --page: #131417;
+    --surface: #1C1D22;
+    --ink: #ECEDF1;
+    --ink-soft: #A3A7B4;
+    --rule: #2E3039;
+    --good: #35B87E;
+    --no: #E56B60;
   }
 
   * { box-sizing: border-box; }
@@ -265,7 +274,7 @@
 </main>
 
 <footer>
-  © 2026 Hourwise · <a href="../index.html">Hourwise</a> · <a href="">Privacy</a> · <a href="../terms/">Terms of Use</a> · Made by <a href="https://ehsanur.com">Shekh Ehsanur Rahman</a>
+  © 2026 Hourwise · <a href="../index.html">Hourwise</a> · <a href="">Privacy</a> · <a href="../terms/">Terms of Use</a> · <a href="https://www.linkedin.com/company/hourwise-labs">LinkedIn</a> · <a href="https://www.facebook.com/profile.php?id=61595186930630">Facebook</a> · Made by <a href="https://ehsanur.com">Shekh Ehsanur Rahman</a>
 </footer>
 
 </body>

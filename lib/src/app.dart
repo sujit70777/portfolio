@@ -21,7 +21,7 @@ class MyApp extends ConsumerWidget {
       darkTheme: themes.darkTheme,
       themeMode: ref.watch(darkModeProvider).maybeWhen(
             data: (darkMode) => darkMode ? ThemeMode.dark : ThemeMode.light,
-            orElse: () => ThemeMode.system,
+            orElse: () => ThemeMode.dark,
           ),
       // MaterialApp already cross-fades between `theme` and `darkTheme` when
       // themeMode changes; these two lines are that animation, configured.
