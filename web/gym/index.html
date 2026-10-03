@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090b10">
+<meta name="description" content="Personal 6-day low-impact gym and fat-loss plan with exercise instructions, sleep, optional afternoon activity, and a workout tracker.">
+<title>My Fat-Loss Gym App</title>
+<style>
+:root{
+  --bg:#080a0f;
+  --panel:#10131b;
+  --panel2:#151925;
+  --card:#111621;
+  --line:#252b3a;
+  --text:#f4f7fb;
+  --muted:#9aa5b6;
+  --neon:#65ffb4;
+  --neon2:#6ae4ff;
+  --warn:#ffd166;
+  --danger:#ff6b7a;
+  --radius:20px;
+  --shadow:0 0 0 1px rgba(101,255,180,.05), 0 18px 50px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% -5%, rgba(101,255,180,.10), transparent 30%),
+    radial-gradient(circle at 100% 0%, rgba(106,228,255,.08), transparent 28%),
+    var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
+  line-height:1.5;
+}
+button,input{font:inherit}
+a{color:var(--neon2);text-decoration:none}
+a:hover{text-decoration:underline}
+.app{max-width:760px;margin:0 auto;padding-bottom:110px}
+.hero{
+  padding:28px 18px 18px;
+  position:relative;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid rgba(101,255,180,.25);
+  color:var(--neon);
+  padding:7px 10px;border-radius:999px;
+  font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(101,255,180,.06);
+}
+h1{font-size:clamp(34px,9vw,58px);line-height:.98;margin:14px 0 12px;letter-spacing:-.04em}
+.hero p{margin:0;color:var(--muted);max-width:650px}
+.glow{color:var(--neon);text-shadow:0 0 18px rgba(101,255,180,.25)}
+.grid{display:grid;gap:12px}
+.metrics{grid-template-columns:repeat(3,1fr);margin-top:18px}
+.metric{
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+  border:1px solid var(--line);border-radius:18px;padding:14px;
+  box-shadow:var(--shadow)
+}
+.metric strong{display:block;font-size:22px}
+.metric span{font-size:12px;color:var(--muted)}
+.section{padding:10px 18px}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0 12px}
+.section-title h2{font-size:21px;margin:0;letter-spacing:-.02em}
+.section-title small{color:var(--muted)}
+.card{
+  background:linear-gradient(160deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)
+}
+.notice{
+  border-left:3px solid var(--warn);
+  background:rgba(255,209,102,.06);
+}
+.notice strong{color:var(--warn)}
+.danger{
+  border-left:3px solid var(--danger);
+  background:rgba(255,107,122,.06);
+}
+.danger strong{color:var(--danger)}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px}
+.pill{
+  border:1px solid var(--line);background:#0d1118;color:#dce2ec;
+  border-radius:999px;padding:7px 10px;font-size:12px
+}
+.week{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px
+}
+.day-card{
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .15s ease,border-color .15s ease;
+}
+.day-card:hover{transform:translateY(-1px);border-color:rgba(101,255,180,.35)}
+.day-card:focus-visible{outline:2px solid var(--neon);outline-offset:2px}
+.day-top{display:flex;justify-content:space-between;gap:8px}
+.day-num{color:var(--neon);font-weight:900;font-size:12px;letter-spacing:.08em}
+.day-name{font-size:19px;font-weight:850;margin-top:3px}
+.day-meta{color:var(--muted);font-size:12px;margin-top:6px}
+.mini-bar{height:4px;background:#202634;border-radius:99px;overflow:hidden;margin-top:13px}
+.mini-fill{height:100%;width:0;background:linear-gradient(90deg,var(--neon),var(--neon2));box-shadow:0 0 10px rgba(101,255,180,.3);transition:width .2s}
+.day-view{display:none}
+.day-view.active{display:block}
+.back{
+  border:1px solid var(--line);background:#0d1118;color:var(--text);
+  border-radius:12px;padding:9px 12px;cursor:pointer
+}
+.workout-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.workout-head h3{margin:0 0 5px;font-size:28px;letter-spacing:-.03em}
+.workout-sub{color:var(--muted);font-size:13px}
+.exercise-list{display:grid;gap:10px;margin-top:14px}
+.exercise{
+  border:1px solid var(--line);background:var(--card);
+  border-radius:18px;overflow:hidden;
+}
+.exercise summary{
+  list-style:none;cursor:pointer;padding:14px 15px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px
+}
+.exercise summary::-webkit-details-marker{display:none}
+.exercise summary:focus-visible{outline:2px solid var(--neon);outline-offset:-2px}
+.ex-name{font-weight:800}
+.ex-meta{font-size:12px;color:var(--muted);margin-top:2px}
+.chev{color:var(--neon);font-size:18px;transition:transform .15s}
+.exercise[open] .chev{transform:rotate(90deg)}
+.exercise-body{padding:0 15px 15px;border-top:1px solid var(--line)}
+.label{
+  display:block;margin-top:13px;margin-bottom:5px;font-size:11px;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--neon);font-weight:900
+}
+.exercise-body p{margin:0;color:#d9dfE9;font-size:14px}
+.tips{display:grid;gap:8px;margin-top:10px}
+.tip{padding:9px 10px;border-radius:12px;background:#0c1017;border:1px solid #1f2632;font-size:13px}
+.tip.good{border-color:rgba(101,255,180,.18)}
+.tip.bad{border-color:rgba(255,107,122,.15)}
+.ref{
+  margin-top:12px;display:inline-flex;align-items:center;gap:6px;
+  padding:8px 11px;border-radius:10px;background:rgba(106,228,255,.06);
+  border:1px solid rgba(106,228,255,.18);font-size:12px;font-weight:750
+}
+.sets{
+  display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;
+  margin-top:10px
+}
+.sets input[type="number"]{
+  width:86px;padding:9px 10px;border-radius:10px;border:1px solid var(--line);
+  background:#0b0e14;color:var(--text)
+}
+.check{
+  width:22px;height:22px;accent-color:var(--neon)
+}
+.rest{
+  color:var(--muted);font-size:12px;padding:10px 0 0
+}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{
+  border:1px solid var(--line);background:#0d1118;color:var(--text);
+  border-radius:12px;padding:9px 12px;cursor:pointer;font-weight:750
+}
+.btn.primary{
+  background:rgba(101,255,180,.10);border-color:rgba(101,255,180,.25);color:var(--neon)
+}
+.btn.danger{color:var(--danger)}
+.timeline{display:grid;gap:10px}
+.time-row{
+  display:grid;grid-template-columns:86px 1fr;gap:12px;align-items:start;
+  padding:12px 0;border-bottom:1px solid var(--line)
+}
+.time-row:last-child{border-bottom:0}
+.time{color:var(--neon);font-weight:900;font-size:13px}
+.time-row strong{display:block;font-size:14px}
+.time-row span{color:var(--muted);font-size:13px}
+.bar{
+  height:9px;border-radius:99px;background:#1d2330;overflow:hidden;margin-top:10px
+}
+.bar span{
+  display:block;height:100%;width:75%;
+  background:linear-gradient(90deg,var(--neon),var(--neon2));
+}
+.tabs{
+  position:fixed;z-index:50;left:50%;bottom:0;transform:translateX(-50%);
+  width:min(760px,100%);padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(8,10,15,.88);backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+}
+.tab-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.tab{
+  border:1px solid transparent;background:transparent;color:var(--muted);
+  padding:8px 5px;border-radius:12px;cursor:pointer;font-size:11px;font-weight:800
+}
+.tab.active{background:rgba(101,255,180,.08);color:var(--neon);border-color:rgba(101,255,180,.12)}
+.tab b{display:block;font-size:16px;margin-bottom:2px}
+.hidden{display:none!important}
+.small{font-size:12px;color:var(--muted)}
+.list{margin:8px 0 0 18px;padding:0;color:#d9dfE9}
+.list li{margin:6px 0}
+.kpi{
+  display:flex;justify-content:space-between;gap:10px;align-items:center;
+  border:1px solid var(--line);border-radius:15px;padding:12px;margin-top:10px
+}
+.kpi strong{font-size:18px}
+.checkline{display:flex;gap:10px;align-items:flex-start}
+.checkline input{margin-top:4px;accent-color:var(--neon)}
+footer{padding:10px 18px 30px;color:var(--muted);font-size:11px}
+@media (min-width:650px){
+  .week{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:420px){
+  .metrics{gap:8px}
+  .metric{padding:11px}
+  .metric strong{font-size:19px}
+  .week{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <span class="eyebrow">⚡ Personal Fat-Loss Gym App</span>
+  <h1>Lean <span class="glow">140 →</span><br>Strong & Consistent</h1>
+  <p>Six-day template focused on sustainable fat loss, full-body strength, low-impact cardio, recovery, and simple tracking.</p>
+  <div class="grid metrics">
+    <div class="metric"><strong>6</strong><span>planned gym days</span></div>
+    <div class="metric"><strong>4–5</strong><span>days is still okay</span></div>
+    <div class="metric"><strong>7.5h+</strong><span>sleep target</span></div>
+  </div>
+</header>
+
+<section id="home" class="section">
+  <div class="section-title"><h2>Today</h2><small id="todayLabel"></small></div>
+  <div class="card">
+    <div class="pill-row">
+      <span class="pill">🔥 Fat loss</span>
+      <span class="pill">🚴 Low impact</span>
+      <span class="pill">💪 Full body</span>
+      <span class="pill">😴 Recovery</span>
+    </div>
+    <div class="kpi"><span>Core idea</span><strong>Don't train to exhaustion</strong></div>
+    <div class="kpi"><span>Progress target</span><strong>Small improvements weekly</strong></div>
+    <div class="kpi"><span>Weight-loss pace</span><strong>~0.5–1 kg/week</strong></div>
+  </div>
+
+  <div class="card notice" style="margin-top:12px">
+    <strong>For your health context</strong>
+    <p class="small" style="margin:6px 0 0">For anyone with diabetes, circulation problems, or recurring leg/ankle symptoms, keep exercise individualized and follow your clinician's exercise advice. Avoid sudden all-out sessions. Use symptoms—not ego—to decide when to stop or swap an exercise.</p>
+  </div>
+
+  <div class="section-title" style="margin-top:18px"><h2>6-Day Week</h2><small>Tap a day</small></div>
+  <div class="week">
+    <div class="card day-card" tabindex="0" onclick="showDay('day1')" onkeypress="if(event.key==='Enter')showDay('day1')">
+      <div class="day-top"><div><div class="day-num">DAY 01</div><div class="day-name">Full Body A</div><div class="day-meta">Strength + 20–25 min cardio</div></div><div>💪</div></div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-day1"></div></div>
+    </div>
+    <div class="card day-card" tabindex="0" onclick="showDay('day2')" onkeypress="if(event.key==='Enter')showDay('day2')">
+      <div class="day-top"><div><div class="day-num">DAY 02</div><div class="day-name">Cardio + Core</div><div class="day-meta">40–50 min + core</div></div><div>🔥</div></div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-day2"></div></div>
+    </div>
+    <div class="card day-card" tabindex="0" onclick="showDay('day3')" onkeypress="if(event.key==='Enter')showDay('day3')">
+      <div class="day-top"><div><div class="day-num">DAY 03</div><div class="day-name">Full Body B</div><div class="day-meta">Strength + 20–25 min cardio</div></div><div>💪</div></div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-day3"></div></div>
+    </div>
+    <div class="card day-card" tabindex="0" onclick="showDay('day4')" onkeypress="if(event.key==='Enter')showDay('day4')">
+      <div class="day-top"><div><div class="day-num">DAY 04</div><div class="day-name">Long Cardio</div><div class="day-meta">Bike / elliptical 40–50 min</div></div><div>🚴</div></div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-day4"></div></div>
+    </div>
+    <div class="card day-card" tabindex="0" onclick="showDay('day5')" onkeypress="if(event.key==='Enter')showDay('day5')">
+      <div class="day-top"><div><div class="day-num">DAY 05</div><div class="day-name">Full Body A</div><div class="day-meta">Repeat + small progression</div></div><div>📈</div></div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-day5"></div></div>
+    </div>
+    <div class="card day-card" tabindex="0" onclick="showDay('day6')" onkeypress="if(event.key==='Enter')showDay('day6')">
+      <div class="day-top"><div><div class="day-num">DAY 06</div><div class="day-name">Cardio + Light</div><div class="day-meta">35–45 min + light full body</div></div><div>⚡</div></div>
+      <div class="mini-bar"><div class="mini-fill" id="bar-day6"></div></div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:18px"><h2>Sleep & Recovery</h2><small>every day</small></div>
+  <div class="card">
+    <div class="timeline">
+      <div class="time-row"><div class="time">10:15 PM</div><div><strong>Wind down</strong><span>Lower lights, reduce scrolling, prep gym clothes.</span></div></div>
+      <div class="time-row"><div class="time">11:00 PM</div><div><strong>Sleep</strong><span>Target 7.5–8 hours. Adults generally need at least 7 hours.</span></div></div>
+      <div class="time-row"><div class="time">6:30 AM</div><div><strong>Wake + water</strong><span>Take your usual prescribed medicines as directed.</span></div></div>
+      <div class="time-row"><div class="time">7:00 AM</div><div><strong>Gym window</strong><span>Warm-up → training → cool-down.</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:18px"><h2>Optional Afternoon</h2><small>easy only</small></div>
+  <div class="card">
+    <p style="margin:0 0 8px"><strong>Choose one — not another hard workout.</strong></p>
+    <div class="pill-row">
+      <span class="pill">🚶 10–20 min easy walk</span>
+      <span class="pill">🚴 10–20 min easy bike</span>
+      <span class="pill">🧘 10 min mobility</span>
+    </div>
+    <p class="small" style="margin:10px 0 0">A short walk after a meal can be a practical way to add activity. On heavy or painful leg days, skip the optional session.</p>
+  </div>
+
+  <div class="section-title" style="margin-top:18px"><h2>Diabetes Safety</h2></div>
+  <div class="card notice">
+    <p style="margin:0"><strong>Check your own medical instructions first.</strong></p>
+    <ul class="list">
+      <li>Exercise can lower blood glucose, and some diabetes medicines can increase the risk of a low.</li>
+      <li>If you use insulin or medicines that can cause lows, follow your clinician's instructions about checking glucose before/after exercise and carrying fast-acting carbohydrate.</li>
+      <li>Low blood sugar is generally <strong>&lt;70 mg/dL</strong>. Treat lows according to your diabetes plan; the CDC describes the 15-15 rule for many adults.</li>
+      <li>Check your feet regularly and stop if you develop an injury, blister, unusual swelling, or significant pain.</li>
+    </ul>
+  </div>
+
+  <div class="section-title" style="margin-top:18px"><h2>Leg / Ankle Rule</h2></div>
+  <div class="card danger">
+    <p style="margin:0"><strong>No “push through” on concerning symptoms.</strong></p>
+    <p class="small" style="margin:7px 0 0">If you have recurring leg/ankle symptoms, consider the seated bike instead of the elliptical when it is more comfortable. New or worsening one-sided swelling, severe leg pain, chest pain, fainting, or unusual shortness of breath needs prompt medical attention.</p>
+  </div>
+</section>
+
+<!-- Workout views -->
+<section id="workouts" class="section day-view">
+  <div class="toolbar"><button class="back" onclick="goHome()">← Back</button></div>
+  <div id="dayContent"></div>
+</section>
+
+<section id="sleep" class="section day-view">
+  <div class="section-title"><h2>Sleep & Recovery</h2></div>
+  <div class="card">
+    <p style="margin-top:0"><strong>Daily target: 7.5–8 hours in bed.</strong></p>
+    <p class="small">A simple template is 11:00 PM → 6:30 AM. Shift it to fit your real schedule, but keep your wake and sleep times reasonably consistent.</p>
+    <div class="bar"><span style="width:94%"></span></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <div class="checkline"><input id="sleepCheck" type="checkbox"><label for="sleepCheck"><strong>Tonight: I gave myself enough sleep time.</strong><div class="small">Saved on this device.</div></label></div>
+  </div>
+  <div class="card notice" style="margin-top:12px">
+    <strong>Recovery is part of fat loss.</strong>
+    <p class="small" style="margin:6px 0 0">Don't turn six gym days into six maximum-effort days. Three strength days plus moderate cardio works better as a repeatable routine.</p>
+  </div>
+</section>
+
+<section id="safety" class="section day-view">
+  <div class="section-title"><h2>Safety & Progress</h2></div>
+  <div class="card">
+    <p style="margin-top:0"><strong>How hard should the weight feel?</strong></p>
+    <p class="small">Start with a load that lets you complete the planned reps with clean form and still feel you could do about 2–3 more good reps. No 1-rep-max testing.</p>
+    <p style="margin-bottom:0"><strong>When to progress:</strong> when you can complete all sets at the top of the rep range with good form, add the smallest available weight next time.</p>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <p style="margin-top:0"><strong>Your fat-loss scoreboard</strong></p>
+    <div class="kpi"><span>Weekly scale trend</span><strong>↓</strong></div>
+    <div class="kpi"><span>Waist measurement</span><strong>↓</strong></div>
+    <div class="kpi"><span>Gym consistency</span><strong>4–6 days</strong></div>
+    <div class="kpi"><span>Sleep</span><strong>7.5h+</strong></div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Reference sources</strong></p>
+  <p>Exercise technique pages are from the American Council on Exercise (ACE) exercise library. Diabetes and sleep guidance is from the U.S. CDC. Links are provided for additional reading; your clinician's individualized instructions take priority.</p>
+  <p>Built as a personal training guide, not a diagnosis or substitute for medical care.</p>
+</footer>
+
+<nav class="tabs" aria-label="App navigation">
+  <div class="tab-row">
+    <button class="tab active" id="tab-home" onclick="showTab('home')"><b>⌂</b>Home</button>
+    <button class="tab" id="tab-workouts" onclick="showTab('workouts');goHomeToDay()"><b>⚡</b>Workout</button>
+    <button class="tab" id="tab-sleep" onclick="showTab('sleep')"><b>☾</b>Sleep</button>
+    <button class="tab" id="tab-safety" onclick="showTab('safety')"><b>✓</b>Safety</button>
+  </div>
+</nav>
+</div>
+
+<script>
+const workouts = {
+  day1:{
+    title:"Day 1 — Full Body A",
+    subtitle:"8–10 min warm-up • Strength • 20–25 min cardio",
+    exercises:[
+      {name:"Seated Chest Press",meta:"3 × 10–12",rest:"60–90 sec",how:"Sit with your back supported. Set the handles around mid-chest height. Brace gently, press forward without locking the elbows, then return slowly.",good:"Keep shoulders controlled and wrists neutral. Use a weight that allows smooth reps.",bad:"Do not bounce the weight, shrug your shoulders, arch hard, or force a painful range.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/188/seated-chest-press/"},
+      {name:"Seated Lat Pulldown",meta:"3 × 10–12",rest:"60–90 sec",how:"Secure the thighs under the pad. Pull the bar toward the upper/mid chest by bringing the elbows down; return under control.",good:"Keep a small natural lean and chest tall. Think elbows down.",bad:"Do not yank the bar, swing your torso, or pull behind your neck.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/158/seated-lat-pulldown/"},
+      {name:"Seated Cable Row",meta:"3 × 10–12",rest:"60–90 sec",how:"Sit tall with feet supported. Pull the handle toward the stomach while keeping the torso mostly still; return slowly.",good:"Keep your chest open and elbows close to your sides.",bad:"Do not rock backward to move the weight or round aggressively through the lower back.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/168/seated-row/"},
+      {name:"Seated Leg Press",meta:"2 × 10–12",rest:"90 sec",how:"Sit with back and tailbone supported. Place feet comfortably on the plate. Push through the whole foot and return slowly.",good:"Keep heels down, knees tracking with toes, and your lower back supported.",bad:"Do not lock the knees hard or let your butt/lower back lift off the pad.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/154/seated-leg-press/"},
+      {name:"Seated Leg Curl",meta:"2 × 10–12",rest:"60–90 sec",how:"Set the pad so the back of the lower leg contacts the lever. Curl the heels toward the seat, then slowly return.",good:"Keep your torso stable and use controlled range.",bad:"Do not jerk the weight or force the knee through painful range.",ref:"https://www.acefitness.org/continuing-education/certified/february-2018/6896/ace-sponsored-research-what-is-the-best-exercise-for-the-hamstrings/"},
+      {name:"Seated Shoulder Press",meta:"2 × 10–12",rest:"60–90 sec",how:"Sit with back supported and handles near shoulder level. Press upward in a controlled line, then lower slowly.",good:"Keep ribs controlled and wrists neutral.",bad:"Do not over-arch your lower back or force the shoulder into painful range.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/186/seated-shoulder-press/"},
+      {name:"Cardio — Bike or Elliptical",meta:"20–25 min",rest:"Easy transition",how:"Use a smooth, moderate pace. You should be able to speak in short sentences.",good:"Bike is a good default if the ankle/leg is uncomfortable.",bad:"Skip all-out sprints or painful movement.",ref:"https://www.cdc.gov/diabetes/living-with/physical-activity.html"}
+    ]
+  },
+  day2:{
+    title:"Day 2 — Cardio + Core",
+    subtitle:"40–50 min moderate cardio • 8–12 min core",
+    exercises:[
+      {name:"Stationary Bike",meta:"25–30 min",rest:"—",how:"Set the seat so the knee stays slightly bent at the bottom of the pedal stroke. Ride at a smooth moderate pace.",good:"Keep cadence comfortable and posture relaxed.",bad:"Do not grind a very heavy resistance if it aggravates the knee or ankle.",ref:"https://www.cdc.gov/diabetes/living-with/physical-activity.html"},
+      {name:"Elliptical (optional swap)",meta:"15–20 min",rest:"—",how:"Stand tall, hold the rails lightly, and use a comfortable stride with steady breathing.",good:"Use only if comfortable for your ankle/leg.",bad:"Do not force range or speed through pain.",ref:"https://www.cdc.gov/diabetes/living-with/physical-activity.html"},
+      {name:"Seated Cable/Machine Crunch",meta:"3 × 12–15",rest:"45–60 sec",how:"Brace the abdomen and curl the torso gently forward, then return slowly without yanking the handles.",good:"Move from the trunk; keep the neck relaxed.",bad:"Do not fling the weight or pull the head/neck.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/291/seated-crunch/"},
+      {name:"Pallof Press",meta:"3 × 10/side",rest:"45–60 sec",how:"Stand or kneel sideways to a cable/band anchor. Hold the handle at the chest, brace, press straight out, resist rotation, and return.",good:"Keep hips and shoulders facing forward.",bad:"Do not twist with the cable.",ref:"https://www.acefitness.org/resources/everyone/blog/5521/summer-inspired-core-circuit/"},
+      {name:"Supine Dead Bug",meta:"2 × 8–10/side",rest:"45–60 sec",how:"Lie on your back with knees bent. Brace gently, extend the opposite arm and leg slowly, then return and switch.",good:"Only lower the limbs as far as you can while keeping the trunk controlled.",bad:"Do not hold your breath or let your back arch excessively.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/147/supine-dead-bug/"}
+    ]
+  },
+  day3:{
+    title:"Day 3 — Full Body B",
+    subtitle:"8–10 min warm-up • Strength • 20–25 min cardio",
+    exercises:[
+      {name:"Seated Chest Press",meta:"3 × 10–12",rest:"60–90 sec",how:"Back supported, handles around mid-chest. Press forward smoothly and return slowly.",good:"Keep shoulder blades controlled and wrists neutral.",bad:"No bouncing, shrugging, or painful range.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/188/seated-chest-press/"},
+      {name:"Seated Lat Pulldown",meta:"3 × 10–12",rest:"60–90 sec",how:"Secure thighs, brace the trunk, pull the bar toward your chest with the elbows moving down.",good:"Control both the pull and the return.",bad:"No swinging or behind-the-neck pulls.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/158/seated-lat-pulldown/"},
+      {name:"Seated Cable Row",meta:"3 × 10–12",rest:"60–90 sec",how:"Pull toward the stomach while keeping the torso upright and stable.",good:"Lead with elbows and squeeze gently at the end.",bad:"Don't use a backward rock to create momentum.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/168/seated-row/"},
+      {name:"Seated Leg Extension",meta:"2 × 10–12",rest:"60–90 sec",how:"Set the machine so the knee aligns with the pivot. Extend the lower leg under control, then lower slowly.",good:"Use a comfortable range and controlled tempo.",bad:"Do not slam the pad or force the knee straight if uncomfortable.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/183/seated-leg-extension/"},
+      {name:"Seated Leg Curl",meta:"2 × 10–12",rest:"60–90 sec",how:"Curl the lower leg against the pad while keeping the hips and torso stable.",good:"Smooth squeeze, slow return.",bad:"No jerking or painful range.",ref:"https://www.acefitness.org/continuing-education/certified/february-2018/6896/ace-sponsored-research-what-is-the-best-exercise-for-the-hamstrings/"},
+      {name:"Cable Face Pull",meta:"2 × 12–15",rest:"45–60 sec",how:"Pull the rope toward face level while keeping elbows comfortably high and shoulders controlled.",good:"Use light resistance and focus on upper-back/shoulder control.",bad:"Don't yank the cable or crank your neck.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/11/standing-cable-face-pull/"},
+      {name:"Biceps Curl",meta:"2 × 10–12",rest:"45–60 sec",how:"Keep upper arms near your sides, curl the weight smoothly, then lower under control.",good:"Keep wrists neutral and torso still.",bad:"No body swing or shoulder shrug.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/44/seated-biceps-curl/"},
+      {name:"Triceps Pushdown",meta:"2 × 10–12",rest:"45–60 sec",how:"Brace the trunk, keep elbows close to your sides, press the handle/rope down, then return slowly.",good:"Control the entire range.",bad:"Do not let the elbows drift forward during every rep or use your body weight.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/185/triceps-pushdowns/"},
+      {name:"Cardio — Bike or Elliptical",meta:"20–25 min",rest:"Easy transition",how:"Moderate, steady effort. Keep impact low.",good:"Choose the machine that feels best on your legs.",bad:"No maximal intervals.",ref:"https://www.cdc.gov/diabetes/living-with/physical-activity.html"}
+    ]
+  },
+  day4:{
+    title:"Day 4 — Long Cardio",
+    subtitle:"40–50 min moderate cardio • no hard lifting required",
+    exercises:[
+      {name:"Stationary Bike",meta:"40–50 min",rest:"—",how:"Ride continuously at a sustainable moderate pace. You can divide the session into two blocks with a short easy break.",good:"This is your main calorie-burning endurance session.",bad:"Do not turn it into a race or choose resistance that causes joint pain.",ref:"https://www.cdc.gov/diabetes/living-with/physical-activity.html"},
+      {name:"Elliptical",meta:"Alternative: 30–40 min",rest:"—",how:"Use a smooth full-body motion at a conversational pace.",good:"Only choose it when the ankle/leg feels comfortable.",bad:"Stop if you get significant pain or unusual symptoms.",ref:"https://www.cdc.gov/diabetes/living-with/physical-activity.html"},
+      {name:"Easy Mobility",meta:"5–10 min",rest:"—",how:"Gentle hip, shoulder and ankle mobility without forcing range.",good:"Use this as recovery, not a workout.",bad:"No painful stretches or aggressive bouncing.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/"}
+    ]
+  },
+  day5:{
+    title:"Day 5 — Full Body A + Progression",
+    subtitle:"Repeat Day 1 • progress only one or two small things",
+    exercises:[
+      {name:"Seated Chest Press",meta:"3 × 10–12",rest:"60–90 sec",how:"Same technique as Day 1. If all sets were clean last time, add 1–2 reps or the smallest weight increment.",good:"Progress one variable at a time.",bad:"Do not chase heavier weight with sloppy form.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/188/seated-chest-press/"},
+      {name:"Seated Lat Pulldown",meta:"3 × 10–12",rest:"60–90 sec",how:"Pull toward the upper/mid chest with a controlled return.",good:"Small, repeatable progress.",bad:"No swinging.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/158/seated-lat-pulldown/"},
+      {name:"Seated Cable Row",meta:"3 × 10–12",rest:"60–90 sec",how:"Keep torso steady as you pull toward the stomach.",good:"Slow return.",bad:"No rocking.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/168/seated-row/"},
+      {name:"Seated Leg Press",meta:"2 × 10–12",rest:"90 sec",how:"Press smoothly while keeping heels grounded and back supported.",good:"Comfortable range only.",bad:"No knee lockout or butt lifting.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/154/seated-leg-press/"},
+      {name:"Seated Leg Curl",meta:"2 × 10–12",rest:"60–90 sec",how:"Curl the lower legs toward the seat, then return slowly.",good:"Stable torso.",bad:"No jerking.",ref:"https://www.acefitness.org/continuing-education/certified/february-2018/6896/ace-sponsored-research-what-is-the-best-exercise-for-the-hamstrings/"},
+      {name:"Seated Shoulder Press",meta:"2 × 10–12",rest:"60–90 sec",how:"Press upward smoothly while keeping ribs and lower back controlled.",good:"Light-to-moderate weight.",bad:"No painful overhead range.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/186/seated-shoulder-press/"},
+      {name:"Cardio — Bike",meta:"20–25 min",rest:"—",how:"Moderate pace; keep breathing controlled.",good:"The bike is the default low-impact option.",bad:"No all-out intervals.",ref:"https://www.cdc.gov/diabetes/living-with/physical-activity.html"}
+    ]
+  },
+  day6:{
+    title:"Day 6 — Cardio + Light Full Body",
+    subtitle:"35–45 min cardio • short, easy strength circuit",
+    exercises:[
+      {name:"Bike / Elliptical",meta:"35–45 min",rest:"—",how:"Steady moderate cardio. Use the machine that feels most comfortable.",good:"Keep it easier than a race pace.",bad:"No hard intervals if you are already fatigued.",ref:"https://www.cdc.gov/diabetes/living-with/physical-activity.html"},
+      {name:"Seated Chest Press",meta:"2 × 12",rest:"45–60 sec",how:"Smooth press with back supported.",good:"Light weight.",bad:"Do not train to failure.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/188/seated-chest-press/"},
+      {name:"Seated Lat Pulldown",meta:"2 × 12",rest:"45–60 sec",how:"Controlled pull toward chest.",good:"Light weight and full control.",bad:"No swinging.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/158/seated-lat-pulldown/"},
+      {name:"Seated Cable Row",meta:"2 × 12",rest:"45–60 sec",how:"Pull toward stomach with upright torso.",good:"Smooth reps.",bad:"No rocking.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/168/seated-row/"},
+      {name:"Seated Leg Curl",meta:"2 × 12",rest:"45–60 sec",how:"Curl under control, return slowly.",good:"Keep it easy.",bad:"Stop if the leg feels painful or unusually swollen.",ref:"https://www.acefitness.org/continuing-education/certified/february-2018/6896/ace-sponsored-research-what-is-the-best-exercise-for-the-hamstrings/"},
+      {name:"Seated Cable/Machine Crunch",meta:"2 × 15",rest:"45–60 sec",how:"Gently curl the torso forward while bracing the abs.",good:"Slow, controlled reps.",bad:"No neck pulling or swinging.",ref:"https://www.acefitness.org/resources/everyone/exercise-library/291/seated-crunch/"}
+    ]
+  }
+};
+
+function storageKey(day,i){return "gymapp_"+day+"_"+i}
+function renderDay(dayKey){
+  const w=workouts[dayKey];
+  let html=`<div class="card"><div class="workout-head"><div><div class="day-num">${w.title.split(" — ")[0].toUpperCase()}</div><h3>${w.title.split(" — ")[1]}</h3><div class="workout-sub">${w.subtitle}</div></div><div class="pill">Tap exercises ↗</div></div>`;
+  html+=`<div class="toolbar"><button class="btn primary" onclick="checkDay('${dayKey}')">✓ Mark completed</button><button class="btn" onclick="resetDay('${dayKey}')">Reset day</button></div></div>`;
+  html+=`<div class="exercise-list">`;
+  w.exercises.forEach((e,i)=>{
+    const id=storageKey(dayKey,i);
+    const checked=localStorage.getItem(id)==="1" ? "checked":"";
+    const saved=localStorage.getItem(id+"_wt")||"";
+    html+=`<details class="exercise"><summary><div><div class="ex-name">${i+1}. ${e.name}</div><div class="ex-meta">${e.meta} • ${e.rest}</div></div><div class="chev">›</div></summary>
+      <div class="exercise-body">
+        <span class="label">How to do it</span><p>${e.how}</p>
+        <div class="tips">
+          <div class="tip good"><strong>✓ Do:</strong> ${e.good}</div>
+          <div class="tip bad"><strong>✕ Avoid:</strong> ${e.bad}</div>
+        </div>
+        <span class="label">Your log</span>
+        <div class="sets">
+          <label class="small"><input class="check" type="checkbox" ${checked} onchange="toggleExercise('${dayKey}',${i},this.checked)"> Done</label>
+          <input type="number" min="0" step="0.5" value="${saved}" placeholder="kg" aria-label="Weight in kilograms" oninput="saveWeight('${dayKey}',${i},this.value)">
+          <span class="small">kg</span>
+        </div>
+        <a class="ref" href="${e.ref}" target="_blank" rel="noopener">↗ Reference & form guide</a>
+      </div></details>`;
+  });
+  html+=`</div>`;
+  document.getElementById("dayContent").innerHTML=html;
+  updateBar(dayKey);
+}
+
+function toggleExercise(day,i,checked){
+  localStorage.setItem(storageKey(day,i),checked?"1":"0");
+  updateBar(day);
+}
+function saveWeight(day,i,val){localStorage.setItem(storageKey(day,i)+"_wt",val)}
+function updateBar(day){
+  const total=workouts[day].exercises.length;
+  let done=0;
+  for(let i=0;i<total;i++) if(localStorage.getItem(storageKey(day,i))==="1") done++;
+  const pct=Math.round(done/total*100);
+  const bar=document.getElementById("bar-"+day);
+  if(bar) bar.style.width=pct+"%";
+}
+function checkDay(day){
+  for(let i=0;i<workouts[day].exercises.length;i++) localStorage.setItem(storageKey(day,i),"1");
+  renderDay(day);
+}
+function resetDay(day){
+  for(let i=0;i<workouts[day].exercises.length;i++){
+    localStorage.removeItem(storageKey(day,i));
+    localStorage.removeItem(storageKey(day,i)+"_wt");
+  }
+  renderDay(day);
+}
+function showDay(day){
+  showTab("workouts");
+  renderDay(day);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function goHome(){
+  showTab("home");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function goHomeToDay(){
+  const d = localStorage.getItem("lastDay") || "day1";
+  renderDay(d);
+}
+function showTab(name){
+  document.querySelectorAll(".day-view").forEach(x=>x.classList.remove("active"));
+  document.getElementById(name).classList.remove("hidden");
+  if(name!=="home") document.getElementById(name).classList.add("active");
+  document.getElementById("home").style.display=name==="home"?"block":"none";
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  const t=document.getElementById("tab-"+name); if(t)t.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".day-card").forEach((el)=>{
+  const onclick=el.getAttribute("onclick")||"";
+  const match=onclick.match(/showDay\\('([^']+)'\\)/);
+  if(match) el.addEventListener("click",()=>localStorage.setItem("lastDay",match[1]));
+});
+document.getElementById("todayLabel").textContent =
+  new Intl.DateTimeFormat(undefined,{weekday:"short",month:"short",day:"numeric"}).format(new Date());
+
+const sleepKey="gymapp_sleep";
+const sleepCheck=document.getElementById("sleepCheck");
+sleepCheck.checked=localStorage.getItem(sleepKey)==="1";
+sleepCheck.addEventListener("change",()=>localStorage.setItem(sleepKey,sleepCheck.checked?"1":"0"));
+
+["day1","day2","day3","day4","day5","day6"].forEach(updateBar);
+</script>
+</body>
+</html>

@@ -174,8 +174,8 @@ class PageBackgroundSettings {
   /// (~180 at 390x844): a phone has the least headroom, and the same field
   /// on a small screen reads as busier.
   static const mobile = PageBackgroundSettings(
-    moteMinCount: 100,
-    moteMaxCount: 150,
+    moteMinCount: 40,
+    moteMaxCount: 100,
   );
 
   Duration get _frameInterval =>
