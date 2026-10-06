@@ -18,12 +18,14 @@ class AvailabilityBadge extends StatelessWidget {
         // A live indicator: the one thing a recruiter should notice first.
         PulseDot(color: signal),
         gapW8,
-        SearchableText(
-          tr(LocaleKeys.availabilityBadge).toUpperCase(),
-          style: monoLabelStyle(
-            fontSize: 12,
-            letterSpacing: 0.06,
-            color: mutedTextColor(Theme.of(context).colorScheme),
+        Flexible(
+          child: SearchableText(
+            tr(LocaleKeys.availabilityBadge).toUpperCase(),
+            style: monoLabelStyle(
+              fontSize: 12,
+              letterSpacing: 0.06,
+              color: mutedTextColor(Theme.of(context).colorScheme),
+            ),
           ),
         ),
       ],

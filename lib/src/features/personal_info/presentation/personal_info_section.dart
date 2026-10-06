@@ -188,7 +188,7 @@ class _DesktopHero extends StatelessWidget {
       children: [
         _entrance(2, const _HeroDevice(width: 460)),
         gapH20,
-        _entrance(3, const HeroStatPlaque()),
+        _entrance(3, const HeroStatPlaque(fullWidth: true)),
       ],
     );
 
