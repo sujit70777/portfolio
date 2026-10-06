@@ -16,21 +16,21 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> _en = {
   "name": "Shekh Ehsanur Rahman",
-  "description": "Senior Mobile & Full-Stack AI Engineer — Offline-First Sync & On-Device AI — Flutter · React Native · Swift",
-  "subDescription": "Based in Bangladesh · hours shifted to overlap EU/US",
+  "description": "Senior Mobile Engineer — I solve difficult production mobile problems",
+  "subDescription": "Offline-first · Data sync · Complex integrations · Payments & subscriptions · AI — Flutter, React Native, iOS, Android",
   "heroPrimaryCta": "Email me",
   "heroSecondaryCta": "WhatsApp",
-  "availabilityBadge": "Available for new work",
-  "contractBadge": "B2B contract ready · Direct invoicing / Deel",
+  "availabilityBadge": "Available now · Remote from Bangladesh · No sponsorship required",
+  "contractBadge": "Full-time or contract",
   "stats": {
     "years": "11",
-    "yearsLabel": "Years",
+    "yearsLabel": "Years shipping",
     "apps": "50+",
-    "appsLabel": "Apps",
+    "appsLabel": "Apps in stores",
     "users": "1M+",
-    "usersLabel": "Users",
+    "usersLabel": "Users served",
     "rating": "4.7",
-    "ratingLabel": "Rating"
+    "ratingLabel": "At 100K daily users"
   },
   "contacts": [
     {
@@ -114,7 +114,7 @@ class CodegenLoader extends AssetLoader{
       "url": "assets/documents/resume.pdf"
     }
   ],
-  "aboutDescription": "I build apps that keep working when the network doesn't, and now apps where AI does the tedious part, privately.\n\n11 years in mobile: 50+ shipped apps and over 1 million users across Flutter, React Native, native Android and Swift/SwiftUI. I specialise in offline-first architecture and conflict-free (CRDT) data sync. I'm the author of flutter_crdt_sync_kit, one of 9 packages I've published on pub.dev.\n\nToday I'm the founder and sole engineer of Hourwise Labs. Hourwise is a native macOS time-tracking and invoicing app for lawyers, live on the Mac App Store. I'm growing it into a full-stack AI product:\n• On-device AI billing narratives with Apple Foundation Models\n• Private meeting capture and summaries\n• A Python/FastAPI + Postgres backend with CRDT sync across Mac, iOS and Android\n• A retrieval-based \"Ask my matters\" agent with citations and evals\n\nBefore that:\n• Led an offline-first EdTech platform at 100,000+ daily active users with a 4.7★ rating\n• Team lead and sole developer on Tanto (Brazilian corporate reimbursement with AI invoice capture, SEFAZ integration and instant Pix payouts) and Farenow (multi-service super app for a US client)\n• Built CI/CD with Fastlane and GitHub Actions, and cut crash rates with BLoC/Riverpod/Redux state management and Crashlytics tracking\n\nWhat I bring: ownership from architecture through App Store and Play approval, native platform integration, test discipline, and AI-assisted development with Claude Code under real code review.\n\nOpen to Senior Mobile, Senior Flutter / React Native, and AI / Full-Stack Engineer roles. Remote, full-time or contract (B2B via Deel, Wise or direct invoice). I worked shifted hours with a Brazil-based team for three years, so US, UK or EU hours are routine for me.",
+  "aboutDescription": "Your app works in the office. Then someone opens it in a basement clinic, on a train, or in northern Norway — and it freezes, loses their data, or shows the wrong answer. That is the problem I fix.\n\nI'm a senior mobile engineer (Flutter, React Native, Swift, Kotlin) who solves difficult production problems: offline reliability, data sync, payments and subscriptions, platform edge cases, and now AI. I'm based in Bangladesh and don't need relocation or visa sponsorship to work remotely.\n\nProblems I've solved:\n• Wrong prayer times in Finland and Norway — standard formulas break at high latitudes, so I wrote an offline prayer-time engine with high-latitude rules. Muslim Times Pro shows correct times every day of the year, offline.\n• Receipts generic scanners couldn't read — for Tanto (Brazil) I built a custom QR/barcode scanner, validated each invoice with the tax authority (SEFAZ) and paid employees instantly by Pix.\n• Learning apps that broke without internet — I built the offline sync layer for 100,000+ students in 5 countries; the apps held 4.7★ at 100,000+ daily users.\n• Subscriptions charging users twice — I fixed StoreKit 2 race conditions on an iOS app and got it through App Store review.\n• Lawyers losing billable hours — I designed and shipped Hourwise to the Mac App Store on my own, with every byte kept on the device.\n\nHow I work: I own a feature from architecture to App Store and Google Play release, write clear async updates, and have worked three years of shifted hours with a Brazil-based team — your hours are normal hours for me.\n\nBring me in if your app must work offline, sync without losing data, take payments or subscriptions, pass store review, or ship an AI feature that respects privacy. Full-time or contract.",
   "skillCategories": [
     {
       "category": "Offline-First & Data Sync",
@@ -198,9 +198,9 @@ class CodegenLoader extends AssetLoader{
   ],
   "experiences": [
     {
-      "role": "Founder & Full-Stack AI Engineer",
+      "role": "Founder & Senior Mobile Engineer",
       "company": "Hourwise Labs",
-      "description": "Founder and sole engineer of Hourwise: private, AI-assisted timekeeping and billing for solo lawyers and small firms.\n\nLive on the Mac App Store\n• Native macOS menu-bar app: SwiftUI + AppKit, ~17k lines of Swift\n• Local-first SQLite/GRDB data layer; on-device time attribution with a rule engine and naive-Bayes classifier\n• EventKit calendar import; PDFKit invoices; LEDES 1998B, XLSX, CSV, QuickBooks and Xero exports\n• StoreKit 2 subscriptions; designed, built, shipped and marketed solo\n\nNow building: full-stack AI\n• On-device AI billing narratives with Apple Foundation Models, plus UTBMS code suggestions and billing-rule checks\n• Private meeting capture: on-device transcription and summaries that become draft time entries\n• Python/FastAPI + Postgres backend: auth, firm seats, CRDT sync across Swift and Dart clients, Claude API proxy\n• Flutter companion app for iOS and Android: timers, voice entries, Live Activities\n• \"Ask my matters\": a tool-using LLM agent with pgvector hybrid search, citations and evals",
+      "description": "Solo and small-firm lawyers lose billable time because they forget to start timers and rebuild their day from memory. I built the fix.\n\n• Stopped lost billable time: Hourwise records work passively and matches it to client matters with an on-device rule engine and a classifier that learns from each user's corrections. Shipped solo to the Mac App Store.\n• Removed the cloud-privacy objection: local-first SQLite/GRDB storage, no account, no server, Touch ID lock.\n• Made invoices billing-system ready: PDF invoices plus LEDES 1998B, QuickBooks, Xero, XLSX and CSV exports; StoreKit 2 subscriptions.\n• Building next: on-device AI billing narratives (Apple Foundation Models), a Python/FastAPI + PostgreSQL backend with CRDT sync, and a Flutter companion app.",
       "url": "https://ehsanur.com/hourwise/",
       "isPresent": true,
       "startYear": 2026,
@@ -279,7 +279,7 @@ class CodegenLoader extends AssetLoader{
     {
       "role": "Senior Mobile Developer — Level III",
       "company": "Developer eXperience Hub (Devxhub)",
-      "description": "• Architected the mobile application layer in Flutter and React Native for enterprise FinTech and expense-management products serving 50,000+ users, owning data flow, state management and release process end to end.\n• Built an offline-first local/Firebase sync architecture keeping core functionality available through network interruptions, with deterministic conflict resolution on reconnect.\n• Designed and implemented the team CI/CD pipeline (Fastlane, GitHub Actions) for a distributed 4-developer team spanning multiple time zones.\n• Reduced crash rates by introducing structured state management (BLoC and Riverpod in Flutter, Redux and Context in React Native) with Crashlytics monitoring and regression tracking.\n• Published 9 reusable open-source packages covering CRDT sync, accessibility auditing, on-device voice, canvas rendering and UI tooling.\n• Team lead and sole developer on multiple products, owning architecture through store release, including Tanto (Brazilian corporate reimbursement with AI invoice capture, SEFAZ tax-agency integration and instant Pix payouts) and Farenow (multi-service super app for a US client).\n• Integrated AI-assisted development workflows (Claude Code) into the team process while keeping code review and test discipline on all merged work.",
+      "description": "Team lead and sole developer on client apps for the US, Brazil and Bangladesh, in Flutter and React Native.\n\n• Tanto (Brazil): replaced generic scanners with a custom QR/barcode scanner, SEFAZ tax-agency validation, policy checks and instant Pix payout.\n• Offline-first FinTech/expense apps for 50,000+ users: a local queue + Firebase sync with deterministic conflict resolution, so expenses filed without signal were never lost.\n• Muslim Times Pro: an offline prayer-time engine with high-latitude rules — correct times in Finland and Norway year-round.\n• Peace of Mind (iOS): fixed StoreKit 2 duplicate-purchase and pending-state race conditions; led App Store submission to approval.\n• Farenow (US client): one modular app instead of five — rides, delivery, bookings, consultations, marketplace — shipped to both stores.\n• Reduced crashes by moving apps to structured state (BLoC/Riverpod, Redux) with Crashlytics tracking.\n• Shortened releases for a 4-developer, multi-time-zone team with a Fastlane + GitHub Actions pipeline.",
       "url": "https://devxhub.com",
       "isPresent": false,
       "startYear": 2023,
@@ -337,7 +337,7 @@ class CodegenLoader extends AssetLoader{
     {
       "role": "Senior Mobile Application Developer",
       "company": "Prabartan Information Technology",
-      "description": "• Led development of an offline-first, multi-language EdTech platform reaching 100,000+ students across 5 countries, engineered so lessons and progress remain available without connectivity.\n• Sustained a 4.7-star store rating at 100,000+ daily active users by building the Firebase/SQLite synchronisation layer and resolving sync-conflict edge cases at scale.\n• Managed a 6-developer team and modernised the stack with Flutter 3.0, React Native, Jetpack Compose and SwiftUI.",
+      "description": "• Students in 5 countries often had weak or no internet. Led a 6-developer team building offline-first learning apps where lessons and progress work without a connection — 100,000+ students reached.\n• Held a 4.7★ rating at 100,000+ daily active users by building the Firebase/SQLite sync layer and fixing sync-conflict edge cases at scale.\n• Learn Python: 165+ tutorials, 100,000+ installs. Modernised the stack (Flutter 3, Jetpack Compose, SwiftUI) with code review standards.",
       "isPresent": false,
       "startYear": 2019,
       "startMonth": 6,
@@ -452,7 +452,7 @@ class CodegenLoader extends AssetLoader{
   "projects": [
     {
       "name": "Hourwise",
-      "description": "Native macOS menu-bar app for solo and small-firm lawyers. It records billable work passively (no timer to start or forget), attributes it to client matters, and turns it into invoices, then shows what never reached a bill. Local-first by design: the shipped app needs no account or server, and nothing leaves the Mac. Published on the Mac App Store. Now growing into a full-stack AI product: on-device billing narratives with Apple Foundation Models, private meeting capture, cross-device sync, a Flutter companion app and an \"Ask my matters\" agent.",
+      "description": "Case study: lawyers lose billable hours to forgotten timers, and many can't put client data in a cloud. Hourwise records work passively on the Mac and turns it into invoices — nothing leaves the device. Live on the Mac App Store.",
       "role": "Founder and sole engineer — product, native macOS architecture, UI design, App Store release and launch.",
       "url": "https://apps.apple.com/us/app/hourwise-billable-hours/id6811420308?mt=12",
       "icon": {
@@ -464,11 +464,9 @@ class CodegenLoader extends AssetLoader{
       "featured": true,
       "flagship": true,
       "highlights": [
-        "Native SwiftUI + AppKit menu-bar app, sandboxed for the Mac App Store — ~17k lines of Swift",
-        "Local-first data layer on SQLite (GRDB) with versioned migrations, backup and recovery — no account, no server",
-        "On-device attribution: a rule engine plus a naive-Bayes classifier trained on the user's own corrections, and EventKit calendar import",
-        "Invoicing pipeline with PDFKit rendering and hand-written XLSX, CSV, QuickBooks/Xero and LEDES 1998B exporters",
-        "StoreKit 2 subscriptions with a free tier, Swift Charts analytics and Touch ID app lock"
+        "Problem: Solo and small-firm lawyers forget to start timers, rebuild their day from memory, and lose billable time; cloud trackers raise client-confidentiality concerns.",
+        "What I did: Designed and built a native SwiftUI + AppKit menu-bar app (~17k lines of Swift): passive capture, an on-device rule engine plus a classifier that learns from corrections, local-first SQLite/GRDB storage, PDF invoices and LEDES 1998B / QuickBooks / Xero exports, StoreKit 2.",
+        "Result: Shipped solo to the Mac App Store; now growing it with on-device AI narratives, a backend with CRDT sync and a Flutter companion app."
       ],
       "technologies": [
         {
@@ -518,8 +516,279 @@ class CodegenLoader extends AssetLoader{
       ]
     },
     {
+      "name": "Muslim Times Pro",
+      "description": "Case study: correct prayer times in Finland and Norway, fully offline, every day of the year.",
+      "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
+      "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
+      "icon": {
+        "codePoint": "0xef23",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "status": "shipped",
+      "featured": true,
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "Android",
+          "icon": {
+            "codePoint": "0xef1c",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "iOS",
+          "icon": {
+            "codePoint": "0xef21",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "SQLite",
+          "icon": {
+            "assetName": "assets/icons/other/sqlite.svg"
+          }
+        },
+        {
+          "name": "Firebase",
+          "icon": {
+            "assetName": "assets/icons/other/firebase.svg"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
+          "platform": "ios"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.devxhub.muslimtimespro",
+          "platform": "android"
+        }
+      ],
+      "highlights": [
+        "Problem: In a Nordic summer twilight never fully ends, and north of the Arctic Circle the sun may not set at all. Standard prayer-time formulas give wrong or missing Fajr and Isha times there — and for a prayer app, one wrong time loses the user.",
+        "What I did: Built an offline prayer-time engine in Dart at Devxhub (published as flutter_prayer_time_calculator): sun position computed on the device, high-latitude rules when normal twilight angles fail, all major calculation methods and Hanafi Asr, feeding iOS WidgetKit and Android home-screen widgets.",
+        "Result: Correct times every day of the year, offline, in Finland, Norway and other high-latitude regions."
+      ]
+    },
+    {
+      "name": "Tanto",
+      "description": "Case study: a receipt scanner generic libraries couldn't build — and refunds paid instantly. Brazilian expense-reimbursement startup (company closed Sept 2025; listings removed).",
+      "role": "Led delivery at Devxhub — Flutter app, offline-first sync architecture, SEFAZ tax-agency integration.",
+      "url": "https://www.facebook.com/profile.php?id=61560593442787",
+      "icon": {
+        "assetName": "assets/icons/software-development/flutter.svg",
+        "color": "0xffffffff"
+      },
+      "status": "shipped",
+      "featured": true,
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "Android",
+          "icon": {
+            "codePoint": "0xef1c",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "Kotlin",
+          "icon": {
+            "assetName": "assets/icons/other/kotlin.svg"
+          }
+        },
+        {
+          "name": "Swift",
+          "icon": {
+            "codePoint": "0xf0aa",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "iOS",
+          "icon": {
+            "codePoint": "0xef21",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "SQLite",
+          "icon": {
+            "assetName": "assets/icons/other/sqlite.svg"
+          }
+        },
+        {
+          "name": "Firebase",
+          "icon": {
+            "assetName": "assets/icons/other/firebase.svg"
+          }
+        }
+      ],
+      "links": [],
+      "highlights": [
+        "Problem: Every reimbursement depended on reading the QR code or barcode on a Brazilian tax invoice, and generic scanners were not reliable on real receipts. Each failed scan meant manual typing, fraud risk and employees waiting for their money.",
+        "What I did: Built a custom QR/barcode scanner, validated each invoice with the state tax agencies (SEFAZ), checked it against company policy, and paid out instantly via Pix.",
+        "Result: [confirm with Ehsanur before publishing]"
+      ]
+    },
+    {
+      "name": "Prabartan Educational Platform",
+      "description": "Case study: learning that keeps working when the internet doesn't — 100,000+ students in 5 countries.",
+      "role": "Led development at Prabartan Information Technology — Flutter, Jetpack Compose, SwiftUI, Firebase/SQLite sync layer.",
+      "url": "https://play.google.com/store/apps/dev?id=6504002943007145339",
+      "icon": {
+        "codePoint": "0xefc5",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "status": "shipped",
+      "featured": true,
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "Android",
+          "icon": {
+            "codePoint": "0xef1c",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "Kotlin",
+          "icon": {
+            "assetName": "assets/icons/other/kotlin.svg"
+          }
+        },
+        {
+          "name": "iOS",
+          "icon": {
+            "codePoint": "0xef21",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "Swift",
+          "icon": {
+            "codePoint": "0xf0aa",
+            "fontFamily": "FontAwesome"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/dev?id=6504002943007145339",
+          "platform": "android"
+        }
+      ],
+      "highlights": [
+        "Problem: Students often studied on weak or no connections. If lessons or progress needed the network, they lost work and quit.",
+        "What I did: Led a 6-developer team; built the Firebase/SQLite sync layer — content cached ahead, progress written on the device first, conflicts resolved deterministically on reconnect.",
+        "Result: 4.7★ held at 100,000+ daily active users; Learn Python alone passed 100,000 installs."
+      ]
+    },
+    {
+      "name": "Peace of Mind (POM)",
+      "description": "Case study: fixing a subscription flow that charged users twice. Flutter estate-planning app with a native iOS layer — digital wills, biometric vault, life timeline.",
+      "role": "Team lead and sole developer — Flutter app with the native iOS layer built solo, including StoreKit 2 subscriptions, App Store submission and compliance.",
+      "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
+      "icon": {
+        "codePoint": "0xef23",
+        "fontFamily": "FontAwesome",
+        "color": "0xffffffff"
+      },
+      "status": "shipped",
+      "featured": true,
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": {
+            "assetName": "assets/icons/software-development/flutter.svg"
+          }
+        },
+        {
+          "name": "Dart",
+          "icon": {
+            "assetName": "assets/icons/other/dart.svg"
+          }
+        },
+        {
+          "name": "Swift",
+          "icon": {
+            "codePoint": "0xf0aa",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "iOS",
+          "icon": {
+            "codePoint": "0xef21",
+            "fontFamily": "FontAwesome"
+          }
+        },
+        {
+          "name": "StoreKit"
+        },
+        {
+          "name": "Apple Pay"
+        }
+      ],
+      "links": [
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
+          "platform": "ios"
+        },
+        {
+          "label": "Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.peaceofmind.app",
+          "platform": "android"
+        }
+      ],
+      "highlights": [
+        "Problem: StoreKit timing bugs caused duplicate purchases and features stuck behind a 'pending' state — each one a refund, a support ticket and a likely cancellation — and the app was stuck in App Store review.",
+        "What I did: Traced the race conditions (pending status, duplicate persistence, navigation timing) and rebuilt the StoreKit 2 flow so one purchase always maps to one entitlement; fixed the review issues.",
+        "Result: Clean subscription flow for individual and family plans; app approved on the App Store."
+      ]
+    },
+    {
       "name": "Farenow",
-      "description": "All-in-one super app for a US-based client (Houston, TX), built while at Devxhub: ride-hailing, on-demand service bookings, food and grocery delivery, virtual consultations, and a real estate/marketplace listings module in a single app.",
+      "description": "Case study: one app instead of five for a US client (Houston, TX).",
       "role": "Team lead and sole developer — owned architecture, implementation, release and delivery end to end across ride-hailing, delivery, bookings, and marketplace modules.",
       "url": "https://apps.apple.com/us/app/farenow/id1638701755",
       "icon": {
@@ -587,70 +856,16 @@ class CodegenLoader extends AssetLoader{
           "url": "https://play.google.com/store/apps/details?id=com.app.farenow",
           "platform": "android"
         }
-      ]
-    },
-    {
-      "name": "Peace of Mind (POM)",
-      "description": "Flutter estate-planning app for iOS: digital will management, a biometric-secured vault, an interactive life timeline, and Apple StoreKit 2 subscriptions with individual and family plans. Built the native iOS layer solo, resolving StoreKit subscription race conditions, and led App Store submission and compliance.",
-      "role": "Team lead and sole developer — Flutter app with the native iOS layer built solo, including StoreKit 2 subscriptions, App Store submission and compliance.",
-      "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
-      "icon": {
-        "codePoint": "0xef23",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
-      },
-      "status": "shipped",
-      "featured": true,
-      "technologies": [
-        {
-          "name": "Flutter",
-          "icon": {
-            "assetName": "assets/icons/software-development/flutter.svg"
-          }
-        },
-        {
-          "name": "Dart",
-          "icon": {
-            "assetName": "assets/icons/other/dart.svg"
-          }
-        },
-        {
-          "name": "Swift",
-          "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "iOS",
-          "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "StoreKit"
-        },
-        {
-          "name": "Apple Pay"
-        }
       ],
-      "links": [
-        {
-          "label": "App Store",
-          "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
-          "platform": "ios"
-        },
-        {
-          "label": "Google Play",
-          "url": "https://play.google.com/store/apps/details?id=com.peaceofmind.app",
-          "platform": "android"
-        }
+      "highlights": [
+        "Problem: The client needed ride-hailing, service bookings, food and grocery delivery, consultations and a marketplace — without paying for five apps and five teams.",
+        "What I did: As team lead and sole developer, designed one modular cross-platform app with shared auth, payments, maps and live tracking.",
+        "Result: One codebase, shipped to the App Store and Google Play."
       ]
     },
     {
       "name": "flutter_crdt_sync_kit",
-      "description": "Pub.dev package. Offline-first, CRDT-based local data layer for Flutter: write while offline, merge automatically and conflict-free when back online, with pluggable Supabase and REST backend adapters.",
+      "description": "Pub.dev package for a common, costly bug: two devices edit the same data offline and one change silently overwrites the other. A CRDT-based local data layer that merges changes conflict-free on reconnect, with Supabase and REST adapters.",
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_crdt_sync_kit",
       "icon": {
@@ -688,71 +903,6 @@ class CodegenLoader extends AssetLoader{
           "label": "View on pub.dev",
           "url": "https://pub.dev/packages/flutter_crdt_sync_kit",
           "platform": "pubdev"
-        }
-      ]
-    },
-    {
-      "name": "Muslim Times Pro",
-      "description": "Prayer times with azan alerts, full Quran with recitation and translation, a mosque locator, Qibla compass, and Hijri calendar.",
-      "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
-      "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
-      "icon": {
-        "codePoint": "0xef23",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
-      },
-      "status": "shipped",
-      "featured": true,
-      "technologies": [
-        {
-          "name": "Flutter",
-          "icon": {
-            "assetName": "assets/icons/software-development/flutter.svg"
-          }
-        },
-        {
-          "name": "Dart",
-          "icon": {
-            "assetName": "assets/icons/other/dart.svg"
-          }
-        },
-        {
-          "name": "Android",
-          "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "iOS",
-          "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "SQLite",
-          "icon": {
-            "assetName": "assets/icons/other/sqlite.svg"
-          }
-        },
-        {
-          "name": "Firebase",
-          "icon": {
-            "assetName": "assets/icons/other/firebase.svg"
-          }
-        }
-      ],
-      "links": [
-        {
-          "label": "App Store",
-          "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
-          "platform": "ios"
-        },
-        {
-          "label": "Google Play",
-          "url": "https://play.google.com/store/apps/details?id=com.devxhub.muslimtimespro",
-          "platform": "android"
         }
       ]
     },
@@ -817,7 +967,7 @@ class CodegenLoader extends AssetLoader{
     },
     {
       "name": "Forward SMS",
-      "description": "SMS forwarder to email, Slack, Telegram, and Discord, with offline queuing and custom filtering rules.",
+      "description": "Never miss an OTP or alert again: forwards SMS to email, Slack, Telegram and Discord, with offline queuing and custom filter rules.",
       "role": "Sole iOS developer — built and shipped independently.",
       "url": "https://apps.apple.com/us/app/forward-sms-sms-forwarder/id6759511643",
       "icon": {
@@ -859,7 +1009,7 @@ class CodegenLoader extends AssetLoader{
     },
     {
       "name": "flutter_a11y_lens",
-      "description": "Pub.dev package. Live accessibility auditing for Flutter: inspects the running widget tree and flags WCAG violations in real time, with an on-screen debug overlay.",
+      "description": "Pub.dev package. Accessibility bugs are found too late, by users or auditors. Inspects the running widget tree and flags WCAG violations live, with an on-screen overlay.",
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_a11y_lens",
       "icon": {
@@ -899,7 +1049,7 @@ class CodegenLoader extends AssetLoader{
     },
     {
       "name": "OMR Scanner",
-      "description": "GitHub project. Fully offline exam and answer-sheet scanner: create exams, define a multi-answer-capable answer key, calibrate the bubble grid once per sheet layout, then scan with a live camera guide and auto-capture for instant per-roll scoring — no OCR, using registration-mark alignment and homography.",
+      "description": "Grading paper answer sheets by hand is slow and error-prone. A fully offline scanner that aligns each sheet with registration marks and homography (no OCR), with live camera guidance, auto-capture and instant per-roll scoring.",
       "role": "Sole developer — personal project, in active development.",
       "url": "https://github.com/sujit70777/omr_scanner_flutter",
       "icon": {
@@ -939,72 +1089,6 @@ class CodegenLoader extends AssetLoader{
           "platform": "github"
         }
       ]
-    },
-    {
-      "name": "Tanto",
-      "description": "Brazilian corporate expense-reimbursement platform integrated with state tax agencies (SEFAZ): AI capture of the unique token on each invoice, validation against company policy, and instant employee reimbursement via Pix. Built while at Devxhub (2023–2025); the company closed in September 2025 and its listings were taken down.",
-      "role": "Led delivery at Devxhub — Flutter app, offline-first sync architecture, SEFAZ tax-agency integration.",
-      "url": "https://www.facebook.com/profile.php?id=61560593442787",
-      "icon": {
-        "assetName": "assets/icons/software-development/flutter.svg",
-        "color": "0xffffffff"
-      },
-      "status": "shipped",
-      "featured": false,
-      "technologies": [
-        {
-          "name": "Flutter",
-          "icon": {
-            "assetName": "assets/icons/software-development/flutter.svg"
-          }
-        },
-        {
-          "name": "Dart",
-          "icon": {
-            "assetName": "assets/icons/other/dart.svg"
-          }
-        },
-        {
-          "name": "Android",
-          "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "Kotlin",
-          "icon": {
-            "assetName": "assets/icons/other/kotlin.svg"
-          }
-        },
-        {
-          "name": "Swift",
-          "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "iOS",
-          "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "SQLite",
-          "icon": {
-            "assetName": "assets/icons/other/sqlite.svg"
-          }
-        },
-        {
-          "name": "Firebase",
-          "icon": {
-            "assetName": "assets/icons/other/firebase.svg"
-          }
-        }
-      ],
-      "links": []
     },
     {
       "name": "flutter_liquid_glass_widgets",
@@ -1048,7 +1132,7 @@ class CodegenLoader extends AssetLoader{
     },
     {
       "name": "local_voice",
-      "description": "Pub.dev package. Privacy-first, on-device voice commands for Flutter — no cloud, no API keys, works in airplane mode.",
+      "description": "Pub.dev package. Voice commands that work with no internet, no cloud and no API keys — private by design and free per request.",
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/local_voice",
       "icon": {
@@ -1333,67 +1417,6 @@ class CodegenLoader extends AssetLoader{
       ]
     },
     {
-      "name": "Prabartan Educational Platform",
-      "description": "Learning apps suite for Prabartan Information Technology, including Learn Python — 165+ tutorials with 100,000+ installs.",
-      "role": "Led development at Prabartan Information Technology — Flutter, Jetpack Compose, SwiftUI, Firebase/SQLite sync layer.",
-      "url": "https://play.google.com/store/apps/dev?id=6504002943007145339",
-      "icon": {
-        "codePoint": "0xefc5",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
-      },
-      "status": "shipped",
-      "featured": false,
-      "technologies": [
-        {
-          "name": "Flutter",
-          "icon": {
-            "assetName": "assets/icons/software-development/flutter.svg"
-          }
-        },
-        {
-          "name": "Dart",
-          "icon": {
-            "assetName": "assets/icons/other/dart.svg"
-          }
-        },
-        {
-          "name": "Android",
-          "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "Kotlin",
-          "icon": {
-            "assetName": "assets/icons/other/kotlin.svg"
-          }
-        },
-        {
-          "name": "iOS",
-          "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
-          }
-        },
-        {
-          "name": "Swift",
-          "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
-          }
-        }
-      ],
-      "links": [
-        {
-          "label": "Google Play",
-          "url": "https://play.google.com/store/apps/dev?id=6504002943007145339",
-          "platform": "android"
-        }
-      ]
-    },
-    {
       "name": "flutter_fabric",
       "description": "Pub.dev package. A Flutter canvas library inspired by Fabric.js — selectable, draggable, scalable, and rotatable objects with free drawing, JSON serialization, and SVG path support.",
       "role": "Sole developer and maintainer — open-source Flutter package.",
@@ -1597,11 +1620,11 @@ class CodegenLoader extends AssetLoader{
   "portfolio": "Shekh Ehsanur Rahman",
   "homeSectionTitle": "Home",
   "aboutSectionTitle": "About",
-  "aboutSectionTitleAlt": "About Me",
-  "aboutLocationCaption": "Rajshahi, Bangladesh · UTC+6",
+  "aboutSectionTitleAlt": "What I fix",
+  "aboutLocationCaption": "Rajshahi, Bangladesh · UTC+6 · Remote",
   "skillsSectionTitle": "Skills",
   "experienceSectionTitle": "Experience",
-  "projectsSectionTitle": "Projects",
+  "projectsSectionTitle": "Problems I've solved",
   "resume": "Resume",
   "downloadResume": "Download Resume",
   "openUrlError": "Could not open the url",
@@ -1609,7 +1632,7 @@ class CodegenLoader extends AssetLoader{
   "sectionEyebrowAbout": "About",
   "sectionEyebrowExperience": "Experience",
   "sectionEyebrowSkills": "Skills",
-  "sectionEyebrowProjects": "Projects",
+  "sectionEyebrowProjects": "Case studies",
   "projectsMoreLabel": "More projects",
   "siteUrl": "https://ehsanur.com/",
   "fitCheckSectionTitle": "Fit check",
