@@ -19,6 +19,9 @@ class Palette {
     required this.button,
     required this.onAurora,
     required this.glowAlpha,
+    required this.findMatch,
+    required this.findCurrent,
+    required this.onFind,
   });
 
   /// Emerald → mint → gold.
@@ -39,6 +42,14 @@ class Palette {
   /// lower on the light theme, where the same alpha reads as a stain.
   final int glowAlpha;
 
+  /// Find-on-page (Cmd/Ctrl+F) highlights: every match, the one the
+  /// visitor is on, and the text colour that reads on top of either. Warm
+  /// and solid, like a browser's own find highlight, so a match is the
+  /// loudest thing on the page whichever section it lands in.
+  final Color findMatch;
+  final Color findCurrent;
+  final Color onFind;
+
   static const _dark = Palette._(
     aurora: [Color(0xff3ecf8e), Color(0xff8fe3b8), Color(0xfffbc771)],
     hues: [
@@ -53,6 +64,9 @@ class Palette {
     button: [Color(0xfffbc771), Color(0xfff0a93b)],
     onAurora: Color(0xff06150f),
     glowAlpha: 70,
+    findMatch: Color(0xfffbc771),
+    findCurrent: Color(0xffff9447),
+    onFind: Color(0xff06150f),
   );
 
   static const _light = Palette._(
@@ -69,6 +83,9 @@ class Palette {
     button: [Color(0xff166534), Color(0xff0f766e)],
     onAurora: Color(0xffffffff),
     glowAlpha: 40,
+    findMatch: Color(0xffffe08a),
+    findCurrent: Color(0xffffa53d),
+    onFind: Color(0xff1c1400),
   );
 
   static Palette of(BuildContext context) =>

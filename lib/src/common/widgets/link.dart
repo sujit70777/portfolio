@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 class MyLink extends StatefulHookConsumerWidget {
   const MyLink({
@@ -78,7 +79,7 @@ class _LinkState extends ConsumerState<MyLink> {
                   ],
                 ),
               Flexible(
-                child: Text(
+                child: SearchableText(
                   widget.displayLink ?? widget.url,
                   style: TextStyle(
                     decoration:

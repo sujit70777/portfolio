@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/project/domain/project_status.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// A muted amber, deliberately distinct from the green used for "shipped"
 /// — "in development" should never read as the same kind of signal as a
@@ -34,7 +35,7 @@ class ProjectStatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return SearchableText(
       statusLabel(status),
       style: monoLabelStyle(fontSize: fontSize, color: statusColor(context, status)),
     );

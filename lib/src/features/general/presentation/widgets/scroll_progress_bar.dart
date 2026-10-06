@@ -50,7 +50,12 @@ class _ProgressPainter extends CustomPainter {
 
   double get _progress {
     if (!controller.hasClients) return 0;
-    final position = controller.position;
+    // Not `controller.position`: for the one frame in which the page swaps
+    // between its tablet and desktop layouts (the window crossing 1280px),
+    // both layouts' scroll views are attached to this shared controller,
+    // and `position` asserts there is exactly one. The last to attach is
+    // the incoming layout.
+    final position = controller.positions.last;
     if (!position.hasContentDimensions || position.maxScrollExtent <= 0) {
       return 0;
     }

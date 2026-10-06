@@ -5,6 +5,7 @@ import 'package:portfolio/src/common/widgets/first_paint_entrance.dart';
 import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// The evidence card anchored to the hero — rating, apps, users, years in
 /// one composed plaque rather than three flat stat boxes. Design brief 2,
@@ -196,7 +197,7 @@ class _Stat extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 2),
-        Text(
+        SearchableText(
           data.label.toUpperCase(),
           textAlign: TextAlign.center,
           style: theme.textTheme.labelSmall?.copyWith(

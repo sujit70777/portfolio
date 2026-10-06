@@ -5,6 +5,7 @@ import 'package:portfolio/src/features/experience/domain/experience.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/localized_date_extension.dart';
 import 'package:portfolio/src/utils/string_extension.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 class ExperienceDateText extends ConsumerWidget {
   const ExperienceDateText({super.key, required this.experience});
@@ -26,7 +27,7 @@ class ExperienceDateText extends ConsumerWidget {
       endDate = endMonth.isEmpty ? endYear : "$endMonth $endYear";
     }
     if (startDate == null || endDate == null) return const Text("");
-    return Text(
+    return SearchableText(
       "${startDate.capitalize()} - ${endDate.capitalize()}",
       style: Theme.of(context).textTheme.bodyMedium,
     );

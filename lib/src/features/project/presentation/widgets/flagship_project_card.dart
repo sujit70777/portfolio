@@ -21,6 +21,7 @@ import 'package:portfolio/src/features/project/presentation/widgets/project_high
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// The top tier of the projects section — one wide card per flagship
 /// product, above the featured grid. Exists because [FeaturedProjectCard]
@@ -272,11 +273,11 @@ class _FlagshipDetails extends StatelessWidget {
           style: monoLabelStyle(fontSize: 11, letterSpacing: 0.08),
         ),
         gapH8,
-        Text(project.name ?? '', style: theme.textTheme.headlineSmall),
+        SearchableText(project.name ?? '', style: theme.textTheme.headlineSmall),
         gapH4,
         ProjectStatusBadge(status: project.status),
         gapH12,
-        Text(project.description ?? '', style: theme.textTheme.bodyMedium),
+        SearchableText(project.description ?? '', style: theme.textTheme.bodyMedium),
         if (highlights.isNotEmpty) ...[
           gapH16,
           ProjectHighlights(highlights: highlights),

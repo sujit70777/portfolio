@@ -8,6 +8,7 @@ import 'package:portfolio/src/features/general/presentation/widgets/end_drawer.d
 import 'package:portfolio/src/features/general/presentation/widgets/safe_area.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/scroll_progress_bar.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
+import 'package:portfolio/src/features/page_search/presentation/page_search_scope.dart';
 
 class GeneralSection extends ConsumerWidget {
   const GeneralSection({super.key});
@@ -21,19 +22,21 @@ class GeneralSection extends ConsumerWidget {
         child: EndDrawer(),
       ),
       body: MySafeArea(
-        child: Stack(
-          children: [
-            isSplitScreen ? const GeneralDesktop() : const GeneralTablet(),
-            const Align(
-              alignment: Alignment.topCenter,
-              child: ScrollProgressBar(),
-            ),
-            const Align(
-              alignment: Alignment.bottomCenter,
-              child: BottomBanner(),
-            ),
-            const DeepLinkHandler(),
-          ],
+        child: PageSearchScope(
+          child: Stack(
+            children: [
+              isSplitScreen ? const GeneralDesktop() : const GeneralTablet(),
+              const Align(
+                alignment: Alignment.topCenter,
+                child: ScrollProgressBar(),
+              ),
+              const Align(
+                alignment: Alignment.bottomCenter,
+                child: BottomBanner(),
+              ),
+              const DeepLinkHandler(),
+            ],
+          ),
         ),
       ),
     );

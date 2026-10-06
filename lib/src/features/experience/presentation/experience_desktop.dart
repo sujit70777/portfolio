@@ -10,6 +10,7 @@ import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/experience/data/experience_repository.dart';
 import 'package:portfolio/src/features/experience/presentation/widgets/experience_card.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 class ExperienceDesktop extends ConsumerWidget {
   const ExperienceDesktop({super.key});
@@ -31,7 +32,7 @@ class ExperienceDesktop extends ConsumerWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 12, bottom: 20),
-          child: Text(
+          child: SearchableText(
             tr(LocaleKeys.experienceSectionTitle),
             style: Theme.of(context).textTheme.titleLarge,
           ),

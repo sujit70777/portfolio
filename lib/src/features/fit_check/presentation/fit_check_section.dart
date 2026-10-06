@@ -16,6 +16,7 @@ import 'package:portfolio/src/features/personal_info/data/personal_info_reposito
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// Paste a job description or project brief, get every requirement mapped
 /// to the role or project on this page that backs it up — gaps included.
@@ -134,11 +135,11 @@ class _FitCheckSectionState extends ConsumerState<FitCheckSection> {
           label: tr(LocaleKeys.sectionEyebrowFitCheck),
         ),
         gapH8,
-        Text(tr(LocaleKeys.fitCheck_title), style: theme.textTheme.titleLarge),
+        SearchableText(tr(LocaleKeys.fitCheck_title), style: theme.textTheme.titleLarge),
         gapH8,
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 760),
-          child: Text(
+          child: SearchableText(
             tr(LocaleKeys.fitCheck_intro),
             style: theme.textTheme.bodyMedium?.copyWith(color: muted),
           ),
@@ -149,7 +150,7 @@ class _FitCheckSectionState extends ConsumerState<FitCheckSection> {
             Icon(Icons.lock_outline, size: 14, color: scheme.tertiary),
             gapW8,
             Flexible(
-              child: Text(
+              child: SearchableText(
                 tr(LocaleKeys.fitCheck_privacy).toUpperCase(),
                 style: monoLabelStyle(
                   fontSize: 11,

@@ -21,6 +21,7 @@ import 'package:portfolio/src/features/personal_info/presentation/widgets/resume
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// Hero entrance: each line fades up ~20px in sequence, ~80ms apart, total
 /// well under 800ms — quick on purpose, since a slow entrance is only
@@ -152,7 +153,7 @@ class _DesktopHero extends StatelessWidget {
         gapH8,
         _entrance(
           3,
-          Text(
+          SearchableText(
             tr(LocaleKeys.description),
             style: textTheme.titleLarge?.copyWith(fontSize: titleSize),
           ),
@@ -251,7 +252,7 @@ class _TabletHero extends StatelessWidget {
             gapH16,
             _entrance(
               2,
-              Text(
+              SearchableText(
                 tr(LocaleKeys.description),
                 textAlign: TextAlign.center,
                 style: textTheme.titleLarge?.copyWith(fontSize: titleSize),
@@ -335,7 +336,7 @@ class _MobileHero extends StatelessWidget {
         gapH12,
         _entrance(
           2,
-          Text(
+          SearchableText(
             tr(LocaleKeys.description),
             style: textTheme.titleLarge?.copyWith(fontSize: titleSize),
           ),
@@ -387,7 +388,7 @@ class _LocationLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return SearchableText(
       tr(LocaleKeys.subDescription).toUpperCase(),
       textAlign: TextAlign.center,
       style: monoLabelStyle(
@@ -420,7 +421,7 @@ class _ContractBadge extends StatelessWidget {
           Icon(Icons.verified_outlined, size: 14, color: scheme.tertiary),
           gapW8,
           Flexible(
-            child: Text(
+            child: SearchableText(
               tr(LocaleKeys.contractBadge).toUpperCase(),
               style: monoLabelStyle(
                 fontSize: 11,

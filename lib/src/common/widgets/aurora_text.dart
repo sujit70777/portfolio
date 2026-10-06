@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/widgets/ambient_loop.dart';
 import 'package:portfolio/src/constants/palette.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// Text filled with the aurora gradient.
 ///
@@ -30,9 +31,8 @@ class AuroraText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Palette.of(context).aurora;
-    final label = Text(text, style: style, textAlign: textAlign);
 
-    Widget masked(double t) {
+    Widget masked(double t, Widget label) {
       return ShaderMask(
         blendMode: BlendMode.srcIn,
         shaderCallback: (bounds) {
@@ -51,10 +51,21 @@ class AuroraText extends StatelessWidget {
       );
     }
 
-    if (!flowing) return masked(0);
-    return AmbientLoop(
-      period: period,
-      builder: (context, t, _) => masked(t),
+    // Searchable, with its find highlights drawn over the gradient rather
+    // than inside the mask, which would paint them in the gradient too.
+    return SearchableText(
+      text,
+      style: style,
+      textAlign: textAlign,
+      highlightAbove: true,
+      wrap: (label) {
+        if (!flowing) return masked(0, label);
+        return AmbientLoop(
+          period: period,
+          child: label,
+          builder: (context, t, label) => masked(t, label!),
+        );
+      },
     );
   }
 }

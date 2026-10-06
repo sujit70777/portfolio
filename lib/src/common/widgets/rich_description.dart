@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/constants/themes.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// Renders plain copy from en.json with enough structure to scan, inferred
 /// from its shape so the source stays plain text (the same text Fit Check
@@ -64,7 +65,7 @@ class RichDescription extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: Text(line.substring(_bullet.length), style: body),
+                  child: SearchableText(line.substring(_bullet.length), style: body),
                 ),
               ],
             ),
@@ -74,7 +75,7 @@ class RichDescription extends StatelessWidget {
         children.add(
           Padding(
             padding: const EdgeInsets.only(bottom: 2),
-            child: Text(
+            child: SearchableText(
               line.toUpperCase(),
               style: monoLabelStyle(
                 fontSize: 12,
@@ -85,7 +86,7 @@ class RichDescription extends StatelessWidget {
           ),
         );
       } else {
-        children.add(Text(line, style: body));
+        children.add(SearchableText(line, style: body));
       }
     }
 

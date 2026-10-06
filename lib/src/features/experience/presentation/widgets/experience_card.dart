@@ -9,6 +9,7 @@ import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/features/experience/presentation/widgets/experience_date_text.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// One role in the Experience timeline, keyed to its own [hue]: a lit
 /// accent edge on the left, a tinted border, and — on hover — a lift and a
@@ -48,7 +49,7 @@ class _ExperienceCardState extends ConsumerState<ExperienceCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(
+                child: SearchableText(
                   experience.role ?? "",
                   style: theme.textTheme.titleMedium
                       ?.copyWith(fontWeight: FontWeight.bold),
@@ -60,7 +61,7 @@ class _ExperienceCardState extends ConsumerState<ExperienceCard> {
             ],
           ),
           gapH4,
-          Text(
+          SearchableText(
             experience.company ?? "",
             style: theme.textTheme.titleMedium?.copyWith(color: hue),
           ),

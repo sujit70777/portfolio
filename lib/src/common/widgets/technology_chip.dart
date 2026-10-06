@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/domain/technology.dart';
 import 'package:portfolio/src/common/widgets/icon.dart';
 import 'package:portfolio/src/constants/sizes.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 class TechnologyChip extends StatelessWidget {
   const TechnologyChip({super.key, required this.technology});
@@ -42,7 +43,7 @@ class TechnologyChip extends StatelessWidget {
               size: 32,
             ),
           ),
-        Text(
+        SearchableText(
           technologyName,
           style: Theme.of(context).textTheme.labelSmall,
         ),

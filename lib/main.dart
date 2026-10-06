@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:portfolio/src/app.dart';
@@ -9,6 +10,11 @@ import 'package:portfolio/src/localization/locale_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Flutter web paints text onto a canvas, so the browser's find-in-page sees
+  // none of it. Forcing the semantics tree on mirrors the text into DOM nodes,
+  // which makes Ctrl+F (recruiters searching for "Flutter" etc.), screen
+  // readers and crawlers work.
+  // SemanticsBinding.instance.ensureSemantics();
   EasyLocalization.logger.enableBuildModes = [];
   usePathUrlStrategy();
   final supportedLocales = await AppLocalizations.supportedLocales();
@@ -18,8 +24,7 @@ void main() async {
         onLoaded: (context) {
           return Consumer(
             builder: (context, ref, child) {
-              final localeControllerState =
-                  ref.watch(localeControllerProvider);
+              final localeControllerState = ref.watch(localeControllerProvider);
               return localeControllerState.when(
                 data: (_) => EasyLocalization(
                   supportedLocales: supportedLocales,

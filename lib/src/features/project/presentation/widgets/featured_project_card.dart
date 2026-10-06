@@ -12,6 +12,7 @@ import 'package:portfolio/src/features/project/presentation/widgets/project_deta
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// Screenshot-forward card for the curated "featured" project tier — the
 /// projects section is meant to read as the page's centrepiece, so the
@@ -122,7 +123,7 @@ class _FeaturedProjectCardState extends ConsumerState<FeaturedProjectCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
+                          SearchableText(
                             projectName ?? '',
                             style: theme.textTheme.titleMedium,
                             overflow: TextOverflow.ellipsis,

@@ -3,6 +3,7 @@ import 'package:portfolio/src/common/domain/app_section.dart';
 import 'package:portfolio/src/common/widgets/scroll_reveal.dart';
 import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/themes.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// Small mono "0N — Label" heading above a section — design brief 2's
 /// quiet, recurring nod to the version/changelog vocabulary. A label, not
@@ -48,7 +49,7 @@ class SectionEyebrow extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        Text(
+        SearchableText(
           '$number — $label'.toUpperCase(),
           style: monoLabelStyle(
             fontSize: 12,

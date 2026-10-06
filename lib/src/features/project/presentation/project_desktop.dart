@@ -15,6 +15,8 @@ import 'package:portfolio/src/features/project/presentation/widgets/featured_pro
 import 'package:portfolio/src/features/project/presentation/widgets/flagship_project_card.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_list_row.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
+import 'package:portfolio/src/features/page_search/presentation/page_search_scope.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 const _gridSpacing = 20.0;
 const _minCardWidth = 200.0;
@@ -49,14 +51,14 @@ class ProjectDesktop extends ConsumerWidget {
           label: tr(LocaleKeys.sectionEyebrowProjects),
         ),
         gapH8,
-        Text(
+        SearchableText(
           tr(LocaleKeys.projectsSectionTitle),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         gapH4,
         Padding(
           padding: const EdgeInsets.only(bottom: 28),
-          child: Text(
+          child: SearchableText(
             '50+ shipped. Here are the ones worth showing.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: mutedTextColor(Theme.of(context).colorScheme),
@@ -70,7 +72,7 @@ class ProjectDesktop extends ConsumerWidget {
         if (featured.isNotEmpty) _FeaturedGrid(projects: featured),
         if (others.isNotEmpty) ...[
           gapH40,
-          Text(
+          SearchableText(
             tr(LocaleKeys.projectsMoreLabel),
             style: Theme.of(context).textTheme.titleSmall,
           ),
@@ -146,8 +148,18 @@ class _CollapsibleProjectListState extends State<_CollapsibleProjectList> {
   @override
   Widget build(BuildContext context) {
     final projects = widget.projects;
+    // Find-on-page can only reach rows that are built, so a search that
+    // matches a collapsed one opens the list for as long as it does.
+    final search = PageSearchScope.maybeOf(context);
+    final expanded = _expanded ||
+        (search != null &&
+            projects.skip(_collapsedCount).any(
+                  (p) =>
+                      search.matchesText(p.name) ||
+                      search.matchesText(p.description),
+                ));
     final visible =
-        _expanded ? projects : projects.take(_collapsedCount).toList();
+        expanded ? projects : projects.take(_collapsedCount).toList();
     final divider = Divider(
       height: 1,
       color: Theme.of(context).colorScheme.onSurface.withAlpha(20),
@@ -169,7 +181,7 @@ class _CollapsibleProjectListState extends State<_CollapsibleProjectList> {
             alignment: Alignment.centerLeft,
             child: Semantics(
               button: true,
-              expanded: _expanded,
+              expanded: expanded,
               child: TextButton(
                 style: ButtonStyle(
                   foregroundColor: WidgetStatePropertyAll(
@@ -177,9 +189,9 @@ class _CollapsibleProjectListState extends State<_CollapsibleProjectList> {
                   ),
                   padding: const WidgetStatePropertyAll(EdgeInsets.zero),
                 ),
-                onPressed: () => setState(() => _expanded = !_expanded),
+                onPressed: () => setState(() => _expanded = !expanded),
                 child: Text(
-                  _expanded ? 'Show less' : 'Show all (${projects.length})',
+                  expanded ? 'Show less' : 'Show all (${projects.length})',
                 ),
               ),
             ),

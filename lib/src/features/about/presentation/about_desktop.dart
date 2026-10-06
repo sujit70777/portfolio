@@ -11,6 +11,7 @@ import 'package:portfolio/src/features/about/data/about_repository.dart';
 import 'package:portfolio/src/features/about/presentation/widgets/skills_panel.dart';
 import 'package:portfolio/src/features/general/provider/section_key_provider.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 class AboutDesktop extends ConsumerWidget {
   const AboutDesktop({super.key});
@@ -37,7 +38,7 @@ class AboutDesktop extends ConsumerWidget {
         gapH8,
         Padding(
           padding: const EdgeInsets.only(bottom: 32),
-          child: Text(
+          child: SearchableText(
             tr(LocaleKeys.aboutSectionTitleAlt),
             style: theme.textTheme.titleLarge,
           ),
@@ -67,7 +68,7 @@ class AboutDesktop extends ConsumerWidget {
           gapH8,
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
-            child: Text(
+            child: SearchableText(
               tr(LocaleKeys.skillsSectionTitle),
               style: Theme.of(context).textTheme.titleLarge,
             ),

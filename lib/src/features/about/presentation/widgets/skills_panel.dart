@@ -5,6 +5,7 @@ import 'package:portfolio/src/common/widgets/scroll_reveal.dart';
 import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/features/about/domain/skill_category.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// Categorized skills grid: two columns on wide layouts, one on narrow ones.
 ///
@@ -129,7 +130,7 @@ class _SkillCategoryCardState extends State<_SkillCategoryCard> {
                 ),
                 gapW12,
                 Expanded(
-                  child: Text(
+                  child: SearchableText(
                     widget.category.category ?? '',
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: hue,
@@ -219,7 +220,7 @@ class _SkillChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(32),
         border: Border.all(color: hue.withAlpha(60)),
       ),
-      child: Text(label, style: theme.textTheme.bodySmall),
+      child: SearchableText(label, style: theme.textTheme.bodySmall),
     );
   }
 }

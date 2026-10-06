@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/constants/palette.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// A project's short architecture bullets ([Project.highlights]) — shared by
 /// the flagship card and the detail modal so both read the same. The marker
@@ -38,7 +39,7 @@ class ProjectHighlights extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              Expanded(child: Text(highlight, style: style)),
+              Expanded(child: SearchableText(highlight, style: style)),
             ],
           ),
         ],

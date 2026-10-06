@@ -7,6 +7,7 @@ import 'package:portfolio/src/features/project/presentation/widgets/project_deta
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// A dense, image-free row for the long-tail project list (design brief
 /// 2, content problem #5) — most of these are small pub.dev packages or
@@ -49,7 +50,7 @@ class ProjectListRow extends StatelessWidget {
               gapW16,
               Expanded(
                 flex: 2,
-                child: Text(
+                child: SearchableText(
                   project.name ?? '',
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w600,
@@ -62,7 +63,7 @@ class ProjectListRow extends StatelessWidget {
               gapW16,
               Expanded(
                 flex: 5,
-                child: Text(
+                child: SearchableText(
                   project.description ?? '',
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: mutedTextColor(theme.colorScheme),

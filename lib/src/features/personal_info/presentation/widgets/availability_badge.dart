@@ -4,6 +4,7 @@ import 'package:portfolio/src/common/widgets/pulse_dot.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
+import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 class AvailabilityBadge extends StatelessWidget {
   const AvailabilityBadge({super.key});
@@ -17,7 +18,7 @@ class AvailabilityBadge extends StatelessWidget {
         // A live indicator: the one thing a recruiter should notice first.
         PulseDot(color: signal),
         gapW8,
-        Text(
+        SearchableText(
           tr(LocaleKeys.availabilityBadge).toUpperCase(),
           style: monoLabelStyle(
             fontSize: 12,

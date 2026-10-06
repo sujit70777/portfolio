@@ -52,7 +52,10 @@ class _BottomBannerState extends ConsumerState<BottomBanner> {
     final controller = _scrollController;
     if (controller == null || !controller.hasClients) return;
 
-    final position = controller.position;
+    // `positions.last`, not `position`: both layouts' scroll views share
+    // this controller for the frame in which the page swaps between them —
+    // see ScrollProgressBar.
+    final position = controller.positions.last;
     if (!position.hasPixels || !position.hasContentDimensions) return;
 
     final shouldBeVisible =
