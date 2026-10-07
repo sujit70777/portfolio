@@ -341,63 +341,73 @@ class _ActionBar extends StatelessWidget {
       disabledForegroundColor: onSurface.withAlpha(70),
     );
 
-    Widget nav({
-      required VoidCallback? onPressed,
-      required IconData icon,
-      required String label,
-      bool iconAfter = false,
-    }) {
-      if (compact) {
-        return IconButton(
-          onPressed: onPressed,
-          icon: Icon(icon),
-          color: onSurface,
-          disabledColor: onSurface.withAlpha(70),
-          tooltip: label,
-        );
-      }
-      return TextButton.icon(
-        style: navStyle,
-        onPressed: onPressed,
-        icon: Icon(icon, size: 18),
-        label: Text(label),
-        iconAlignment: iconAfter ? IconAlignment.end : IconAlignment.start,
-      );
-    }
-
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border(top: BorderSide(color: onSurface.withAlpha(20))),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        child: Row(
-          children: [
-            nav(
-              onPressed: onPrevious,
-              icon: Icons.arrow_back_rounded,
-              label: tr(LocaleKeys.notePrevious),
-            ),
-            nav(
-              onPressed: onNext,
-              icon: Icons.arrow_forward_rounded,
-              label: tr(LocaleKeys.noteNext),
-              iconAfter: true,
-            ),
-            const Spacer(),
-            CopyLinkButton(url: shareUrl),
-            gapW8,
-            OutlinedButton(
-              style: ButtonStyle(
-                foregroundColor: WidgetStatePropertyAll(onSurface),
-                side: WidgetStatePropertyAll(
-                  BorderSide(color: onSurface.withAlpha(60)),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            // Full Previous/Next + Copy + Close labels need ~800px; drop
+            // to icon nav when the dialog is narrower (or phone layout).
+            final useCompact = compact || constraints.maxWidth < 800;
+            Widget navButton({
+              required VoidCallback? onPressed,
+              required IconData icon,
+              required String label,
+              bool iconAfter = false,
+            }) {
+              if (useCompact) {
+                return IconButton(
+                  onPressed: onPressed,
+                  icon: Icon(icon),
+                  color: onSurface,
+                  disabledColor: onSurface.withAlpha(70),
+                  tooltip: label,
+                );
+              }
+              return TextButton.icon(
+                style: navStyle,
+                onPressed: onPressed,
+                icon: Icon(icon, size: 18),
+                label: Text(label),
+                iconAlignment:
+                    iconAfter ? IconAlignment.end : IconAlignment.start,
+              );
+            }
+
+            return Row(
+              children: [
+                navButton(
+                  onPressed: onPrevious,
+                  icon: Icons.arrow_back_rounded,
+                  label: tr(LocaleKeys.notePrevious),
                 ),
-              ),
-              onPressed: onClose,
-              child: Text(MaterialLocalizations.of(context).closeButtonLabel),
-            ),
-          ],
+                navButton(
+                  onPressed: onNext,
+                  icon: Icons.arrow_forward_rounded,
+                  label: tr(LocaleKeys.noteNext),
+                  iconAfter: true,
+                ),
+                const Spacer(),
+                CopyLinkButton(url: shareUrl),
+                gapW8,
+                OutlinedButton(
+                  style: ButtonStyle(
+                    foregroundColor: WidgetStatePropertyAll(onSurface),
+                    side: WidgetStatePropertyAll(
+                      BorderSide(color: onSurface.withAlpha(60)),
+                    ),
+                  ),
+                  onPressed: onClose,
+                  child: Text(
+                    MaterialLocalizations.of(context).closeButtonLabel,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

@@ -58,8 +58,13 @@ const skillSignals = <SkillSignal>[
     label: 'Objective-C',
     patterns: [r'objective[- ]?c', r'obj-?c'],
   ),
-  // Not "Learn Python": a tutorial app about Python isn't Python work.
-  SkillSignal(id: 'python', label: 'Python', patterns: [r'(?<!learn )python']),
+  // Not "Learn Python" / "(Python, CSE…)" as a curriculum topic in a
+  // learning product — that isn't professional Python work.
+  SkillSignal(
+    id: 'python',
+    label: 'Python',
+    patterns: [r'(?<!learn )(?<!\()python'],
+  ),
   SkillSignal(id: 'cpp', label: 'C++', patterns: [r'c\+\+']),
   SkillSignal(id: 'csharp', label: 'C#', patterns: ['c#']),
   SkillSignal(id: 'go', label: 'Go', patterns: ['golang']),
