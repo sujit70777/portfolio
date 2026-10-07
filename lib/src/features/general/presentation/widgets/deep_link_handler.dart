@@ -2,6 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:portfolio/src/features/conversion/data/conversion_repository.dart';
+import 'package:portfolio/src/features/conversion/presentation/widgets/note_reader_dialog.dart';
 import 'package:portfolio/src/features/general/provider/section_key_provider.dart';
 import 'package:portfolio/src/features/project/data/project_repository.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_detail_modal.dart';
@@ -18,10 +20,16 @@ String projectShareUrl(String projectName) {
       .toString();
 }
 
-/// Acts on `?project=<slug>` and `?section=<name>` once the page is up:
-/// a shared project link opens that project's modal over the Projects
-/// section, and a section link (e.g. `?section=fit-check` in a cold email)
-/// scrolls straight to it.
+/// The link to one note, as the note reader's "Copy link" shares it.
+String noteShareUrl(String slug) {
+  final site = Uri.parse(tr(LocaleKeys.siteUrl));
+  return site.replace(queryParameters: {'note': slug}).toString();
+}
+
+/// Acts on `?project=<slug>`, `?note=<slug>` and `?section=<name>` once
+/// the page is up: a shared project or note link opens its modal over its
+/// own section, and a section link (e.g. `?section=fit-check` in a cold
+/// email) scrolls straight to it.
 ///
 /// Query parameters rather than paths, because a path would need the host
 /// to rewrite it to index.html — and this site shares its host with real
@@ -46,18 +54,31 @@ class _DeepLinkHandlerState extends ConsumerState<DeepLinkHandler> {
     super.initState();
     final params = (widget.uri ?? Uri.base).queryParameters;
     final project = params['project'];
+    final note = params['note'];
     final section = params['section'];
-    if (project == null && section == null) return;
+    if (project == null && note == null && section == null) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(_settleDelay, () {
         if (!mounted) return;
         if (project != null) {
           _openProject(project);
+        } else if (note != null) {
+          _openNote(note);
         } else {
           _scrollToSection(section!);
         }
       });
     });
+  }
+
+  void _openNote(String slug) {
+    final notes = ref.read(conversionRepositoryProvider).getNotes();
+    final note = notes.firstWhereOrNull((n) => n.slug == slug);
+    if (note == null) return;
+    // Land on Notes underneath, so closing the reader leaves the visitor
+    // beside the other notes.
+    _scrollTo(ref.read(notesSectionKeyProvider), animate: false);
+    showNoteReader(context, note: note, allNotes: notes);
   }
 
   void _openProject(String slug) {
@@ -78,6 +99,7 @@ class _DeepLinkHandlerState extends ConsumerState<DeepLinkHandler> {
       'skills' => skillsSectionKeyProvider,
       'experience' => experienceSectionKeyProvider,
       'projects' => projectSectionKeyProvider,
+      'notes' => notesSectionKeyProvider,
       'fit-check' || 'fit' => fitCheckSectionKeyProvider,
       _ => null,
     };

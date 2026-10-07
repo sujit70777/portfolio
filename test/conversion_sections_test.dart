@@ -41,15 +41,16 @@ void main() {
         of: find.byType(TestimonialsSection),
         matching: find.textContaining('Recommendations'),
       ),
-      findsNothing,
+      findsOneWidget,
     );
+    expect(find.textContaining('Tanvir Kabir'), findsOneWidget);
 
     expect(find.byType(OpenSourceSection), findsOneWidget);
     expect(find.text('flutter_crdt_sync_kit'), findsWidgets);
     expect(find.byType(NotesSection), findsOneWidget);
-    expect(find.textContaining('Native scanner behind'), findsOneWidget);
+    expect(find.textContaining('Rewriting a Flutter scanner natively'), findsOneWidget);
     expect(find.byType(ContractWorkSection), findsOneWidget);
     expect(find.textContaining('Who I help'), findsOneWidget);
-    expect(find.textContaining('15-min intro call'), findsNothing);
+    expect(find.textContaining('30-min intro call'), findsWidgets);
   });
 }

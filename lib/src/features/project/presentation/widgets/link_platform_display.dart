@@ -1,9 +1,6 @@
 import 'package:portfolio/src/common/domain/icon.dart';
 import 'package:portfolio/src/common/domain/link.dart';
 
-/// Codepoints reused from the whitelist in common/widgets/icon.dart — see
-/// that file's comment for why an arbitrary FontAwesome codepoint can't be
-/// used without registering it there first (font tree-shaking).
 String linkPlatformLabel(LinkPlatform? platform) {
   return switch (platform) {
     LinkPlatform.ios => 'App Store',
@@ -18,13 +15,13 @@ String linkPlatformLabel(LinkPlatform? platform) {
 IconModel? linkPlatformIcon(LinkPlatform? platform) {
   return switch (platform) {
     LinkPlatform.ios =>
-      const IconModel(codePoint: '0xef23', fontFamily: 'FontAwesome'),
+      const IconModel(assetName: 'assets/icons/other/app-store.svg'),
     LinkPlatform.android =>
-      const IconModel(codePoint: '0xefc5', fontFamily: 'FontAwesome'),
+      const IconModel(assetName: 'assets/icons/other/google-play.svg'),
     LinkPlatform.github =>
-      const IconModel(codePoint: '0xefb7', fontFamily: 'FontAwesome'),
+      const IconModel(assetName: 'assets/icons/other/github.svg'),
     LinkPlatform.web =>
-      const IconModel(codePoint: '0xeb3e', fontFamily: 'FontAwesome'),
+      const IconModel(assetName: 'assets/icons/other/globe.svg'),
     LinkPlatform.pubdev =>
       const IconModel(assetName: 'assets/icons/other/dart.svg'),
     null => null,

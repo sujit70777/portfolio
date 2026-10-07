@@ -12,6 +12,11 @@ import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/features/general/provider/section_key_provider.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 
+/// Matches the pre-Flutter hero brand mark in `web/index.html` (`.pl-prompt`).
+const _brandPrompt = '>_';
+/// Site gold — same as `--pl-accent` / dark `ColorScheme.tertiary`.
+const _brandPromptGold = Color(0xfffbc771);
+
 /// Below this width the secondary nav items move into a "More" menu so the
 /// bar doesn't overflow (seven text buttons + locale + theme ≈ 980px).
 const _compactNavBreakpoint = 1180.0;
@@ -42,13 +47,17 @@ class MyAppBar extends ConsumerWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(
-                        IconData(
-                          0xedc3,
-                          fontFamily: "FontAwesome",
+                      const Text(
+                        _brandPrompt,
+                        style: TextStyle(
+                          fontFamily: 'JetBrainsMono',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          height: 1,
+                          color: _brandPromptGold,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: 10),
                       Flexible(
                         child: Text(
                           tr(LocaleKeys.portfolio),

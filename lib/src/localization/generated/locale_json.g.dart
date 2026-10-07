@@ -37,8 +37,7 @@ class CodegenLoader extends AssetLoader{
       "tooltip": "Github",
       "url": "https://github.com/sujit70777",
       "icon": {
-        "codePoint": "0xefb7",
-        "fontFamily": "FontAwesome"
+        "assetName": "assets/icons/other/github.svg"
       }
     },
     {
@@ -52,16 +51,14 @@ class CodegenLoader extends AssetLoader{
       "tooltip": "ehsanur.com",
       "url": "https://ehsanur.com",
       "icon": {
-        "codePoint": "0xeb3e",
-        "fontFamily": "FontAwesome"
+        "assetName": "assets/icons/other/globe.svg"
       }
     },
     {
       "tooltip": "mail@ehsanur.com",
       "url": "mailto:mail@ehsanur.com",
       "icon": {
-        "codePoint": "0xeaad",
-        "fontFamily": "FontAwesome"
+        "assetName": "assets/icons/other/mail.svg"
       }
     },
     {
@@ -114,7 +111,7 @@ class CodegenLoader extends AssetLoader{
       "url": "assets/documents/resume.pdf"
     }
   ],
-  "aboutDescription": "I take on the mobile problems that block a product: offline data that must not be lost, payments that must reconcile across Apple and Stripe, platform edge cases, and slow components that need a native rewrite.\n\nI'm a senior Flutter engineer — 7 years of Flutter inside 11 years of shipping mobile apps — with native iOS, Android and macOS (Swift, SwiftUI, Kotlin). When a package can't do the job, I write the plugin or platform channel myself, and I've published 9 Flutter packages on pub.dev. I'm based in Bangladesh and don't need relocation or visa sponsorship to work remotely.\n\nA few problems I've solved:\n\n→ Prayer times that were wrong at high latitudes. A prayer-times app showed wrong times to users in far-northern cities, and earlier fixes hadn't worked. I traced it to the sunrise and sunset calculation and built a new offline engine, verified against a real local schedule. It works with or without internet.\n\n→ A receipt scanner too slow for the business. For an expense-reimbursement FinTech platform, I replaced a generic Flutter scanner with a native one (Swift on iOS, Java on Android) that reads a QR code or barcode in about half a second. Live verification progress replaced the spinner, claims save offline and sync later, and a reimbursement completes in about 5–10 seconds.\n\n→ Two payment systems that disagreed. A subscription app sold through Stripe on Android and Apple In-App Purchase on iOS, and the two produced duplicate purchases and mismatched accounts. As team lead I redesigned the entitlement model so both map to one account. After about two years stuck in development, the app was approved and live within about a month.\n\n→ Learning that works offline. I led a 6-developer team building offline-first learning apps (Python, CSE, ML) as free + one-time Pro editions on Google Play and the App Store; two free apps each passed 100,000 downloads.\n\n→ Lawyers losing billable hours. I built Hourwise alone and shipped it to the Mac App Store. It records work passively and learns, on the Mac itself, which client each piece of work belongs to.\n\nWhat I can do for your team: make your app work offline without losing data, fix payments and subscriptions across Stripe, Apple and Google, get a stalled app through store review, and add on-device machine learning that keeps user data private.\n\nHow I work: I own the problem, the architecture and the code review; AI coding agents write much of the code; tests and automated releases keep quality up. I've worked an overseas team's hours for three years.\n\nOpen to: Senior Mobile Engineer, Senior Flutter Developer, Mobile Tech Lead. Full-time or contract.",
+  "aboutDescription": "I take on the mobile problems that block a product: offline data that must not be lost, payments that must reconcile across Apple and Stripe, platform edge cases, and slow components that need a native rewrite.\n\nI'm a senior Flutter engineer — 7 years of Flutter inside 11 years of shipping mobile apps — with native iOS, Android and macOS (Swift, SwiftUI, Kotlin). When a package can't do the job, I write the plugin or platform channel myself, and I've published 9 Flutter packages on pub.dev. I'm based in Bangladesh and don't need relocation or visa sponsorship to work remotely.\n\nA few problems I've solved:\n\n→ Prayer times that were wrong at high latitudes. A prayer-times app showed wrong times to users in far-northern cities, and earlier fixes hadn't worked. I traced it to the sunrise and sunset calculation and built a new offline engine, verified against a real local schedule. It works with or without internet.\n\n→ A receipt scanner too slow for the business. For an expense-reimbursement FinTech platform, I replaced a generic Flutter scanner with a native one (Swift on iOS, Java on Android) that reads a QR code or barcode in about half a second. Live verification progress replaced the spinner, claims save offline and sync later, and a reimbursement completes in about 5–10 seconds.\n\n→ Two payment systems that disagreed. A subscription app sold through Stripe on Android and Apple In-App Purchase on iOS, and the two produced duplicate purchases and mismatched accounts. As team lead I redesigned the entitlement model so both map to one account. After about two years stuck in development, the app was approved and live within about a month.\n\n→ Learning that works offline. I led a 6-developer team building offline-first learning apps (Python, CSE, ML) as free + one-time Pro editions on Google Play and the App Store; two free apps each passed 100,000 downloads.\n\n→ Lawyers losing billable hours. I built Hourwise alone and shipped it to the Mac App Store. It records work passively and learns, on the Mac itself, which client each piece of work belongs to.\n\nWhat I can do for your team: make your app work offline without losing data, fix payments and subscriptions across Stripe, Apple and Google, get a stalled app through store review, and add on-device machine learning that keeps user data private.\n\nHow I work: I own the problem, the architecture and the code review; AI coding agents write much of the code; tests and automated releases keep quality up. I've worked an overseas team's hours for three years.\n\nOpen to: Senior Flutter Engineer, Senior Flutter Developer, Lead Flutter Developer, Mobile Tech Lead. Full-time or contract.",
   "skillCategories": [
     {
       "category": "Offline-First & Data Sync",
@@ -202,18 +199,19 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Swift",
           "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/swift.svg"
           }
         },
         {
-          "name": "SwiftUI"
+          "name": "SwiftUI",
+          "icon": {
+            "assetName": "assets/icons/other/swift.svg"
+          }
         },
         {
           "name": "macOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
@@ -223,30 +221,39 @@ class CodegenLoader extends AssetLoader{
           }
         },
         {
-          "name": "Apple Foundation Models"
-        },
-        {
-          "name": "LLMs"
-        },
-        {
-          "name": "Python",
+          "name": "Apple Foundation Models",
           "icon": {
-            "assetName": "assets/icons/software-development/python.svg"
+            "assetName": "assets/icons/other/app-store.svg"
           }
         },
         {
-          "name": "FastAPI"
-        },
-        {
-          "name": "PostgreSQL",
+          "name": "StoreKit 2",
           "icon": {
-            "assetName": "assets/icons/software-development/postgresql.svg"
+            "assetName": "assets/icons/other/app-store.svg"
           }
         },
         {
-          "name": "Flutter",
+          "name": "PDFKit",
           "icon": {
-            "assetName": "assets/icons/software-development/flutter.svg"
+            "assetName": "assets/icons/other/app-store.svg"
+          }
+        },
+        {
+          "name": "EventKit",
+          "icon": {
+            "assetName": "assets/icons/other/app-store.svg"
+          }
+        },
+        {
+          "name": "On-Device Machine Learning",
+          "icon": {
+            "assetName": "assets/icons/other/app-store.svg"
+          }
+        },
+        {
+          "name": "Claude Code",
+          "icon": {
+            "assetName": "assets/icons/software-development/claude-code.svg"
           }
         }
       ],
@@ -287,6 +294,30 @@ class CodegenLoader extends AssetLoader{
           }
         },
         {
+          "name": "Swift",
+          "icon": {
+            "assetName": "assets/icons/other/swift.svg"
+          }
+        },
+        {
+          "name": "Kotlin",
+          "icon": {
+            "assetName": "assets/icons/other/kotlin.svg"
+          }
+        },
+        {
+          "name": "SwiftUI",
+          "icon": {
+            "assetName": "assets/icons/other/swift.svg"
+          }
+        },
+        {
+          "name": "Jetpack Compose",
+          "icon": {
+            "assetName": "assets/icons/other/jetpack-compose.svg"
+          }
+        },
+        {
           "name": "Dart",
           "icon": {
             "assetName": "assets/icons/other/dart.svg"
@@ -299,10 +330,70 @@ class CodegenLoader extends AssetLoader{
           }
         },
         {
-          "name": "Riverpod"
+          "name": "Riverpod",
+          "icon": {
+            "assetName": "assets/icons/software-development/riverpod.svg"
+          }
         },
         {
-          "name": "Bloc"
+          "name": "Bloc",
+          "icon": {
+            "assetName": "assets/icons/software-development/bloc.svg"
+          }
+        },
+        {
+          "name": "SQLite / Drift",
+          "icon": {
+            "assetName": "assets/icons/other/sqlite.svg"
+          }
+        },
+        {
+          "name": "Fastlane",
+          "icon": {
+            "assetName": "assets/icons/software-development/fastlane.svg"
+          }
+        },
+        {
+          "name": "GitHub Actions",
+          "icon": {
+            "assetName": "assets/icons/software-development/github-actions.svg"
+          }
+        },
+        {
+          "name": "Claude Code",
+          "icon": {
+            "assetName": "assets/icons/software-development/claude-code.svg"
+          }
+        },
+        {
+          "name": "WebSockets",
+          "icon": {
+            "assetName": "assets/icons/other/websockets.svg"
+          }
+        },
+        {
+          "name": "REST APIs",
+          "icon": {
+            "assetName": "assets/icons/other/rest-api.svg"
+          }
+        },
+        {
+          "name": "StoreKit 2",
+          "icon": {
+            "assetName": "assets/icons/other/app-store.svg"
+          }
+        },
+        {
+          "name": "Apple Pay",
+          "icon": {
+            "assetName": "assets/icons/other/apple-pay.svg"
+          }
+        },
+        {
+          "name": "Stripe",
+          "icon": {
+            "assetName": "assets/icons/other/stripe.svg"
+          }
         }
       ],
       "links": [
@@ -343,8 +434,7 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         }
       ]
@@ -362,15 +452,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
           "name": "Java",
           "icon": {
-            "codePoint": "0xefe7",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/java.svg"
           }
         }
       ]
@@ -400,15 +488,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
           "name": "Java",
           "icon": {
-            "codePoint": "0xefe7",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/java.svg"
           }
         }
       ]
@@ -422,9 +508,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Founder and sole engineer — product, native macOS architecture, UI design, App Store release and launch.",
       "url": "https://apps.apple.com/us/app/hourwise-billable-hours/id6811420308?mt=12",
       "icon": {
-        "codePoint": "0xef21",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/apple.svg"
       },
       "status": "shipped",
       "featured": true,
@@ -438,29 +522,25 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Swift",
           "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/swift.svg"
           }
         },
         {
           "name": "SwiftUI",
           "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/swift.svg"
           }
         },
         {
           "name": "AppKit",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
           "name": "macOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
@@ -472,8 +552,7 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "StoreKit 2",
           "icon": {
-            "codePoint": "0xef23",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/app-store.svg"
           }
         },
         {
@@ -502,9 +581,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://apps.apple.com/us/app/muslim-times-pro-prayer-quran/id6740039144",
       "icon": {
-        "codePoint": "0xef23",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/app-store.svg"
       },
       "status": "shipped",
       "featured": true,
@@ -524,15 +601,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
@@ -593,8 +668,7 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
@@ -606,15 +680,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Swift",
           "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/swift.svg"
           }
         },
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
@@ -640,12 +712,10 @@ class CodegenLoader extends AssetLoader{
     {
       "name": "Offline-First Learning Apps",
       "description": "Case study: three offline learning products (Python, CSE, ML & AI) shipped as free + one-time Pro editions on Google Play and the App Store.",
-      "role": "Led development at Prabartan Information Technology — Flutter, Jetpack Compose, SwiftUI; Firebase/SQLite sync layer; free + Pro listings on Android and iOS.",
+      "role": "Led development at Prabartan Information Technology and now maintained and published under my developer account — Flutter, Jetpack Compose, SwiftUI; Firebase/SQLite sync layer; free + Pro listings on Android and iOS.",
       "url": "https://play.google.com/store/apps/dev?id=6504002943007145339",
       "icon": {
-        "codePoint": "0xefc5",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/google-play.svg"
       },
       "status": "shipped",
       "featured": true,
@@ -665,8 +735,7 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
@@ -678,15 +747,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
           "name": "Swift",
           "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/swift.svg"
           }
         },
         {
@@ -726,9 +793,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Team lead and sole developer — Flutter app with the native iOS layer built solo, including StoreKit 2 subscriptions, App Store submission and compliance.",
       "url": "https://apps.apple.com/us/app/pom-app/id6760588055",
       "icon": {
-        "codePoint": "0xef23",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/app-store.svg"
       },
       "status": "shipped",
       "featured": true,
@@ -748,29 +813,25 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Swift",
           "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/swift.svg"
           }
         },
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
           "name": "StoreKit",
           "icon": {
-            "codePoint": "0xef23",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/app-store.svg"
           }
         },
         {
           "name": "Apple Pay",
           "icon": {
-            "codePoint": "0xef22",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple-pay.svg"
           }
         }
       ],
@@ -798,9 +859,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Team lead and sole developer — owned architecture, implementation, release and delivery end to end across ride-hailing, delivery, bookings, and marketplace modules.",
       "url": "https://apps.apple.com/us/app/farenow/id1638701755",
       "icon": {
-        "codePoint": "0xefc5",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/google-play.svg"
       },
       "status": "shipped",
       "featured": true,
@@ -820,8 +879,7 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
@@ -833,15 +891,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Swift",
           "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/swift.svg"
           }
         },
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
@@ -875,9 +931,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_crdt_sync_kit",
       "icon": {
-        "codePoint": "0xea6f",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/cube.svg"
       },
       "status": "shipped",
       "featured": true,
@@ -918,9 +972,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://apps.apple.com/us/app/proofsell/id6755882846",
       "icon": {
-        "codePoint": "0xef23",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/app-store.svg"
       },
       "status": "shipped",
       "featured": true,
@@ -940,15 +992,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
@@ -977,9 +1027,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole iOS developer — built and shipped independently.",
       "url": "https://apps.apple.com/us/app/forward-sms-sms-forwarder/id6759511643",
       "icon": {
-        "codePoint": "0xef23",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/app-store.svg"
       },
       "status": "shipped",
       "featured": true,
@@ -987,22 +1035,19 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Swift",
           "icon": {
-            "codePoint": "0xf0aa",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/swift.svg"
           }
         },
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
           "name": "StoreKit",
           "icon": {
-            "codePoint": "0xef23",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/app-store.svg"
           }
         },
         {
@@ -1023,12 +1068,10 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_a11y_lens",
       "icon": {
-        "codePoint": "0xea6f",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/cube.svg"
       },
       "status": "shipped",
-      "featured": true,
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -1063,12 +1106,10 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer — personal project, in active development.",
       "url": "https://github.com/sujit70777/omr_scanner_flutter",
       "icon": {
-        "codePoint": "0xefb7",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/github.svg"
       },
       "status": "inDevelopment",
-      "featured": true,
+      "featured": false,
       "technologies": [
         {
           "name": "Flutter",
@@ -1103,12 +1144,10 @@ class CodegenLoader extends AssetLoader{
     {
       "name": "flutter_liquid_glass_widgets",
       "description": "Pub.dev package. UI kit implementing Apple's Liquid Glass design language: shader-powered blur, physics-based jelly animations, and dynamic lighting, across Android, iOS, web, and desktop.",
-      "role": "Sole developer and maintainer — open-source Flutter package.",
+      "role": "Sole developer and Maintainer of a fork of an open-source Liquid Glass package (original author credited), with added widgets. — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_liquid_glass_widgets",
       "icon": {
-        "codePoint": "0xea6f",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/cube.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1146,9 +1185,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/local_voice",
       "icon": {
-        "codePoint": "0xea6f",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/cube.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1186,9 +1223,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer — personal project, in active development.",
       "url": "https://github.com/sujit70777/Jatri---Bangladesh-Transit-App",
       "icon": {
-        "codePoint": "0xefb7",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/github.svg"
       },
       "status": "inDevelopment",
       "featured": false,
@@ -1226,9 +1261,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer — personal project, in active development.",
       "url": "https://github.com/sujit70777/ar_measure",
       "icon": {
-        "codePoint": "0xefb7",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/github.svg"
       },
       "status": "inDevelopment",
       "featured": false,
@@ -1248,15 +1281,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "ARKit",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
           "name": "ARCore",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         }
       ],
@@ -1274,9 +1305,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://apps.apple.com/us/app/sk-mobile-school/id6475169754",
       "icon": {
-        "codePoint": "0xef23",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/app-store.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1296,15 +1325,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
@@ -1333,9 +1360,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://apps.apple.com/us/app/notivio-notes-task-planner/id6748751923",
       "icon": {
-        "codePoint": "0xef23",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/app-store.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1355,15 +1380,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         }
       ],
@@ -1386,9 +1409,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Team lead and sole developer — owned architecture, implementation, release and store delivery end to end.",
       "url": "https://play.google.com/store/apps/details?id=com.esim247.app",
       "icon": {
-        "codePoint": "0xefc5",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/google-play.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1408,15 +1429,13 @@ class CodegenLoader extends AssetLoader{
         {
           "name": "Android",
           "icon": {
-            "codePoint": "0xef1c",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/android.svg"
           }
         },
         {
           "name": "iOS",
           "icon": {
-            "codePoint": "0xef21",
-            "fontFamily": "FontAwesome"
+            "assetName": "assets/icons/other/apple.svg"
           }
         },
         {
@@ -1440,9 +1459,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_fabric",
       "icon": {
-        "codePoint": "0xea6f",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/cube.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1477,9 +1494,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_scanner_devxhub",
       "icon": {
-        "codePoint": "0xea6f",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/cube.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1514,9 +1529,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_zoom_image",
       "icon": {
-        "codePoint": "0xea6f",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/cube.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1551,9 +1564,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_prayer_time_calculator",
       "icon": {
-        "codePoint": "0xea6f",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/cube.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1588,9 +1599,7 @@ class CodegenLoader extends AssetLoader{
       "role": "Sole developer and maintainer — open-source Flutter package.",
       "url": "https://pub.dev/packages/flutter_scroll_date_picker",
       "icon": {
-        "codePoint": "0xea6f",
-        "fontFamily": "FontAwesome",
-        "color": "0xffffffff"
+        "assetName": "assets/icons/other/cube.svg"
       },
       "status": "shipped",
       "featured": false,
@@ -1683,8 +1692,8 @@ class CodegenLoader extends AssetLoader{
   "projectLinkCopied": "Link copied",
   "downloadOnePager": "One-pager",
   "onePagerUrl": "assets/documents/one-pager.pdf",
-  "bookingUrl": "",
-  "bookingLabel": "15-min intro call",
+  "bookingUrl": "https://calendly.com/ehsanur/30min",
+  "bookingLabel": "30-min intro call",
   "videoUrl": "",
   "videoCaption": "Who I am, two problems I've solved, and how to reach me.",
   "stickyAvailableLabel": "Available now",
@@ -1697,8 +1706,8 @@ class CodegenLoader extends AssetLoader{
       "label": "Native scanner reads QR / barcodes"
     },
     {
-      "value": "100K+",
-      "label": "Downloads each, two learning apps"
+      "value": "4.7 Avg rating",
+      "label": "App Store & Google Play ratings with 5K+ reviews"
     },
     {
       "value": "~1 mo",
@@ -1776,35 +1785,110 @@ class CodegenLoader extends AssetLoader{
       "name": "flutter_a11y_lens",
       "blurb": "Live WCAG accessibility auditing in a running app.",
       "url": "https://pub.dev/packages/flutter_a11y_lens"
+    },
+    {
+      "name": "flutter_fabric",
+      "blurb": "Fabric.js-style interactive canvas: select, drag, scale and rotate objects, free drawing, JSON and SVG paths (published under Devxhub).",
+      "url": "https://pub.dev/packages/flutter_fabric"
+    },
+    {
+      "name": "flutter_zoom_image",
+      "blurb": "Gesture zoom for standard images and deep-zoom (DZI) tile pyramids, on one shared controller (published under Devxhub).",
+      "url": "https://pub.dev/packages/flutter_zoom_image"
+    },
+    {
+      "name": "flutter_liquid_glass_widgets",
+      "blurb": "iOS 26 Liquid Glass-style widget kit: shader-powered blur, jelly animations and dynamic lighting.",
+      "url": "https://pub.dev/packages/flutter_liquid_glass_widgets"
     }
   ],
   "openSourceSectionTitle": "Open source",
   "sectionEyebrowOpenSource": "Open source",
-  "notesSectionTitle": "Notes",
+  "notesSectionTitle": "Notes from production work",
   "sectionEyebrowNotes": "Notes",
   "videoSectionTitle": "Intro",
   "sectionEyebrowVideo": "Intro",
   "contractSectionTitle": "Contract work",
   "sectionEyebrowContract": "Contract work",
-  "contractIntro": "For product teams that need a senior Flutter engineer on a clear problem — not an agency retainers page.",
+  "contractIntro": "For product teams that need a senior Flutter engineer on a clear, scoped problem. I can take ownership of the solution end to end, from architecture to App Store and Google Play release. I work with your team on a fixed-scope engagement, or as a contractor on a longer-term project.",
   "whoIHelpTitle": "Who I help",
   "engagementProcessTitle": "How an engagement works",
   "faqTitle": "FAQ",
   "notes": [
     {
-      "title": "Native scanner behind a platform channel",
-      "summary": "When a Flutter plugin is too slow for a FinTech scan flow, drop to Swift/Kotlin and keep one Dart API.",
-      "url": "notes/native-scanner-platform-channel.html"
+      "slug": "prayer-times-high-latitude",
+      "title": "Why prayer times break in the far north — and how I fixed them offline",
+      "description": "Why standard prayer-time calculations go wrong at high latitudes, and how a new offline engine fixed a production app.",
+      "tags": [
+        "Flutter",
+        "Dart",
+        "offline-first",
+        "algorithms"
+      ],
+      "body": "A prayer-times app looked correct almost everywhere. Then a user living in a far-northern city told us the times on his phone didn't match the schedule he actually prayed by. Other developers had already tried to fix it and couldn't. For a prayer app, one wrong time is enough to lose a user's trust.\n\n**Where the times come from.** Every prayer time is derived from the sun's position. Sunrise and sunset are the moments the sun's centre is about 0.833° below the horizon (that small offset covers atmospheric refraction and the sun's radius). Fajr and Isha are defined by deeper angles — typically 15° to 19.5° below the horizon, depending on the calculation method a community follows.\n\n**What changes in the far north.** Around 60° north and above, two things happen:\n\n1. In summer the sun never sinks deep enough. Near 60° N at midsummer it only reaches about 6–7° below the horizon, so an 18° Fajr or Isha angle simply has no answer.\n2. The sun crosses the horizon at a shallow slant. A tiny error in the angle becomes many minutes of error in the time.\n\nSunrise and sunset sit underneath everything else, so when they drift, every prayer built on them drifts too.\n\n**What I did.** I didn't patch individual cities. I traced the problem to the sunrise and sunset calculation, then replaced the app's calculation setup with our own engine:\n\n- fully offline — no API call for any prayer time\n- the standard calculation methods, plus high-latitude handling for the months when normal angles fail\n- offline location and time-zone data for 30+ countries, with manual location selection when GPS is off or permission is denied\n\n**How I knew it was right.** Numbers that \"look reasonable\" prove nothing. I compared the engine's output against the real local schedule followed by a person living there, and against a leading prayer app. The engine was later published as an open-source Flutter package.\n\n**What I took away:**\n\n- Your edge case is someone's daily life. Test where your users live, not where your developers sit.\n- When a bug survives several fixes, stop adjusting outputs and find the layer everything depends on.\n- Validate against reality, not against another formula."
     },
     {
-      "title": "Offline conflict-resolution that keeps claims",
-      "summary": "A deterministic merge rule so expense claims made without signal survive sync.",
-      "url": "notes/offline-conflict-resolution.html"
+      "slug": "native-scanner-behind-flutter",
+      "title": "Rewriting a Flutter scanner natively: from a slow plugin to ~0.5 seconds",
+      "description": "When a generic Flutter plugin is too slow, a native implementation behind a clean Flutter interface can fix speed and UX at once.",
+      "tags": [
+        "Flutter",
+        "Swift",
+        "Java",
+        "platform channels",
+        "FinTech"
+      ],
+      "body": "An expense-reimbursement app paid employees back after they scanned the QR code or barcode on a receipt. Two things hurt: the generic Flutter scanner plugin was too slow and couldn't be customized for the workflow, and after a scan users stared at an endless spinner while the server verified the receipt.\n\n**Why go native.** Tuning a generic plugin only gets you as far as its design allows. The camera pipeline is where speed is won or lost, and on each platform the native APIs give direct control over it — on iOS, AVFoundation and the Vision framework; on Android, CameraX with a barcode library. I rewrote scanning natively — Swift on iOS, Java on Android — behind a small Flutter interface, so the Flutter code stayed clean and platform-independent.\n\n**The shape of the bridge.** The pattern that works:\n\n- a platform view (or a texture) shows the native camera preview inside the Flutter layout\n- a method channel handles commands: start, stop, torch, configure code types\n- an event channel streams results back to Dart as they happen\n\nKeep the channel contract small and typed. The more logic that crosses the bridge, the harder both sides are to test.\n\n**Killing the spinner.** A spinner tells the user nothing. The scanned value went to the backend for verification, so I streamed verification progress back over WebSockets and showed it as a live progress bar: 20%, 45%, 73%, done. Same server work — very different feeling.\n\n**Never losing a claim.** Claims could be created with no signal; they were saved on the device and synced when the connection returned.\n\n**Results:** about 0.5 s to recognize a code in testing, and a successful reimbursement about 5–10 seconds after the scan. The scanner was later published as an open-source Flutter package.\n\n**Lessons:**\n\n- Flutter is the right default. Native is the right tool for the 5% that is performance-critical.\n- Design the channel API first; implement it twice.\n- Progress you can see beats speed you can't."
     },
     {
-      "title": "One entitlement model for StoreKit and Stripe",
-      "summary": "Stop duplicate purchases by mapping both stores to one account-level entitlement.",
-      "url": "notes/storekit-stripe-entitlements.html"
+      "slug": "stripe-apple-entitlements",
+      "title": "One entitlement model for Stripe and Apple In-App Purchase",
+      "description": "Selling subscriptions on Android through Stripe and on iOS through Apple? Make your backend the single source of truth for what each account owns.",
+      "tags": [
+        "Flutter",
+        "StoreKit 2",
+        "Stripe",
+        "subscriptions",
+        "architecture"
+      ],
+      "body": "I joined an app that had been in development for about two years without launching. Payments were part of the reason. Android sold subscriptions through Stripe; iOS had to use Apple In-App Purchase. Each system was correct on its own — together they disagreed.\n\n**The core mismatch.** Apple records a purchase against the Apple ID, not against your app's account. So a user can log out, sign in to a different app account on the same iPhone, try to buy again, and Apple says they already own it. Meanwhile upgrades and downgrades behave differently in the two systems, and the app's own account records drift away from both.\n\n**The fix: the backend decides.** As team lead, I redesigned the model with our backend developer:\n\n- one **entitlement** per app account, stored on the backend — the only answer to \"what does this user have?\"\n- Stripe and Apple purchases are both just **inputs** that update that entitlement\n- before accepting a new payment, check whether it would create a duplicate entitlement\n- reconcile existing records once, so old data matches the new rules\n- handle StoreKit purchase states properly (pending, verified, revoked) instead of treating \"not purchased yet\" as \"failed\"\n\nThe result: something bought on iOS is recognized on Android, and the other way round. The app passed App Store review and went live about a month after the stabilization work began.\n\n**Practical tips if you're building this:**\n\n- Store your own account ID with each Apple purchase. StoreKit 2 lets you attach an `appAccountToken` (a UUID) to a purchase for exactly this.\n- Let server events drive state: App Store Server Notifications on the Apple side, webhooks on the Stripe side. Don't trust the client alone.\n- Show the right \"manage subscription\" path — a user can't cancel an Apple subscription from your Android app.\n- Write tests for the unhappy paths: interrupted purchase, restore on a new device, account switch, refund.\n\n**The principle:** payment providers are rails. Your backend owns the truth."
+    },
+    {
+      "slug": "offline-first-conflict-resolution",
+      "title": "Offline-first sync: the conflict rule matters more than the sync code",
+      "description": "How to make offline writes safe in a mobile app: local-first storage, an outbox, idempotent sync and one deterministic conflict rule.",
+      "tags": [
+        "Flutter",
+        "offline-first",
+        "data sync",
+        "SQLite",
+        "Firebase"
+      ],
+      "body": "I've built offline-first data layers for learning apps used by students on weak internet and for expense apps used by people in basements, lifts and trains. The sync code is the visible part. The part that decides whether users lose work is the conflict rule.\n\n**The building blocks:**\n\n1. **The device is the source of truth for the user's own writes.** Every write goes to local storage (SQLite) first and the UI reads from there. The network is a background concern.\n2. **An outbox.** Pending changes go into a queue with a client-generated ID. When the connection returns, the queue drains in order.\n3. **Idempotent sync.** The server must accept the same change twice without creating a duplicate — the client ID makes that possible. Retries are guaranteed; duplicates are not acceptable.\n4. **One deterministic conflict rule.** When two devices change the same record, every device must reach the same result, every time.\n\n**Choosing the rule.** Common options, from simplest:\n\n- **Server wins** — simple, but can silently drop a user's offline work.\n- **Last write wins** — needs trustworthy ordering. Device clocks drift, so use server timestamps or a hybrid logical clock rather than the phone's clock.\n- **Field-level merge** — two people edit different fields of the same record and both changes survive.\n- **CRDTs** — data types designed to merge without conflicts. Worth it when many devices edit the same data offline; overkill for a single user's form.\n\nThere is no universally right rule. There is only a rule you chose deliberately, applied everywhere, and tested.\n\n**Two things people forget:**\n\n- **Deletes.** Record them as tombstones, or a deleted item comes back on the next sync.\n- **Tests.** Simulate airplane mode, kill the app mid-sync, edit the same record on two devices. If you haven't tested it, it doesn't work.\n\nI extracted these ideas into an open-source Flutter package, `flutter_crdt_sync_kit`, which merges offline edits from several devices without losing any.\n\n**Rule of thumb:** offline-first can't be added later. It changes your data model, your sync, your conflict rules and your tests — decide on day one."
+    },
+    {
+      "slug": "flutter-home-screen-widgets",
+      "title": "Home-screen widgets that share live data with a Flutter app",
+      "description": "Flutter can't render inside iOS or Android home-screen widgets. Here's how to share data between the app and native widgets reliably.",
+      "tags": [
+        "Flutter",
+        "WidgetKit",
+        "Android",
+        "App Groups"
+      ],
+      "body": "Users often want a glance at your app's key information without opening it — the next prayer time, today's progress, an upcoming deadline. I built home-screen widgets on iOS and Android for a Flutter app. The first thing to accept: **the widget is native, not Flutter.**\n\n**How it fits together:**\n\n- **iOS:** the widget is a WidgetKit extension written in SwiftUI. It runs in a separate process, so it can't read the app's memory. The app and the widget share data through an **App Group** — a shared container and shared `UserDefaults`.\n- **Android:** the widget is an `AppWidgetProvider` with a layout. The Flutter app writes the data to shared storage; the provider reads it when it updates.\n- **The Flutter side** writes a small, ready-to-display payload through a platform channel (or a package such as `home_widget`) and asks the system to refresh: `WidgetCenter.shared.reloadAllTimelines()` on iOS, an update broadcast through `AppWidgetManager` on Android.\n\n**What makes it reliable:**\n\n- **Write display-ready data.** Do the calculations in the app; the widget only shows values. Widgets have tight time and memory budgets.\n- **Plan the timeline.** On iOS, give WidgetKit a timeline of future entries (for example, every prayer time today) so the widget stays correct without the app running.\n- **Keep the contract versioned.** If the app writes a new data shape while an old widget reads it, nothing should crash.\n- **Test on real devices** across sizes, light and dark mode, and after a reboot.\n\n**Lesson:** Flutter covers the app. Knowing exactly where Flutter stops — and writing clean native code there — is what makes a senior Flutter engineer."
+    },
+    {
+      "slug": "building-with-ai-coding-agents",
+      "title": "How I build with AI coding agents without losing quality",
+      "description": "How a senior mobile engineer uses AI coding agents in practice: own the problem, the architecture and the review — let the agent type.",
+      "tags": [
+        "AI",
+        "software engineering",
+        "Flutter",
+        "Swift"
+      ],
+      "body": "I shipped a native macOS app of around 17,000 lines of Swift to the Mac App Store on my own, and AI coding agents wrote much of the code. I also introduced Claude Code to a mobile team, with one non-negotiable rule: code review and tests on every merge. The job didn't disappear. It changed.\n\n**What I still own:**\n\n- **The problem.** What are we solving, for whom, and what does \"done\" mean?\n- **The architecture and data model.** Agents are good at filling in a design. They are poor at choosing one.\n- **The review.** I read every diff as if a junior engineer wrote it — because agents make confident mistakes: missed edge cases, invented APIs, quietly changed behaviour.\n- **The release.** Tests, signing, store review, rollout.\n\n**How I work with an agent:**\n\n1. Write the plan first: modules, interfaces, phases. Give the agent that plan, not a vague wish.\n2. Ask for small, testable tasks. One feature or one refactor at a time.\n3. Give it the rules: architecture patterns, naming, what must not change.\n4. Make it write or update tests with the code, then run them myself.\n5. Review the diff before anything merges. If I can't explain a change, it doesn't go in.\n\n**Where agents help most:** boilerplate, migrations, test scaffolding, exploring an unfamiliar API, and turning a clear spec into a first draft.\n\n**Where they still need a human:** concurrency and race conditions, payments, data that must never be lost, platform review rules, and any decision that trades one cost against another.\n\n**The takeaway:** the most valuable engineering skill now is judgment — choosing the right problem, designing the system, and catching what's wrong. Typing speed matters less every month."
     }
   ],
   "contractHelpCards": [
@@ -1917,12 +2001,43 @@ class CodegenLoader extends AssetLoader{
     }
   ],
   "emailPresetsTitle": "I'm reaching out about…",
-  "testimonials": [],
+  "testimonials": [
+    {
+      "quote": "As a Senior Flutter Developer, Shekh possesses a deep, practical understanding of cross-platform architecture that consistently elevated the quality of our applications. … Any engineering team looking for a technical powerhouse and a supportive leader would be incredibly fortunate to have Shekh onboard.",
+      "name": "Tanvir Kabir",
+      "role": "Flutter Developer",
+      "company": "Devxhub",
+      "linkedinUrl": "https://www.linkedin.com/in/sujit70777/details/recommendations/"
+    },
+    {
+      "quote": "Whenever a new project or unfamiliar challenge comes up, he is quick to adapt, understand the requirements, and start contributing effectively.",
+      "name": "Tabia Tasnia",
+      "role": "Human Resources Executive",
+      "linkedinUrl": "https://www.linkedin.com/in/sujit70777/details/recommendations/"
+    },
+    {
+      "quote": "He is a skilled and dependable developer with strong technical knowledge, excellent problem-solving abilities, and a great sense of responsibility.",
+      "name": "Rifa Abdullah Rafia",
+      "role": "Software Business Analyst & Scrum Master",
+      "linkedinUrl": "https://www.linkedin.com/in/sujit70777/details/recommendations/"
+    },
+    {
+      "quote": "He has excellent knowledge of technology and is always eager to share his expertise with others.",
+      "name": "Soma Dey",
+      "role": "QA Engineer",
+      "linkedinUrl": "https://www.linkedin.com/in/sujit70777/details/recommendations/"
+    }
+  ],
   "press": [],
   "sectionEyebrowTestimonials": "Recommendations",
   "resumeUrl": "assets/documents/resume.pdf",
   "navMore": "More",
-  "navMoreTooltip": "More sections"
+  "navMoreTooltip": "More sections",
+  "testimonialLinkedInLabel": "LinkedIn recommendation",
+  "noteReadLabel": "Read note",
+  "noteMinutesRead": "{} min read",
+  "notePrevious": "Previous",
+  "noteNext": "Next"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en};
 }

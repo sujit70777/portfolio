@@ -59,10 +59,8 @@ flutter:
   # root verbatim, so this is the only way to get a predictable URL for it.
   # NOTE: assets/fonts/ is deliberately NOT listed here. Every font in that
   # directory is already bundled by the `fonts:` section below, and listing
-  # the directory as a plain asset too made `flutter build` copy each .ttf
-  # verbatim instead of tree-shaking it — shipping the full 580KB
-  # FontAwesome.ttf for the 15 glyphs this app actually uses. Fonts block
-  # first text paint, so that was ~575KB of dead weight on the critical path.
+  # the directory as a plain asset too would copy each .ttf verbatim instead
+  # of letting Flutter's font pipeline manage them.
   assets:
     - assets/icons/flags/
     - assets/icons/other/
@@ -95,9 +93,6 @@ flutter:
     - assets/translations/
 
   fonts:
-    - family: FontAwesome
-      fonts:
-        - asset: assets/fonts/FontAwesome.ttf
     # Local copies of the three Google Fonts used by the TextTheme
     # (lib/src/constants/themes.dart). Filenames must end with exactly
     # "<GoogleFontsFamily>-<Weight>" (e.g. "Archivo-ExtraBold") — that's the

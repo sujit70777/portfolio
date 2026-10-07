@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/common/widgets/card_grid.dart';
 import 'package:portfolio/src/common/widgets/scroll_reveal.dart';
 import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/sizes.dart';
@@ -18,40 +19,18 @@ class SkillsPanel extends StatelessWidget {
 
   final List<SkillCategory> categories;
 
-  static const double _twoColumnBreakpoint = 640;
-  static const double _columnGap = 16;
-  static const _cardStagger = Duration(milliseconds: 90);
-
   @override
   Widget build(BuildContext context) {
     final palette = Palette.of(context);
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final twoColumns = constraints.maxWidth >= _twoColumnBreakpoint;
-        final cardWidth = twoColumns
-            ? (constraints.maxWidth - _columnGap) / 2
-            : constraints.maxWidth;
-        return Wrap(
-          spacing: _columnGap,
-          runSpacing: _columnGap,
-          children: [
-            for (final (index, category) in categories.indexed)
-              SizedBox(
-                width: cardWidth,
-                child: ScrollReveal(
-                  // Stagger across a row, not down the whole list — the
-                  // last card shouldn't wait for every card above it.
-                  delay: _cardStagger * (twoColumns ? index % 2 : 0),
-                  duration: const Duration(milliseconds: 900),
-                  child: _SkillCategoryCard(
-                    category: category,
-                    hue: palette.hue(index),
-                  ),
-                ),
-              ),
-          ],
-        );
-      },
+    // CardGrid, not a Wrap: a Wrap row is as tall as its tallest card and
+    // leaves a hole under the shorter one. CardGrid gives each pair one
+    // height, staggers the reveal across the row, and spans an odd last
+    // card full width.
+    return CardGrid(
+      children: [
+        for (final (index, category) in categories.indexed)
+          _SkillCategoryCard(category: category, hue: palette.hue(index)),
+      ],
     );
   }
 }

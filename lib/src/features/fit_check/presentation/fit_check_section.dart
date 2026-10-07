@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/domain/app_section.dart';
+import 'package:portfolio/src/common/widgets/glass_card.dart';
 import 'package:portfolio/src/common/widgets/gradient_button.dart';
 import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
+import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/fit_check/application/fit_summary.dart';
@@ -127,6 +129,7 @@ class _FitCheckSectionState extends ConsumerState<FitCheckSection> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
+    final palette = Palette.of(context);
     final muted = mutedTextColor(scheme);
     final report = _report;
 
@@ -149,34 +152,34 @@ class _FitCheckSectionState extends ConsumerState<FitCheckSection> {
         ),
         gapH16,
         const EmailPresetsRow(),
-        gapH12,
-        Row(
-          children: [
-            Icon(Icons.lock_outline, size: 14, color: scheme.tertiary),
-            gapW8,
-            Flexible(
-              child: SearchableText(
-                tr(LocaleKeys.fitCheck_privacy).toUpperCase(),
-                style: monoLabelStyle(
-                  fontSize: 11,
-                  letterSpacing: 0.06,
-                  color: muted,
-                ),
-              ),
-            ),
-          ],
-        ),
         gapH20,
-        Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: scheme.primary,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: scheme.tertiary.withAlpha(60)),
-          ),
+        // The tool on the site's card surface, lit edge and all, but with
+        // no hover lift: it holds a text field.
+        GlassCard(
+          hue: palette.aurora.first,
+          accent: palette.aurora,
+          hoverLift: false,
+          padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Row(
+                children: [
+                  Icon(Icons.lock_outline, size: 14, color: scheme.tertiary),
+                  gapW8,
+                  Flexible(
+                    child: SearchableText(
+                      tr(LocaleKeys.fitCheck_privacy).toUpperCase(),
+                      style: monoLabelStyle(
+                        fontSize: 11,
+                        letterSpacing: 0.06,
+                        color: muted,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              gapH12,
               CallbackShortcuts(
                 bindings: {
                   const SingleActivator(LogicalKeyboardKey.enter, meta: true):

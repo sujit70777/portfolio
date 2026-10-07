@@ -37,7 +37,7 @@ Everything below exists because it broke in practice, not because it looked good
 
 **Static assets are pre-compressed in CI, not at request time.** The shared host's on-the-fly compression is slow and capped well below Brotli's ratio, so `.br` and `.gz` siblings are built once and served through an `.htaccess` rewrite.
 
-**Icons survive font tree-shaking.** FontAwesome glyphs referenced only from JSON content arrive as runtime strings, not compile-time `const IconData`, so Flutter's icon tree-shaker can't see them and strips them from the build. The codepoint whitelist in `lib/src/common/widgets/icon.dart` keeps them.
+**Icons are SVGs.** Brand and UI icons live under `assets/icons/` and render via `flutter_svg` — no icon font, no tree-shake whitelist.
 
 ---
 

@@ -69,6 +69,13 @@ class TestimonialsSection extends ConsumerWidget {
                 if ((t.linkedinUrl ?? '').isNotEmpty) ...[
                   const SizedBox(height: 6),
                   TextButton(
+                    // Default foreground is colorScheme.primary, which is
+                    // this card's own surface colour — set it explicitly.
+                    // Zero padding keeps the label flush with the quote.
+                    style: TextButton.styleFrom(
+                      foregroundColor: palette.hue(i),
+                      padding: EdgeInsets.zero,
+                    ),
                     onPressed: () async {
                       final url = t.linkedinUrl!;
                       try {
@@ -82,7 +89,7 @@ class TestimonialsSection extends ConsumerWidget {
                         }
                       }
                     },
-                    child: const Text('LinkedIn recommendation'),
+                    child: Text(tr(LocaleKeys.testimonialLinkedInLabel)),
                   ),
                 ],
               ],

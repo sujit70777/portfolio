@@ -107,7 +107,6 @@ Future<void> _loadFonts() async {
       'assets/fonts/PublicSans-SemiBold.ttf',
     ],
     'JetBrainsMono': ['assets/fonts/JetBrainsMono-Medium.ttf'],
-    'FontAwesome': ['assets/fonts/FontAwesome.ttf'],
   };
   for (final MapEntry(key: family, value: files) in families.entries) {
     final loader = FontLoader(family);

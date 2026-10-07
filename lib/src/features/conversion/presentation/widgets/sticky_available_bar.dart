@@ -34,18 +34,24 @@ class _StickyAvailableBarState extends ConsumerState<StickyAvailableBar> {
       _boundController = controller;
       _scrollListener = _onScroll;
       controller.addListener(_onScroll);
-      _onScroll();
+      // Mid-mount: build runs right after, so no setState here.
+      _visible = _shouldShow();
     }
   }
 
-  void _onScroll() {
+  bool _shouldShow() {
     final c = _boundController;
-    if (c == null || !c.hasClients || _dismissedThisSession) {
-      if (_visible) setState(() => _visible = false);
-      return;
-    }
+    if (c == null || !c.hasClients || _dismissedThisSession) return false;
+    // `positions.last`, not `offset`: both layouts' scroll views share this
+    // controller, and for the one frame in which the page swaps between
+    // them both are attached — `offset` asserts there is exactly one. The
+    // newest is the layout being built, same as ScrollProgressBar.
     // Hero is roughly the first viewport; show after ~420px of scroll.
-    final show = c.offset > 420;
+    return c.positions.last.pixels > 420;
+  }
+
+  void _onScroll() {
+    final show = _shouldShow();
     if (show != _visible) setState(() => _visible = show);
   }
 

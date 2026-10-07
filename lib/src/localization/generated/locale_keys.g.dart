@@ -134,5 +134,10 @@ abstract class  LocaleKeys {
   static const resumeUrl = 'resumeUrl';
   static const navMore = 'navMore';
   static const navMoreTooltip = 'navMoreTooltip';
+  static const testimonialLinkedInLabel = 'testimonialLinkedInLabel';
+  static const noteReadLabel = 'noteReadLabel';
+  static const noteMinutesRead = 'noteMinutesRead';
+  static const notePrevious = 'notePrevious';
+  static const noteNext = 'noteNext';
 
 }

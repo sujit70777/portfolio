@@ -42,9 +42,9 @@ class ConversionRepository {
           .where((p) => p.name.isNotEmpty && p.url.isNotEmpty)
           .toList();
 
-  List<NoteCard> getNotes() => _list(LocaleKeys.notes)
-      .map(NoteCard.fromJson)
-      .where((n) => n.title.isNotEmpty && n.url.isNotEmpty)
+  List<Note> getNotes() => _list(LocaleKeys.notes)
+      .map(Note.fromJson)
+      .where((n) => n.slug.isNotEmpty && n.title.isNotEmpty)
       .toList();
 
   List<HelpCard> getContractHelpCards() =>

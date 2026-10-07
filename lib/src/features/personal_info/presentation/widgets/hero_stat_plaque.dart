@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio/src/common/utils/fluid_size.dart';
 import 'package:portfolio/src/common/widgets/first_paint_entrance.dart';
 import 'package:portfolio/src/constants/palette.dart';
@@ -15,14 +16,10 @@ import 'package:portfolio/src/features/page_search/presentation/searchable_text.
 /// [columns] is 4 (one row, tablet/desktop) or 2 (a 2×2 grid, mobile — four
 /// across becomes unreadable at phone width). [fullWidth] stretches the
 /// plaque to fill its parent instead of sizing to its own content.
-/// The rating star, drawn from the bundled FontAwesome subset rather than
-/// written as a literal '★' (U+2605). That character is in none of this
-/// app's fonts, so CanvasKit resolved it by downloading Noto Sans Symbols 2
-/// from fonts.gstatic.com — a 374KB cross-origin fetch, for one glyph, in
-/// the hero, on every first load. Keep this an [IconData]; see
-/// lib/src/common/widgets/icon.dart for why the codepoint has to appear as a
-/// const literal to survive icon tree-shaking.
-const _starIcon = IconData(0xed85, fontFamily: 'FontAwesome');
+///
+/// Rating star is a local SVG (not U+2605) so CanvasKit never downloads
+/// Noto Sans Symbols 2 for a single hero glyph.
+const _starAsset = 'assets/icons/other/star.svg';
 
 class HeroStatPlaque extends StatelessWidget {
   const HeroStatPlaque({super.key, this.columns = 4, this.fullWidth = false});
@@ -48,7 +45,7 @@ class HeroStatPlaque extends StatelessWidget {
     final palette = Palette.of(context);
     final stats = [
       _StatData(
-        leadingIcon: _starIcon,
+        leadingAsset: _starAsset,
         rawValue: tr(LocaleKeys.stats_rating),
         label: tr(LocaleKeys.stats_ratingLabel),
         color: palette.hues[0],
@@ -159,13 +156,13 @@ class HeroStatPlaque extends StatelessWidget {
 
 class _StatData {
   const _StatData({
-    this.leadingIcon,
+    this.leadingAsset,
     required this.rawValue,
     required this.label,
     required this.color,
   });
 
-  final IconData? leadingIcon;
+  final String? leadingAsset;
   final String rawValue;
   final String label;
   final Color color;
@@ -191,11 +188,12 @@ class _Stat extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (data.leadingIcon != null) ...[
-                Icon(
-                  data.leadingIcon,
-                  size: numberSize * 0.72,
-                  color: data.color,
+              if (data.leadingAsset != null) ...[
+                SvgPicture.asset(
+                  data.leadingAsset!,
+                  width: numberSize * 0.72,
+                  height: numberSize * 0.72,
+                  colorFilter: ColorFilter.mode(data.color, BlendMode.srcIn),
                 ),
                 SizedBox(width: numberSize * 0.12),
               ],

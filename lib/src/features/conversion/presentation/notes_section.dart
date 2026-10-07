@@ -2,16 +2,21 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:portfolio/src/common/domain/app_section.dart';
+import 'package:portfolio/src/common/widgets/card_grid.dart';
+import 'package:portfolio/src/common/widgets/glass_card.dart';
 import 'package:portfolio/src/common/widgets/section_eyebrow.dart';
 import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/sizes.dart';
+import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/conversion/data/conversion_repository.dart';
+import 'package:portfolio/src/features/conversion/domain/conversion_models.dart';
+import 'package:portfolio/src/features/conversion/presentation/widgets/note_reader_dialog.dart';
+import 'package:portfolio/src/features/conversion/presentation/widgets/tag_chips.dart';
 import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
-import 'package:portfolio/src/utils/analytics.dart';
-import 'package:portfolio/src/utils/launch_url_helper.dart';
-import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
+/// Notes from production work as a grid of cards; each opens in place in
+/// the note reader rather than on a separate page.
 class NotesSection extends ConsumerWidget {
   const NotesSection({super.key});
 
@@ -37,76 +42,109 @@ class NotesSection extends ConsumerWidget {
           style: theme.textTheme.titleLarge,
         ),
         gapH20,
-        for (final (i, note) in notes.indexed) ...[
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(12),
-              onTap: () async {
-                Analytics.track('note_click', props: {'title': note.title});
-                try {
-                  await LaunchUrlHelper.launchURL(note.url, openInNewTab: true);
-                } catch (_) {
-                  if (context.mounted) {
-                    ScaffoldMessengerHelper.showLaunchUrlError(
-                      context,
-                      url: note.url,
-                    );
-                  }
-                }
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 8,
-                      height: 8,
-                      margin: const EdgeInsets.only(top: 6),
-                      decoration: BoxDecoration(
-                        color: palette.hue(i),
-                        borderRadius: BorderRadius.circular(2.5),
-                      ),
-                    ),
-                    gapW12,
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SearchableText(
-                            note.title,
-                            style: theme.textTheme.titleSmall?.copyWith(
-                              color: palette.hue(i),
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          SearchableText(
-                            note.summary,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color:
-                                  theme.colorScheme.onSurface.withAlpha(170),
-                              height: 1.35,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_outward_rounded,
-                      size: 16,
-                      color: palette.hue(i).withAlpha(180),
-                    ),
-                  ],
+        CardGrid(
+          children: [
+            for (final (i, note) in notes.indexed)
+              _NoteCard(
+                note: note,
+                number: i + 1,
+                hue: palette.hue(i),
+                onOpen: () =>
+                    showNoteReader(context, note: note, allNotes: notes),
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _NoteCard extends StatelessWidget {
+  const _NoteCard({
+    required this.note,
+    required this.number,
+    required this.hue,
+    required this.onOpen,
+  });
+
+  final Note note;
+  final int number;
+  final Color hue;
+  final VoidCallback onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final muted = mutedTextColor(theme.colorScheme);
+    final readLabel = tr(LocaleKeys.noteReadLabel);
+
+    return GlassCard(
+      hue: hue,
+      onTap: onOpen,
+      semanticLabel: '${note.title}. $readLabel',
+      child: Column(
+        // In a two-column row the cards share one height; spaceBetween
+        // keeps every "Read note" on the same baseline.
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                [
+                  number.toString().padLeft(2, '0'),
+                  tr(LocaleKeys.noteMinutesRead,
+                          args: ['${note.readingMinutes}'])
+                      .toUpperCase(),
+                ].join('  ·  '),
+                style: monoLabelStyle(
+                  fontSize: 12,
+                  letterSpacing: 0.08,
+                  color: hue,
                 ),
               ),
-            ),
+              gapH12,
+              SearchableText(
+                note.title,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: hue,
+                  fontWeight: FontWeight.bold,
+                  height: 1.3,
+                ),
+              ),
+              if (note.description.isNotEmpty) ...[
+                gapH8,
+                SearchableText(
+                  note.description,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    height: 1.55,
+                    color: muted,
+                  ),
+                ),
+              ],
+              if (note.tags.isNotEmpty) ...[
+                gapH12,
+                TagChips(tags: note.tags, hue: hue),
+              ],
+            ],
           ),
-          if (i < notes.length - 1)
-            Divider(color: theme.colorScheme.onSurface.withAlpha(20)),
+          gapH16,
+          Row(
+            children: [
+              Text(
+                readLabel,
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: hue,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              gapW4,
+              Icon(Icons.arrow_forward_rounded, size: 16, color: hue),
+            ],
+          ),
         ],
-      ],
+      ),
     );
   }
 }

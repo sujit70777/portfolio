@@ -47,22 +47,39 @@ class OpenSourcePackage {
   final String url;
 }
 
-class NoteCard {
-  const NoteCard({
+/// A note from production work, read in-page (NoteReaderDialog) and shared
+/// as `?note=<slug>`. [body] is light markdown — paragraphs, "- " and "1. "
+/// lists, **bold** and `code` — rendered by NoteBody.
+class Note {
+  const Note({
+    required this.slug,
     required this.title,
-    required this.summary,
-    required this.url,
+    required this.description,
+    required this.tags,
+    required this.body,
   });
 
-  factory NoteCard.fromJson(Map<String, dynamic> json) => NoteCard(
+  factory Note.fromJson(Map<String, dynamic> json) => Note(
+        slug: '${json['slug'] ?? ''}',
         title: '${json['title'] ?? ''}',
-        summary: '${json['summary'] ?? ''}',
-        url: '${json['url'] ?? ''}',
+        description: '${json['description'] ?? ''}',
+        tags: [
+          for (final tag in (json['tags'] as List?) ?? const []) '$tag',
+        ],
+        body: '${json['body'] ?? ''}',
       );
 
+  final String slug;
   final String title;
-  final String summary;
-  final String url;
+  final String description;
+  final List<String> tags;
+  final String body;
+
+  /// At ~200 words a minute, rounded up — never "0 min".
+  int get readingMinutes {
+    final words = body.split(RegExp(r'\s+')).where((w) => w.isNotEmpty);
+    return (words.length / 200).ceil().clamp(1, 999);
+  }
 }
 
 class HelpCard {
