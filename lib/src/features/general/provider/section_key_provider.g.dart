@@ -255,6 +255,204 @@ final class ProjectSectionKeyProvider
 
 String _$projectSectionKeyHash() => r'784a80cb653f8c5ca93b09b0933c65a1c71955c2';
 
+@ProviderFor(openSourceSectionKey)
+final openSourceSectionKeyProvider = OpenSourceSectionKeyProvider._();
+
+final class OpenSourceSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
+    with $Provider<GlobalKey<State<StatefulWidget>>> {
+  OpenSourceSectionKeyProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'openSourceSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$openSourceSectionKeyHash();
+
+  @$internal
+  @override
+  $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GlobalKey<State<StatefulWidget>> create(Ref ref) {
+    return openSourceSectionKey(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$openSourceSectionKeyHash() =>
+    r'f9aa19757e68f12de75d7291dec05e83c9a73d04';
+
+@ProviderFor(videoSectionKey)
+final videoSectionKeyProvider = VideoSectionKeyProvider._();
+
+final class VideoSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
+    with $Provider<GlobalKey<State<StatefulWidget>>> {
+  VideoSectionKeyProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'videoSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$videoSectionKeyHash();
+
+  @$internal
+  @override
+  $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GlobalKey<State<StatefulWidget>> create(Ref ref) {
+    return videoSectionKey(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$videoSectionKeyHash() => r'8a4d92d25085077310fcc610716a13f06359edf3';
+
+@ProviderFor(notesSectionKey)
+final notesSectionKeyProvider = NotesSectionKeyProvider._();
+
+final class NotesSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
+    with $Provider<GlobalKey<State<StatefulWidget>>> {
+  NotesSectionKeyProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'notesSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$notesSectionKeyHash();
+
+  @$internal
+  @override
+  $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GlobalKey<State<StatefulWidget>> create(Ref ref) {
+    return notesSectionKey(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$notesSectionKeyHash() => r'1b648ac8cdea4daa03ed54f3857f13fd4b5b3a32';
+
+@ProviderFor(contractSectionKey)
+final contractSectionKeyProvider = ContractSectionKeyProvider._();
+
+final class ContractSectionKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
+    with $Provider<GlobalKey<State<StatefulWidget>>> {
+  ContractSectionKeyProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'contractSectionKeyProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$contractSectionKeyHash();
+
+  @$internal
+  @override
+  $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GlobalKey<State<StatefulWidget>> create(Ref ref) {
+    return contractSectionKey(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$contractSectionKeyHash() =>
+    r'bf563850bcfee17d22b3f71d6aec8ca437fab281';
+
 @ProviderFor(fitCheckSectionKey)
 final fitCheckSectionKeyProvider = FitCheckSectionKeyProvider._();
 

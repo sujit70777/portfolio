@@ -16,9 +16,11 @@ import 'package:portfolio/src/features/general/provider/scroll_controller.dart';
 import 'package:portfolio/src/features/personal_info/data/personal_info_repository.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/availability_badge.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/hero_background.dart';
+import 'package:portfolio/src/features/conversion/presentation/widgets/outcome_cards.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/hero_stat_plaque.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/resume_button.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
+import 'package:portfolio/src/utils/analytics.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
@@ -189,6 +191,8 @@ class _DesktopHero extends StatelessWidget {
         _entrance(2, const _HeroDevice(width: 460)),
         gapH20,
         _entrance(3, const HeroStatPlaque(fullWidth: true)),
+        gapH12,
+        _entrance(4, const OutcomeCards(columns: 2)),
       ],
     );
 
@@ -286,6 +290,8 @@ class _TabletHero extends StatelessWidget {
             _entrance(6, const _HeroDevice(width: 420)),
             gapH24,
             _entrance(7, const HeroStatPlaque(fullWidth: true)),
+            gapH12,
+            _entrance(8, const OutcomeCards(columns: 2)),
           ],
         ),
       ),
@@ -349,6 +355,8 @@ class _MobileHero extends StatelessWidget {
         // Stats before CTAs: a visitor needs a reason to care before
         // they'll tap anything.
         _entrance(4, const HeroStatPlaque(columns: 2, fullWidth: true)),
+        gapH12,
+        _entrance(4, const OutcomeCards(columns: 1)),
         gapH24,
         _entrance(
           5,
@@ -571,6 +579,14 @@ class _HeroCta extends StatelessWidget {
   }
 
   Future<void> _onTap(BuildContext context) async {
+    if (url.startsWith('mailto:')) {
+      Analytics.track('email_click');
+    } else if (url.contains('wa.me')) {
+      Analytics.track('whatsapp_click');
+    } else if (url.contains('calendly') || url.contains('cal.com')) {
+      Analytics.track('book_call_click');
+    }
+
     const mailto = 'mailto:';
     if (url.startsWith(mailto)) {
       try {

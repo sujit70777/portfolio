@@ -1,11 +1,11 @@
 {
     "name": "Shekh Ehsanur Rahman",
-    "description": "Senior Flutter Engineer — native iOS, Android and macOS. I take on the problems that block a product, and build with AI coding agents",
+    "description": "Senior Flutter Engineer · Native iOS · Android · macOS. I take on the problems that block a product, and build with AI coding agents",
     "subDescription": "Flutter architecture · Custom plugins & native integration · Offline-first sync · Payments & subscriptions · Native iOS, Android and macOS",
     "heroPrimaryCta": "Email me",
     "heroSecondaryCta": "WhatsApp",
     "availabilityBadge": "Available now · Remote from Bangladesh · No sponsorship required",
-    "contractBadge": "Full-time or contract · Works with any time zone",
+    "contractBadge": "Full-time or contract · Works with any time zone; flexible core overlap hours",
     "stats": {
         "years": "11",
         "yearsLabel": "Years shipping",
@@ -1657,11 +1657,251 @@
         "nothingFound": "No recognisable mobile-engineering requirements found. Try pasting the full description, including the requirements list.",
         "tooShort": "Paste a little more of the description first.",
         "disclaimer": "Keyword-based and deterministic: it recognises common mobile-engineering skills and links only to evidence on this page. It won't read between the lines, so a gap here may just be something the site doesn't mention.",
-        "sampleText": "Senior Mobile Engineer, Flutter (Remote)\n\nWe're a fintech startup building a payments app for 200,000 small businesses.\n\nWhat you'll do\n- Own features end to end, from architecture to App Store and Google Play release\n- Build offline-capable flows that sync reliably on poor networks\n- Lead code reviews and mentor two mid-level engineers\n\nRequirements\n- 5+ years of mobile development, 3+ years with Flutter and Dart\n- Strong state management experience (Riverpod or Bloc)\n- REST APIs and GraphQL\n- Firebase (Auth, Firestore, Crashlytics)\n- Unit, widget and integration testing; CI/CD with GitHub Actions or Codemagic\n- Comfortable dropping into native iOS (Swift) or Android (Kotlin) when a plugin is needed\n\nNice to have\n- In-app subscriptions (StoreKit / Play Billing)\n- Kotlin Multiplatform\n- Accessibility (WCAG) experience\n\nBenefits\n- Fully remote, health insurance, learning budget"
+        "sampleText": "Senior Mobile Engineer, Flutter (Remote)\n\nWe're a fintech startup building a payments app for 200,000 small businesses.\n\nWhat you'll do\n- Own features end to end, from architecture to App Store and Google Play release\n- Build offline-capable flows that sync reliably on poor networks\n- Lead code reviews and mentor two mid-level engineers\n\nRequirements\n- 5+ years of mobile development, 3+ years with Flutter and Dart\n- Strong state management experience (Riverpod or Bloc)\n- REST APIs and GraphQL\n- Firebase (Auth, Firestore, Crashlytics)\n- Unit, widget and integration testing; CI/CD with GitHub Actions or Codemagic\n- Comfortable dropping into native iOS (Swift) or Android (Kotlin) when a plugin is needed\n\nNice to have\n- In-app subscriptions (StoreKit / Play Billing)\n- Kotlin Multiplatform\n- Accessibility (WCAG) experience\n\nBenefits\n- Fully remote, health insurance, learning budget",
+        "presetsHint": "Or pick a starting point:"
     },
     "copyEmail": "Copy email address",
     "emailCopied": "Email address copied",
     "emailOpening": "Opening your mail app. No mail app? Copy the address instead:",
     "copyProjectLink": "Copy link",
-    "projectLinkCopied": "Link copied"
+    "projectLinkCopied": "Link copied",
+    "downloadOnePager": "One-pager",
+    "onePagerUrl": "assets/documents/one-pager.pdf",
+    "bookingUrl": "",
+    "bookingLabel": "15-min intro call",
+    "videoUrl": "",
+    "videoCaption": "Who I am, two problems I've solved, and how to reach me.",
+    "stickyAvailableLabel": "Available now",
+    "stickyDismissLabel": "Dismiss",
+    "stickyResumeLabel": "Resume",
+    "stickyEmailLabel": "Email",
+    "outcomes": [
+        {
+            "value": "~0.5 s",
+            "label": "Native scanner reads QR / barcodes"
+        },
+        {
+            "value": "100K+",
+            "label": "Downloads each, two learning apps"
+        },
+        {
+            "value": "~1 mo",
+            "label": "Stalled ~2 years → live after payment redesign"
+        },
+        {
+            "value": "10–20 min",
+            "label": "Releases, down from ~1 hour (Fastlane + Actions)"
+        }
+    ],
+    "trustChips": [
+        {
+            "text": "FinTech · 50K+ users"
+        },
+        {
+            "text": "EdTech · 2 apps past 100K downloads"
+        },
+        {
+            "text": "Mac App Store · Hourwise"
+        },
+        {
+            "text": "9 Flutter packages on pub.dev"
+        }
+    ],
+    "trustBadgeLinks": [
+        {
+            "label": "App Store",
+            "url": "https://apps.apple.com/us/developer/shekh-ehsanur-rahman/id1892682672",
+            "iconAsset": "assets/icons/other/app-store.svg"
+        },
+        {
+            "label": "Google Play",
+            "url": "https://play.google.com/store/apps/dev?id=4646660586516176141",
+            "iconAsset": "assets/icons/other/google-play.svg"
+        },
+        {
+            "label": "pub.dev",
+            "url": "https://pub.dev/publishers/ehsanur.com/packages",
+            "iconAsset": "assets/icons/other/dart.svg"
+        }
+    ],
+    "recruiterFit": {
+        "title": "For recruiters & hiring managers",
+        "targetRolesLabel": "Target roles",
+        "targetRoles": "Senior Flutter Engineer · Senior Flutter Developer · Lead Flutter Developer · Mobile Tech Lead",
+        "experienceLabel": "Experience",
+        "experience": "11 years shipping mobile apps · 7 years of Flutter",
+        "stackLabel": "Stack",
+        "stack": "Flutter, Dart, Swift/SwiftUI, Kotlin, Firebase, offline-first sync, StoreKit 2 / Stripe",
+        "locationLabel": "Location",
+        "location": "Remote from Bangladesh · No relocation or visa sponsorship required",
+        "timezoneLabel": "Time zone",
+        "timezone": "Works with any time zone; flexible core overlap hours",
+        "availabilityLabel": "Availability",
+        "availability": "Available now",
+        "engagementLabel": "Engagement",
+        "engagement": "Full-time or contract",
+        "resumeLabel": "Resume (PDF)",
+        "onePagerLabel": "One-pager (PDF)",
+        "emailLabel": "Email",
+        "linkedinLabel": "LinkedIn"
+    },
+    "openSourcePackages": [
+        {
+            "name": "flutter_crdt_sync_kit",
+            "blurb": "Merges offline edits from several devices without losing any.",
+            "url": "https://pub.dev/packages/flutter_crdt_sync_kit"
+        },
+        {
+            "name": "flutter_scanner_devxhub",
+            "blurb": "Native receipt scanner behind Flutter (built at Devxhub, published under Devxhub).",
+            "url": "https://pub.dev/packages/flutter_scanner_devxhub"
+        },
+        {
+            "name": "flutter_a11y_lens",
+            "blurb": "Live WCAG accessibility auditing in a running app.",
+            "url": "https://pub.dev/packages/flutter_a11y_lens"
+        }
+    ],
+    "openSourceSectionTitle": "Open source",
+    "sectionEyebrowOpenSource": "Open source",
+    "notesSectionTitle": "Notes",
+    "sectionEyebrowNotes": "Notes",
+    "videoSectionTitle": "Intro",
+    "sectionEyebrowVideo": "Intro",
+    "contractSectionTitle": "Contract work",
+    "sectionEyebrowContract": "Contract work",
+    "contractIntro": "For product teams that need a senior Flutter engineer on a clear problem — not an agency retainers page.",
+    "whoIHelpTitle": "Who I help",
+    "engagementProcessTitle": "How an engagement works",
+    "faqTitle": "FAQ",
+    "notes": [
+        {
+            "title": "Native scanner behind a platform channel",
+            "summary": "When a Flutter plugin is too slow for a FinTech scan flow, drop to Swift/Kotlin and keep one Dart API.",
+            "url": "notes/native-scanner-platform-channel.html"
+        },
+        {
+            "title": "Offline conflict-resolution that keeps claims",
+            "summary": "A deterministic merge rule so expense claims made without signal survive sync.",
+            "url": "notes/offline-conflict-resolution.html"
+        },
+        {
+            "title": "One entitlement model for StoreKit and Stripe",
+            "summary": "Stop duplicate purchases by mapping both stores to one account-level entitlement.",
+            "url": "notes/storekit-stripe-entitlements.html"
+        }
+    ],
+    "contractHelpCards": [
+        {
+            "title": "Rescue a stalled Flutter app",
+            "body": "Unstick a product blocked on architecture, store review, or a half-finished rewrite.",
+            "tags": [
+                "contract",
+                "full-time",
+                "advisory"
+            ]
+        },
+        {
+            "title": "Offline-first / sync",
+            "body": "Local-first storage and conflict rules so work done without signal is never lost.",
+            "tags": [
+                "contract",
+                "full-time"
+            ]
+        },
+        {
+            "title": "Payments (Stripe + StoreKit)",
+            "body": "One entitlement model across web/Android Stripe and Apple In-App Purchase.",
+            "tags": [
+                "contract",
+                "full-time"
+            ]
+        },
+        {
+            "title": "Native plugin / performance rewrite",
+            "body": "Replace a slow Flutter path with Swift/Kotlin when the package cannot do the job.",
+            "tags": [
+                "contract",
+                "advisory"
+            ]
+        },
+        {
+            "title": "Tech lead / architecture review",
+            "body": "Own the mobile architecture, code review standards, and release pipeline for a team.",
+            "tags": [
+                "contract",
+                "full-time",
+                "advisory"
+            ]
+        }
+    ],
+    "engagementSteps": [
+        {
+            "title": "Discovery",
+            "body": "15–30 minutes on the product, the blocker, and what success looks like."
+        },
+        {
+            "title": "Audit",
+            "body": "Short written findings on architecture, risks, and the smallest useful next step."
+        },
+        {
+            "title": "Milestone plan",
+            "body": "Scoped milestones with clear demos — not an open-ended time dump."
+        },
+        {
+            "title": "Weekly demos",
+            "body": "Working software every week, with tests and a release path."
+        },
+        {
+            "title": "Handoff",
+            "body": "Documented code, ownership transfer, and a clean exit when the goal is met."
+        }
+    ],
+    "faqItems": [
+        {
+            "question": "How do engagements usually work?",
+            "answer": "Project milestones or a monthly retainer for ongoing lead work. Scope and commercial terms are agreed in writing before code starts — rates are not listed publicly."
+        },
+        {
+            "question": "What about time zones?",
+            "answer": "Works with any time zone; flexible core overlap hours. Overseas team hours for three years."
+        },
+        {
+            "question": "NDA and IP?",
+            "answer": "Happy to sign an NDA. Work product belongs to the client under a standard contractor or employment agreement."
+        },
+        {
+            "question": "What tools do you use?",
+            "answer": "Flutter/Dart, native iOS and Android, Firebase/SQLite, Fastlane, GitHub Actions, and the usual design handoff tools."
+        },
+        {
+            "question": "AI-assisted workflow?",
+            "answer": "AI coding agents write much of the code under my architecture and review. Tests and automated releases keep quality up — I own the result."
+        },
+        {
+            "question": "Remote from Bangladesh?",
+            "answer": "Yes. No relocation or visa sponsorship required for remote work."
+        }
+    ],
+    "emailPresets": [
+        {
+            "label": "Hiring for a full-time role",
+            "subject": "Full-time role — Senior Flutter Engineer",
+            "body": "Hi Ehsanur,\n\nI'm hiring for a full-time Senior Flutter / mobile role. Here's a short summary of the company, stack, and timeline:\n\n"
+        },
+        {
+            "label": "Need a contract fix",
+            "subject": "Contract — Flutter / native mobile fix",
+            "body": "Hi Ehsanur,\n\nWe need contract help on a Flutter (or native) problem. Brief:\n\n- Product:\n- Blocker:\n- Timeline:\n\n"
+        },
+        {
+            "label": "Architecture advisory",
+            "subject": "Architecture advisory — mobile",
+            "body": "Hi Ehsanur,\n\nI'd like a short architecture / tech-lead advisory pass on our mobile stack. Context:\n\n"
+        }
+    ],
+    "emailPresetsTitle": "I'm reaching out about…",
+    "testimonials": [],
+    "press": [],
+    "sectionEyebrowTestimonials": "Recommendations"
 }

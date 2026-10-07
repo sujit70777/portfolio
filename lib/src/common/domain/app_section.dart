@@ -7,6 +7,10 @@ enum AppSection {
   skills,
   experience,
   projects,
+  openSource,
+  video,
+  notes,
+  contract,
   fitCheck,
 }
 

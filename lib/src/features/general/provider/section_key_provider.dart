@@ -29,6 +29,26 @@ GlobalKey projectSectionKey(Ref ref) {
 }
 
 @riverpod
+GlobalKey openSourceSectionKey(Ref ref) {
+  return GlobalKey();
+}
+
+@riverpod
+GlobalKey videoSectionKey(Ref ref) {
+  return GlobalKey();
+}
+
+@riverpod
+GlobalKey notesSectionKey(Ref ref) {
+  return GlobalKey();
+}
+
+@riverpod
+GlobalKey contractSectionKey(Ref ref) {
+  return GlobalKey();
+}
+
+@riverpod
 GlobalKey fitCheckSectionKey(Ref ref) {
   return GlobalKey();
 }

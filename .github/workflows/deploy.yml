@@ -68,24 +68,30 @@ jobs:
             exit 1
           fi
 
-      - name: Cache-bust resume PDF URLs
-        # resume.pdf keeps a stable filename, so a plain redeploy gives
-        # returning visitors no signal that the file changed and they can
-        # keep seeing a stale cached copy indefinitely. Stamping the content
-        # hash onto the URL used to fetch it (in the built translations
-        # asset, not the source file) makes every content change a distinct
-        # URL, which busts any cache layer — browser, ISP, or the host's own
-        # server-side cache — without needing a purge.
+      - name: Cache-bust PDF document URLs
+        # resume.pdf / one-pager.pdf keep stable filenames, so a plain
+        # redeploy gives returning visitors no signal that the file changed.
+        # Stamping the content hash onto every URL that points at them (in
+        # the built translations asset and the prerender HTML) busts any
+        # cache layer without needing a purge.
         run: |
           TRANSLATIONS=build/web/assets/assets/translations/en.json
+          INDEX=build/web/index.html
           test -f "$TRANSLATIONS"
+          test -f "$INDEX"
           for pdf in build/web/assets/documents/*.pdf; do
+            [ -f "$pdf" ] || continue
             hash=$(sha256sum "$pdf" | cut -c1-12)
-            url="assets/documents/$(basename "$pdf")"
-            jq --arg url "$url" --arg hash "$hash" \
-              '(.resumes[]? | select(.url == $url) | .url) |= (. + "?v=" + $hash)' \
-              "$TRANSLATIONS" > "$TRANSLATIONS.tmp"
+            base=$(basename "$pdf")
+            url="assets/documents/$base"
+            jq --arg url "$url" --arg hash "$hash" '
+              (.resumes[]? | select(.url == $url or (.url | startswith($url + "?"))) | .url) = ($url + "?v=" + $hash)
+              | if (.onePagerUrl == $url or (.onePagerUrl | tostring | startswith($url + "?")))
+                then .onePagerUrl = ($url + "?v=" + $hash) else . end
+            ' "$TRANSLATIONS" > "$TRANSLATIONS.tmp"
             mv "$TRANSLATIONS.tmp" "$TRANSLATIONS"
+            # Prerender CTAs are plain HTML — stamp those too.
+            sed -i "s|${url}\\(?v=[a-f0-9]*\\)\\?|${url}?v=${hash}|g" "$INDEX"
           done
 
       - name: Drop debug symbol maps

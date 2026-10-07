@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/src/features/personal_info/domain/resume.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/resume_language_dialog.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
+import 'package:portfolio/src/utils/analytics.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
@@ -70,6 +71,7 @@ class ResumeButton extends StatelessWidget {
       if (resumeFirstUrl == null) {
         ScaffoldMessengerHelper.showLaunchUrlError(context);
       } else {
+        Analytics.track('resume_click');
         try {
           await LaunchUrlHelper.launchURL(resumeFirstUrl, openInNewTab: true);
         } catch (e) {

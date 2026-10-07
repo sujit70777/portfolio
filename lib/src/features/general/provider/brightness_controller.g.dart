@@ -10,13 +10,11 @@ part of 'brightness_controller.dart';
 // ignore_for_file: type=lint, type=warning
 /// The active [Brightness], persisted across visits.
 ///
-/// Absence of a stored value means "follow the operating system" — it is not
-/// recorded on first load. Writing it down eagerly would pin the very first
-/// visit's OS setting forever, so a visitor whose machine switches to dark at
-/// sunset would keep getting the light site. It also has to stay unwritten
-/// for the pre-Flutter hero in web/index.html to agree with the app: that
-/// markup reads this same key out of localStorage and falls back to the
-/// `prefers-color-scheme` media query, which is exactly this rule.
+/// Absence of a stored value means dark — the site's default, whatever the
+/// operating system prefers. Only an explicit toggle writes a value, so a
+/// visitor who never touches the switch keeps getting the default even if it
+/// changes later. The pre-Flutter hero in web/index.html reads this same key
+/// out of localStorage and falls back to dark too, so the two agree.
 // keepAlive: an app-wide setting, not per-screen state. Auto-disposing it
 // means every rebuild re-reads storage, which throws away a toggle that has
 // not finished being written — see the note on sharedPreferencesProvider.
@@ -26,13 +24,11 @@ final brightnessControllerProvider = BrightnessControllerProvider._();
 
 /// The active [Brightness], persisted across visits.
 ///
-/// Absence of a stored value means "follow the operating system" — it is not
-/// recorded on first load. Writing it down eagerly would pin the very first
-/// visit's OS setting forever, so a visitor whose machine switches to dark at
-/// sunset would keep getting the light site. It also has to stay unwritten
-/// for the pre-Flutter hero in web/index.html to agree with the app: that
-/// markup reads this same key out of localStorage and falls back to the
-/// `prefers-color-scheme` media query, which is exactly this rule.
+/// Absence of a stored value means dark — the site's default, whatever the
+/// operating system prefers. Only an explicit toggle writes a value, so a
+/// visitor who never touches the switch keeps getting the default even if it
+/// changes later. The pre-Flutter hero in web/index.html reads this same key
+/// out of localStorage and falls back to dark too, so the two agree.
 // keepAlive: an app-wide setting, not per-screen state. Auto-disposing it
 // means every rebuild re-reads storage, which throws away a toggle that has
 // not finished being written — see the note on sharedPreferencesProvider.
@@ -40,13 +36,11 @@ final class BrightnessControllerProvider
     extends $AsyncNotifierProvider<BrightnessController, Brightness> {
   /// The active [Brightness], persisted across visits.
   ///
-  /// Absence of a stored value means "follow the operating system" — it is not
-  /// recorded on first load. Writing it down eagerly would pin the very first
-  /// visit's OS setting forever, so a visitor whose machine switches to dark at
-  /// sunset would keep getting the light site. It also has to stay unwritten
-  /// for the pre-Flutter hero in web/index.html to agree with the app: that
-  /// markup reads this same key out of localStorage and falls back to the
-  /// `prefers-color-scheme` media query, which is exactly this rule.
+  /// Absence of a stored value means dark — the site's default, whatever the
+  /// operating system prefers. Only an explicit toggle writes a value, so a
+  /// visitor who never touches the switch keeps getting the default even if it
+  /// changes later. The pre-Flutter hero in web/index.html reads this same key
+  /// out of localStorage and falls back to dark too, so the two agree.
   // keepAlive: an app-wide setting, not per-screen state. Auto-disposing it
   // means every rebuild re-reads storage, which throws away a toggle that has
   // not finished being written — see the note on sharedPreferencesProvider.
@@ -70,17 +64,15 @@ final class BrightnessControllerProvider
 }
 
 String _$brightnessControllerHash() =>
-    r'7593f0f039c10a586a53507ccfac9be7aa64d192';
+    r'5127a30b36622e8b45d7e5d612101559a7e28f48';
 
 /// The active [Brightness], persisted across visits.
 ///
-/// Absence of a stored value means "follow the operating system" — it is not
-/// recorded on first load. Writing it down eagerly would pin the very first
-/// visit's OS setting forever, so a visitor whose machine switches to dark at
-/// sunset would keep getting the light site. It also has to stay unwritten
-/// for the pre-Flutter hero in web/index.html to agree with the app: that
-/// markup reads this same key out of localStorage and falls back to the
-/// `prefers-color-scheme` media query, which is exactly this rule.
+/// Absence of a stored value means dark — the site's default, whatever the
+/// operating system prefers. Only an explicit toggle writes a value, so a
+/// visitor who never touches the switch keeps getting the default even if it
+/// changes later. The pre-Flutter hero in web/index.html reads this same key
+/// out of localStorage and falls back to dark too, so the two agree.
 // keepAlive: an app-wide setting, not per-screen state. Auto-disposing it
 // means every rebuild re-reads storage, which throws away a toggle that has
 // not finished being written — see the note on sharedPreferencesProvider.

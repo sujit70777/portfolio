@@ -89,6 +89,20 @@ class MyAppBar extends ConsumerWidget {
                     },
                   ),
                   AppBarButton(
+                    title: tr(LocaleKeys.openSourceSectionTitle),
+                    onPressed: () {
+                      _onAppBarButtonTap(
+                          ref.watch(openSourceSectionKeyProvider));
+                    },
+                  ),
+                  AppBarButton(
+                    title: tr(LocaleKeys.contractSectionTitle),
+                    onPressed: () {
+                      _onAppBarButtonTap(
+                          ref.watch(contractSectionKeyProvider));
+                    },
+                  ),
+                  AppBarButton(
                     title: tr(LocaleKeys.fitCheckSectionTitle),
                     emphasized: true,
                     onPressed: () {

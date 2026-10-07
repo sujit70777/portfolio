@@ -11,9 +11,11 @@ import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/fit_check/application/fit_summary.dart';
 import 'package:portfolio/src/features/fit_check/data/fit_analyzer_provider.dart';
 import 'package:portfolio/src/features/fit_check/domain/fit_report.dart';
+import 'package:portfolio/src/features/conversion/presentation/widgets/email_presets_row.dart';
 import 'package:portfolio/src/features/fit_check/presentation/widgets/fit_results.dart';
 import 'package:portfolio/src/features/personal_info/data/personal_info_repository.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
+import 'package:portfolio/src/utils/analytics.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
@@ -56,6 +58,7 @@ class _FitCheckSectionState extends ConsumerState<FitCheckSection> {
       final report = ref.read(fitAnalyzerProvider).analyze(text);
       _report = report.isEmpty ? null : report;
       _message = report.isEmpty ? tr(LocaleKeys.fitCheck_nothingFound) : null;
+      if (_report != null) Analytics.track('fitcheck_submit');
     });
   }
 
@@ -144,6 +147,8 @@ class _FitCheckSectionState extends ConsumerState<FitCheckSection> {
             style: theme.textTheme.bodyMedium?.copyWith(color: muted),
           ),
         ),
+        gapH16,
+        const EmailPresetsRow(),
         gapH12,
         Row(
           children: [
