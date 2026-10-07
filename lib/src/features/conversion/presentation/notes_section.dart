@@ -10,6 +10,7 @@ import 'package:portfolio/src/features/page_search/presentation/searchable_text.
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/analytics.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
+import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
 class NotesSection extends ConsumerWidget {
   const NotesSection({super.key});
@@ -41,9 +42,18 @@ class NotesSection extends ConsumerWidget {
             color: Colors.transparent,
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
-              onTap: () {
+              onTap: () async {
                 Analytics.track('note_click', props: {'title': note.title});
-                LaunchUrlHelper.launchURL(note.url, openInNewTab: true);
+                try {
+                  await LaunchUrlHelper.launchURL(note.url, openInNewTab: true);
+                } catch (_) {
+                  if (context.mounted) {
+                    ScaffoldMessengerHelper.showLaunchUrlError(
+                      context,
+                      url: note.url,
+                    );
+                  }
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),

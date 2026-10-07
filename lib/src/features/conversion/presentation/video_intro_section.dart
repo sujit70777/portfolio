@@ -7,6 +7,7 @@ import 'package:portfolio/src/features/page_search/presentation/searchable_text.
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/analytics.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
+import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Hidden until [LocaleKeys.videoUrl] is a non-empty URL.
@@ -51,11 +52,20 @@ class VideoIntroSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
             onTap: () async {
               Analytics.track('video_play_click');
-              final uri = Uri.parse(url);
-              if (url.endsWith('.mp4') || url.startsWith('assets/')) {
-                await LaunchUrlHelper.launchURL(url, openInNewTab: true);
-              } else {
-                await launchUrl(uri, mode: LaunchMode.externalApplication);
+              try {
+                final uri = Uri.parse(url);
+                if (url.endsWith('.mp4') || url.startsWith('assets/')) {
+                  await LaunchUrlHelper.launchURL(url, openInNewTab: true);
+                } else {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                }
+              } catch (_) {
+                if (context.mounted) {
+                  ScaffoldMessengerHelper.showLaunchUrlError(
+                    context,
+                    url: url,
+                  );
+                }
               }
             },
             child: AspectRatio(

@@ -106,6 +106,22 @@ void main() {
     ]);
   });
 
+  test('filterProjects matches technology after trim', () {
+    final spaced = Project(
+      name: 'Spaced Tech',
+      featured: true,
+      technologies: const [Technology(name: 'Flutter ')],
+    );
+    expect(
+      filterProjects(
+        [spaced, package],
+        searchQuery: '',
+        technology: 'Flutter',
+      ).map((p) => p.name),
+      ['Spaced Tech', 'flutter_helper'],
+    );
+  });
+
   test('collectTechnologyIcons keeps first non-null icon per name', () {
     final icons = collectTechnologyIcons([caseStudy, package]);
     expect(

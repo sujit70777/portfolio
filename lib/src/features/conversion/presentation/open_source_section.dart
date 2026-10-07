@@ -10,6 +10,7 @@ import 'package:portfolio/src/features/page_search/presentation/searchable_text.
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/analytics.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
+import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
 class OpenSourceSection extends ConsumerWidget {
   const OpenSourceSection({super.key});
@@ -58,10 +59,19 @@ class OpenSourceSection extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(14),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(14),
-                        onTap: () {
+                        onTap: () async {
                           Analytics.track('pubdev_click',
                               props: {'package': pkg.name});
-                          LaunchUrlHelper.launchURL(pkg.url);
+                          try {
+                            await LaunchUrlHelper.launchURL(pkg.url);
+                          } catch (_) {
+                            if (context.mounted) {
+                              ScaffoldMessengerHelper.showLaunchUrlError(
+                                context,
+                                url: pkg.url,
+                              );
+                            }
+                          }
                         },
                         child: Container(
                           padding: const EdgeInsets.all(16),

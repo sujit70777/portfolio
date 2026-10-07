@@ -32,6 +32,7 @@ class ProjectSwitcherPanel extends StatelessWidget {
     super.key,
     required this.allProjects,
     required this.selected,
+    this.selectedItemKey,
     required this.searchController,
     required this.searchFocusNode,
     required this.listFocusNode,
@@ -45,6 +46,8 @@ class ProjectSwitcherPanel extends StatelessWidget {
 
   final List<Project> allProjects;
   final Project selected;
+  /// Attached to the selected row so arrow-key selection can scroll into view.
+  final GlobalKey? selectedItemKey;
   final TextEditingController searchController;
   final FocusNode searchFocusNode;
   final FocusNode listFocusNode;
@@ -208,6 +211,9 @@ class ProjectSwitcherPanel extends StatelessWidget {
                             _SectionHeader(label: _caseStudiesLabel()),
                             for (final project in sections.caseStudies)
                               _SwitcherRow(
+                                key: project.name == selected.name
+                                    ? selectedItemKey
+                                    : null,
                                 project: project,
                                 hue: hueFor(project),
                                 selected: project.name == selected.name,
@@ -218,6 +224,9 @@ class ProjectSwitcherPanel extends StatelessWidget {
                             _SectionHeader(label: _moreShippedLabel()),
                             for (final project in sections.more)
                               _SwitcherRow(
+                                key: project.name == selected.name
+                                    ? selectedItemKey
+                                    : null,
                                 project: project,
                                 hue: hueFor(project),
                                 selected: project.name == selected.name,
@@ -430,6 +439,7 @@ class _SectionHeader extends StatelessWidget {
 
 class _SwitcherRow extends StatelessWidget {
   const _SwitcherRow({
+    super.key,
     required this.project,
     required this.hue,
     required this.selected,

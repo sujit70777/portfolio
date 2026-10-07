@@ -36,10 +36,19 @@ class DocumentLinkButton extends StatelessWidget {
 
     Future<void> onTap() async {
       Analytics.track(analyticsEvent);
+      final isMailto = url.startsWith('mailto:');
       try {
-        await LaunchUrlHelper.launchURL(url, openInNewTab: true);
+        // mailto in a new tab leaves a blank tab behind in browsers that
+        // hand the URI to a mail app — same rule as the hero Email CTA.
+        await LaunchUrlHelper.launchURL(url, openInNewTab: !isMailto);
       } catch (_) {
-        if (context.mounted) {
+        if (!context.mounted) return;
+        if (isMailto) {
+          ScaffoldMessengerHelper.showEmailFallback(
+            context,
+            email: url.substring('mailto:'.length).split('?').first,
+          );
+        } else {
           ScaffoldMessengerHelper.showLaunchUrlError(context, url: url);
         }
       }

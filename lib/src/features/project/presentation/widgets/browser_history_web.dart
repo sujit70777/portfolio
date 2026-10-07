@@ -1,6 +1,5 @@
-// ignore: avoid_web_libraries_in_flutter, conditional import for web only
-import 'dart:html' as html;
+import 'package:web/web.dart' as web;
 
 void replaceBrowserUrl(String url) {
-  html.window.history.replaceState(null, '', url);
+  web.window.history.replaceState(null, '', url);
 }

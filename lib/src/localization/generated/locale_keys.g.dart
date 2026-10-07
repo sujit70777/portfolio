@@ -131,5 +131,8 @@ abstract class  LocaleKeys {
   static const testimonials = 'testimonials';
   static const press = 'press';
   static const sectionEyebrowTestimonials = 'sectionEyebrowTestimonials';
+  static const resumeUrl = 'resumeUrl';
+  static const navMore = 'navMore';
+  static const navMoreTooltip = 'navMoreTooltip';
 
 }

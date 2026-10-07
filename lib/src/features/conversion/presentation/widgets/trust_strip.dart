@@ -7,6 +7,7 @@ import 'package:portfolio/src/features/conversion/data/conversion_repository.dar
 import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 import 'package:portfolio/src/utils/analytics.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
+import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
 /// NDA-safe text chips + store/pub.dev badges under the hero.
 class TrustStrip extends ConsumerWidget {
@@ -68,7 +69,16 @@ class TrustStrip extends ConsumerWidget {
                       Analytics.track('store_badge_click', props: {
                         'label': badge.label,
                       });
-                      await LaunchUrlHelper.launchURL(badge.url);
+                      try {
+                        await LaunchUrlHelper.launchURL(badge.url);
+                      } catch (_) {
+                        if (context.mounted) {
+                          ScaffoldMessengerHelper.showLaunchUrlError(
+                            context,
+                            url: badge.url,
+                          );
+                        }
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(6),

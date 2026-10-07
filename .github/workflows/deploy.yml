@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
 
+# Two quick pushes would otherwise rsync --delete into the same public_html
+# at once and can leave a mix of both builds live. Queue them instead.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -84,10 +90,16 @@ jobs:
             hash=$(sha256sum "$pdf" | cut -c1-12)
             base=$(basename "$pdf")
             url="assets/documents/$base"
+            # Stamp lists (resumes[]) and scalars that the app reads via
+            # EasyLocalization's runtime asset (tr / resumeUrl / onePagerUrl).
+            # CodegenLoader.mapLocales is baked into main.dart.js and never
+            # sees this edit — resume buttons must use resumeUrl via tr().
             jq --arg url "$url" --arg hash "$hash" '
-              (.resumes[]? | select(.url == $url or (.url | startswith($url + "?"))) | .url) = ($url + "?v=" + $hash)
+              (.resumes[]? | select(.url == $url or ((.url // "") | startswith($url + "?"))) | .url) = ($url + "?v=" + $hash)
               | if (.onePagerUrl == $url or (.onePagerUrl | tostring | startswith($url + "?")))
                 then .onePagerUrl = ($url + "?v=" + $hash) else . end
+              | if (.resumeUrl == $url or (.resumeUrl | tostring | startswith($url + "?")))
+                then .resumeUrl = ($url + "?v=" + $hash) else . end
             ' "$TRANSLATIONS" > "$TRANSLATIONS.tmp"
             mv "$TRANSLATIONS.tmp" "$TRANSLATIONS"
             # Prerender CTAs are plain HTML — stamp those too.

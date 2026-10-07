@@ -7,6 +7,7 @@ import 'package:portfolio/src/features/conversion/data/conversion_repository.dar
 import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
+import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 
 /// Renders only when real testimonials exist — empty array hides entirely.
 class TestimonialsSection extends ConsumerWidget {
@@ -68,8 +69,19 @@ class TestimonialsSection extends ConsumerWidget {
                 if ((t.linkedinUrl ?? '').isNotEmpty) ...[
                   const SizedBox(height: 6),
                   TextButton(
-                    onPressed: () =>
-                        LaunchUrlHelper.launchURL(t.linkedinUrl!),
+                    onPressed: () async {
+                      final url = t.linkedinUrl!;
+                      try {
+                        await LaunchUrlHelper.launchURL(url);
+                      } catch (_) {
+                        if (context.mounted) {
+                          ScaffoldMessengerHelper.showLaunchUrlError(
+                            context,
+                            url: url,
+                          );
+                        }
+                      }
+                    },
                     child: const Text('LinkedIn recommendation'),
                   ),
                 ],

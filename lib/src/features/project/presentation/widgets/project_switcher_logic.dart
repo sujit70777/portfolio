@@ -88,12 +88,16 @@ List<Project> filterProjects(
       return false;
     }
     if (technology != null) {
+      // Dropdown labels are trimmed; compare against trimmed names so a
+      // trailing space in en.json cannot hide a matching project.
+      final needle = technology.trim();
       final names = project.technologies
-              ?.map((t) => t.name)
+              ?.map((t) => t.name?.trim())
               .whereType<String>()
+              .where((n) => n.isNotEmpty)
               .toSet() ??
           const <String>{};
-      if (!names.contains(technology)) return false;
+      if (!names.contains(needle)) return false;
     }
     return true;
   }).toList();

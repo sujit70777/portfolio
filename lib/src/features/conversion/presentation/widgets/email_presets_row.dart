@@ -62,17 +62,15 @@ class EmailPresetsRow extends ConsumerWidget {
                         Analytics.track('email_preset_click', props: {
                           'label': preset.label,
                         });
-                        final uri = Uri(
-                          scheme: 'mailto',
-                          path: email,
-                          queryParameters: {
-                            'subject': preset.subject,
-                            'body': preset.body,
-                          },
-                        );
+                        // Uri(queryParameters:) uses + for spaces; mail
+                        // clients show those as literal plus signs. Percent-
+                        // encode so the subject/body stay readable.
+                        final mailto =
+                            'mailto:$email?subject=${Uri.encodeComponent(preset.subject)}'
+                            '&body=${Uri.encodeComponent(preset.body)}';
                         try {
                           await LaunchUrlHelper.launchURL(
-                            uri.toString(),
+                            mailto,
                             openInNewTab: false,
                           );
                         } catch (_) {

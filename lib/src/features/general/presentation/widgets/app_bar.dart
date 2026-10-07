@@ -12,11 +12,18 @@ import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/features/general/provider/section_key_provider.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 
+/// Below this width the secondary nav items move into a "More" menu so the
+/// bar doesn't overflow (seven text buttons + locale + theme ≈ 980px).
+const _compactNavBreakpoint = 1180.0;
+
 class MyAppBar extends ConsumerWidget {
   const MyAppBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final width = MediaQuery.sizeOf(context).width;
+    final compact = width < _compactNavBreakpoint;
+
     return MySelectionArea(
       child: AppBar(
         scrolledUnderElevation: 0,
@@ -68,12 +75,13 @@ class MyAppBar extends ConsumerWidget {
                       _onAppBarButtonTap(ref.watch(aboutSectionKeyProvider));
                     },
                   ),
-                  AppBarButton(
-                    title: tr(LocaleKeys.skillsSectionTitle),
-                    onPressed: () {
-                      _onAppBarButtonTap(ref.watch(skillsSectionKeyProvider));
-                    },
-                  ),
+                  if (!compact)
+                    AppBarButton(
+                      title: tr(LocaleKeys.skillsSectionTitle),
+                      onPressed: () {
+                        _onAppBarButtonTap(ref.watch(skillsSectionKeyProvider));
+                      },
+                    ),
                   AppBarButton(
                     title: tr(LocaleKeys.experienceSectionTitle),
                     onPressed: () {
@@ -88,20 +96,31 @@ class MyAppBar extends ConsumerWidget {
                       _onAppBarButtonTap(ref.watch(projectSectionKeyProvider));
                     },
                   ),
-                  AppBarButton(
-                    title: tr(LocaleKeys.openSourceSectionTitle),
-                    onPressed: () {
-                      _onAppBarButtonTap(
-                          ref.watch(openSourceSectionKeyProvider));
-                    },
-                  ),
-                  AppBarButton(
-                    title: tr(LocaleKeys.contractSectionTitle),
-                    onPressed: () {
-                      _onAppBarButtonTap(
-                          ref.watch(contractSectionKeyProvider));
-                    },
-                  ),
+                  if (!compact) ...[
+                    AppBarButton(
+                      title: tr(LocaleKeys.openSourceSectionTitle),
+                      onPressed: () {
+                        _onAppBarButtonTap(
+                            ref.watch(openSourceSectionKeyProvider));
+                      },
+                    ),
+                    AppBarButton(
+                      title: tr(LocaleKeys.contractSectionTitle),
+                      onPressed: () {
+                        _onAppBarButtonTap(
+                            ref.watch(contractSectionKeyProvider));
+                      },
+                    ),
+                  ],
+                  if (compact)
+                    _MoreNavMenu(
+                      onSkills: () => _onAppBarButtonTap(
+                          ref.watch(skillsSectionKeyProvider)),
+                      onOpenSource: () => _onAppBarButtonTap(
+                          ref.watch(openSourceSectionKeyProvider)),
+                      onContract: () => _onAppBarButtonTap(
+                          ref.watch(contractSectionKeyProvider)),
+                    ),
                   AppBarButton(
                     title: tr(LocaleKeys.fitCheckSectionTitle),
                     emphasized: true,
@@ -144,5 +163,52 @@ class MyAppBar extends ConsumerWidget {
     final languages = ref.watch(languageRepositoryProvider).getLanguages();
     if (languages.length > 1) return const LocaleButton();
     return const SizedBox.shrink();
+  }
+}
+
+class _MoreNavMenu extends StatelessWidget {
+  const _MoreNavMenu({
+    required this.onSkills,
+    required this.onOpenSource,
+    required this.onContract,
+  });
+
+  final VoidCallback onSkills;
+  final VoidCallback onOpenSource;
+  final VoidCallback onContract;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return PopupMenuButton<VoidCallback>(
+      tooltip: tr(LocaleKeys.navMoreTooltip),
+      onSelected: (action) => action(),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          value: onSkills,
+          child: Text(tr(LocaleKeys.skillsSectionTitle)),
+        ),
+        PopupMenuItem(
+          value: onOpenSource,
+          child: Text(tr(LocaleKeys.openSourceSectionTitle)),
+        ),
+        PopupMenuItem(
+          value: onContract,
+          child: Text(tr(LocaleKeys.contractSectionTitle)),
+        ),
+      ],
+      child: SizedBox(
+        height: kToolbarHeight,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Center(
+            child: Text(
+              tr(LocaleKeys.navMore),
+              style: theme.textTheme.titleMedium,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

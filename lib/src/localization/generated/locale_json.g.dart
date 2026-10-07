@@ -1919,7 +1919,10 @@ class CodegenLoader extends AssetLoader{
   "emailPresetsTitle": "I'm reaching out about…",
   "testimonials": [],
   "press": [],
-  "sectionEyebrowTestimonials": "Recommendations"
+  "sectionEyebrowTestimonials": "Recommendations",
+  "resumeUrl": "assets/documents/resume.pdf",
+  "navMore": "More",
+  "navMoreTooltip": "More sections"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en};
 }

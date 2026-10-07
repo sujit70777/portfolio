@@ -90,6 +90,7 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
   final _searchController = TextEditingController();
   final _searchFocus = FocusNode();
   final _listFocus = FocusNode();
+  final _selectedRowKey = GlobalKey();
 
   late Project _selected;
   String _searchQuery = '';
@@ -110,12 +111,19 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
     super.initState();
     _selected = widget.project;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) _syncBrowserQuery(_selected.name);
+      if (!mounted) return;
+      _syncBrowserQuery(_selected.name);
+      // List owns Up/Down for project switching; detail pane keeps them for
+      // scrolling when the user tabs/clicks into the description.
+      _listFocus.requestFocus();
     });
   }
 
   @override
   void dispose() {
+    // Drop ?project= so reload / share doesn't reopen this modal. Keep
+    // ?section= if present.
+    _syncBrowserQuery(null);
     _focusNode.dispose();
     _searchController.dispose();
     _searchFocus.dispose();
@@ -133,11 +141,19 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
       );
 
   void _syncBrowserQuery(String? projectName) {
-    if (projectName == null || projectName.isEmpty) return;
     final params = Map<String, String>.from(Uri.base.queryParameters);
-    params['project'] = slugify(projectName);
-    params.remove('section');
-    replaceBrowserUrl(Uri.base.replace(queryParameters: params).toString());
+    if (projectName == null || projectName.isEmpty) {
+      params.remove('project');
+    } else {
+      params['project'] = slugify(projectName);
+    }
+    // Keep ?section= — deep links from cold emails should survive browsing.
+    // Uri.replace(queryParameters: {}) still leaves a bare "?", so fall back
+    // to the path alone; replaceState resolves it against the current origin.
+    final next = params.isEmpty
+        ? Uri.base.path
+        : Uri.base.replace(queryParameters: params).toString();
+    replaceBrowserUrl(next);
   }
 
   void _selectProject(Project project, {bool closeDrawer = false}) {
@@ -153,6 +169,18 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
       _images = const [];
     });
     _syncBrowserQuery(project.name);
+    _listFocus.requestFocus();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final ctx = _selectedRowKey.currentContext;
+      if (ctx != null && ctx.mounted) {
+        Scrollable.ensureVisible(
+          ctx,
+          alignment: 0.35,
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOut,
+        );
+      }
+    });
     if (closeDrawer) _scaffoldKey.currentState?.closeDrawer();
   }
 
@@ -174,6 +202,9 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
 
   void _moveSelection(int delta) {
     if (_searchFocus.hasFocus) return;
+    // Only when the list owns focus — otherwise Up/Down should scroll a
+    // long project description in the detail pane.
+    if (!_listFocus.hasFocus) return;
     final visible =
         flattenSections(sectionProjects(_visibleProjects(_projectsFromRepo())));
     if (visible.isEmpty) return;
@@ -245,11 +276,15 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
         }
         return KeyEventResult.ignored;
       case LogicalKeyboardKey.arrowDown:
-        if (_searchFocus.hasFocus) return KeyEventResult.ignored;
+        if (_searchFocus.hasFocus || !_listFocus.hasFocus) {
+          return KeyEventResult.ignored;
+        }
         _moveSelection(1);
         return KeyEventResult.handled;
       case LogicalKeyboardKey.arrowUp:
-        if (_searchFocus.hasFocus) return KeyEventResult.ignored;
+        if (_searchFocus.hasFocus || !_listFocus.hasFocus) {
+          return KeyEventResult.ignored;
+        }
         _moveSelection(-1);
         return KeyEventResult.handled;
       case LogicalKeyboardKey.escape:
@@ -272,6 +307,7 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
     return ProjectSwitcherPanel(
       allProjects: allProjects,
       selected: _selected,
+      selectedItemKey: _selectedRowKey,
       searchController: _searchController,
       searchFocusNode: _searchFocus,
       listFocusNode: _listFocus,

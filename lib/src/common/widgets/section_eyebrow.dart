@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/domain/app_section.dart';
 import 'package:portfolio/src/common/widgets/scroll_reveal.dart';
 import 'package:portfolio/src/constants/palette.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
+import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 
 /// Small mono "0N — Label" heading above a section — design brief 2's
 /// quiet, recurring nod to the version/changelog vocabulary. A label, not
@@ -28,7 +30,10 @@ class SectionEyebrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final number = section.number.toString().padLeft(2, '0');
+    // Skip the optional video slot while its URL is empty so numbers stay
+    // contiguous (05 Open source → 06 Notes, not 05 → 07).
+    final videoVisible = tr(LocaleKeys.videoUrl).trim().isNotEmpty;
+    final number = section.number(videoVisible: videoVisible).toString().padLeft(2, '0');
     final palette = Palette.of(context);
     final reveal = CurvedAnimation(
       parent: RevealScope.of(context),
