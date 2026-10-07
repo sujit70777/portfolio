@@ -35,8 +35,12 @@ class HeroStatPlaque extends StatelessWidget {
     final theme = Theme.of(context);
     // The single fastest credibility signal on the page — sized to read at
     // a glance rather than the smallest text in the hero.
-    final numberSize =
-        fluidSize(context, min: 20, preferredVwPercent: 2.5, max: 32);
+    final numberSize = fluidSize(
+      context,
+      min: 20,
+      preferredVwPercent: 2.5,
+      max: 32,
+    );
 
     // One hue per figure, so the four read as four separate facts at a
     // glance: gold for the star rating, then emerald, cyan, mint.
@@ -50,13 +54,15 @@ class HeroStatPlaque extends StatelessWidget {
         color: palette.hues[0],
       ),
       _StatData(
-          rawValue: tr(LocaleKeys.stats_apps),
-          label: tr(LocaleKeys.stats_appsLabel),
-          color: palette.hues[1]),
+        rawValue: tr(LocaleKeys.stats_apps),
+        label: tr(LocaleKeys.stats_appsLabel),
+        color: palette.hues[1],
+      ),
       _StatData(
-          rawValue: tr(LocaleKeys.stats_users),
-          label: tr(LocaleKeys.stats_usersLabel),
-          color: palette.hues[2]),
+        rawValue: tr(LocaleKeys.stats_users),
+        label: tr(LocaleKeys.stats_usersLabel),
+        color: palette.hues[2],
+      ),
       _StatData(
         rawValue: '${tr(LocaleKeys.stats_years)}yr',
         label: tr(LocaleKeys.stats_yearsLabel),
@@ -120,8 +126,7 @@ class HeroStatPlaque extends StatelessWidget {
         child: Stack(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               child: content,
             ),
             // An aurora rule along the top edge, like a lit bezel.
@@ -178,32 +183,40 @@ class _Stat extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            if (data.leadingIcon != null) ...[
-              Icon(
-                data.leadingIcon,
-                size: numberSize * 0.72,
-                color: data.color,
+        // scaleDown keeps "100K+" (+ star) inside narrow Expanded cells
+        // without clipping; no-op when the row already fits.
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (data.leadingIcon != null) ...[
+                Icon(
+                  data.leadingIcon,
+                  size: numberSize * 0.72,
+                  color: data.color,
+                ),
+                SizedBox(width: numberSize * 0.12),
+              ],
+              _CountUpValue(
+                rawValue: data.rawValue,
+                style: monoLabelStyle(fontSize: numberSize, color: data.color),
               ),
-              SizedBox(width: numberSize * 0.12),
             ],
-            _CountUpValue(
-              rawValue: data.rawValue,
-              style: monoLabelStyle(fontSize: numberSize, color: data.color),
-            ),
-          ],
+          ),
         ),
         const SizedBox(height: 2),
         SearchableText(
           data.label.toUpperCase(),
           textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           style: theme.textTheme.labelSmall?.copyWith(
             fontSize: 10,
             letterSpacing: 0.04,
             color: mutedTextColor(theme.colorScheme),
+            height: 1.2,
           ),
         ),
       ],
@@ -217,8 +230,7 @@ class _Stat extends StatelessWidget {
 /// on rebuild) and jumps straight to the final value under
 /// `prefers-reduced-motion`.
 class _CountUpValue extends StatefulWidget {
-  const _CountUpValue(
-      {required this.rawValue, this.style});
+  const _CountUpValue({required this.rawValue, this.style});
 
   final String rawValue;
   final TextStyle? style;
@@ -244,7 +256,9 @@ class _CountUpValueState extends State<_CountUpValue>
     _target = double.tryParse(numStr) ?? 0;
     _suffix = widget.rawValue.substring(match?.end ?? 0);
     _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1200));
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    );
     _curve = CurvedAnimation(parent: _controller, curve: Curves.easeOut);
   }
 

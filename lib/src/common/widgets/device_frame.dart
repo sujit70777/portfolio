@@ -12,7 +12,7 @@ class DeviceFrame extends StatelessWidget {
   final Widget screen;
 
   /// Real screenshots are portrait ~9:19.5 — see
-  /// assets/projectimage/tanto/ (414x896). Every device-framed screen uses
+  /// assets/projectimage/fintech-reimbursement-native-scanner/ (414x896). Every device-framed screen uses
   /// that ratio so featured cards line up consistently regardless of a
   /// given screenshot's actual source resolution (screenshots are
   /// cover-fit inside).

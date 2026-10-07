@@ -7,12 +7,12 @@ import 'package:portfolio/src/features/project/domain/project.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_image.dart';
 
-const _project = Project(name: 'Tanto');
+const _project = Project(name: 'FinTech Reimbursement — Native Scanner');
 const _images = [
-  'assets/projectimage/tanto/Frame 1.webp',
-  'assets/projectimage/tanto/Frame 2.webp',
-  'assets/projectimage/tanto/Frame 3.webp',
-  'assets/projectimage/tanto/Frame 4.webp',
+  'assets/projectimage/fintech-reimbursement-native-scanner/Frame 1.webp',
+  'assets/projectimage/fintech-reimbursement-native-scanner/Frame 2.webp',
+  'assets/projectimage/fintech-reimbursement-native-scanner/Frame 3.webp',
+  'assets/projectimage/fintech-reimbursement-native-scanner/Frame 4.webp',
 ];
 
 Future<void> _pumpCard(
@@ -22,7 +22,7 @@ Future<void> _pumpCard(
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
-        projectImagesProvider('Tanto').overrideWith((ref) async => _images),
+        projectImagesProvider('FinTech Reimbursement — Native Scanner').overrideWith((ref) async => _images),
       ],
       child: MaterialApp(
         home: Scaffold(
@@ -55,7 +55,7 @@ void main() {
     await tester.tap(find.byType(ProjectImage));
     await tester.pumpAndSettle();
     expect(find.text('1 / 4'), findsOneWidget);
-    expect(find.text('Tanto'), findsOneWidget);
+    expect(find.text('FinTech Reimbursement — Native Scanner'), findsOneWidget);
   });
 
   testWidgets(
@@ -134,7 +134,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          projectImagesProvider('Tanto')
+          projectImagesProvider('FinTech Reimbursement — Native Scanner')
               .overrideWith((ref) async => [_images.first]),
         ],
         child: const MaterialApp(
@@ -162,7 +162,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          projectImagesProvider('Tanto').overrideWith((ref) async => []),
+          projectImagesProvider('FinTech Reimbursement — Native Scanner').overrideWith((ref) async => []),
         ],
         child: const MaterialApp(
           home: Scaffold(

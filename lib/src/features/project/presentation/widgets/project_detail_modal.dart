@@ -12,23 +12,37 @@ import 'package:portfolio/src/common/widgets/technology_wrap_chips.dart';
 import 'package:portfolio/src/constants/sizes.dart';
 import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/deep_link_handler.dart';
+import 'package:portfolio/src/features/project/data/project_repository.dart';
 import 'package:portfolio/src/features/project/data/project_image_assets_provider.dart';
 import 'package:portfolio/src/features/project/domain/project.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/browser_history.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_highlights.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/link_platform_display.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/project_switcher_logic.dart';
+import 'package:portfolio/src/features/project/presentation/widgets/project_switcher_panel.dart';
 import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
+import 'package:portfolio/src/utils/slugify.dart';
+
+const _railWidth = 300.0;
+const _desktopMaxWidth = 1180.0;
 
 /// Opens the full project detail modal — image gallery, status, full
 /// description, tech chips, role, and a "visit project" CTA. Used by both
 /// the featured grid cards and the "more shipped work" rows so every
 /// project (shipped or in development, with or without a live URL) has the
 /// same place to be seen in full rather than jumping straight offsite.
-Future<void> showProjectDetailModal(BuildContext context,
-    {required Project project}) {
+///
+/// [allProjects] defaults to the repository list so callers can omit it;
+/// tests pass a short fake list.
+Future<void> showProjectDetailModal(
+  BuildContext context, {
+  required Project project,
+  List<Project>? allProjects,
+}) {
   final reduceMotion = MediaQuery.disableAnimationsOf(context);
   return showGeneralDialog<void>(
     context: context,
@@ -38,7 +52,10 @@ Future<void> showProjectDetailModal(BuildContext context,
     transitionDuration:
         reduceMotion ? Duration.zero : const Duration(milliseconds: 150),
     pageBuilder: (context, animation, secondaryAnimation) {
-      return ProjectDetailModal(project: project);
+      return ProjectDetailModal(
+        project: project,
+        allProjects: allProjects,
+      );
     },
     transitionBuilder: (context, animation, secondaryAnimation, child) {
       final curved = CurvedAnimation(parent: animation, curve: Curves.easeOut);
@@ -54,9 +71,14 @@ Future<void> showProjectDetailModal(BuildContext context,
 }
 
 class ProjectDetailModal extends ConsumerStatefulWidget {
-  const ProjectDetailModal({super.key, required this.project});
+  const ProjectDetailModal({
+    super.key,
+    required this.project,
+    this.allProjects,
+  });
 
   final Project project;
+  final List<Project>? allProjects;
 
   @override
   ConsumerState<ProjectDetailModal> createState() => _ProjectDetailModalState();
@@ -64,6 +86,15 @@ class ProjectDetailModal extends ConsumerStatefulWidget {
 
 class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
   final _focusNode = FocusNode();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _searchController = TextEditingController();
+  final _searchFocus = FocusNode();
+  final _listFocus = FocusNode();
+
+  late Project _selected;
+  String _searchQuery = '';
+  String? _technologyFilter;
+
   int _currentIndex = 0;
   List<String> _images = const [];
 
@@ -75,9 +106,81 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
   final Set<int> _resolvingIndices = {};
 
   @override
+  void initState() {
+    super.initState();
+    _selected = widget.project;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _syncBrowserQuery(_selected.name);
+    });
+  }
+
+  @override
   void dispose() {
     _focusNode.dispose();
+    _searchController.dispose();
+    _searchFocus.dispose();
+    _listFocus.dispose();
     super.dispose();
+  }
+
+  List<Project> _projectsFromRepo() =>
+      widget.allProjects ?? ref.read(projectRepositoryProvider).getProjects();
+
+  List<Project> _visibleProjects(List<Project> all) => filterProjects(
+        all,
+        searchQuery: _searchQuery,
+        technology: _technologyFilter,
+      );
+
+  void _syncBrowserQuery(String? projectName) {
+    if (projectName == null || projectName.isEmpty) return;
+    final params = Map<String, String>.from(Uri.base.queryParameters);
+    params['project'] = slugify(projectName);
+    params.remove('section');
+    replaceBrowserUrl(Uri.base.replace(queryParameters: params).toString());
+  }
+
+  void _selectProject(Project project, {bool closeDrawer = false}) {
+    if (project.name == _selected.name) {
+      if (closeDrawer) _scaffoldKey.currentState?.closeDrawer();
+      return;
+    }
+    setState(() {
+      _selected = project;
+      _currentIndex = 0;
+      _aspectRatios.clear();
+      _resolvingIndices.clear();
+      _images = const [];
+    });
+    _syncBrowserQuery(project.name);
+    if (closeDrawer) _scaffoldKey.currentState?.closeDrawer();
+  }
+
+  void _ensureSelectionVisible() {
+    final visible =
+        flattenSections(sectionProjects(_visibleProjects(_projectsFromRepo())));
+    if (visible.isEmpty) return;
+    final stillVisible = visible.any((p) => p.name == _selected.name);
+    if (!stillVisible) _selectProject(visible.first);
+  }
+
+  void _clearFilters() {
+    _searchController.clear();
+    setState(() {
+      _searchQuery = '';
+      _technologyFilter = null;
+    });
+  }
+
+  void _moveSelection(int delta) {
+    if (_searchFocus.hasFocus) return;
+    final visible =
+        flattenSections(sectionProjects(_visibleProjects(_projectsFromRepo())));
+    if (visible.isEmpty) return;
+    final index = visible.indexWhere((p) => p.name == _selected.name);
+    final current = index < 0 ? 0 : index;
+    final next = (current + delta).clamp(0, visible.length - 1);
+    _selectProject(visible[next]);
   }
 
   void _resolveAspectRatio(int index) {
@@ -128,12 +231,33 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
     switch (event.logicalKey) {
       case LogicalKeyboardKey.arrowRight:
-        if (_images.length > 1) _goTo(_currentIndex + 1);
-        return KeyEventResult.handled;
+        if (_searchFocus.hasFocus) return KeyEventResult.ignored;
+        if (_images.length > 1) {
+          _goTo(_currentIndex + 1);
+          return KeyEventResult.handled;
+        }
+        return KeyEventResult.ignored;
       case LogicalKeyboardKey.arrowLeft:
-        if (_images.length > 1) _goTo(_currentIndex - 1);
+        if (_searchFocus.hasFocus) return KeyEventResult.ignored;
+        if (_images.length > 1) {
+          _goTo(_currentIndex - 1);
+          return KeyEventResult.handled;
+        }
+        return KeyEventResult.ignored;
+      case LogicalKeyboardKey.arrowDown:
+        if (_searchFocus.hasFocus) return KeyEventResult.ignored;
+        _moveSelection(1);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.arrowUp:
+        if (_searchFocus.hasFocus) return KeyEventResult.ignored;
+        _moveSelection(-1);
         return KeyEventResult.handled;
       case LogicalKeyboardKey.escape:
+        final scaffold = _scaffoldKey.currentState;
+        if (scaffold?.isDrawerOpen == true) {
+          scaffold!.closeDrawer();
+          return KeyEventResult.handled;
+        }
         Navigator.of(context).pop();
         return KeyEventResult.handled;
       default:
@@ -141,9 +265,98 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
     }
   }
 
+  Widget _buildSwitcher({
+    required List<Project> allProjects,
+    required bool closeDrawerOnSelect,
+  }) {
+    return ProjectSwitcherPanel(
+      allProjects: allProjects,
+      selected: _selected,
+      searchController: _searchController,
+      searchFocusNode: _searchFocus,
+      listFocusNode: _listFocus,
+      searchQuery: _searchQuery,
+      technologyFilter: _technologyFilter,
+      onSearchChanged: (value) {
+        setState(() => _searchQuery = value);
+        _ensureSelectionVisible();
+      },
+      onTechnologyChanged: (value) {
+        setState(() => _technologyFilter = value);
+        _ensureSelectionVisible();
+      },
+      onClearFilters: _clearFilters,
+      onSelect: (project) =>
+          _selectProject(project, closeDrawer: closeDrawerOnSelect),
+    );
+  }
+
+  Widget _buildDetailBody(Project project) {
+    final theme = Theme.of(context);
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Flexible(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (_images.isNotEmpty)
+                  _Gallery(
+                    images: _images,
+                    currentIndex: _currentIndex,
+                    aspectRatio: _aspectRatios[_currentIndex],
+                    onNavigate: _goTo,
+                    placeholder: EmptyProjectPlaceholder(project: project),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(project.description ?? '',
+                          style: theme.textTheme.bodyLarge),
+                      if (project.role != null) ...[
+                        gapH16,
+                        Text(
+                          'My role',
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: mutedTextColor(theme.colorScheme),
+                          ),
+                        ),
+                        gapH4,
+                        Text(project.role!, style: theme.textTheme.bodyMedium),
+                      ],
+                      if (project.highlights?.isNotEmpty == true) ...[
+                        gapH16,
+                        ProjectHighlights(highlights: project.highlights!),
+                      ],
+                      if (project.technologies?.isNotEmpty == true) ...[
+                        gapH16,
+                        TechnologyWrapChips(
+                            technologies: project.technologies!),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        _ActionBar(
+          project: project,
+          onClose: () => Navigator.of(context).pop(),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final project = widget.project;
+    final allProjects = widget.allProjects ??
+        ref.watch(projectRepositoryProvider).getProjects();
+    final project = _selected;
     final projectName = project.name ?? '';
     _images = project.screenshotPath != null
         ? [project.screenshotPath!]
@@ -160,87 +373,88 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
     final isDesktop = Responsive.isDesktop(context);
     final theme = Theme.of(context);
 
-    final content = Material(
+    final shell = Material(
       color: theme.colorScheme.primary,
       clipBehavior: Clip.antiAlias,
       borderRadius: isDesktop ? BorderRadius.circular(20) : BorderRadius.zero,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _Header(project: project, onClose: () => Navigator.of(context).pop()),
-          Flexible(
-            child: SingleChildScrollView(
-              child: Column(
+      child: Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: theme.colorScheme.primary,
+        drawer: isDesktop
+            ? null
+            : Drawer(
+                width: (_railWidth + 24).clamp(
+                  280.0,
+                  MediaQuery.sizeOf(context).width * 0.92,
+                ),
+                child: SafeArea(
+                  child: _buildSwitcher(
+                    allProjects: allProjects,
+                    closeDrawerOnSelect: true,
+                  ),
+                ),
+              ),
+        drawerEnableOpenDragGesture: !isDesktop,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _Header(
+              project: project,
+              showMenu: !isDesktop,
+              onOpenMenu: () => _scaffoldKey.currentState?.openDrawer(),
+              onClose: () => Navigator.of(context).pop(),
+            ),
+            Expanded(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  if (_images.isNotEmpty)
-                    _Gallery(
-                      images: _images,
-                      currentIndex: _currentIndex,
-                      aspectRatio: _aspectRatios[_currentIndex],
-                      onNavigate: _goTo,
-                      placeholder: EmptyProjectPlaceholder(project: project),
-                    ),
-                  Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(project.description ?? '',
-                            style: theme.textTheme.bodyLarge),
-                        if (project.role != null) ...[
-                          gapH16,
-                          Text(
-                            'My role',
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              color: mutedTextColor(theme.colorScheme),
+                  if (isDesktop) ...[
+                    SizedBox(
+                      width: _railWidth,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            right: BorderSide(
+                              color: theme.colorScheme.onSurface.withAlpha(20),
                             ),
                           ),
-                          gapH4,
-                          Text(project.role!,
-                              style: theme.textTheme.bodyMedium),
-                        ],
-                        if (project.highlights?.isNotEmpty == true) ...[
-                          gapH16,
-                          ProjectHighlights(highlights: project.highlights!),
-                        ],
-                        if (project.technologies?.isNotEmpty == true) ...[
-                          gapH16,
-                          TechnologyWrapChips(
-                              technologies: project.technologies!),
-                        ],
-                      ],
+                        ),
+                        child: _buildSwitcher(
+                          allProjects: allProjects,
+                          closeDrawerOnSelect: false,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
+                  Expanded(child: _buildDetailBody(project)),
                 ],
               ),
             ),
-          ),
-          _ActionBar(
-              project: project, onClose: () => Navigator.of(context).pop()),
-        ],
+          ],
+        ),
       ),
     );
 
-    return Focus(
-      focusNode: _focusNode,
-      autofocus: true,
-      onKeyEvent: _handleKey,
-      child: Material(
-        type: MaterialType.transparency,
-        child: SafeArea(
-          child: isDesktop
-              ? Center(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: 860,
-                      maxHeight: MediaQuery.sizeOf(context).height * 0.88,
+    return FocusTraversalGroup(
+      child: Focus(
+        focusNode: _focusNode,
+        autofocus: true,
+        onKeyEvent: _handleKey,
+        child: Material(
+          type: MaterialType.transparency,
+          child: SafeArea(
+            child: isDesktop
+                ? Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: _desktopMaxWidth,
+                        maxHeight: MediaQuery.sizeOf(context).height * 0.88,
+                      ),
+                      child: shell,
                     ),
-                    child: content,
-                  ),
-                )
-              : content,
+                  )
+                : shell,
+          ),
         ),
       ),
     );
@@ -248,31 +462,47 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({required this.project, required this.onClose});
+  const _Header({
+    required this.project,
+    required this.onClose,
+    this.showMenu = false,
+    this.onOpenMenu,
+  });
 
   final Project project;
   final VoidCallback onClose;
+  final bool showMenu;
+  final VoidCallback? onOpenMenu;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 20, 12, 16),
+      padding: const EdgeInsets.fromLTRB(12, 12, 8, 8),
       child: Row(
         children: [
+          if (showMenu)
+            IconButton(
+              onPressed: onOpenMenu,
+              icon: const Icon(Icons.menu),
+              tooltip: 'Projects',
+            ),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  project.name ?? '',
-                  style: theme.textTheme.titleLarge,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                gapH4,
-                ProjectStatusBadge(status: project.status),
-              ],
+            child: Padding(
+              padding: EdgeInsets.only(left: showMenu ? 0 : 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    project.name ?? '',
+                    style: theme.textTheme.titleLarge,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  gapH4,
+                  ProjectStatusBadge(status: project.status),
+                ],
+              ),
             ),
           ),
           IconButton(

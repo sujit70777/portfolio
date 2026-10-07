@@ -68,15 +68,15 @@ flutter:
     - assets/icons/software-development/
     - assets/images/
     - assets/projectimage/hourwise/
-    - assets/projectimage/peace-of-mind-pom/
+    - assets/projectimage/subscription-app-stripe-apple-entitlements/
     - assets/projectimage/forward-sms/
-    - assets/projectimage/muslim-times-pro/
-    - assets/projectimage/tanto/
-    - assets/projectimage/prabartan-educational-platform/
-    - assets/projectimage/sk-mobile-school/
-    - assets/projectimage/notivio/
-    - assets/projectimage/proofsell/
-    - assets/projectimage/esim247/
+    - assets/projectimage/prayer-times-app-high-latitude-engine/
+    - assets/projectimage/fintech-reimbursement-native-scanner/
+    - assets/projectimage/offline-first-learning-apps/
+    - assets/projectimage/secure-video-course-app/
+    - assets/projectimage/notes-task-planner-app/
+    - assets/projectimage/e-commerce-marketplace-app/
+    - assets/projectimage/esim-data-plan-marketplace/
     - assets/projectimage/flutter-scanner-devxhub/
     - assets/projectimage/flutter-prayer-time-calculator/
     - assets/projectimage/flutter-scroll-date-picker/
@@ -89,7 +89,7 @@ flutter:
     - assets/projectimage/fitness-tracker-senseit/
     - assets/projectimage/jatri-bangladesh-transit-app/
     - assets/projectimage/omr-scanner/
-    - assets/projectimage/farenow/
+    - assets/projectimage/multi-service-super-app/
     - assets/projectimage/flutter-zoom-image/
     - assets/translations/
 
