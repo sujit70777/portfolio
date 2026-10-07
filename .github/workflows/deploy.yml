@@ -15,7 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        # v5 runs on Node 24; v4 targets the deprecated Node 20 runtime.
+        uses: actions/checkout@v5
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -105,6 +106,15 @@ jobs:
             # Prerender CTAs are plain HTML — stamp those too.
             sed -i "s|${url}\\(?v=[a-f0-9]*\\)\\?|${url}?v=${hash}|g" "$INDEX"
           done
+          # The link-preview image keeps a stable name too, and it's served
+          # immutable for a year — and LinkedIn, Facebook, X and WhatsApp
+          # cache previews by image URL. Stamping its hash onto the og:image
+          # and twitter:image URLs means a new card is a new URL everywhere.
+          OG=build/web/og-preview.jpg
+          test -f "$OG"
+          og_hash=$(sha256sum "$OG" | cut -c1-12)
+          sed -i "s|og-preview\\.jpg\\(?v=[a-f0-9]*\\)\\?\"|og-preview.jpg?v=${og_hash}\"|g" "$INDEX"
+          grep -q "og-preview.jpg?v=${og_hash}\"" "$INDEX"
 
       - name: Drop debug symbol maps
         # Each engine variant ships a multi-megabyte .symbols file next to it
