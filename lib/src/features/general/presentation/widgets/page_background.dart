@@ -19,7 +19,7 @@ import 'package:portfolio/src/features/general/provider/scroll_controller.dart';
 class PageBackgroundSettings {
   const PageBackgroundSettings({
     // Whole effect
-    this.enabled = true,
+    this.enabled = false,
     this.frameRate = 30,
     this.fadeInDuration = const Duration(milliseconds: 1600),
     // Glows
