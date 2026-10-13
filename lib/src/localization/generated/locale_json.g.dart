@@ -16,8 +16,8 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> _en = {
   "name": "Shekh Ehsanur Rahman",
-  "description": "Senior Flutter Engineer · Native iOS · Android · macOS. I take on the problems that block a product, and build with AI coding agents",
-  "subDescription": "Flutter architecture · Custom plugins & native integration · Offline-first sync · Payments & subscriptions · Native iOS, Android and macOS",
+  "description": "Senior Mobile & Full-Stack AI Engineer | Flutter — Native iOS · Android · macOS. I take on the problems that block a product, and build with AI coding agents",
+  "subDescription": "Flutter architecture · Custom plugins & native integration · Offline-first sync · Payments & subscriptions · Native iOS, Android and macOS (Swift, SwiftUI, Kotlin) · On-device machine learning · Full-stack AI (Claude Code, FastAPI, Postgres)",
   "heroPrimaryCta": "Email me",
   "heroSecondaryCta": "WhatsApp",
   "availabilityBadge": "Available now · Remote from Bangladesh · No sponsorship required",
@@ -111,7 +111,7 @@ class CodegenLoader extends AssetLoader{
       "url": "assets/documents/resume.pdf"
     }
   ],
-  "aboutDescription": "I take on the mobile problems that block a product: offline data that must not be lost, payments that must reconcile across Apple and Stripe, platform edge cases, and slow components that need a native rewrite.\n\nI'm a senior Flutter engineer — 7 years of Flutter inside 11 years of shipping mobile apps — with native iOS, Android and macOS (Swift, SwiftUI, Kotlin). When a package can't do the job, I write the plugin or platform channel myself, and I've published 9 Flutter packages on pub.dev. I'm based in Bangladesh and don't need relocation or visa sponsorship to work remotely.\n\nA few problems I've solved:\n\n→ Prayer times that were wrong at high latitudes. A prayer-times app showed wrong times to users in far-northern cities, and earlier fixes hadn't worked. I traced it to the sunrise and sunset calculation and built a new offline engine, verified against a real local schedule. It works with or without internet.\n\n→ A receipt scanner too slow for the business. For an expense-reimbursement FinTech platform, I replaced a generic Flutter scanner with a native one (Swift on iOS, Java on Android) that reads a QR code or barcode in about half a second. Live verification progress replaced the spinner, claims save offline and sync later, and a reimbursement completes in about 5–10 seconds.\n\n→ Two payment systems that disagreed. A subscription app sold through Stripe on Android and Apple In-App Purchase on iOS, and the two produced duplicate purchases and mismatched accounts. As team lead I redesigned the entitlement model so both map to one account. After about two years stuck in development, the app was approved and live within about a month.\n\n→ Learning that works offline. I led a 6-developer team building offline-first learning apps (Python, CSE, ML) as free + one-time Pro editions on Google Play and the App Store; two free apps each passed 100,000 downloads.\n\n→ Lawyers losing billable hours. I built Hourwise alone and shipped it to the Mac App Store. It records work passively and learns, on the Mac itself, which client each piece of work belongs to.\n\nWhat I can do for your team: make your app work offline without losing data, fix payments and subscriptions across Stripe, Apple and Google, get a stalled app through store review, and add on-device machine learning that keeps user data private.\n\nHow I work: I own the problem, the architecture and the code review; AI coding agents write much of the code; tests and automated releases keep quality up. I've worked an overseas team's hours for three years.\n\nOpen to: Senior Flutter Engineer, Senior Flutter Developer, Lead Flutter Developer, Mobile Tech Lead. Full-time or contract.",
+  "aboutDescription": "I take on the mobile problems that block a product: offline data that must not be lost, payments that must reconcile across Apple and Stripe, platform edge cases, and slow components that need a native rewrite.\n\nI'm a Senior Mobile & Full-Stack AI Engineer — 7 years of Flutter inside 11 years of shipping mobile apps — with native iOS, Android and macOS (Swift, SwiftUI, Kotlin). When a package can't do the job, I write the plugin or platform channel myself, and I've published 9 Flutter packages on pub.dev. I'm based in Bangladesh and don't need relocation or visa sponsorship to work remotely.\n\nA few problems I've solved:\n\n→ Prayer times that were wrong at high latitudes. A prayer-times app showed wrong times to users in far-northern cities, and earlier fixes hadn't worked. I traced it to the sunrise and sunset calculation and built a new offline engine, verified against a real local schedule. It works with or without internet.\n\n→ A receipt scanner too slow for the business. For an expense-reimbursement FinTech platform, I replaced a generic Flutter scanner with a native one (Swift on iOS, Java on Android) that reads a QR code or barcode in about half a second. Live verification progress replaced the spinner, claims save offline and sync later, and a reimbursement completes in about 5–10 seconds.\n\n→ Two payment systems that disagreed. A subscription app sold through Stripe on Android and Apple In-App Purchase on iOS, and the two produced duplicate purchases and mismatched accounts. As team lead I redesigned the entitlement model so both map to one account. After about two years stuck in development, the app was approved and live within about a month.\n\n→ Learning that works offline. I led a 6-developer team building offline-first learning apps (Python, CSE, ML) as free + one-time Pro editions on Google Play and the App Store; two free apps each passed 100,000 downloads.\n\n→ Lawyers losing billable hours. I built Hourwise alone and shipped it to the Mac App Store. It records work passively and learns, on the Mac itself, which client each piece of work belongs to.\n\nWhat I can do for your team: make your app work offline without losing data, fix payments and subscriptions across Stripe, Apple and Google, get a stalled app through store review, and add on-device machine learning that keeps user data private.\n\nHow I work: I own the problem, the architecture and the code review; AI coding agents write much of the code; tests and automated releases keep quality up. I've worked an overseas team's hours for three years.\n\nOpen to: Senior Mobile & Full-Stack AI Engineer, Senior Flutter Engineer, Senior Flutter Developer, Lead Flutter Developer, Mobile Tech Lead. Full-time or contract.",
   "skillCategories": [
     {
       "category": "Offline-First & Data Sync",
@@ -136,7 +136,7 @@ class CodegenLoader extends AssetLoader{
       ]
     },
     {
-      "category": "AI",
+      "category": "Full-Stack AI",
       "skills": [
         "AI-Assisted Development (Claude Code)",
         "On-Device Machine Learning (live)",
@@ -157,12 +157,17 @@ class CodegenLoader extends AssetLoader{
       ]
     },
     {
-      "category": "Backend & Data",
+      "category": "Web Backend & Data",
       "skills": [
+        "React / Next.js / Next.js",
         "Firebase (Firestore, Auth, Functions, Crashlytics)",
         "REST APIs & WebSockets",
         "Supabase",
-        "SQLite / Drift / GRDB"
+        "SQLite / Drift / GRDB",
+        "PostgreSQL / MongoDB / Redis",
+        "CRDTs & Conflict Resolution",
+        "Cloud Functions & Serverless",
+        "Python / FastAPI"
       ]
     },
     {
@@ -188,9 +193,9 @@ class CodegenLoader extends AssetLoader{
   ],
   "experiences": [
     {
-      "role": "Founder & Senior Mobile Engineer",
+      "role": "Founder & Full-Stack AI Engineer",
       "company": "Hourwise Labs",
-      "description": "Solo lawyers lose billable time because they forget timers and rebuild their day from memory. I built Hourwise alone — with AI coding agents under my review — from design to Mac App Store release.\n\n• Passive time capture in a native macOS menu-bar app (SwiftUI + AppKit, ~17k lines of Swift).\n• On-device machine learning, live today: a rule engine plus a naive-Bayes classifier that learns from each user's corrections and assigns work to the right client matter. Work history never leaves the Mac.\n• Local-first SQLite/GRDB storage; PDF invoices plus LEDES 1998B, QuickBooks, Xero, XLSX and CSV exports; StoreKit 2 subscriptions.\n• In progress: on-device AI billing narratives with Apple Foundation Models.",
+      "description": "Solo lawyers lose billable time because they forget timers and rebuild their day from memory. I built Hourwise alone — with AI coding agents under my review — from design to Mac App Store release.\n\n• Passive time capture in a native macOS menu-bar app (SwiftUI + AppKit, ~17k lines of Swift).\n• On-device machine learning, live today: a rule engine plus a naive-Bayes classifier that learns from each user's corrections and assigns work to the right client matter. Work history never leaves the Mac.\n• Local-first SQLite/GRDB storage; PDF invoices plus LEDES 1998B, QuickBooks, Xero, XLSX and CSV exports; StoreKit 2 subscriptions.\n\n• Now building: full-stack AI \n• On-device AI billing narratives with Apple Foundation Models, plus UTBMS code suggestions and billing-rule checks \n• Private meeting capture: on-device transcription and summaries that become draft time entries\n• Python/FastAPI + Postgres backend: auth, firm seats, CRDT sync across Swift and Dart clients, Claude API proxy\n• Flutter companion app for iOS and Android: timers, voice entries, Live Activities\n• 'Ask my matters': a tool-using LLM agent with pgvector hybrid search, citations and evals",
       "url": "https://ehsanur.com/hourwise/",
       "isPresent": true,
       "startYear": 2026,
@@ -1752,7 +1757,7 @@ class CodegenLoader extends AssetLoader{
   "recruiterFit": {
     "title": "For recruiters & hiring managers",
     "targetRolesLabel": "Target roles",
-    "targetRoles": "Senior Flutter Engineer · Senior Flutter Developer · Lead Flutter Developer · Mobile Tech Lead",
+    "targetRoles": "Senior Mobile & Full-Stack AI Engineer · Senior Flutter Developer · Lead Flutter Developer · Mobile Tech Lead",
     "experienceLabel": "Experience",
     "experience": "11 years shipping mobile apps · 7 years of Flutter",
     "stackLabel": "Stack",
@@ -1986,8 +1991,8 @@ class CodegenLoader extends AssetLoader{
   "emailPresets": [
     {
       "label": "Hiring for a full-time role",
-      "subject": "Full-time role — Senior Flutter Engineer",
-      "body": "Hi Ehsanur,\n\nI'm hiring for a full-time Senior Flutter / mobile role. Here's a short summary of the company, stack, and timeline:\n\n"
+      "subject": "Full-time role — Senior Mobile & Full-Stack AI Engineer / Senior Flutter Developer",
+      "body": "Hi Ehsanur,\n\nI'm hiring for a full-time Senior Mobile & Full-Stack AI Engineer / Senior Flutter Developer role. Here's a short summary of the company, stack, and timeline:\n\n"
     },
     {
       "label": "Need a contract fix",
@@ -2003,7 +2008,7 @@ class CodegenLoader extends AssetLoader{
   "emailPresetsTitle": "I'm reaching out about…",
   "testimonials": [
     {
-      "quote": "As a Senior Flutter Developer, Shekh possesses a deep, practical understanding of cross-platform architecture that consistently elevated the quality of our applications. … Any engineering team looking for a technical powerhouse and a supportive leader would be incredibly fortunate to have Shekh onboard.",
+      "quote": "As a Senior Mobile & Full-Stack AI Engineer, Shekh possesses a deep, practical understanding of cross-platform architecture that consistently elevated the quality of our applications. … Any engineering team looking for a technical powerhouse and a supportive leader would be incredibly fortunate to have Shekh onboard.",
       "name": "Tanvir Kabir",
       "role": "Flutter Developer",
       "company": "Devxhub",
