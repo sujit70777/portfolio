@@ -142,6 +142,7 @@ jobs:
             --exclude=ehsanur_apis.zip
             --exclude=ml/
             --exclude=python/
+            --exclude=medhaat/
           path: build/web/
           remote_path: ~/public_html/
           remote_host: ${{ secrets.SSH_HOST }}
