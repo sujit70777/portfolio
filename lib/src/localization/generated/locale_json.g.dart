@@ -16,12 +16,20 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> _en = {
   "name": "Shekh Ehsanur Rahman",
-  "description": "Senior Mobile & Full-Stack AI Engineer | Flutter — Native iOS · Android · macOS. I take on the problems that block a product, and build with AI coding agents",
-  "subDescription": "Flutter architecture · Custom plugins & native integration · Offline-first sync · Payments & subscriptions · Native iOS, Android and macOS (Swift, SwiftUI, Kotlin) · On-device machine learning · Full-stack AI (Claude Code, FastAPI, Postgres)",
+  "description": "Senior Mobile & Full-Stack AI Engineer | Flutter · Native iOS · Android · macOS. I take on the problems that block a product, and build with AI coding agents",
+  "subDescription": "Flutter architecture · Custom plugins & native integration · Offline-first sync · Payments & subscriptions · Swift, SwiftUI & Kotlin · On-device ML · Full-stack AI (Claude Code, FastAPI, Postgres)",
+  "heroRole": "Senior Mobile & Full-Stack AI Engineer",
+  "heroPlatforms": "Flutter · Native iOS · Android · macOS",
+  "heroTagline": "I take on the problems that block a product, and build with AI coding agents.",
   "heroPrimaryCta": "Email me",
   "heroSecondaryCta": "WhatsApp",
-  "availabilityBadge": "Available now · Remote from Bangladesh · No sponsorship required",
-  "contractBadge": "Full-time or contract · Works with any time zone; flexible core overlap hours",
+  "availability": {
+    "status": "Available now",
+    "remote": "Remote from Bangladesh",
+    "sponsorship": "No sponsorship required",
+    "engagement": "Full-time or contract",
+    "timezone": "Any time zone · flexible overlap"
+  },
   "stats": {
     "years": "11",
     "yearsLabel": "Years shipping",

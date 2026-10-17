@@ -10,12 +10,12 @@ import 'package:portfolio/src/common/widgets/gradient_button.dart';
 import 'package:portfolio/src/common/widgets/first_paint_entrance.dart';
 import 'package:portfolio/src/common/widgets/responsive.dart';
 import 'package:portfolio/src/constants/sizes.dart';
-import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/about/presentation/widgets/profile_photo.dart';
 import 'package:portfolio/src/features/general/provider/scroll_controller.dart';
 import 'package:portfolio/src/features/personal_info/data/personal_info_repository.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/availability_badge.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/hero_background.dart';
+import 'package:portfolio/src/features/personal_info/presentation/widgets/hero_intro.dart';
 import 'package:portfolio/src/features/conversion/presentation/widgets/outcome_cards.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/hero_stat_plaque.dart';
 import 'package:portfolio/src/features/personal_info/presentation/widgets/resume_button.dart';
@@ -23,7 +23,6 @@ import 'package:portfolio/src/localization/generated/locale_keys.g.dart';
 import 'package:portfolio/src/utils/analytics.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
-import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
 
 /// Hero entrance: each line fades up ~20px in sequence, ~80ms apart, total
 /// well under 800ms — quick on purpose, since a slow entrance is only
@@ -139,7 +138,7 @@ class _DesktopHero extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _entrance(0, const AvailabilityBadge()),
-        gapH20,
+        gapH24,
         // 72px, inline immediately above the name — an identity marker,
         // not a portrait.
         _entrance(1, const ProfilePhoto(size: 72)),
@@ -152,19 +151,9 @@ class _DesktopHero extends StatelessWidget {
             style: textTheme.displayLarge?.copyWith(fontSize: nameSize),
           ),
         ),
-        gapH8,
-        _entrance(
-          3,
-          SearchableText(
-            tr(LocaleKeys.description),
-            style: textTheme.titleLarge?.copyWith(fontSize: titleSize),
-          ),
-        ),
         gapH12,
-        _entrance(4, _LocationLine()),
-        gapH12,
-        _entrance(4, const _ContractBadge()),
-        const SizedBox(height: 28),
+        _entrance(3, HeroIntro(titleSize: titleSize)),
+        const SizedBox(height: 32),
         _entrance(
           5,
           Wrap(
@@ -231,8 +220,8 @@ class _TabletHero extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _entrance(0, const AvailabilityBadge()),
-            gapH20,
+            _entrance(0, const AvailabilityBadge(centered: true)),
+            gapH24,
             // Photo and name share a row at this width; the name is free
             // to wrap to two lines.
             _entrance(
@@ -254,19 +243,8 @@ class _TabletHero extends StatelessWidget {
               ),
             ),
             gapH16,
-            _entrance(
-              2,
-              SearchableText(
-                tr(LocaleKeys.description),
-                textAlign: TextAlign.center,
-                style: textTheme.titleLarge?.copyWith(fontSize: titleSize),
-              ),
-            ),
-            gapH8,
-            _entrance(3, _LocationLine()),
-            gapH12,
-            _entrance(3, const _ContractBadge()),
-            gapH24,
+            _entrance(2, HeroIntro(titleSize: titleSize, centered: true)),
+            gapH32,
             _entrance(
               4,
               Wrap(
@@ -339,18 +317,8 @@ class _MobileHero extends StatelessWidget {
             ],
           ),
         ),
-        gapH12,
-        _entrance(
-          2,
-          SearchableText(
-            tr(LocaleKeys.description),
-            style: textTheme.titleLarge?.copyWith(fontSize: titleSize),
-          ),
-        ),
-        gapH8,
-        _entrance(3, _LocationLine()),
-        gapH12,
-        _entrance(3, const _ContractBadge()),
+        gapH16,
+        _entrance(2, HeroIntro(titleSize: titleSize)),
         gapH24,
         // Stats before CTAs: a visitor needs a reason to care before
         // they'll tap anything.
@@ -387,59 +355,6 @@ class _MobileHero extends StatelessWidget {
         // order and lazy-loaded.
         _entrance(6, Center(child: const _HeroDevice(width: 360, lazy: true))),
       ],
-    );
-  }
-}
-
-class _LocationLine extends StatelessWidget {
-  const _LocationLine();
-
-  @override
-  Widget build(BuildContext context) {
-    return SearchableText(
-      tr(LocaleKeys.subDescription).toUpperCase(),
-      textAlign: TextAlign.center,
-      style: monoLabelStyle(
-        fontSize: 12,
-        color: mutedTextColor(Theme.of(context).colorScheme),
-      ),
-    );
-  }
-}
-
-/// Removes the "overseas hire = payroll/tax headache" objection up front,
-/// right under the location line, rather than leaving it to the last
-/// sentence of the About copy. Outlined pill so it reads as a fact/badge,
-/// not another button.
-class _ContractBadge extends StatelessWidget {
-  const _ContractBadge();
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: scheme.onSurface.withAlpha(70)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.verified_outlined, size: 14, color: scheme.tertiary),
-          gapW8,
-          Flexible(
-            child: SearchableText(
-              tr(LocaleKeys.contractBadge).toUpperCase(),
-              style: monoLabelStyle(
-                fontSize: 11,
-                letterSpacing: 0.06,
-                color: mutedTextColor(scheme),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
