@@ -145,15 +145,22 @@ jobs:
       - name: Deploy to Namecheap via rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
+          # Paths the portfolio does not own. --delete never removes an excluded path.
+          # Each is anchored with a leading "/" (top of public_html only) and has no
+          # trailing "/": "repha/" matched only directories, so the public_html/repha
+          # *symlink* (to ~/medhaat/backend/public, the Repha app) was deleted on deploy.
+          # .well-known holds AutoSSL's certificate-renewal checks; cgi-bin is cPanel's.
           switches: >-
             -avzr --delete
-            --exclude=cse/
-            --exclude=ehsanur_apis/
-            --exclude=ehsanur_apis.zip
-            --exclude=ml/
-            --exclude=python/
-            --exclude=medhaat/
-            --exclude=repha/
+            --exclude=/cse
+            --exclude=/ehsanur_apis
+            --exclude=/ehsanur_apis.zip
+            --exclude=/ml
+            --exclude=/python
+            --exclude=/medhaat
+            --exclude=/repha
+            --exclude=/.well-known
+            --exclude=/cgi-bin
           path: build/web/
           remote_path: ~/public_html/
           remote_host: ${{ secrets.SSH_HOST }}
