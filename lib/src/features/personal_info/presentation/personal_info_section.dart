@@ -461,13 +461,12 @@ class _HeroDeviceState extends ConsumerState<_HeroDevice> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (!widget.lazy) {
-      // The hero screenshot is this page's LCP element on desktop/tablet —
-      // warm the decode cache immediately rather than waiting for
-      // Image.asset's own on-demand load.
-      precacheImage(const AssetImage(_heroImagePath), context);
-      return;
-    }
+    // No precacheImage here, on either path. Image.asset below is built in
+    // the same frame and starts the load itself, and it decodes through a
+    // ResizeImage (it passes cacheWidth), which is a different image-cache
+    // key from a bare AssetImage. Precaching the bare one fetched the file a
+    // second time and decoded it again at full size.
+    if (!widget.lazy) return;
     // On mobile the screenshot is last in the order and genuinely lazy:
     // only decode once it's actually near the viewport.
     final controller = ref.read(scrollControllerProvider);
@@ -496,7 +495,6 @@ class _HeroDeviceState extends ConsumerState<_HeroDevice> {
     final screenHeight = MediaQuery.sizeOf(context).height;
     if (top <= screenHeight + 600) {
       setState(() => _isNearViewport = true);
-      precacheImage(const AssetImage(_heroImagePath), context);
     }
   }
 

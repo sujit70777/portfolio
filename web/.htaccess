@@ -16,6 +16,33 @@
 # suffix on each pattern: cache policy is about what a file is, not whether
 # it happens to be pre-compressed.
 
+# --- Cross-origin isolation ----------------------------------------------
+# Skwasm, the renderer the --wasm build uses, only rasterises on a web
+# worker when the page is cross-origin isolated (window.crossOriginIsolated,
+# which needs SharedArrayBuffer). Without these two headers it falls back to
+# single-threaded mode and every frame is drawn on the main thread:
+# Lighthouse measured ~31s of skwasm.js main-thread time on a throttled
+# phone and flagged "SharedArrayBuffer requires cross-origin isolation".
+#
+# COEP is "credentialless" rather than "require-corp". Cross-origin no-cors
+# subresources (the Google Fonts stylesheets the static legal pages link,
+# anything else embedded later) keep loading, just without cookies, instead
+# of being blocked for lacking a Cross-Origin-Resource-Policy header. Safari
+# doesn't support "credentialless" yet, so it ignores the header and stays
+# single-threaded, exactly as before. Nothing is worse off. COOP
+# "same-origin" only cuts window.opener for cross-origin popups, and the
+# site only opens links with url_launcher, which doesn't need it.
+#
+# The other apps that share this public_html (the rsync --exclude list in
+# .github/workflows/deploy.yml) are left out. They aren't this build and
+# may embed cross-origin iframes that isolation would break.
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} !~ m#^/(cse|ehsanur_apis|ml|python|medhaat|repha)(/|$)#">
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Cross-Origin-Embedder-Policy "credentialless"
+  </If>
+</IfModule>
+
 <IfModule mod_headers.c>
   <FilesMatch "\.(html|json)(\.br|\.gz)?$">
     Header set Cache-Control "no-cache"
@@ -35,6 +62,7 @@
   ExpiresByType application/javascript "access plus 0 seconds"
   ExpiresByType application/wasm "access plus 0 seconds"
   ExpiresByType font/ttf "access plus 1 year"
+  ExpiresByType font/otf "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/webp "access plus 1 year"
@@ -49,7 +77,7 @@ AddType application/wasm .wasm
 AddType text/javascript .mjs
 
 # --- Pre-compressed assets ---------------------------------------------
-# CI runs `brotli -k` and `gzip -k` over js/mjs/wasm/json/css/svg after the
+# CI runs `brotli -k` and `gzip -k` over js/mjs/wasm/json/css/svg/otf/ttf after the
 # build, producing "<file>.br"/"<file>.gz" siblings next to every original.
 # mod_rewrite serves whichever compressed sibling the client's
 # Accept-Encoding allows and actually exists on disk, preferring Brotli —
@@ -107,6 +135,12 @@ AddType text/javascript .mjs
   <FilesMatch "\.svg\.(br|gz)$">
     Header set Content-Type "image/svg+xml"
   </FilesMatch>
+  <FilesMatch "\.otf\.(br|gz)$">
+    Header set Content-Type "font/otf"
+  </FilesMatch>
+  <FilesMatch "\.ttf\.(br|gz)$">
+    Header set Content-Type "font/ttf"
+  </FilesMatch>
 
   <FilesMatch "\.br$">
     Header set Content-Encoding "br"
@@ -117,7 +151,7 @@ AddType text/javascript .mjs
 
   # A cache or proxy in front of this origin (e.g. Cloudflare) must not
   # hand a Brotli body to a client that sent no "br" in Accept-Encoding.
-  <FilesMatch "\.(js|mjs|wasm|json|css|svg)(\.br|\.gz)?$">
+  <FilesMatch "\.(js|mjs|wasm|json|css|svg|otf|ttf)(\.br|\.gz)?$">
     Header append Vary "Accept-Encoding"
   </FilesMatch>
 </IfModule>

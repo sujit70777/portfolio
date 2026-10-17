@@ -69,7 +69,7 @@
        mode and is only reused by a request made the same way. Without the
        attribute these download twice. Verified, not assumed.
 
-       The three text faces are loaded twice by design, once by the @font-face
+       The Manrope faces are loaded twice by design, once by the @font-face
        rules that paint the pre-Flutter hero and again by Flutter's own font
        loader once it boots. Nothing dedupes those two: they have different
        request destinations, so they get separate cache entries even under
@@ -80,10 +80,11 @@
        first contentful paint: a font preload is deprioritised until the
        stylesheet proves the face is needed, a fetch preload starts at once. -->
   <link rel="preload" href="assets/fonts/MaterialIcons-Regular.otf" as="fetch" crossorigin="anonymous">
-  <link rel="preload" href="assets/assets/fonts/Archivo-ExtraBold.ttf" as="fetch" crossorigin="anonymous">
-  <link rel="preload" href="assets/assets/fonts/PublicSans-Regular.ttf" as="fetch" crossorigin="anonymous">
-  <link rel="preload" href="assets/assets/fonts/PublicSans-SemiBold.ttf" as="fetch" crossorigin="anonymous">
-  <link rel="preload" href="assets/assets/fonts/JetBrainsMono-Medium.ttf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/Manrope-Regular.otf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/Manrope-Medium.otf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/Manrope-SemiBold.otf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/Manrope-Bold.otf" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="assets/assets/fonts/Manrope-ExtraBold.otf" as="fetch" crossorigin="anonymous">
   <script>
     // Everything below main.dart.* is picked by browser feature detection
     // that normally happens inside flutter.js, long after the parser could
@@ -285,30 +286,37 @@
        font-display:swap lets text paint immediately in a system face and
        upgrade in place — not waiting is the entire point of this markup. */
     @font-face {
-      font-family: "PlArchivo";
-      src: url("assets/assets/fonts/Archivo-ExtraBold.ttf") format("truetype");
-      font-weight: 800;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: "PlPublicSans";
-      src: url("assets/assets/fonts/PublicSans-Regular.ttf") format("truetype");
+      font-family: "PlManrope";
+      src: url("assets/assets/fonts/Manrope-Regular.otf") format("opentype");
       font-weight: 400;
       font-display: swap;
     }
 
     @font-face {
-      font-family: "PlPublicSans";
-      src: url("assets/assets/fonts/PublicSans-SemiBold.ttf") format("truetype");
+      font-family: "PlManrope";
+      src: url("assets/assets/fonts/Manrope-Medium.otf") format("opentype");
+      font-weight: 500;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "PlManrope";
+      src: url("assets/assets/fonts/Manrope-SemiBold.otf") format("opentype");
       font-weight: 600;
       font-display: swap;
     }
 
     @font-face {
-      font-family: "PlMono";
-      src: url("assets/assets/fonts/JetBrainsMono-Medium.ttf") format("truetype");
-      font-weight: 500;
+      font-family: "PlManrope";
+      src: url("assets/assets/fonts/Manrope-Bold.otf") format("opentype");
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "PlManrope";
+      src: url("assets/assets/fonts/Manrope-ExtraBold.otf") format("opentype");
+      font-weight: 800;
       font-display: swap;
     }
 
@@ -329,7 +337,7 @@
       flex-direction: column;
       background: var(--pl-surface);
       color: var(--pl-text);
-      font-family: "PlPublicSans", -apple-system, BlinkMacSystemFont,
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont,
         "Segoe UI", Roboto, sans-serif;
       /* Flutter's first frame swaps this out. The cross-fade covers the small
          differences between CSS text rendering and CanvasKit's — a hard cut
@@ -359,7 +367,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 800;
       font-size: 18px;
       white-space: nowrap;
@@ -369,7 +377,8 @@
 
     .pl-prompt {
       color: var(--pl-accent);
-      font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-variant-numeric: tabular-nums;
       font-weight: 500;
     }
 
@@ -378,7 +387,7 @@
       margin-left: auto;
       align-items: center;
       gap: 28px;
-      font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 800;
       font-size: 16px;
     }
@@ -436,7 +445,8 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-variant-numeric: tabular-nums;
       font-weight: 500;
       font-size: 12px;
       letter-spacing: 0.06em;
@@ -511,7 +521,7 @@
          in lib/src/common/utils/fluid_size.dart is a clamp() by another
          name, so the same three numbers give the same size at every width. */
       margin: 0;
-      font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 800;
       font-size: clamp(32px, 5vw, 56px);
       line-height: 1.02;
@@ -529,7 +539,7 @@
     .pl-title {
       /* fluidSize(min: 16, preferredVwPercent: 2, max: 21.6) */
       margin: var(--pl-gap-title) 0 0;
-      font-family: "PlArchivo", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 800;
       font-size: clamp(16px, 2vw, 21.6px);
       line-height: 1.2;
@@ -541,7 +551,8 @@
          line and the centring is invisible either way. */
       text-align: center;
       margin: var(--pl-gap-loc) 0 0;
-      font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-variant-numeric: tabular-nums;
       font-weight: 500;
       font-size: 12px;
       text-transform: uppercase;
@@ -562,7 +573,8 @@
       padding: 5px 10px;
       border-radius: 20px;
       border: 1px solid color-mix(in srgb, var(--pl-text) 27%, transparent);
-      font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-variant-numeric: tabular-nums;
       font-weight: 500;
       font-size: 11px;
       letter-spacing: 0.06em;
@@ -613,7 +625,8 @@
     .pl-stat b {
       display: block;
       /* fluidSize(min: 20, preferredVwPercent: 2.5, max: 32) */
-      font-family: "PlMono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-variant-numeric: tabular-nums;
       font-weight: 500;
       font-size: clamp(20px, 2.5vw, 32px);
       line-height: 1.4;
@@ -629,7 +642,7 @@
     .pl-stat span {
       display: block;
       margin-top: 2px;
-      font-family: "PlPublicSans", -apple-system, sans-serif;
+      font-family: "PlManrope", -apple-system, sans-serif;
       font-weight: 600;
       font-size: 10px;
       letter-spacing: 0.04em;
@@ -652,7 +665,7 @@
       min-height: 48px;
       box-sizing: border-box;
       border-radius: 999px;
-      font-family: "PlPublicSans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "PlManrope", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 600;
       font-size: 16px;
       text-decoration: none;

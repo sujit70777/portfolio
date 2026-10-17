@@ -101,12 +101,13 @@ Future<void> _loadFonts() async {
   if (_fontsLoaded) return;
   _fontsLoaded = true;
   const families = {
-    'Archivo': ['assets/fonts/Archivo-ExtraBold.ttf'],
-    'PublicSans': [
-      'assets/fonts/PublicSans-Regular.ttf',
-      'assets/fonts/PublicSans-SemiBold.ttf',
+    'Manrope': [
+      'assets/fonts/Manrope-Regular.otf',
+      'assets/fonts/Manrope-Medium.otf',
+      'assets/fonts/Manrope-SemiBold.otf',
+      'assets/fonts/Manrope-Bold.otf',
+      'assets/fonts/Manrope-ExtraBold.otf',
     ],
-    'JetBrainsMono': ['assets/fonts/JetBrainsMono-Medium.ttf'],
   };
   for (final MapEntry(key: family, value: files) in families.entries) {
     final loader = FontLoader(family);

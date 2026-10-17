@@ -22,6 +22,7 @@ import 'package:portfolio/src/features/project/presentation/widgets/project_stat
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
+import 'package:portfolio/src/common/widgets/lazy_asset_image.dart';
 
 /// The top tier of the projects section — one wide card per flagship
 /// product, above the featured grid. Exists because [FeaturedProjectCard]
@@ -83,7 +84,7 @@ class _FlagshipProjectCardState extends ConsumerState<FlagshipProjectCard> {
                         scale: _hovered ? 1.02 : 1,
                         duration: const Duration(milliseconds: 250),
                         curve: Curves.easeOut,
-                        child: Image.asset(primaryImage, fit: BoxFit.cover),
+                        child: LazyAssetImage(primaryImage),
                       ),
               ),
             ),
@@ -236,11 +237,8 @@ class _Thumbnail extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: AspectRatio(
             aspectRatio: 16 / 10,
-            child: Image.asset(
+            child: LazyAssetImage(
               image,
-              fit: BoxFit.cover,
-              // Thumbnails render ~130px wide; no need to decode 1280px.
-              cacheWidth: 320,
               // Purely a shortcut into the gallery; the modal carries the
               // real alt text.
               excludeFromSemantics: true,

@@ -5,6 +5,7 @@ import 'package:portfolio/src/common/data/language_repository.dart';
 import 'package:portfolio/src/common/widgets/first_paint_entrance.dart';
 import 'package:portfolio/src/common/widgets/selection_area.dart';
 import 'package:portfolio/src/constants/sizes.dart';
+import 'package:portfolio/src/constants/themes.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/app_bar_button.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/dark_mode_switch.dart';
 import 'package:portfolio/src/features/general/presentation/widgets/locale_button.dart';
@@ -50,7 +51,7 @@ class MyAppBar extends ConsumerWidget {
                       const Text(
                         _brandPrompt,
                         style: TextStyle(
-                          fontFamily: 'JetBrainsMono',
+                          fontFamily: kFontFamily,
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
                           height: 1,

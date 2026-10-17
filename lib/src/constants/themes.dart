@@ -20,20 +20,18 @@ import 'package:flutter/material.dart';
 // category, role and featured project its own identity. Add colour there,
 // not as one-off literals, so light/dark pairs and contrast stay in one place.
 
-// The three families below are referenced by the family names declared in
-// pubspec.yaml `fonts:`, rather than through the google_fonts package. Both
-// routes end up at the same .ttf in assets/fonts/, but the package re-reads
-// those bytes through its own loader and registers a second FontFace for
-// them, so every one of these faces was downloaded and decoded twice on
-// first paint. Naming the bundled family directly renders identically for
-// half the font bytes, and drops the dependency altogether.
+// One family for all text: Manrope, bundled from assets/fonts/ by the family
+// name declared in pubspec.yaml `fonts:` (not through the google_fonts
+// package, which would register and decode every face a second time).
+// Weights 400, 500, 600, 700 and 800 are bundled, so any FontWeight from
+// w400 to w800 gets a real face rather than a synthesised one.
 //
-// Display/headline/title all use a single Archivo weight (ExtraBold/800) —
-// that's the only static instance bundled, so every heading-tier style below
-// must request exactly FontWeight.w800 to get a match.
+// Display/headline/title all use ExtraBold (800).
+const kFontFamily = 'Manrope';
+
 TextStyle _display({required double fontSize, double? height, double? letterSpacing}) {
   return TextStyle(
-    fontFamily: 'Archivo',
+    fontFamily: kFontFamily,
     fontSize: fontSize,
     fontWeight: FontWeight.w800,
     height: height,
@@ -41,19 +39,22 @@ TextStyle _display({required double fontSize, double? height, double? letterSpac
   );
 }
 
-/// The utility/data face (JetBrains Mono) — version tags, stat numbers,
-/// section eyebrows, availability line, tech-stack pills. Never body prose.
+/// The utility/data style — version tags, stat numbers, section eyebrows,
+/// availability line, tech-stack pills. Never body prose. Manrope Medium
+/// with tabular figures, so numbers keep the even, column-aligned rhythm
+/// the monospace face used to give them.
 TextStyle monoLabelStyle({
   double fontSize = 13,
   Color? color,
   double letterSpacing = 0.02,
 }) {
   return TextStyle(
-    fontFamily: 'JetBrainsMono',
+    fontFamily: kFontFamily,
     fontSize: fontSize,
     fontWeight: FontWeight.w500,
     letterSpacing: letterSpacing,
     color: color,
+    fontFeatures: const [FontFeature.tabularFigures()],
   );
 }
 
@@ -74,12 +75,12 @@ final _textTheme = TextTheme(
   titleLarge: _display(fontSize: 22, height: 1.2),
   titleMedium: _display(fontSize: 18, height: 1.2),
   titleSmall: _display(fontSize: 16, height: 1.2),
-  bodyLarge: TextStyle(fontFamily: 'PublicSans', fontSize: 18, height: 1.55),
-  bodyMedium: TextStyle(fontFamily: 'PublicSans', fontSize: 16, height: 1.55),
-  bodySmall: TextStyle(fontFamily: 'PublicSans', fontSize: 14, height: 1.5),
-  labelLarge: TextStyle(fontFamily: 'PublicSans', fontSize: 16, fontWeight: FontWeight.w600),
-  labelMedium: TextStyle(fontFamily: 'PublicSans', fontSize: 14, fontWeight: FontWeight.w600),
-  labelSmall: TextStyle(fontFamily: 'PublicSans', fontSize: 12, fontWeight: FontWeight.w600),
+  bodyLarge: TextStyle(fontFamily: kFontFamily, fontSize: 18, height: 1.55),
+  bodyMedium: TextStyle(fontFamily: kFontFamily, fontSize: 16, height: 1.55),
+  bodySmall: TextStyle(fontFamily: kFontFamily, fontSize: 14, height: 1.5),
+  labelLarge: TextStyle(fontFamily: kFontFamily, fontSize: 16, fontWeight: FontWeight.w600),
+  labelMedium: TextStyle(fontFamily: kFontFamily, fontSize: 14, fontWeight: FontWeight.w600),
+  labelSmall: TextStyle(fontFamily: kFontFamily, fontSize: 12, fontWeight: FontWeight.w600),
 );
 
 const _subThemesData = FlexSubThemesData(
@@ -138,7 +139,7 @@ final lightTheme = FlexThemeData.light(
   // fonts.gstatic.com at runtime: a cross-origin round trip for a face that
   // was never meant to appear in this design. Pointing the default at a
   // bundled family keeps every glyph local.
-  fontFamily: 'PublicSans',
+  fontFamily: kFontFamily,
   subThemesData: _subThemesData,
   keyColors: const FlexKeyColors(
     useSecondary: true,
@@ -180,7 +181,7 @@ final darkTheme = FlexThemeData.dark(
   // fonts.gstatic.com at runtime: a cross-origin round trip for a face that
   // was never meant to appear in this design. Pointing the default at a
   // bundled family keeps every glyph local.
-  fontFamily: 'PublicSans',
+  fontFamily: kFontFamily,
   subThemesData: _subThemesData,
   keyColors: const FlexKeyColors(
     useSecondary: true,

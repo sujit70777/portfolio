@@ -21,6 +21,14 @@
   is not one. Upload this single file; nothing else is needed.
 -->
 <style>
+  /* Manrope, the site-wide face: the same subset files the Flutter app
+     bundles (see pubspec.yaml), loaded from this origin, so one cached copy
+     serves every page. */
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-SemiBold.otf") format("opentype"); font-weight: 600; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-ExtraBold.otf") format("opentype"); font-weight: 800; font-display: swap; }
   :root {
     color-scheme: light;
     --navy: #2F3B50;
@@ -55,7 +63,7 @@
     margin: 0;
     background: var(--page);
     color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 17px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
@@ -76,7 +84,7 @@
   }
   .mark { flex: none; border-radius: 14px; }
   .masthead h1 {
-    font-family: ui-serif, "New York", Georgia, "Times New Roman", serif;
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: clamp(28px, 5vw, 38px);
     line-height: 1.15;
     margin: 0 0 6px;
@@ -99,7 +107,7 @@
   .lede strong { color: var(--ink); }
 
   h2 {
-    font-family: ui-serif, "New York", Georgia, "Times New Roman", serif;
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 24px;
     font-weight: 600;
     margin: 44px 0 14px;

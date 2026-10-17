@@ -6,12 +6,20 @@
 <title>App support — Prabartan Information Technology</title>
 <meta name="description" content="Support, FAQ and contact for the Computer Science Engineering, Machine Learning and Learn Python apps.">
 <style>
+  /* Manrope, the site-wide face: the same subset files the Flutter app
+     bundles (see pubspec.yaml), loaded from this origin, so one cached copy
+     serves every page. */
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-SemiBold.otf") format("opentype"); font-weight: 600; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-ExtraBold.otf") format("opentype"); font-weight: 800; font-display: swap; }
   :root{--ink:#1b1b1f;--ink-soft:#54545c;--paper:#fbfbf9;--rule:#dcdcd6;--mark:#3d5a4a;--mark-bg:#eef2ef}
   @media (prefers-color-scheme:dark){:root{--ink:#e6e6e3;--ink-soft:#a0a09b;--paper:#16171a;--rule:#33343a;--mark:#8fbfa6;--mark-bg:#1e2422}}
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{margin:0;background:var(--paper);color:var(--ink);
-    font:400 clamp(16px,0.98rem + 0.2vw,19px)/1.65 Charter,"Bitstream Charter","Iowan Old Style",Georgia,"Times New Roman",serif}
+    font:400 clamp(16px,0.98rem + 0.2vw,19px)/1.65 "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif}
   .wrap{max-width:42rem;margin:0 auto;padding:clamp(2rem,7vw,4rem) clamp(1.15rem,5vw,1.5rem) clamp(3rem,10vw,6rem)}
   header{border-bottom:1px solid var(--rule);padding-bottom:clamp(1.1rem,4vw,1.75rem);margin-bottom:clamp(1.75rem,6vw,2.5rem)}
   h1{font-size:clamp(1.5rem,1.15rem + 1.5vw,2rem);line-height:1.2;margin:0 0 .6rem;font-weight:600;letter-spacing:-.01em}

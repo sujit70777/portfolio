@@ -93,38 +93,47 @@ flutter:
     - assets/translations/
 
   fonts:
-    # Local copies of the three Google Fonts used by the TextTheme
-    # (lib/src/constants/themes.dart). Filenames must end with exactly
-    # "<GoogleFontsFamily>-<Weight>" (e.g. "Archivo-ExtraBold") — that's the
-    # convention the google_fonts package's local-asset detection matches
-    # against (see google_fonts_family_with_variant.dart), so it loads these
-    # instead of fetching from fonts.gstatic.com at runtime.
-    - family: Archivo
+    # Manrope (SIL OFL 1.1, see assets/fonts/Manrope-OFL.txt) is the one
+    # family for all text: headings, body and the small data labels. These
+    # are subsets of the v2 desktop release, cut to Basic Latin, Latin-1,
+    # common punctuation and every character the copy, the Dart sources and
+    # the web/ pages actually use (245 glyphs, ~32KB each, ~15KB Brotli'd),
+    # with kerning, ligatures and tabular figures kept. The full files were
+    # 71KB each, mostly Cyrillic and accented Latin the site never shows.
+    # Anything outside the subset falls through to the "Roboto" fallback
+    # below. web/index.html and the static pages under web/ load these same
+    # files through @font-face, so keep paths in sync if they're renamed.
+    - family: Manrope
       fonts:
-        - asset: assets/fonts/Archivo-ExtraBold.ttf
-          weight: 800
-    - family: PublicSans
-      fonts:
-        - asset: assets/fonts/PublicSans-Regular.ttf
+        - asset: assets/fonts/Manrope-Regular.otf
           weight: 400
-        - asset: assets/fonts/PublicSans-SemiBold.ttf
-          weight: 600
-    - family: JetBrainsMono
-      fonts:
-        - asset: assets/fonts/JetBrainsMono-Medium.ttf
+        - asset: assets/fonts/Manrope-Medium.otf
           weight: 500
+        - asset: assets/fonts/Manrope-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Manrope-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Manrope-ExtraBold.otf
+          weight: 800
     # Not a real Roboto. Flutter Web's engine scans the bundled font families
     # for one literally named "Roboto" and, finding none, downloads Roboto
     # from fonts.gstatic.com during startup — 63KB over a fresh cross-origin
     # connection (DNS + TCP + TLS to a third party), on the critical path,
     # for a face this design never shows. Declaring the name satisfies that
-    # check and keeps startup on this origin. It points at the Public Sans
-    # file on purpose: ThemeData.fontFamily is PublicSans (see
-    # lib/src/constants/themes.dart), so nothing should ever resolve to
-    # "Roboto" anyway — this entry only has to exist.
+    # check and keeps startup on this origin.
+    #
+    # "Roboto" is also the head of the engine's global fallback list, so any
+    # glyph the styled family lacks is looked up here before the engine goes
+    # to fonts.gstatic.com for a Noto font. GlyphFallback-Regular.ttf is a
+    # ~6KB subset of Noto Sans / Noto Sans Math / Noto Sans Symbols 2 (all
+    # SIL OFL 1.1) holding the symbols Manrope lacks that the site uses
+    # (↗ ≈ ✓ ✗; missing glyphs used to pull 68KB of Noto Sans Symbols
+    # cross-origin during startup), plus a few common arrows and marks. If new
+    # copy adds a symbol none of the bundled fonts have, the engine still
+    # downloads a Noto font for it — regenerate this subset with it included.
     - family: Roboto
       fonts:
-        - asset: assets/fonts/PublicSans-Regular.ttf
+        - asset: assets/fonts/GlyphFallback-Regular.ttf
 
 
 flutter_native_splash:

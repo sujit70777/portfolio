@@ -124,12 +124,22 @@ jobs:
         # rsynced on every deploy.
         run: find build/web -name '*.symbols' -delete
 
+      - name: Strip dangling source map reference
+        # flutter_bootstrap.js inlines flutter.js along with its
+        # "sourceMappingURL=flutter.js.map" comment, but the build ships no
+        # flutter.js.map. Anything that follows the reference (DevTools,
+        # Lighthouse) hits the SPA fallback, gets index.html back, and fails
+        # to parse it as JSON. Lighthouse marks Best Practices down for it.
+        run: sed -i '/^\/\/# sourceMappingURL=flutter\.js\.map/d' build/web/flutter_bootstrap.js
+
       - name: Pre-compress static assets
+        # Fonts are included: .otf/.ttf aren't compressed formats, and Brotli
+        # roughly halves the Manrope subsets (~32KB -> ~15KB each).
         run: |
           sudo apt-get install -y brotli
           find build/web -type f \
             \( -name '*.js' -o -name '*.mjs' -o -name '*.wasm' -o -name '*.json' \
-               -o -name '*.css' -o -name '*.svg' \) \
+               -o -name '*.css' -o -name '*.svg' -o -name '*.otf' -o -name '*.ttf' \) \
             -exec brotli -q 11 -k {} \; -exec gzip -9 -k {} \;
 
       - name: Deploy to Namecheap via rsync
@@ -143,6 +153,7 @@ jobs:
             --exclude=ml/
             --exclude=python/
             --exclude=medhaat/
+            --exclude=repha/
           path: build/web/
           remote_path: ~/public_html/
           remote_host: ${{ secrets.SSH_HOST }}

@@ -13,6 +13,7 @@ import 'package:portfolio/src/features/project/presentation/widgets/project_stat
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
 import 'package:portfolio/src/features/page_search/presentation/searchable_text.dart';
+import 'package:portfolio/src/common/widgets/lazy_asset_image.dart';
 
 /// Screenshot-forward card for the curated "featured" project tier — the
 /// projects section is meant to read as the page's centrepiece, so the
@@ -108,11 +109,10 @@ class _FeaturedProjectCardState extends ConsumerState<FeaturedProjectCard> {
                                 project: project, iconSize: 48)
                             : AnimatedSwitcher(
                                 duration: const Duration(milliseconds: 200),
-                                child: Image.asset(
+                                child: LazyAssetImage(
                                   showHoverImage ? hoverImage : primaryImage,
                                   key: ValueKey(showHoverImage),
                                   fit: BoxFit.contain,
-                                  width: double.infinity,
                                 ),
                               ),
                       ),

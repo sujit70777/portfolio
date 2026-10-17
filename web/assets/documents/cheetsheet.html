@@ -7,6 +7,14 @@
 <title>Toptal Stage 1 — One Page Cheat Sheet</title>
 
 <style>
+  /* Manrope, the site-wide face: the same subset files the Flutter app
+     bundles (see pubspec.yaml), loaded from this origin, so one cached copy
+     serves every page. */
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-SemiBold.otf") format("opentype"); font-weight: 600; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-ExtraBold.otf") format("opentype"); font-weight: 800; font-display: swap; }
 * {
     box-sizing: border-box;
 }
@@ -22,12 +30,7 @@ body {
     padding: 0;
     background: #000000;
     color: #eaffff;
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .sheet {

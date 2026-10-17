@@ -7,6 +7,14 @@
 <meta name="description" content="Personal 6-day low-impact gym and fat-loss plan with exercise instructions, sleep, optional afternoon activity, and a workout tracker.">
 <title>My Fat-Loss Gym App</title>
 <style>
+  /* Manrope, the site-wide face: the same subset files the Flutter app
+     bundles (see pubspec.yaml), loaded from this origin, so one cached copy
+     serves every page. */
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-SemiBold.otf") format("opentype"); font-weight: 600; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-ExtraBold.otf") format("opentype"); font-weight: 800; font-display: swap; }
 :root{
   --bg:#080a0f;
   --panel:#10131b;
@@ -31,7 +39,7 @@ body{
     radial-gradient(circle at 100% 0%, rgba(106,228,255,.08), transparent 28%),
     var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
+  font-family:"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height:1.5;
 }
 button,input{font:inherit}

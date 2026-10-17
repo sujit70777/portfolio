@@ -32,12 +32,20 @@
 <meta name="apple-itunes-app" content="app-id=6811420308">
 
 <!--
-  Self-contained on purpose: no webfonts, no analytics, no third-party requests
-  of any kind. An app whose whole promise is that nothing leaves your Mac should
+  Self-contained on purpose: no third-party webfonts, no analytics, no third-party
+  requests of any kind (Manrope is served from this site). An app whose whole promise is that nothing leaves your Mac should
   not have a marketing page that phones home about you. Everything it loads —
   images, video, the theme choice — comes from or stays on this site.
 -->
 <style>
+  /* Manrope, the site-wide face: the same subset files the Flutter app
+     bundles (see pubspec.yaml), loaded from this origin, so one cached copy
+     serves every page. */
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-SemiBold.otf") format("opentype"); font-weight: 600; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Manrope"; src: url("/assets/assets/fonts/Manrope-ExtraBold.otf") format("opentype"); font-weight: 800; font-display: swap; }
   /* Light palette here; [data-theme="dark"] swaps it. Dark is the default
      (set before first paint, in the <head> script) unless the visitor chose
      light. Text colours in both themes clear WCAG AA on their backgrounds. */
@@ -66,9 +74,9 @@
     --btn-shadow:  0 8px 22px rgba(89,84,214,0.28);
     --band:        linear-gradient(150deg, #F2F5FA, #ECF1F7);
 
-    --serif: "New York", ui-serif, Iowan Old Style, Georgia, serif;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --round: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, sans-serif;
+    --serif: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --round: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --max: 1120px;
   }
 
