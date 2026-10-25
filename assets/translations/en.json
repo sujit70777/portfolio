@@ -103,7 +103,7 @@
             "url": "assets/documents/resume.pdf"
         }
     ],
-    "aboutDescription": "I take on the problems that block a product: offline data that must not be lost, payments that must reconcile across Apple and Stripe, platform edge cases, and slow components that need a native rewrite.\n\nI'm a Senior Mobile & Full-Stack AI Engineer — 7 years of Flutter inside 11 years of shipping mobile apps — with native iOS, Android and macOS (Swift, SwiftUI, Kotlin). When a package can't do the job, I write the plugin or platform channel myself, and I've published 9 Flutter packages on pub.dev. I'm based in Bangladesh and don't need relocation or visa sponsorship to work remotely.\n\nA few problems I've solved:\n\n→ Prayer times that were wrong at high latitudes. A prayer-times app showed wrong times to users in far-northern cities, and earlier fixes hadn't worked. I traced it to the sunrise and sunset calculation and built a new offline engine, verified against a real local schedule. It works with or without internet.\n\n→ A receipt scanner too slow for the business. For an expense-reimbursement FinTech platform, I replaced a generic Flutter scanner with a native one (Swift on iOS, Java on Android) that reads a QR code or barcode in about half a second. Live verification progress replaced the spinner, claims save offline and sync later, and a reimbursement completes in about 5–10 seconds.\n\n→ Two payment systems that disagreed. A subscription app sold through Stripe on Android and Apple In-App Purchase on iOS, and the two produced duplicate purchases and mismatched accounts. As team lead I redesigned the entitlement model so both map to one account. After about two years stuck in development, the app was approved and live within about a month.\n\n→ Learning that works offline. I led a 6-developer team building offline-first learning apps (Python, CSE, ML) as free + one-time Pro editions on Google Play and the App Store; two free apps each passed 100,000 downloads.\n\n→ Lawyers losing billable hours. I built Hourwise alone and shipped it to the Mac App Store. It records work passively and learns, on the Mac itself, which client each piece of work belongs to.\n\nWhat I can do for your team: make your app work offline without losing data, fix payments and subscriptions across Stripe, Apple and Google, get a stalled app through store review, and add on-device machine learning that keeps user data private.\n\nHow I work: I own the problem, the architecture and the code review; AI coding agents write much of the code; tests and automated releases keep quality up. I've worked an overseas team's hours for three years.\n\nOpen to: Senior Mobile & Full-Stack AI Engineer, Senior Flutter Engineer, Senior Flutter Developer, Lead Flutter Developer, Mobile Tech Lead. Full-time or contract.",
+    "aboutDescription": "I take on the problems that block a product: offline data that must not be lost, payments that must reconcile across Apple and Stripe, platform edge cases, and slow components that need a native rewrite.\n\nI'm a Senior Mobile & Full-Stack AI Engineer — 7 years of Flutter inside 11 years of shipping mobile apps — with native iOS, Android and macOS (Swift, SwiftUI, Kotlin). When a package can't do the job, I write the plugin or platform channel myself, and I've published 9 Flutter packages on pub.dev. I'm based in Bangladesh and don't need relocation or visa sponsorship to work remotely.\n\nA few problems I've solved:\n\n→ Prayer times that were wrong at high latitudes. A prayer-times app showed wrong times to users in far-northern cities, and earlier fixes hadn't worked. I traced it to the sunrise and sunset calculation and built a new offline engine, verified against a real local schedule. It works with or without internet.\n\n→ A receipt scanner too slow for the business. For an expense-reimbursement FinTech platform, I replaced a generic Flutter scanner with a native one (Swift on iOS, Java on Android) that reads a QR code or barcode in about half a second. Live verification progress replaced the spinner, claims save offline and sync later, and a reimbursement completes in about 5–10 seconds.\n\n→ Two payment systems that disagreed. A subscription app sold through Stripe on Android and Apple In-App Purchase on iOS, and the two produced duplicate purchases and mismatched accounts. As team lead I redesigned the entitlement model so both map to one account. After about two years stuck in development, the app was approved and live within about a month.\n\n→ Learning that works offline. I led a 6-developer team building offline-first learning apps (Python, CSE, ML) as free + one-time Pro editions on Google Play and the App Store; two free apps each passed 100,000 downloads.\n\n→ Lawyers losing billable hours. I built Hourwise alone and shipped it to the Mac App Store. It records work passively and learns, on the Mac itself, which client each piece of work belongs to.\n\n→ Pharmacies ordering by phone and paper. I built Repha alone and shipped it to Google Play. A pharmacy writes or photographs one medicine list; the app splits it by company, sends each part to the right medical rep and tracks it to delivery — with 73,000+ medicines searchable offline and a backend that costs nothing to run.\n\nWhat I can do for your team: make your app work offline without losing data, fix payments and subscriptions across Stripe, Apple and Google, get a stalled app through store review, and add on-device machine learning that keeps user data private.\n\nHow I work: I own the problem, the architecture and the code review; AI coding agents write much of the code; tests and automated releases keep quality up. I've worked an overseas team's hours for three years.\n\nOpen to: Senior Mobile & Full-Stack AI Engineer, Senior Flutter Engineer, Senior Flutter Developer, Lead Flutter Developer, Mobile Tech Lead. Full-time or contract.",
     "skillCategories": [
         {
             "category": "Offline-First & Data Sync",
@@ -187,12 +187,21 @@
         {
             "role": "Founder & Full-Stack AI Engineer",
             "company": "Hourwise Labs",
-            "description": "Solo lawyers lose billable time because they forget timers and rebuild their day from memory. I built Hourwise alone — with AI coding agents under my review — from design to Mac App Store release.\n\n• Passive time capture in a native macOS menu-bar app (SwiftUI + AppKit, ~17k lines of Swift).\n• On-device machine learning, live today: a rule engine plus a naive-Bayes classifier that learns from each user's corrections and assigns work to the right client matter. Work history never leaves the Mac.\n• Local-first SQLite/GRDB storage; PDF invoices plus LEDES 1998B, QuickBooks, Xero, XLSX and CSV exports; StoreKit 2 subscriptions.\n\n• Now building: full-stack AI \n• On-device AI billing narratives with Apple Foundation Models, plus UTBMS code suggestions and billing-rule checks \n• Private meeting capture: on-device transcription and summaries that become draft time entries\n• Python/FastAPI + Postgres backend: auth, firm seats, CRDT sync across Swift and Dart clients, Claude API proxy\n• Flutter companion app for iOS and Android: timers, voice entries, Live Activities\n• 'Ask my matters': a tool-using LLM agent with pgvector hybrid search, citations and evals",
+            "description": "Solo lawyers lose billable time because they forget timers and rebuild their day from memory. I built Hourwise alone — with AI coding agents under my review — from design to Mac App Store release.\n\nAlso shipped from Hourwise Labs: Repha (Google Play, October 2026), a B2B ordering network for pharmacies and medical representatives in Bangladesh.\n• Flutter app for both sides: 73,000+ medicines searchable offline, one order list split by company and routed to the right rep, photo-to-order on-device OCR, tracking to delivery, Bangla-first UI.\n• Laravel + MySQL backend, Filament admin panel with switchable rules and a full change history, push notifications; runs at zero hosting cost.\n\n• Passive time capture in a native macOS menu-bar app (SwiftUI + AppKit, ~17k lines of Swift).\n• On-device machine learning, live today: a rule engine plus a naive-Bayes classifier that learns from each user's corrections and assigns work to the right client matter. Work history never leaves the Mac.\n• Local-first SQLite/GRDB storage; PDF invoices plus LEDES 1998B, QuickBooks, Xero, XLSX and CSV exports; StoreKit 2 subscriptions.\n\n• Now building: full-stack AI \n• On-device AI billing narratives with Apple Foundation Models, plus UTBMS code suggestions and billing-rule checks \n• Private meeting capture: on-device transcription and summaries that become draft time entries\n• Python/FastAPI + Postgres backend: auth, firm seats, CRDT sync across Swift and Dart clients, Claude API proxy\n• Flutter companion app for iOS and Android: timers, voice entries, Live Activities\n• 'Ask my matters': a tool-using LLM agent with pgvector hybrid search, citations and evals",
             "url": "https://ehsanur.com/hourwise/",
             "isPresent": true,
             "startYear": 2026,
             "startMonth": 9,
             "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
+                },
+                {
+                    "name": "Laravel"
+                },
                 {
                     "name": "Swift",
                     "icon": {
@@ -258,6 +267,10 @@
                 {
                     "url": "https://apps.apple.com/us/app/hourwise-billable-hours/id6811420308?mt=12",
                     "label": "Mac App Store"
+                },
+                {
+                    "url": "https://play.google.com/store/apps/details?id=com.repha.app",
+                    "label": "Repha on Google Play"
                 },
                 {
                     "url": "https://ehsanur.com/hourwise/",
@@ -568,6 +581,81 @@
                 {
                     "label": "Product site",
                     "url": "https://ehsanur.com/hourwise/",
+                    "platform": "web"
+                }
+            ]
+        },
+        {
+            "name": "Repha",
+            "description": "Case study: Bangladeshi pharmacies order stock from dozens of companies, each through a different medical rep, by phone and paper. Repha turns one list into routed orders and tracks them to delivery. Live on Google Play.",
+            "role": "Founder and sole engineer — product, Flutter app, Laravel backend and admin panel, Bangla-first design, Google Play release and the Rajshahi pilot.",
+            "url": "https://play.google.com/store/apps/details?id=com.repha.app",
+            "icon": {
+                "assetName": "assets/icons/other/google-play.svg"
+            },
+            "status": "shipped",
+            "featured": true,
+            "highlights": [
+                "Problem: A pharmacy buys from dozens of pharma companies, each through its own medical rep. Orders live on paper lists and phone calls, get lost or arrive partly, and new shops don't know who the rep for their area is.",
+                "What I did: Built the whole product alone, with AI coding agents under my review. A Flutter app for pharmacies and reps: 73,000+ medicines searchable offline (SQLite FTS5), one list split automatically by company and routed to the right rep, a photo of a printed list read on-device into order lines, an offline outbox that sends each order exactly once, and a Bangla-first UI. Behind it: a Laravel API, a Filament admin panel where every rule can be switched and every change is logged, and push notifications — running at zero hosting cost.",
+                "Result: Live on Google Play since October 2026; pilot running in Rajshahi."
+            ],
+            "technologies": [
+                {
+                    "name": "Flutter",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/flutter.svg"
+                    }
+                },
+                {
+                    "name": "Dart",
+                    "icon": {
+                        "assetName": "assets/icons/other/dart.svg"
+                    }
+                },
+                {
+                    "name": "Riverpod",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/riverpod.svg"
+                    }
+                },
+                {
+                    "name": "SQLite / Drift (FTS5)",
+                    "icon": {
+                        "assetName": "assets/icons/other/sqlite.svg"
+                    }
+                },
+                {
+                    "name": "On-device OCR (ML Kit)"
+                },
+                {
+                    "name": "Laravel"
+                },
+                {
+                    "name": "MySQL"
+                },
+                {
+                    "name": "Firebase Cloud Messaging",
+                    "icon": {
+                        "assetName": "assets/icons/other/firebase.svg"
+                    }
+                },
+                {
+                    "name": "Claude Code",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/claude-code.svg"
+                    }
+                }
+            ],
+            "links": [
+                {
+                    "label": "Google Play",
+                    "url": "https://play.google.com/store/apps/details?id=com.repha.app",
+                    "platform": "android"
+                },
+                {
+                    "label": "Product site",
+                    "url": "https://ehsanur.com/repha/",
                     "platform": "web"
                 }
             ]
@@ -1723,7 +1811,7 @@
             "text": "EdTech · 2 apps past 100K downloads"
         },
         {
-            "text": "Mac App Store · Hourwise"
+            "text": "Shipped solo: Hourwise · Repha"
         },
         {
             "text": "9 Flutter packages on pub.dev"
@@ -1753,7 +1841,7 @@
         "experienceLabel": "Experience",
         "experience": "11 years shipping mobile apps · 7 years of Flutter",
         "stackLabel": "Stack",
-        "stack": "Flutter, Dart, Swift/SwiftUI, Kotlin, Firebase, offline-first sync, StoreKit 2 / Stripe",
+        "stack": "Flutter, Dart, Swift/SwiftUI, Kotlin, Firebase, offline-first sync, StoreKit 2 / Stripe, Laravel backends",
         "locationLabel": "Location",
         "location": "Remote from Bangladesh · No relocation or visa sponsorship required",
         "timezoneLabel": "Time zone",
