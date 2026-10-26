@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -48,13 +49,11 @@ Future<void> showProjectDetailModal(
     barrierDismissible: true,
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     barrierColor: Colors.black87,
-    transitionDuration:
-        reduceMotion ? Duration.zero : const Duration(milliseconds: 150),
+    transitionDuration: reduceMotion
+        ? Duration.zero
+        : const Duration(milliseconds: 150),
     pageBuilder: (context, animation, secondaryAnimation) {
-      return ProjectDetailModal(
-        project: project,
-        allProjects: allProjects,
-      );
+      return ProjectDetailModal(project: project, allProjects: allProjects);
     },
     transitionBuilder: (context, animation, secondaryAnimation, child) {
       final curved = CurvedAnimation(parent: animation, curve: Curves.easeOut);
@@ -134,15 +133,15 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
       widget.allProjects ?? ref.read(projectRepositoryProvider).getProjects();
 
   List<Project> _visibleProjects(List<Project> all) => filterProjects(
-        all,
-        searchQuery: _searchQuery,
-        technology: _technologyFilter,
-      );
+    all,
+    searchQuery: _searchQuery,
+    technology: _technologyFilter,
+  );
 
   void _syncBrowserQuery(String? projectName) => setBrowserQueryParam(
-        'project',
-        projectName == null ? null : slugify(projectName),
-      );
+    'project',
+    projectName == null ? null : slugify(projectName),
+  );
 
   void _selectProject(Project project, {bool closeDrawer = false}) {
     if (project.name == _selected.name) {
@@ -173,8 +172,9 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
   }
 
   void _ensureSelectionVisible() {
-    final visible =
-        flattenSections(sectionProjects(_visibleProjects(_projectsFromRepo())));
+    final visible = flattenSections(
+      sectionProjects(_visibleProjects(_projectsFromRepo())),
+    );
     if (visible.isEmpty) return;
     final stillVisible = visible.any((p) => p.name == _selected.name);
     if (!stillVisible) _selectProject(visible.first);
@@ -193,8 +193,9 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
     // Only when the list owns focus — otherwise Up/Down should scroll a
     // long project description in the detail pane.
     if (!_listFocus.hasFocus) return;
-    final visible =
-        flattenSections(sectionProjects(_visibleProjects(_projectsFromRepo())));
+    final visible = flattenSections(
+      sectionProjects(_visibleProjects(_projectsFromRepo())),
+    );
     if (visible.isEmpty) return;
     final index = visible.indexWhere((p) => p.name == _selected.name);
     final current = index < 0 ? 0 : index;
@@ -322,49 +323,58 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Flexible(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                if (_images.isNotEmpty)
-                  _Gallery(
-                    images: _images,
-                    currentIndex: _currentIndex,
-                    aspectRatio: _aspectRatios[_currentIndex],
-                    onNavigate: _goTo,
-                    placeholder: EmptyProjectPlaceholder(project: project),
-                  ),
-                Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(project.description ?? '',
-                          style: theme.textTheme.bodyLarge),
-                      if (project.role != null) ...[
-                        gapH16,
+          child: LayoutBuilder(
+            builder: (context, constraints) => SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (_images.isNotEmpty)
+                    _Gallery(
+                      images: _images,
+                      currentIndex: _currentIndex,
+                      aspectRatio: _aspectRatios[_currentIndex],
+                      maxHeight: constraints.maxHeight,
+                      onNavigate: _goTo,
+                      placeholder: EmptyProjectPlaceholder(project: project),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         Text(
-                          'My role',
-                          style: theme.textTheme.labelSmall?.copyWith(
-                            color: mutedTextColor(theme.colorScheme),
-                          ),
+                          project.description ?? '',
+                          style: theme.textTheme.bodyLarge,
                         ),
-                        gapH4,
-                        Text(project.role!, style: theme.textTheme.bodyMedium),
+                        if (project.role != null) ...[
+                          gapH16,
+                          Text(
+                            'My role',
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              color: mutedTextColor(theme.colorScheme),
+                            ),
+                          ),
+                          gapH4,
+                          Text(
+                            project.role!,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                        ],
+                        if (project.highlights?.isNotEmpty == true) ...[
+                          gapH16,
+                          ProjectHighlights(highlights: project.highlights!),
+                        ],
+                        if (project.technologies?.isNotEmpty == true) ...[
+                          gapH16,
+                          TechnologyWrapChips(
+                            technologies: project.technologies!,
+                          ),
+                        ],
                       ],
-                      if (project.highlights?.isNotEmpty == true) ...[
-                        gapH16,
-                        ProjectHighlights(highlights: project.highlights!),
-                      ],
-                      if (project.technologies?.isNotEmpty == true) ...[
-                        gapH16,
-                        TechnologyWrapChips(
-                            technologies: project.technologies!),
-                      ],
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -378,16 +388,19 @@ class _ProjectDetailModalState extends ConsumerState<ProjectDetailModal> {
 
   @override
   Widget build(BuildContext context) {
-    final allProjects = widget.allProjects ??
+    final allProjects =
+        widget.allProjects ??
         ref.watch(projectRepositoryProvider).getProjects();
     final project = _selected;
     final projectName = project.name ?? '';
     _images = project.screenshotPath != null
         ? [project.screenshotPath!]
-        : ref.watch(projectImagesProvider(projectName)).maybeWhen(
-              data: (value) => value,
-              orElse: () => const <String>[],
-            );
+        : ref
+              .watch(projectImagesProvider(projectName))
+              .maybeWhen(
+                data: (value) => value,
+                orElse: () => const <String>[],
+              );
     if (_images.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) _resolveAspectRatio(_currentIndex);
@@ -545,6 +558,7 @@ class _Gallery extends StatelessWidget {
     required this.images,
     required this.currentIndex,
     required this.aspectRatio,
+    required this.maxHeight,
     required this.onNavigate,
     required this.placeholder,
   });
@@ -555,6 +569,10 @@ class _Gallery extends StatelessWidget {
   // portrait phone ratio (most of this site's screenshots) so the box
   // doesn't flash as a wide landscape shape before that resolves.
   final double? aspectRatio;
+  // The detail pane's visible height. The gallery sits inside that pane's
+  // scroll view, so anything taller than this has a tall phone screenshot's
+  // bottom cut off at the pane's edge until the visitor scrolls.
+  final double maxHeight;
   final ValueChanged<int> onNavigate;
   final Widget placeholder;
 
@@ -569,8 +587,10 @@ class _Gallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final galleryHeight = (MediaQuery.sizeOf(context).height * 0.68)
-        .clamp(320.0, _standardHeight);
+    final galleryHeight = math.min(
+      (MediaQuery.sizeOf(context).height * 0.68).clamp(320.0, _standardHeight),
+      maxHeight,
+    );
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
 
     // The dark backdrop spans the gallery's full width and a fixed height;
@@ -615,14 +635,16 @@ class _Gallery extends StatelessWidget {
                       errorBuilder: (_, _, _) => placeholder,
                       frameBuilder:
                           (context, child, frame, wasSynchronouslyLoaded) {
-                        if (wasSynchronouslyLoaded) return child;
-                        return AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 200),
-                          child: frame != null
-                              ? child
-                              : const _GalleryShimmer(key: ValueKey('loading')),
-                        );
-                      },
+                            if (wasSynchronouslyLoaded) return child;
+                            return AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 200),
+                              child: frame != null
+                                  ? child
+                                  : const _GalleryShimmer(
+                                      key: ValueKey('loading'),
+                                    ),
+                            );
+                          },
                     ),
                   ),
                 ),
@@ -697,7 +719,9 @@ class _GalleryShimmer extends StatefulWidget {
 class _GalleryShimmerState extends State<_GalleryShimmer>
     with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 1400));
+    vsync: this,
+    duration: const Duration(milliseconds: 1400),
+  );
 
   // See HeroBackground's identical guard: an infinitely-repeating ticker
   // never lets pumpAndSettle() settle, so it must not start under the test
@@ -737,7 +761,7 @@ class _GalleryShimmerState extends State<_GalleryShimmer>
                 colors: const [
                   Color(0xFF2A2A2A),
                   Color(0xFF454545),
-                  Color(0xFF2A2A2A)
+                  Color(0xFF2A2A2A),
                 ],
                 stops: const [0.35, 0.5, 0.65],
               ).createShader(bounds);
@@ -751,8 +775,11 @@ class _GalleryShimmerState extends State<_GalleryShimmer>
 }
 
 class _NavButton extends StatelessWidget {
-  const _NavButton(
-      {required this.icon, required this.tooltip, required this.onPressed});
+  const _NavButton({
+    required this.icon,
+    required this.tooltip,
+    required this.onPressed,
+  });
 
   final IconData icon;
   final String tooltip;
@@ -765,7 +792,9 @@ class _NavButton extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
         child: Container(
           decoration: BoxDecoration(
-              shape: BoxShape.circle, color: Colors.black.withAlpha(130)),
+            shape: BoxShape.circle,
+            color: Colors.black.withAlpha(130),
+          ),
           child: IconButton(
             icon: Icon(icon, color: Colors.white),
             tooltip: tooltip,
@@ -804,7 +833,8 @@ class _ActionBar extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border(
-            top: BorderSide(color: theme.colorScheme.onSurface.withAlpha(20))),
+          top: BorderSide(color: theme.colorScheme.onSurface.withAlpha(20)),
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -816,8 +846,9 @@ class _ActionBar extends StatelessWidget {
           children: [
             OutlinedButton(
               style: ButtonStyle(
-                foregroundColor:
-                    WidgetStatePropertyAll(theme.colorScheme.onSurface),
+                foregroundColor: WidgetStatePropertyAll(
+                  theme.colorScheme.onSurface,
+                ),
                 side: WidgetStatePropertyAll(
                   BorderSide(color: theme.colorScheme.onSurface.withAlpha(60)),
                 ),

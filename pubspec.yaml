@@ -67,6 +67,7 @@ flutter:
     - assets/icons/software-development/
     - assets/images/
     - assets/projectimage/hourwise/
+    - assets/projectimage/repha/
     - assets/projectimage/subscription-app-stripe-apple-entitlements/
     - assets/projectimage/forward-sms/
     - assets/projectimage/prayer-times-app-high-latitude-engine/

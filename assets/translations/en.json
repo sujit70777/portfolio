@@ -200,7 +200,10 @@
                     }
                 },
                 {
-                    "name": "Laravel"
+                    "name": "Laravel",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/laravel.svg"
+                    }
                 },
                 {
                     "name": "Swift",
@@ -595,6 +598,7 @@
             },
             "status": "shipped",
             "featured": true,
+            "flagship": true,
             "highlights": [
                 "Problem: A pharmacy buys from dozens of pharma companies, each through its own medical rep. Orders live on paper lists and phone calls, get lost or arrive partly, and new shops don't know who the rep for their area is.",
                 "What I did: Built the whole product alone, with AI coding agents under my review. A Flutter app for pharmacies and reps: 73,000+ medicines searchable offline (SQLite FTS5), one list split automatically by company and routed to the right rep, a photo of a printed list read on-device into order lines, an offline outbox that sends each order exactly once, and a Bangla-first UI. Behind it: a Laravel API, a Filament admin panel where every rule can be switched and every change is logged, and push notifications — running at zero hosting cost.",
@@ -629,10 +633,16 @@
                     "name": "On-device OCR (ML Kit)"
                 },
                 {
-                    "name": "Laravel"
+                    "name": "Laravel",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/laravel.svg"
+                    }
                 },
                 {
-                    "name": "MySQL"
+                    "name": "MySQL",
+                    "icon": {
+                        "assetName": "assets/icons/software-development/mysql.svg"
+                    }
                 },
                 {
                     "name": "Firebase Cloud Messaging",

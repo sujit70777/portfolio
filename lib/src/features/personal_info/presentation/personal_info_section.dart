@@ -70,10 +70,14 @@ class PersonalInfoSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final resumes =
-        ref.watch(personalInfoRepositoryProvider).getResumes().toList();
-    final contacts =
-        ref.watch(personalInfoRepositoryProvider).getContacts().toList();
+    final resumes = ref
+        .watch(personalInfoRepositoryProvider)
+        .getResumes()
+        .toList();
+    final contacts = ref
+        .watch(personalInfoRepositoryProvider)
+        .getContacts()
+        .toList();
     final emailContact = contacts.firstWhereOrNull(
       (c) => c.url?.startsWith('mailto:') == true,
     );
@@ -107,19 +111,17 @@ class PersonalInfoSection extends ConsumerWidget {
     return Stack(
       // The backdrop's light deliberately spills past the hero's box.
       clipBehavior: Clip.none,
-      children: [
-        const HeroBackground(),
-        content,
-      ],
+      children: [const HeroBackground(), content],
     );
   }
 }
 
 class _DesktopHero extends StatelessWidget {
-  const _DesktopHero(
-      {required this.emailUrl,
-      required this.whatsappUrl,
-      required this.resumes});
+  const _DesktopHero({
+    required this.emailUrl,
+    required this.whatsappUrl,
+    required this.resumes,
+  });
 
   final String? emailUrl;
   final String? whatsappUrl;
@@ -128,10 +130,18 @@ class _DesktopHero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final nameSize =
-        fluidSize(context, min: 32, preferredVwPercent: 5, max: 56);
-    final titleSize =
-        fluidSize(context, min: 16, preferredVwPercent: 2, max: 21.6);
+    final nameSize = fluidSize(
+      context,
+      min: 32,
+      preferredVwPercent: 5,
+      max: 56,
+    );
+    final titleSize = fluidSize(
+      context,
+      min: 16,
+      preferredVwPercent: 2,
+      max: 21.6,
+    );
 
     final left = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,11 +173,15 @@ class _DesktopHero extends StatelessWidget {
             children: [
               if (emailUrl != null)
                 _HeroCta.primary(
-                    label: tr(LocaleKeys.heroPrimaryCta), url: emailUrl!),
+                  label: tr(LocaleKeys.heroPrimaryCta),
+                  url: emailUrl!,
+                ),
               if (resumes.isNotEmpty) ResumeButton(resumes: resumes.cast()),
               if (whatsappUrl != null)
                 _HeroCta.secondary(
-                    label: tr(LocaleKeys.heroSecondaryCta), url: whatsappUrl!),
+                  label: tr(LocaleKeys.heroSecondaryCta),
+                  url: whatsappUrl!,
+                ),
             ],
           ),
         ),
@@ -197,10 +211,11 @@ class _DesktopHero extends StatelessWidget {
 }
 
 class _TabletHero extends StatelessWidget {
-  const _TabletHero(
-      {required this.emailUrl,
-      required this.whatsappUrl,
-      required this.resumes});
+  const _TabletHero({
+    required this.emailUrl,
+    required this.whatsappUrl,
+    required this.resumes,
+  });
 
   final String? emailUrl;
   final String? whatsappUrl;
@@ -209,10 +224,18 @@ class _TabletHero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final nameSize =
-        fluidSize(context, min: 32, preferredVwPercent: 5, max: 56);
-    final titleSize =
-        fluidSize(context, min: 16, preferredVwPercent: 2, max: 21.6);
+    final nameSize = fluidSize(
+      context,
+      min: 32,
+      preferredVwPercent: 5,
+      max: 56,
+    );
+    final titleSize = fluidSize(
+      context,
+      min: 16,
+      preferredVwPercent: 2,
+      max: 21.6,
+    );
 
     return Center(
       child: ConstrainedBox(
@@ -235,8 +258,9 @@ class _TabletHero extends StatelessWidget {
                     child: AuroraText(
                       tr(LocaleKeys.name),
                       flowing: true,
-                      style:
-                          textTheme.displayLarge?.copyWith(fontSize: nameSize),
+                      style: textTheme.displayLarge?.copyWith(
+                        fontSize: nameSize,
+                      ),
                     ),
                   ),
                 ],
@@ -254,13 +278,15 @@ class _TabletHero extends StatelessWidget {
                 children: [
                   if (emailUrl != null)
                     _HeroCta.primary(
-                        label: tr(LocaleKeys.heroPrimaryCta), url: emailUrl!),
-                  if (resumes.isNotEmpty)
-                    ResumeButton(resumes: resumes.cast()),
+                      label: tr(LocaleKeys.heroPrimaryCta),
+                      url: emailUrl!,
+                    ),
+                  if (resumes.isNotEmpty) ResumeButton(resumes: resumes.cast()),
                   if (whatsappUrl != null)
                     _HeroCta.secondary(
-                        label: tr(LocaleKeys.heroSecondaryCta),
-                        url: whatsappUrl!),
+                      label: tr(LocaleKeys.heroSecondaryCta),
+                      url: whatsappUrl!,
+                    ),
                 ],
               ),
             ),
@@ -278,10 +304,11 @@ class _TabletHero extends StatelessWidget {
 }
 
 class _MobileHero extends StatelessWidget {
-  const _MobileHero(
-      {required this.emailUrl,
-      required this.whatsappUrl,
-      required this.resumes});
+  const _MobileHero({
+    required this.emailUrl,
+    required this.whatsappUrl,
+    required this.resumes,
+  });
 
   final String? emailUrl;
   final String? whatsappUrl;
@@ -290,10 +317,18 @@ class _MobileHero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final nameSize =
-        fluidSize(context, min: 32, preferredVwPercent: 5, max: 56);
-    final titleSize =
-        fluidSize(context, min: 16, preferredVwPercent: 2, max: 21.6);
+    final nameSize = fluidSize(
+      context,
+      min: 32,
+      preferredVwPercent: 5,
+      max: 56,
+    );
+    final titleSize = fluidSize(
+      context,
+      min: 16,
+      preferredVwPercent: 2,
+      max: 21.6,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -333,9 +368,10 @@ class _MobileHero extends StatelessWidget {
             children: [
               if (emailUrl != null)
                 _HeroCta.primary(
-                    label: tr(LocaleKeys.heroPrimaryCta),
-                    url: emailUrl!,
-                    fullWidth: true),
+                  label: tr(LocaleKeys.heroPrimaryCta),
+                  url: emailUrl!,
+                  fullWidth: true,
+                ),
               if (resumes.isNotEmpty) ...[
                 gapH12,
                 ResumeButton(resumes: resumes.cast(), fullWidth: true),
@@ -343,9 +379,10 @@ class _MobileHero extends StatelessWidget {
               if (whatsappUrl != null) ...[
                 gapH12,
                 _HeroCta.secondary(
-                    label: tr(LocaleKeys.heroSecondaryCta),
-                    url: whatsappUrl!,
-                    fullWidth: true),
+                  label: tr(LocaleKeys.heroSecondaryCta),
+                  url: whatsappUrl!,
+                  fullWidth: true,
+                ),
               ],
             ],
           ),
@@ -415,37 +452,43 @@ class _HeroDeviceState extends ConsumerState<_HeroDevice> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      // [widget.width] is a cap — the column may be narrower than that.
-      final width = math.min(widget.width, constraints.maxWidth);
-      final height = width / _heroImageAspectRatio;
-      final dpr = MediaQuery.devicePixelRatioOf(context);
-      final showImage = !widget.lazy || _isNearViewport;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // [widget.width] is a cap — the column may be narrower than that.
+        final width = math.min(widget.width, constraints.maxWidth);
+        final height = width / _heroImageAspectRatio;
+        final dpr = MediaQuery.devicePixelRatioOf(context);
+        final showImage = !widget.lazy || _isNearViewport;
 
-      return SizedBox(
-        width: width,
-        height: height,
-        child: showImage
-            ? Image.asset(
-                _heroImagePath,
-                fit: BoxFit.contain,
-                cacheWidth: (width * dpr).round(),
-                semanticLabel: _heroImageAlt,
-              )
-            : null,
-      );
-    });
+        return SizedBox(
+          width: width,
+          height: height,
+          child: showImage
+              ? Image.asset(
+                  _heroImagePath,
+                  fit: BoxFit.contain,
+                  cacheWidth: (width * dpr).round(),
+                  semanticLabel: _heroImageAlt,
+                )
+              : null,
+        );
+      },
+    );
   }
 }
 
 class _HeroCta extends StatelessWidget {
-  const _HeroCta.primary(
-      {required this.label, required this.url, this.fullWidth = false})
-      : _isPrimary = true;
+  const _HeroCta.primary({
+    required this.label,
+    required this.url,
+    this.fullWidth = false,
+  }) : _isPrimary = true;
 
-  const _HeroCta.secondary(
-      {required this.label, required this.url, this.fullWidth = false})
-      : _isPrimary = false;
+  const _HeroCta.secondary({
+    required this.label,
+    required this.url,
+    this.fullWidth = false,
+  }) : _isPrimary = false;
 
   final String label;
   final String url;

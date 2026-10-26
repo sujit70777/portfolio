@@ -84,7 +84,9 @@ class _FlagshipProjectCardState extends ConsumerState<FlagshipProjectCard> {
                         scale: _hovered ? 1.02 : 1,
                         duration: const Duration(milliseconds: 250),
                         curve: Curves.easeOut,
-                        child: LazyAssetImage(primaryImage),
+                        // Contain, not cover: a flagship's lead image may
+                        // be a wide store banner, which cover would crop.
+                        child: LazyAssetImage(primaryImage, fit: BoxFit.contain),
                       ),
               ),
             ),
@@ -237,11 +239,17 @@ class _Thumbnail extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: AspectRatio(
             aspectRatio: 16 / 10,
-            child: LazyAssetImage(
-              image,
-              // Purely a shortcut into the gallery; the modal carries the
-              // real alt text.
-              excludeFromSemantics: true,
+            // Contain so a phone screenshot shows whole rather than as a
+            // thin cropped strip; landscape shots fill the box either way.
+            child: ColoredBox(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              child: LazyAssetImage(
+                image,
+                fit: BoxFit.contain,
+                // Purely a shortcut into the gallery; the modal carries the
+                // real alt text.
+                excludeFromSemantics: true,
+              ),
             ),
           ),
         ),
