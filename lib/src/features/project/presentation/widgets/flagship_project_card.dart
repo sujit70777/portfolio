@@ -17,7 +17,6 @@ import 'package:portfolio/src/features/project/domain/project.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/empty_project_placeholder.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/link_platform_display.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_detail_modal.dart';
-import 'package:portfolio/src/features/project/presentation/widgets/project_highlights.dart';
 import 'package:portfolio/src/features/project/presentation/widgets/project_status_badge.dart';
 import 'package:portfolio/src/utils/launch_url_helper.dart';
 import 'package:portfolio/src/utils/scaffold_messenger_helper.dart';
@@ -31,8 +30,9 @@ import 'package:portfolio/src/common/widgets/lazy_asset_image.dart';
 /// and the copy gets room for the architecture highlights that make the
 /// case to a technical reader.
 ///
-/// Screenshot left / copy right on desktop, stacked below that. Tapping the
-/// screenshot opens the full detail modal (gallery included); the store and
+/// One column: header (store and site buttons beside the name on desktop),
+/// a justified screenshot strip, the case study, then the stack. Tapping
+/// the strip opens the full detail modal (gallery included); the store and
 /// site links are real buttons.
 class FlagshipProjectCard extends ConsumerStatefulWidget {
   const FlagshipProjectCard({super.key, required this.project});
@@ -46,8 +46,6 @@ class FlagshipProjectCard extends ConsumerStatefulWidget {
 
 class _FlagshipProjectCardState extends ConsumerState<FlagshipProjectCard> {
   bool _hovered = false;
-
-  static const _screenshotAspectRatio = 16 / 10;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +61,26 @@ class _FlagshipProjectCardState extends ConsumerState<FlagshipProjectCard> {
     final primaryImage =
         project.screenshotPath ?? (images.isNotEmpty ? images.first : null);
 
-    final screenshot = MouseRegion(
+    // Lead image first, then the rest. Repha leads with a ~2:1 store
+    // banner then phone screenshots, Hourwise with 16:10 Mac windows; only
+    // the lead and the first of the rest are measured, since a gallery's
+    // screenshots share one shape.
+    final gallery = [
+      ?primaryImage,
+      ...images.where((image) => image != primaryImage),
+    ];
+    for (final image in gallery.take(2)) {
+      _resolveAspectRatio(image);
+    }
+    final leadAspect =
+        _aspectRatios[gallery.firstOrNull] ?? _fallbackAspectRatio;
+    final restAspect = gallery.length > 1
+        ? _aspectRatios[gallery[1]] ?? _fallbackAspectRatio
+        : leadAspect;
+    final isDesktop = Responsive.isDesktop(context);
+    final isMobile = Responsive.isMobile(context);
+
+    final media = MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
@@ -72,74 +89,73 @@ class _FlagshipProjectCardState extends ConsumerState<FlagshipProjectCard> {
         child: Semantics(
           button: true,
           label: 'Open ${projectName ?? 'project'} details and screenshots',
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: AspectRatio(
-              aspectRatio: _screenshotAspectRatio,
-              child: ColoredBox(
-                color: theme.colorScheme.secondaryContainer,
-                child: primaryImage == null
-                    ? EmptyProjectPlaceholder(project: project, iconSize: 48)
-                    : AnimatedScale(
-                        scale: _hovered ? 1.02 : 1,
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.easeOut,
-                        // Contain, not cover: a flagship's lead image may
-                        // be a wide store banner, which cover would crop.
-                        child: LazyAssetImage(primaryImage, fit: BoxFit.contain),
+          child: gallery.isEmpty
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: AspectRatio(
+                    aspectRatio: _fallbackAspectRatio,
+                    child: ColoredBox(
+                      color: theme.colorScheme.secondaryContainer,
+                      child: EmptyProjectPlaceholder(
+                        project: project,
+                        iconSize: 48,
                       ),
-              ),
-            ),
-          ),
+                    ),
+                  ),
+                )
+              : _GalleryStrip(
+                  images: gallery,
+                  aspectRatios: [
+                    for (var i = 0; i < gallery.length; i++)
+                      i == 0 ? leadAspect : restAspect,
+                  ],
+                  targetHeight: isDesktop ? 300 : (isMobile ? 180 : 240),
+                ),
         ),
       ),
     );
 
-    // The rest of the gallery as a thumbnail strip under the main shot, so
-    // the card shows the product's breadth at a glance — and so the image
-    // column isn't left short beside the taller copy column on desktop.
-    final thumbnails = images.length > 1
-        ? Row(
-            children: [
-              for (final (index, image) in images.skip(1).take(4).indexed) ...[
-                if (index > 0) gapW8,
-                Expanded(
-                  child: _Thumbnail(
-                    image: image,
-                    onTap: () =>
-                        showProjectDetailModal(context, project: project),
-                  ),
-                ),
-              ],
-            ],
-          )
-        : null;
-    final media = Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    final highlights = project.highlights ?? const <String>[];
+    final technologies = project.technologies ?? const [];
+    final links = project.links?.where((l) => l.url != null).toList() ??
+        const <Link>[];
+    final linkButtons = Wrap(
+      spacing: 12,
+      runSpacing: 10,
       children: [
-        screenshot,
-        if (thumbnails != null) ...[gapH8, thumbnails],
+        for (final (index, link) in links.indexed)
+          _FlagshipLinkButton(link: link, primary: index == 0),
       ],
     );
 
-    final details = _FlagshipDetails(project: project);
-
-    final Widget body;
-    if (Responsive.isDesktop(context)) {
-      body = Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(flex: 11, child: media),
-          gapW32,
-          Expanded(flex: 9, child: details),
+    // One column, top to bottom, every block as tall as its own content:
+    // side-by-side columns of different lengths always left a gap.
+    final body = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _FlagshipHeader(
+          project: project,
+          trailing: isDesktop && links.isNotEmpty ? linkButtons : null,
+        ),
+        gapH20,
+        media,
+        if (highlights.isNotEmpty) ...[
+          gapH20,
+          _CaseStudy(highlights: highlights, horizontal: !isMobile),
         ],
-      );
-    } else {
-      body = Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [media, gapH20, details],
-      );
-    }
+        if (technologies.isNotEmpty) ...[
+          gapH20,
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: technologies
+                .map((tech) => TechnologyChip(technology: tech))
+                .toList(),
+          ),
+        ],
+        if (!isDesktop && links.isNotEmpty) ...[gapH20, linkButtons],
+      ],
+    );
 
     final palette = Palette.of(context);
     final card = AnimatedContainer(
@@ -186,6 +202,30 @@ class _FlagshipProjectCardState extends ConsumerState<FlagshipProjectCard> {
   }
 
   static const _radius = 20.0;
+  static const _fallbackAspectRatio = 16 / 10;
+
+  final Map<String, double> _aspectRatios = {};
+  final Set<String> _resolving = {};
+
+  /// Reads [asset]'s width/height once, then drops the full-size decode —
+  /// only the shape is needed here; LazyAssetImage paints the real thing.
+  void _resolveAspectRatio(String asset) {
+    if (!_resolving.add(asset)) return;
+    final provider = AssetImage(asset);
+    final stream = provider.resolve(ImageConfiguration.empty);
+    late final ImageStreamListener listener;
+    listener = ImageStreamListener(
+      (info, _) {
+        stream.removeListener(listener);
+        final aspectRatio = info.image.width / info.image.height;
+        info.dispose();
+        provider.evict();
+        if (mounted) setState(() => _aspectRatios[asset] = aspectRatio);
+      },
+      onError: (_, _) => stream.removeListener(listener),
+    );
+    stream.addListener(listener);
+  }
 }
 
 class _AuroraBorderPainter extends CustomPainter {
@@ -223,54 +263,129 @@ class _AuroraBorderPainter extends CustomPainter {
       old.colors != colors;
 }
 
-class _Thumbnail extends StatelessWidget {
-  const _Thumbnail({required this.image, required this.onTap});
+/// The gallery as one justified row: every image at its own shape, all at
+/// one height, chosen so the row fills the width exactly — no letterboxing
+/// and no gap at the end. Takes as many images as keeps that height
+/// closest to [targetHeight]; the last tile counts the rest.
+class _GalleryStrip extends StatelessWidget {
+  const _GalleryStrip({
+    required this.images,
+    required this.aspectRatios,
+    required this.targetHeight,
+  });
 
-  final String image;
-  final VoidCallback onTap;
+  final List<String> images;
+  final List<double> aspectRatios;
+  final double targetHeight;
+
+  static const _gap = 8.0;
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: onTap,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: AspectRatio(
-            aspectRatio: 16 / 10,
-            // Contain so a phone screenshot shows whole rather than as a
-            // thin cropped strip; landscape shots fill the box either way.
-            child: ColoredBox(
-              color: Theme.of(context).colorScheme.secondaryContainer,
-              child: LazyAssetImage(
-                image,
-                fit: BoxFit.contain,
-                // Purely a shortcut into the gallery; the modal carries the
-                // real alt text.
-                excludeFromSemantics: true,
+    return LayoutBuilder(builder: (context, constraints) {
+      final width = constraints.maxWidth;
+      var count = 1;
+      var height = width / aspectRatios.first;
+      var aspectSum = 0.0;
+      for (var n = 1; n <= images.length; n++) {
+        aspectSum += aspectRatios[n - 1];
+        final fitted = (width - _gap * (n - 1)) / aspectSum;
+        if ((fitted - targetHeight).abs() < (height - targetHeight).abs()) {
+          count = n;
+          height = fitted;
+        }
+        if (fitted < targetHeight) break;
+      }
+      final remaining = images.length - count;
+
+      return SizedBox(
+        height: height,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            for (var index = 0; index < count; index++) ...[
+              if (index > 0) const SizedBox(width: _gap),
+              Expanded(
+                // Widths in proportion to shape, so each tile is exactly
+                // its image's aspect ratio at the shared height.
+                flex: (aspectRatios[index] * 1000).round(),
+                child: _Tile(
+                  image: images[index],
+                  moreCount: index == count - 1 ? remaining : 0,
+                ),
               ),
+            ],
+          ],
+        ),
+      );
+    });
+  }
+}
+
+class _Tile extends StatelessWidget {
+  const _Tile({required this.image, required this.moreCount});
+
+  final String image;
+  // Gallery images past the strip, as a pill in the corner so it never
+  // covers the screenshot itself.
+  final int moreCount;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          ColoredBox(
+            color: theme.colorScheme.secondaryContainer,
+            child: LazyAssetImage(
+              image,
+              fit: BoxFit.cover,
+              // The whole strip is one button into the gallery; the modal
+              // carries the real alt text.
+              excludeFromSemantics: true,
             ),
           ),
-        ),
+          if (moreCount > 0)
+            Positioned(
+              right: 8,
+              bottom: 8,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.black.withAlpha(170),
+                  borderRadius: BorderRadius.circular(999),
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  child: Text(
+                    '+$moreCount',
+                    style: theme.textTheme.labelMedium
+                        ?.copyWith(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
 }
 
-class _FlagshipDetails extends StatelessWidget {
-  const _FlagshipDetails({required this.project});
+/// Label, name, status and description; on desktop the store and site
+/// buttons sit at the top right, beside the name.
+class _FlagshipHeader extends StatelessWidget {
+  const _FlagshipHeader({required this.project, this.trailing});
 
   final Project project;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final links = project.links?.where((l) => l.url != null).toList() ??
-        const <Link>[];
-    final highlights = project.highlights ?? const <String>[];
-
-    return Column(
+    final title = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -279,37 +394,136 @@ class _FlagshipDetails extends StatelessWidget {
           style: monoLabelStyle(fontSize: 11, letterSpacing: 0.08),
         ),
         gapH8,
-        SearchableText(project.name ?? '', style: theme.textTheme.headlineSmall),
-        gapH4,
-        ProjectStatusBadge(status: project.status),
-        gapH12,
-        SearchableText(project.description ?? '', style: theme.textTheme.bodyMedium),
-        if (highlights.isNotEmpty) ...[
-          gapH16,
-          ProjectHighlights(highlights: highlights),
-        ],
-        if (project.technologies?.isNotEmpty == true) ...[
-          gapH16,
-          Wrap(
-            spacing: 6,
-            runSpacing: 6,
-            children: project.technologies!
-                .map((tech) => TechnologyChip(technology: tech))
-                .toList(),
-          ),
-        ],
-        if (links.isNotEmpty) ...[
-          gapH20,
-          Wrap(
-            spacing: 12,
-            runSpacing: 10,
+        Wrap(
+          spacing: 12,
+          runSpacing: 4,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            SearchableText(
+              project.name ?? '',
+              style: theme.textTheme.headlineSmall,
+            ),
+            ProjectStatusBadge(status: project.status),
+          ],
+        ),
+      ],
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (trailing == null)
+          title
+        else
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              for (final (index, link) in links.indexed)
-                _FlagshipLinkButton(link: link, primary: index == 0),
+              Expanded(child: title),
+              gapW16,
+              trailing!,
             ],
           ),
-        ],
+        gapH12,
+        SearchableText(
+          project.description ?? '',
+          style: theme.textTheme.bodyMedium,
+        ),
       ],
+    );
+  }
+}
+
+/// The flagship's highlights as a case study: "Problem: …", "What I did: …",
+/// "Result: …" become rows on a tinted panel — label on the left, text on
+/// the right (label above text on phones). Rows grow with their own text,
+/// so a long entry never leaves a short one beside empty space.
+class _CaseStudy extends StatelessWidget {
+  const _CaseStudy({required this.highlights, required this.horizontal});
+
+  final List<String> highlights;
+  final bool horizontal;
+
+  static final _labelPattern = RegExp(r'^([^:]{1,24}):\s*');
+  static const _labelWidth = 120.0;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final aurora = Palette.of(context).aurora;
+    final divider = Divider(
+      height: 1,
+      color: theme.colorScheme.onSurface.withAlpha(20),
+    );
+
+    Widget entry(int index, String highlight) {
+      final match = _labelPattern.firstMatch(highlight);
+      final text = match == null ? highlight : highlight.substring(match.end);
+      final label = Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+              // Stepping through the aurora, entry by entry.
+              color: aurora[index % aurora.length],
+              borderRadius: BorderRadius.circular(1.5),
+            ),
+          ),
+          gapW8,
+          Flexible(
+            child: Text(
+              (match?.group(1) ?? '').toUpperCase(),
+              style: monoLabelStyle(
+                fontSize: 11,
+                letterSpacing: 0.08,
+                color: theme.colorScheme.onSurface.withAlpha(170),
+              ),
+            ),
+          ),
+        ],
+      );
+      final body = SearchableText(text, style: theme.textTheme.bodySmall);
+      if (!horizontal) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [label, gapH8, body],
+        );
+      }
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Nudged down to sit on the body text's first line.
+          Padding(
+            padding: const EdgeInsets.only(top: 3),
+            child: SizedBox(width: _labelWidth, child: label),
+          ),
+          gapW16,
+          Expanded(child: body),
+        ],
+      );
+    }
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.onSurface.withAlpha(8),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: theme.colorScheme.onSurface.withAlpha(20)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            for (final (index, highlight) in highlights.indexed) ...[
+              if (index > 0) divider,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: entry(index, highlight),
+              ),
+            ],
+          ],
+        ),
+      ),
     );
   }
 }
