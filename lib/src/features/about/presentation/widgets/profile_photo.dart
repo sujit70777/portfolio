@@ -6,7 +6,7 @@ import 'package:portfolio/src/constants/palette.dart';
 
 const _webpPath = 'assets/images/profile.webp';
 const _jpgPath = 'assets/images/profile.jpg';
-const _photoAlt = 'Shekh Ehsanur Rahman, Senior Mobile & Full-Stack AI Engineer';
+const _photoAlt = 'Shekh Ehsanur Rahman, Senior Flutter Engineer';
 
 /// Circular profile photo — WebP first (CanvasKit decodes it natively, no
 /// browser fallback needed), falling back to a JPEG if the WebP is ever

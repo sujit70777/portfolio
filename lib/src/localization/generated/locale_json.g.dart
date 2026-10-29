@@ -16,11 +16,11 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> _en = {
   "name": "Shekh Ehsanur Rahman",
-  "description": "Senior Mobile & Full-Stack AI Engineer | Flutter · Native iOS · Android · macOS. I take on the problems that block a product, and build with AI coding agents",
-  "subDescription": "Flutter architecture · Custom plugins & native integration · Offline-first sync · Payments & subscriptions · Swift, SwiftUI & Kotlin · On-device ML · Full-stack AI (Claude Code, FastAPI, Postgres)",
-  "heroRole": "Senior Mobile & Full-Stack AI Engineer",
+  "description": "Senior Flutter Engineer | Native iOS · Android · macOS. I take on the problems that block a product: offline data, payments and native performance.",
+  "subDescription": "Flutter architecture · Custom plugins & native integration · Offline-first sync · Payments & subscriptions · Swift, SwiftUI & Kotlin · On-device ML",
+  "heroRole": "Senior Flutter Engineer",
   "heroPlatforms": "Flutter · Native iOS · Android · macOS",
-  "heroTagline": "I take on the problems that block a product, and build with AI coding agents.",
+  "heroTagline": "I take on the problems that block a product — offline data, payments, native performance — and ship them.",
   "heroPrimaryCta": "Email me",
   "heroSecondaryCta": "WhatsApp",
   "availability": {
@@ -119,7 +119,7 @@ class CodegenLoader extends AssetLoader{
       "url": "assets/documents/resume.pdf"
     }
   ],
-  "aboutDescription": "I take on the problems that block a product: offline data that must not be lost, payments that must reconcile across Apple and Stripe, platform edge cases, and slow components that need a native rewrite.\n\nI'm a Senior Mobile & Full-Stack AI Engineer — 7 years of Flutter inside 11 years of shipping mobile apps — with native iOS, Android and macOS (Swift, SwiftUI, Kotlin). When a package can't do the job, I write the plugin or platform channel myself, and I've published 9 Flutter packages on pub.dev. I'm based in Bangladesh and don't need relocation or visa sponsorship to work remotely.\n\nA few problems I've solved:\n\n→ Prayer times that were wrong at high latitudes. A prayer-times app showed wrong times to users in far-northern cities, and earlier fixes hadn't worked. I traced it to the sunrise and sunset calculation and built a new offline engine, verified against a real local schedule. It works with or without internet.\n\n→ A receipt scanner too slow for the business. For an expense-reimbursement FinTech platform, I replaced a generic Flutter scanner with a native one (Swift on iOS, Java on Android) that reads a QR code or barcode in about half a second. Live verification progress replaced the spinner, claims save offline and sync later, and a reimbursement completes in about 5–10 seconds.\n\n→ Two payment systems that disagreed. A subscription app sold through Stripe on Android and Apple In-App Purchase on iOS, and the two produced duplicate purchases and mismatched accounts. As team lead I redesigned the entitlement model so both map to one account. After about two years stuck in development, the app was approved and live within about a month.\n\n→ Learning that works offline. I led a 6-developer team building offline-first learning apps (Python, CSE, ML) as free + one-time Pro editions on Google Play and the App Store; two free apps each passed 100,000 downloads.\n\n→ Lawyers losing billable hours. I built Hourwise alone and shipped it to the Mac App Store. It records work passively and learns, on the Mac itself, which client each piece of work belongs to.\n\n→ Pharmacies ordering by phone and paper. I built Repha alone and shipped it to Google Play. A pharmacy writes or photographs one medicine list; the app splits it by company, sends each part to the right medical rep and tracks it to delivery — with 73,000+ medicines searchable offline and a backend that costs nothing to run.\n\nWhat I can do for your team: make your app work offline without losing data, fix payments and subscriptions across Stripe, Apple and Google, get a stalled app through store review, and add on-device machine learning that keeps user data private.\n\nHow I work: I own the problem, the architecture and the code review; AI coding agents write much of the code; tests and automated releases keep quality up. I've worked an overseas team's hours for three years.\n\nOpen to: Senior Mobile & Full-Stack AI Engineer, Senior Flutter Engineer, Senior Flutter Developer, Lead Flutter Developer, Mobile Tech Lead. Full-time or contract.",
+  "aboutDescription": "I take on the problems that block a product: offline data that must not be lost, payments that must reconcile across Apple and Stripe, platform edge cases, and slow components that need a native rewrite.\n\nI'm a Senior Flutter Engineer — 7 years of Flutter inside 11 years of shipping mobile apps — with native iOS, Android and macOS (Swift, SwiftUI, Kotlin). When a package can't do the job, I write the plugin or platform channel myself, and I've published 9 Flutter packages on pub.dev. I'm based in Bangladesh and don't need relocation or visa sponsorship to work remotely.\n\nA few problems I've solved:\n\n→ Prayer times that were wrong at high latitudes. A prayer-times app showed wrong times to users in far-northern cities, and earlier fixes hadn't worked. I traced it to the sunrise and sunset calculation and built a new offline engine, verified against a real local schedule. It works with or without internet.\n\n→ A receipt scanner too slow for the business. For an expense-reimbursement FinTech platform, I replaced a generic Flutter scanner with a native one (Swift on iOS, Java on Android) that reads a QR code or barcode in about half a second. Live verification progress replaced the spinner, claims save offline and sync later, and a reimbursement completes in about 5–10 seconds.\n\n→ Two payment systems that disagreed. A subscription app sold through Stripe on Android and Apple In-App Purchase on iOS, and the two produced duplicate purchases and mismatched accounts. As team lead I redesigned the entitlement model so both map to one account. After about two years stuck in development, the app was approved and live within about a month.\n\n→ Learning that works offline. I led a 6-developer team building offline-first learning apps (Python, CSE, ML) as free + one-time Pro editions on Google Play and the App Store; two free apps each passed 100,000 downloads.\n\n→ Lawyers losing billable hours. I built Hourwise alone and shipped it to the Mac App Store. It records work passively and learns, on the Mac itself, which client each piece of work belongs to.\n\n→ Pharmacies ordering by phone and paper. I built Repha alone and shipped it to Google Play. A pharmacy writes or photographs one medicine list; the app splits it by company, sends each part to the right medical rep and tracks it to delivery — with 70,000+ medicines searchable offline and a backend that costs nothing to run.\n\nWhat I can do for your team: make your app work offline without losing data, fix payments and subscriptions across Stripe, Apple and Google, get a stalled app through store review, and add on-device machine learning that keeps user data private.\n\nHow I work: I own the problem, the architecture and the code review, and tests and automated releases keep quality up. I've worked an overseas team's hours for three years.\n\nOpen to: Senior Flutter Engineer, Senior Flutter Developer, Lead Flutter Developer, Mobile Tech Lead. Full-time or contract.",
   "skillCategories": [
     {
       "category": "Offline-First & Data Sync",
@@ -144,12 +144,13 @@ class CodegenLoader extends AssetLoader{
       ]
     },
     {
-      "category": "Full-Stack AI",
+      "category": "On-Device ML & AI Tools",
       "skills": [
-        "AI-Assisted Development (Claude Code)",
         "On-Device Machine Learning (live)",
         "On-Device Classification",
-        "Apple Foundation Models (in progress)"
+        "On-Device OCR (ML Kit)",
+        "Apple Foundation Models (in progress)",
+        "AI-Assisted Development (Claude Code)"
       ]
     },
     {
@@ -165,17 +166,15 @@ class CodegenLoader extends AssetLoader{
       ]
     },
     {
-      "category": "Web Backend & Data",
+      "category": "Backend & Data",
       "skills": [
-        "React / Next.js / Next.js",
         "Firebase (Firestore, Auth, Functions, Crashlytics)",
         "REST APIs & WebSockets",
         "Supabase",
-        "SQLite / Drift / GRDB",
-        "PostgreSQL / MongoDB / Redis",
+        "Laravel + MySQL APIs",
+        "SQLite / Drift / GRDB / FTS5",
         "CRDTs & Conflict Resolution",
-        "Cloud Functions & Serverless",
-        "Python / FastAPI"
+        "Cloud Functions & Serverless"
       ]
     },
     {
@@ -201,9 +200,9 @@ class CodegenLoader extends AssetLoader{
   ],
   "experiences": [
     {
-      "role": "Founder & Full-Stack AI Engineer",
+      "role": "Independent Mobile Engineer — own products",
       "company": "Hourwise Labs",
-      "description": "Solo lawyers lose billable time because they forget timers and rebuild their day from memory. I built Hourwise alone — with AI coding agents under my review — from design to Mac App Store release.\n\nAlso shipped from Hourwise Labs: Repha (Google Play, October 2026), a B2B ordering network for pharmacies and medical representatives in Bangladesh.\n• Flutter app for both sides: 73,000+ medicines searchable offline, one order list split by company and routed to the right rep, photo-to-order on-device OCR, tracking to delivery, Bangla-first UI.\n• Laravel + MySQL backend, Filament admin panel with switchable rules and a full change history, push notifications; runs at zero hosting cost.\n\n• Passive time capture in a native macOS menu-bar app (SwiftUI + AppKit, ~17k lines of Swift).\n• On-device machine learning, live today: a rule engine plus a naive-Bayes classifier that learns from each user's corrections and assigns work to the right client matter. Work history never leaves the Mac.\n• Local-first SQLite/GRDB storage; PDF invoices plus LEDES 1998B, QuickBooks, Xero, XLSX and CSV exports; StoreKit 2 subscriptions.\n\n• Now building: full-stack AI \n• On-device AI billing narratives with Apple Foundation Models, plus UTBMS code suggestions and billing-rule checks \n• Private meeting capture: on-device transcription and summaries that become draft time entries\n• Python/FastAPI + Postgres backend: auth, firm seats, CRDT sync across Swift and Dart clients, Claude API proxy\n• Flutter companion app for iOS and Android: timers, voice entries, Live Activities\n• 'Ask my matters': a tool-using LLM agent with pgvector hybrid search, citations and evals",
+      "description": "Solo lawyers lose billable time because they forget timers and rebuild their day from memory. I built Hourwise alone from design to Mac App Store release.\n\nAlso shipped from Hourwise Labs: Repha (Google Play, October 2026), a B2B ordering network for pharmacies and medical representatives in Bangladesh.\n• Flutter app for both sides: 70,000+ medicines searchable offline, one order list split by company and routed to the right rep, photo-to-order on-device OCR, tracking to delivery, Bangla-first UI.\n• Laravel + MySQL backend, Filament admin panel with switchable rules and a full change history, push notifications; runs at zero hosting cost.\n\n• Passive time capture in a native macOS menu-bar app (SwiftUI + AppKit, ~17k lines of Swift).\n• On-device machine learning, live today: a rule engine plus a naive-Bayes classifier that learns from each user's corrections and assigns work to the right client matter. Work history never leaves the Mac.\n• Local-first SQLite/GRDB storage; PDF invoices plus LEDES 1998B, QuickBooks, Xero, XLSX and CSV exports; StoreKit 2 subscriptions.\n\n• Now building: full-stack AI \n• On-device AI billing narratives with Apple Foundation Models, plus UTBMS code suggestions and billing-rule checks \n• Private meeting capture: on-device transcription and summaries that become draft time entries\n• Python/FastAPI + Postgres backend: auth, firm seats, CRDT sync across Swift and Dart clients, Claude API proxy\n• Flutter companion app for iOS and Android: timers, voice entries, Live Activities\n• 'Ask my matters': a tool-using LLM agent with pgvector hybrid search, citations and evals",
       "url": "https://ehsanur.com/hourwise/",
       "isPresent": true,
       "startYear": 2026,
@@ -216,10 +215,7 @@ class CodegenLoader extends AssetLoader{
           }
         },
         {
-          "name": "Laravel",
-          "icon": {
-            "assetName": "assets/icons/software-development/laravel.svg"
-          }
+          "name": "Laravel"
         },
         {
           "name": "Swift",
@@ -306,9 +302,9 @@ class CodegenLoader extends AssetLoader{
       ]
     },
     {
-      "role": "Senior Mobile Developer — Level III",
+      "role": "Senior Mobile Developer — Level III · Mobile Team Lead",
       "company": "Developer eXperience Hub (Devxhub)",
-      "description": "Team lead and mobile lead on client products in FinTech, subscriptions, marketplaces and consumer apps, in Flutter with native iOS and Android code.\n\n• Expense-reimbursement FinTech platform: replaced a generic Flutter scanner with a native one (Swift/iOS, Java/Android) that reads QR codes and barcodes in about 0.5 s; added live WebSocket verification progress, offline claims with later sync, and instant payout — reimbursement in about 5–10 s after a scan.\n• Expense and FinTech apps (50,000+ users): local-first sync with deterministic conflict resolution, so claims made without signal survive and recurring sync issues dropped.\n• Prayer-times app: after earlier attempts failed, traced wrong times at high latitudes to the sunrise/sunset calculation and built a new offline engine, verified against a real local schedule.\n• Subscription app: as team lead, redesigned the account-level entitlement model so Stripe and Apple In-App Purchase stay in sync; App Store approval about a month after stabilization began, following about two years in development.\n• Multi-service marketplace: merged separate provider and customer apps into one super app. Team lead and sole mobile developer.\n• Release time from about 1 hour to 10–20 minutes with Fastlane + GitHub Actions.\n• Introduced Claude Code with code review and tests required on every merge.",
+      "description": "Mobile team lead for client products in FinTech, subscriptions, marketplaces and consumer apps, in Flutter with native iOS and Android code.\n\n• Led the mobile team: hired and onboarded developers, mentored them through code review and pairing, and was accountable for every team member's work.\n• Ran sprint planning and owned every mobile release; worked directly with product managers and designers on scope, user flows and UX.\n• Expense-reimbursement FinTech platform: replaced a generic Flutter scanner with a native one (Swift/iOS, Java/Android) that reads QR codes and barcodes in about 0.5 s; added live WebSocket verification progress, offline claims with later sync, and instant payout — reimbursement in about 5–10 s after a scan.\n• Expense and FinTech apps (50,000+ users): local-first sync with deterministic conflict resolution, so claims made without signal survive and recurring sync issues dropped.\n• Prayer-times app: after earlier attempts failed, traced wrong times at high latitudes to the sunrise/sunset calculation and built a new offline engine, verified against a real local schedule.\n• Subscription app: as team lead, redesigned the account-level entitlement model so Stripe and Apple In-App Purchase stay in sync; App Store approval about a month after stabilization began, following about two years in development.\n• Multi-service marketplace: merged separate provider and customer apps into one super app. Team lead and sole mobile developer.\n• Release time from about 1 hour to 10–20 minutes with Fastlane + GitHub Actions.\n• Introduced Claude Code with code review and tests required on every merge.",
       "url": "https://devxhub.com",
       "isPresent": false,
       "startYear": 2023,
@@ -433,9 +429,9 @@ class CodegenLoader extends AssetLoader{
       ]
     },
     {
-      "role": "Senior Mobile Application Developer",
-      "company": "Prabartan Information Technology",
-      "description": "• Led a 6-developer team building offline-first learning apps (Python, CSE, ML & AI) for students on weak or no internet.\n• Built the Firebase/SQLite sync layer and fixed sync-conflict edge cases.\n• Shipped each product as free + one-time Pro on Google Play and the App Store; two free apps each passed 100,000 downloads.\n• Modernised the stack (Flutter 3, Jetpack Compose, SwiftUI) and introduced code review standards.",
+      "role": "Founder & Lead Mobile Developer",
+      "company": "Prabartan Information Technology (own company)",
+      "description": "• Founded and ran an EdTech app studio; hired and led a 6-developer team building offline-first learning apps (Python, CSE, ML & AI) for students on weak or no internet.\n• Built the Firebase/SQLite sync layer and fixed sync-conflict edge cases.\n• Shipped each product as free + one-time Pro on Google Play and the App Store; two free apps each passed 100,000 downloads.\n• Modernized the stack (Flutter 3, Jetpack Compose, SwiftUI) and introduced code review standards.",
       "isPresent": false,
       "startYear": 2019,
       "startMonth": 6,
@@ -614,10 +610,9 @@ class CodegenLoader extends AssetLoader{
       },
       "status": "shipped",
       "featured": true,
-      "flagship": true,
       "highlights": [
         "Problem: A pharmacy buys from dozens of pharma companies, each through its own medical rep. Orders live on paper lists and phone calls, get lost or arrive partly, and new shops don't know who the rep for their area is.",
-        "What I did: Built the whole product alone, with AI coding agents under my review. A Flutter app for pharmacies and reps: 73,000+ medicines searchable offline (SQLite FTS5), one list split automatically by company and routed to the right rep, a photo of a printed list read on-device into order lines, an offline outbox that sends each order exactly once, and a Bangla-first UI. Behind it: a Laravel API, a Filament admin panel where every rule can be switched and every change is logged, and push notifications — running at zero hosting cost.",
+        "What I did: Built the whole product alone. A Flutter app for pharmacies and reps: 70,000+ medicines searchable offline (SQLite FTS5), one list split automatically by company and routed to the right rep, a photo of a printed list read on-device into order lines, an offline outbox that sends each order exactly once, and a Bangla-first UI. Behind it: a Laravel API, a Filament admin panel where every rule can be switched and every change is logged, and push notifications — running at zero hosting cost.",
         "Result: Live on Google Play since October 2026; pilot running in Rajshahi."
       ],
       "technologies": [
@@ -649,16 +644,10 @@ class CodegenLoader extends AssetLoader{
           "name": "On-device OCR (ML Kit)"
         },
         {
-          "name": "Laravel",
-          "icon": {
-            "assetName": "assets/icons/software-development/laravel.svg"
-          }
+          "name": "Laravel"
         },
         {
-          "name": "MySQL",
-          "icon": {
-            "assetName": "assets/icons/software-development/mysql.svg"
-          }
+          "name": "MySQL"
         },
         {
           "name": "Firebase Cloud Messaging",
@@ -1792,7 +1781,7 @@ class CodegenLoader extends AssetLoader{
     "alsoBrings": "Also brings",
     "nothingFound": "No recognisable mobile-engineering requirements found. Try pasting the full description, including the requirements list.",
     "tooShort": "Paste a little more of the description first.",
-    "disclaimer": "Keyword-based and deterministic: it recognises common mobile-engineering skills and links only to evidence on this page. It won't read between the lines, so a gap here may just be something the site doesn't mention.",
+    "disclaimer": "Keyword-based and deterministic: it recognizes common mobile-engineering skills and links only to evidence on this page. It won't read between the lines, so a gap here may just be something the site doesn't mention.",
     "sampleText": "Senior Mobile Engineer, Flutter (Remote)\n\nWe're a fintech startup building a payments app for 200,000 small businesses.\n\nWhat you'll do\n- Own features end to end, from architecture to App Store and Google Play release\n- Build offline-capable flows that sync reliably on poor networks\n- Lead code reviews and mentor two mid-level engineers\n\nRequirements\n- 5+ years of mobile development, 3+ years with Flutter and Dart\n- Strong state management experience (Riverpod or Bloc)\n- REST APIs and GraphQL\n- Firebase (Auth, Firestore, Crashlytics)\n- Unit, widget and integration testing; CI/CD with GitHub Actions or Codemagic\n- Comfortable dropping into native iOS (Swift) or Android (Kotlin) when a plugin is needed\n\nNice to have\n- In-app subscriptions (StoreKit / Play Billing)\n- Kotlin Multiplatform\n- Accessibility (WCAG) experience\n\nBenefits\n- Fully remote, health insurance, learning budget",
     "presetsHint": "Or pick a starting point:"
   },
@@ -1817,8 +1806,8 @@ class CodegenLoader extends AssetLoader{
       "label": "Native scanner reads QR / barcodes"
     },
     {
-      "value": "4.7 Avg rating",
-      "label": "App Store & Google Play ratings with 5K+ reviews"
+      "value": "9",
+      "label": "Flutter packages published on pub.dev"
     },
     {
       "value": "~1 mo",
@@ -1863,7 +1852,7 @@ class CodegenLoader extends AssetLoader{
   "recruiterFit": {
     "title": "For recruiters & hiring managers",
     "targetRolesLabel": "Target roles",
-    "targetRoles": "Senior Mobile & Full-Stack AI Engineer · Senior Flutter Developer · Lead Flutter Developer · Mobile Tech Lead",
+    "targetRoles": "Senior Flutter Engineer · Lead Flutter Developer · Senior Mobile Engineer (iOS / Android) · Mobile Tech Lead",
     "experienceLabel": "Experience",
     "experience": "11 years shipping mobile apps · 7 years of Flutter",
     "stackLabel": "Stack",
@@ -1999,7 +1988,7 @@ class CodegenLoader extends AssetLoader{
         "Flutter",
         "Swift"
       ],
-      "body": "I shipped a native macOS app of around 17,000 lines of Swift to the Mac App Store on my own, and AI coding agents wrote much of the code. I also introduced Claude Code to a mobile team, with one non-negotiable rule: code review and tests on every merge. The job didn't disappear. It changed.\n\n**What I still own:**\n\n- **The problem.** What are we solving, for whom, and what does \"done\" mean?\n- **The architecture and data model.** Agents are good at filling in a design. They are poor at choosing one.\n- **The review.** I read every diff as if a junior engineer wrote it — because agents make confident mistakes: missed edge cases, invented APIs, quietly changed behaviour.\n- **The release.** Tests, signing, store review, rollout.\n\n**How I work with an agent:**\n\n1. Write the plan first: modules, interfaces, phases. Give the agent that plan, not a vague wish.\n2. Ask for small, testable tasks. One feature or one refactor at a time.\n3. Give it the rules: architecture patterns, naming, what must not change.\n4. Make it write or update tests with the code, then run them myself.\n5. Review the diff before anything merges. If I can't explain a change, it doesn't go in.\n\n**Where agents help most:** boilerplate, migrations, test scaffolding, exploring an unfamiliar API, and turning a clear spec into a first draft.\n\n**Where they still need a human:** concurrency and race conditions, payments, data that must never be lost, platform review rules, and any decision that trades one cost against another.\n\n**The takeaway:** the most valuable engineering skill now is judgment — choosing the right problem, designing the system, and catching what's wrong. Typing speed matters less every month."
+      "body": "I shipped a native macOS app of around 17,000 lines of Swift to the Mac App Store on my own, using AI coding agents for much of the routine code. I also introduced Claude Code to a mobile team, with one non-negotiable rule: code review and tests on every merge. The job didn't disappear. It changed.\n\n**What I still own:**\n\n- **The problem.** What are we solving, for whom, and what does \"done\" mean?\n- **The architecture and data model.** Agents are good at filling in a design. They are poor at choosing one.\n- **The review.** I read every diff as if a junior engineer wrote it — because agents make confident mistakes: missed edge cases, invented APIs, quietly changed behavior.\n- **The release.** Tests, signing, store review, rollout.\n\n**How I work with an agent:**\n\n1. Write the plan first: modules, interfaces, phases. Give the agent that plan, not a vague wish.\n2. Ask for small, testable tasks. One feature or one refactor at a time.\n3. Give it the rules: architecture patterns, naming, what must not change.\n4. Make it write or update tests with the code, then run them myself.\n5. Review the diff before anything merges. If I can't explain a change, it doesn't go in.\n\n**Where agents help most:** boilerplate, migrations, test scaffolding, exploring an unfamiliar API, and turning a clear spec into a first draft.\n\n**Where they still need a human:** concurrency and race conditions, payments, data that must never be lost, platform review rules, and any decision that trades one cost against another.\n\n**The takeaway:** the most valuable engineering skill now is judgment — choosing the right problem, designing the system, and catching what's wrong. Typing speed matters less every month."
     }
   ],
   "contractHelpCards": [
@@ -2087,7 +2076,7 @@ class CodegenLoader extends AssetLoader{
     },
     {
       "question": "AI-assisted workflow?",
-      "answer": "AI coding agents write much of the code under my architecture and review. Tests and automated releases keep quality up — I own the result."
+      "answer": "I use AI coding agents as a productivity tool. I own the problem, the architecture and every review, and nothing merges without tests."
     },
     {
       "question": "Remote from Bangladesh?",
@@ -2097,8 +2086,8 @@ class CodegenLoader extends AssetLoader{
   "emailPresets": [
     {
       "label": "Hiring for a full-time role",
-      "subject": "Full-time role — Senior Mobile & Full-Stack AI Engineer / Senior Flutter Developer",
-      "body": "Hi Ehsanur,\n\nI'm hiring for a full-time Senior Mobile & Full-Stack AI Engineer / Senior Flutter Developer role. Here's a short summary of the company, stack, and timeline:\n\n"
+      "subject": "Full-time role — Senior Flutter Engineer",
+      "body": "Hi Ehsanur,\n\nI'm hiring for a full-time Senior Flutter Engineer role. Here's a short summary of the company, stack, and timeline:\n\n"
     },
     {
       "label": "Need a contract fix",
@@ -2114,7 +2103,7 @@ class CodegenLoader extends AssetLoader{
   "emailPresetsTitle": "I'm reaching out about…",
   "testimonials": [
     {
-      "quote": "As a Senior Mobile & Full-Stack AI Engineer, Shekh possesses a deep, practical understanding of cross-platform architecture that consistently elevated the quality of our applications. … Any engineering team looking for a technical powerhouse and a supportive leader would be incredibly fortunate to have Shekh onboard.",
+      "quote": "Shekh possesses a deep, practical understanding of cross-platform architecture that consistently elevated the quality of our applications. … Any engineering team looking for a technical powerhouse and a supportive leader would be incredibly fortunate to have Shekh onboard.",
       "name": "Tanvir Kabir",
       "role": "Flutter Developer",
       "company": "Devxhub",

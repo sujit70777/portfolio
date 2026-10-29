@@ -2,7 +2,7 @@
 
 # ehsanur.com
 
-**Portfolio site of Ehsanur Rahman — Senior Mobile & Full-Stack AI Engineer (Flutter, React Native, Swift), 11 years in mobile**
+**Portfolio site of Ehsanur Rahman — Senior Flutter Engineer with native iOS, Android and macOS experience, 11 years in mobile**
 
 Built in Flutter Web. Data-driven, cache-safe, and deployed by a pipeline that survives a real production host.
 
@@ -157,10 +157,10 @@ MIT licensed, see [LICENSE](LICENSE). Fork it for your own portfolio; a link bac
 
 ## About me
 
-Senior Mobile & Full-Stack AI Engineer, 11 years in mobile — Flutter, React Native and Swift. I specialise in offline-first architecture and conflict-free (CRDT) data sync — apps that keep working when the network doesn't. Today I'm the founder and sole engineer of Hourwise Labs: [Hourwise](https://ehsanur.com/hourwise/) is a native macOS time-tracking and invoicing app for lawyers, live on the Mac App Store, which I'm growing into a full-stack AI product.
+Senior Flutter Engineer, 11 years shipping mobile apps and 7 years of Flutter — with native iOS, Android and macOS experience. I specialise in offline-first architecture and conflict-free (CRDT) data sync — apps that keep working when the network doesn't. Today I'm the founder and sole engineer of Hourwise Labs: [Hourwise](https://ehsanur.com/hourwise/) is a native macOS time-tracking and invoicing app for lawyers, live on the Mac App Store.
 
 **50+ apps shipped · 1M+ users · [9 packages on pub.dev](https://pub.dev/publishers/ehsanur.com/packages)**
 
-Open to remote Senior Mobile, Senior Flutter / React Native, and AI / Full-Stack Engineer roles, full-time or contract, with US, UK and EU teams.
+Open to remote Senior Flutter Engineer, Lead Flutter Developer, Senior Mobile Engineer (iOS / Android), and Mobile Tech Lead roles, full-time or contract.
 
 [ehsanur.com](https://ehsanur.com) · [LinkedIn](https://www.linkedin.com/in/sujit70777) · [mail@ehsanur.com](mailto:mail@ehsanur.com)
